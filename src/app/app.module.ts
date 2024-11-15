@@ -8,6 +8,7 @@ import { CompaniesComponentComponent } from './Components/companies-component/co
 import { ResumeBuilderComponentComponent } from './Components/resume-builder-component/resume-builder-component.component';
 import { PortfolioComponentComponent } from './Components/portfolio-component/portfolio-component.component';
 import { LoginComponentComponent } from './Components/login-component/login-component.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { LoginComponentComponent } from './Components/login-component/login-comp
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
