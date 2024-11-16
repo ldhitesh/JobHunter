@@ -9,6 +9,7 @@ import { ResumeBuilderComponentComponent } from './Components/resume-builder-com
 import { PortfolioComponentComponent } from './Components/portfolio-component/portfolio-component.component';
 import { LoginComponentComponent } from './Components/login-component/login-component.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
