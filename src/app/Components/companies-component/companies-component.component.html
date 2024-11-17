@@ -1,9 +1,23 @@
-<h1>companies-component works!</h1>
-<h1>companies-component works!</h1>
-<h1>companies-component works!</h1>
-<h1>companies-component works!</h1>
-<h1>companies-component works!</h1>
-<h1>companies-component works!</h1>
-<h1>companies-component works!</h1>
-<h1>companies-component works!</h1>
-<h1>companies-component works!</h1>
+<div class="companylistcontainer table-bordered">
+    <table class="table">
+        <thead>
+            <th>ID</th>
+            <th>Company</th>
+            <th>Description</th>
+            <th>Last Applied</th>
+            <th>Status</th>
+
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of companies">
+                <td class="Id">{{c.id}}</td>
+                <td>{{c.organization}}</td>
+                <td>{{c.description|companyDataFilter:'description'}}</td>
+                <td class="lastapplied">{{c.lastapplied|companyDataFilter:'lastapplied'}}</td>
+                <td class="status">{{c.Status|companyDataFilter:'status'}}</td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+

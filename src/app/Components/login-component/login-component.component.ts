@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-check-service.service';
 
 @Component({
   selector: 'login-component',
@@ -15,24 +16,21 @@ export class LoginComponentComponent {
   };
   
 
-  constructor(private http: HttpClient,private router: Router) {}
+
+  constructor(private http: HttpClient,private router: Router,private loginstatuscheckservice:LoginStatusCheckServiceService) {}
 
 
   onLogin(data:any){
     
       const loginData = this.loginCredential;
-
-      console.log(loginData);
-
-      this.http.post('http://localhost:5018/api/login/login', loginData).subscribe({
+      this.http.post('http://localhost:5018/api/login', loginData).subscribe({
         next: (response: any) => {
           localStorage.setItem('jwtToken', response.token);
-          alert('Login successful!');
+          this.loginstatuscheckservice.login();
           this.router.navigate(['/companiescomponent']); 
         },
         error: (err) => {
           alert('Invalid username or password!');
-          console.error(err);
         }
       });
   }

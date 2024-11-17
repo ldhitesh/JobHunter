@@ -8,8 +8,10 @@ import { CompaniesComponentComponent } from './Components/companies-component/co
 import { ResumeBuilderComponentComponent } from './Components/resume-builder-component/resume-builder-component.component';
 import { PortfolioComponentComponent } from './Components/portfolio-component/portfolio-component.component';
 import { LoginComponentComponent } from './Components/login-component/login-component.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RegisterUserComponent } from './Components/register-user/register-user.component';
+import { CompanyDataFilterPipe } from './Pipes/CompanyDataFilter';
 
 @NgModule({
   declarations: [
@@ -18,13 +20,16 @@ import { HttpClientModule } from '@angular/common/http';
     CompaniesComponentComponent,
     ResumeBuilderComponentComponent,
     PortfolioComponentComponent,
-    LoginComponentComponent
+    LoginComponentComponent,
+    RegisterUserComponent,
+    CompanyDataFilterPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
