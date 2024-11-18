@@ -1,0 +1,18 @@
+.search{
+    padding: 0.5%;
+    background-color: rgb(243, 247, 247);
+    opacity: 50%;
+    border-radius: 5%;
+}
+
+input{
+    padding: 1%;
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    font-size: larger;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+

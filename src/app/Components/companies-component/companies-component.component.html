@@ -1,5 +1,7 @@
 <div class="companylistcontainer table-bordered">
-    <table class="table">
+    <search-bar (search)="onSearch($event)"></search-bar>
+    <add-company routerLink="/addcompanyform" routerLinkActive="active"></add-company>
+    <table *ngIf="!nomatchingdata" class="table">
         <thead>
             <th>ID</th>
             <th>Company</th>
@@ -9,7 +11,7 @@
 
         </thead>
         <tbody>
-            <tr *ngFor="let c of companies">
+            <tr *ngFor="let c of paginatedData">
                 <td class="Id">{{c.id}}</td>
                 <td>{{c.organization}}</td>
                 <td>{{c.description|companyDataFilter:'description'}}</td>
@@ -17,7 +19,18 @@
                 <td class="status">{{c.Status|companyDataFilter:'status'}}</td>
             </tr>
         </tbody>
-
     </table>
+
+    <div class="pagination" *ngIf="!nomatchingdata">
+        <button (click)="PrevClicked()">Prev</button>
+        <div>
+            {{currentPage}} of {{totalPages}}
+        </div>
+        <button (click)="NextClicked()">Next</button>
+    </div>
+
+    <div class="nomatchingdata" *ngIf="nomatchingdata">
+        <h1>No Matching Data</h1>
+    </div>
 </div>
 

@@ -1,0 +1,13 @@
+.companyform{
+    margin: 5%;
+    padding: 5%;
+    align-items: center;
+}
+
+.statusradio{
+    margin-right: 1%;
+}
+
+.descriptionbox{
+    height: 100px;
+}
