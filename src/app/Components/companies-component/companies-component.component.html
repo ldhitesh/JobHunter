@@ -1,6 +1,7 @@
 <div class="companylistcontainer table-bordered">
     <search-bar (search)="onSearch($event)"></search-bar>
     <add-company routerLink="/addcompanyform" routerLinkActive="active"></add-company>
+
     <table *ngIf="!nomatchingdata" class="table">
         <thead>
             <th>ID</th>
@@ -8,15 +9,20 @@
             <th>Description</th>
             <th>Last Applied</th>
             <th>Status</th>
+            <th></th>
 
         </thead>
         <tbody>
             <tr *ngFor="let c of paginatedData">
                 <td class="Id">{{c.id}}</td>
-                <td>{{c.organization}}</td>
-                <td>{{c.description|companyDataFilter:'description'}}</td>
-                <td class="lastapplied">{{c.lastapplied|companyDataFilter:'lastapplied'}}</td>
-                <td class="status">{{c.Status|companyDataFilter:'status'}}</td>
+                <td class ="edit"><span class="fas fa-edit" (click)="editcompanyform(c)"></span>{{c.organization}}</td>
+                <td class="desc">{{c.description|companyDataFilter:'description'}}</td>
+                <td class="lastapplied" >{{c.lastApplied|companyDataFilter:'lastapplied'}}</td>
+                <td class="status">{{c.status|companyDataFilter:'status'}}</td>
+                <!-- <td>
+                    <a [href]="c.link" target="_blank">Apply</a>
+                </td> -->
+                <td (click)="getapple()">Apply</td>
             </tr>
         </tbody>
     </table>

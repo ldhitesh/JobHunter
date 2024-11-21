@@ -13,6 +13,9 @@ import { CompanyDataFilterPipe } from './Pipes/CompanyDataFilter';
 import { SearchBarComponent } from './Components/search-bar/search-bar.component';
 import { AddCompanyButtonComponent } from './Components/add-company-button/add-company-button.component';
 import { AddCompanyFormComponent } from './Components/add-company-form/add-company-form.component';
+import { ResumeBuilderComponent } from './Components/resume-builder/resume-builder.component';
+import { ReferencesComponent } from './Components/references/references.component';
+import { EmailComponent } from './Components/email/email.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { AddCompanyFormComponent } from './Components/add-company-form/add-compa
     CompanyDataFilterPipe,
     SearchBarComponent,
     AddCompanyButtonComponent,
-    AddCompanyFormComponent
+    AddCompanyFormComponent,
+    ResumeBuilderComponent,
+    ReferencesComponent,
+    EmailComponent
   ],
   imports: [
     BrowserModule,

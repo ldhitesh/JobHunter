@@ -40,8 +40,12 @@
             </div>
         </div>
 
-        <div class="row mb-3">
+        <div class="row mb-3" *ngIf="!updatebtn">
             <button type="submit" class="btn btn-primary col-sm-10 ">Add</button>
+        </div>
+        <div class="row mb-3" *ngIf="updatebtn">
+            <button (click)="Update()" class="btn btn-primary col-sm-10 udbtn">Update</button>
+            <button (click)="Delete()" class="btn btn-danger col-sm-10 udbtn ">Delete</button>
         </div>
     </form>
 </div>

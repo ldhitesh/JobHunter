@@ -1,0 +1,11 @@
+{
+    "/jobs": {
+      "target": "https://jobs.apple.com",
+      "secure": true,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/jobs": ""
+      }
+    }
+  }
+  

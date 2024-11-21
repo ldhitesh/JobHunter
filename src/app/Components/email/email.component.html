@@ -1,0 +1,48 @@
+
+
+  <form (submit)="sendEmail()">
+    <div>
+        <div class="SendEmail">
+            <div class="row mb-3">
+                <label for="to" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                <input  type="text" 
+                        class="form-control" 
+                        id="recipientemail"
+                        name="to"
+                        [(ngModel)]="emailData.to">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="subject" class="col-sm-2 col-form-label">Subject</label>
+                <div class="col-sm-10">
+                <input  type="text" 
+                        class="form-control" 
+                        id="subject"
+                        name="subject"
+                        [(ngModel)]="emailData.subject">
+                </div>
+            </div>
+
+            <div class="row mb-3 ">
+                <label for="body" class="col-sm-2 col-form-label">Body</label>
+                <div class="col-sm-10">
+                <textarea  type="email" 
+                        class="form-control ebody" 
+                        id="body"
+                        name="body"
+                        rows="100"
+                        cols="100"
+                        [(ngModel)]="emailData.body"
+                        (keydown.enter)="onEnterKey()">
+                        </textarea>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+        </div>
+    </div>
+
+</form>
