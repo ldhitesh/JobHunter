@@ -9,20 +9,14 @@
             <th>Description</th>
             <th>Last Applied</th>
             <th>Status</th>
-            <th></th>
-
         </thead>
         <tbody>
-            <tr *ngFor="let c of paginatedData">
+            <tr *ngFor="let c of paginatedData" >
                 <td class="Id">{{c.id}}</td>
                 <td class ="edit"><span class="fas fa-edit" (click)="editcompanyform(c)"></span>{{c.organization}}</td>
                 <td class="desc">{{c.description|companyDataFilter:'description'}}</td>
                 <td class="lastapplied" >{{c.lastApplied|companyDataFilter:'lastapplied'}}</td>
                 <td class="status">{{c.status|companyDataFilter:'status'}}</td>
-                <!-- <td>
-                    <a [href]="c.link" target="_blank">Apply</a>
-                </td> -->
-                <td (click)="getapple()">Apply</td>
             </tr>
         </tbody>
     </table>

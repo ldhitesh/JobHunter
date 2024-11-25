@@ -2,6 +2,10 @@
     margin: 5%;
     padding: 5%;
     align-items: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;  
+    align-items: center; 
 }
 
 .statusradio{

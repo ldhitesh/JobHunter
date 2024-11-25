@@ -16,6 +16,10 @@ import { AddCompanyFormComponent } from './Components/add-company-form/add-compa
 import { ResumeBuilderComponent } from './Components/resume-builder/resume-builder.component';
 import { ReferencesComponent } from './Components/references/references.component';
 import { EmailComponent } from './Components/email/email.component';
+import { SendEmailsComponent } from './Components/send-emails/send-emails.component';
+import { AddReferenceFormComponent } from './Components/add-reference-form/add-reference-form.component';
+import { AddReferenceButtonComponent } from './Components/add-reference-button/add-reference-button.component';
+import { SendEmailButtonComponent } from './Components/send-email-button/send-email-button.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,11 @@ import { EmailComponent } from './Components/email/email.component';
     AddCompanyFormComponent,
     ResumeBuilderComponent,
     ReferencesComponent,
-    EmailComponent
+    EmailComponent,
+    SendEmailsComponent,
+    AddReferenceFormComponent,
+    AddReferenceButtonComponent,
+    SendEmailButtonComponent
   ],
   imports: [
     BrowserModule,

@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class CompaniesComponentComponent {
 
   public companies: any;
-  public filtercompanies:any;
+  public filtercompanies:any=[];
   public nomatchingdata:boolean=false;
   public pageSize = 10;
   public currentPage = 1;
@@ -47,7 +47,6 @@ export class CompaniesComponentComponent {
   }
 
   get paginatedData() {
-      
       const startIndex = (this.currentPage-1) * this.pageSize;
       const endIndex = startIndex + this.pageSize;
       return this.filtercompanies.slice(startIndex, endIndex);
@@ -80,19 +79,7 @@ export class CompaniesComponentComponent {
     });
   }
 
-  getapple(){
 
-    
-    this.http.get('https://jobs.apple.com/en-us/search?location=united-states-USA').subscribe({
-      next: (data) => {
-        console.log(data);
-         
-      },
-      error: (err) => {
-        console.error('Error fetching companies:', err);
-      }
-    });
-  }
 
 }
 

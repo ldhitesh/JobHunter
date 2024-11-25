@@ -1,0 +1,55 @@
+<div class="referenceform">
+    <form [formGroup]="referenceform" (ngSubmit)="Onsubmit()">
+        <div class="row mb-3">
+            <label for="referralname" class="col-mb-3 col-form-label">Referral Name</label>
+            <br>
+            <div class="col-mb-3">
+            <input  type="text" 
+                    class="form-control" 
+                    id="referralname"
+                    formControlName="referralname">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="organization" class="col-mb-3 col-form-label">Organization</label>
+            <br>
+            <div class="col-mb-3">
+            <input  type="text" 
+                    class="form-control descriptionbox" 
+                    id="organization"
+                    formControlName="organization">
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="position" class="col-mb-3 col-form-label">Position</label>
+            <br>
+            <div class="col-mb-3">
+            <input  type="text" 
+                    class="form-control" 
+                    id="position"
+                    formControlName="position">
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="email" class="col-mb-3 col-form-label">Email</label>
+            <br>
+            <div class="col-mb-3">
+            <input  type="text" 
+                    class="form-control" 
+                    id="email"
+                    formControlName="email">
+            </div>
+        </div>
+
+
+        <div class="row mb-3" *ngIf="!updatebtn">
+            <button type="submit" class="btn btn-primary col-mb-3 ">Add Referrer</button>
+        </div>
+        <div class="row mb-3" *ngIf="updatebtn">
+            <button (click)="Update()" class="btn btn-primary col-mb-3 udbtn">Update</button>
+            <button (click)="Delete()" class="btn btn-danger col-mb-3 udbtn ">Delete</button>
+        </div>
+    </form>
+</div>

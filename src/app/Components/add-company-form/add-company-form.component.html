@@ -1,9 +1,9 @@
 <div class="companyform">
     <form [formGroup]="companyform" (ngSubmit)="Onsubmit()">
         <div class="row mb-3">
-            <label for="organization" class="col-sm-4 col-form-label">Organization Name</label>
+            <label for="organization" class="col-mb-3 col-form-label">Organization Name</label>
             <br>
-            <div class="col-sm-10">
+            <div class="col-mb-3">
             <input  type="text" 
                     class="form-control" 
                     id="organizationname"
@@ -11,9 +11,9 @@
             </div>
         </div>
         <div class="row mb-3">
-            <label for="description" class="col-sm-4 col-form-label">Description</label>
+            <label for="description" class="col-mb-3 col-form-label">Description</label>
             <br>
-            <div class="col-sm-10">
+            <div class="col-mb-3">
             <input  type="text" 
                     class="form-control descriptionbox" 
                     id="description"
@@ -22,9 +22,9 @@
         </div>
 
         <div class="row mb-3">
-            <label for="lastapplied" class="col-sm-4 col-form-label">Last Applied</label>
+            <label for="lastapplied" class="col-mb-3 col-form-label">Last Applied</label>
             <br>
-            <div class="col-sm-10">
+            <div class="col-mb-3">
             <input  type="date" 
                     class="form-control" 
                     id="lastapplied"
@@ -32,20 +32,20 @@
             </div>
         </div>
         <div class="row mb-3">
-            <div class="col-sm-10 ">
+            <div class="col-mb-3">
                 <input class="statusradio" type="checkbox" 
                         id="lastapplied"
                         formControlName="status">
-                <label for="status" class="col-sm-2 col-form-label">Applied</label>                
+                <label for="status" class="col-mb-3 col-form-label">Applied</label>                
             </div>
         </div>
 
         <div class="row mb-3" *ngIf="!updatebtn">
-            <button type="submit" class="btn btn-primary col-sm-10 ">Add</button>
+            <button type="submit" class="btn btn-primary col-mb-3 ">Add</button>
         </div>
         <div class="row mb-3" *ngIf="updatebtn">
-            <button (click)="Update()" class="btn btn-primary col-sm-10 udbtn">Update</button>
-            <button (click)="Delete()" class="btn btn-danger col-sm-10 udbtn ">Delete</button>
+            <button (click)="Update()" class="btn btn-primary col-mb-3 udbtn">Update</button>
+            <button (click)="Delete()" class="btn btn-danger col-mb-3 udbtn ">Delete</button>
         </div>
     </form>
 </div>

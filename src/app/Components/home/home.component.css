@@ -1,0 +1,93 @@
+/* Base body styling */
+body {
+    background-color: white; /* White background for the whole page */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Navbar brand/logo */
+    .navbar .navbar-brand {
+        color: #337ab7;
+        font-size: 1.5rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        transition: color 0.3s ease;
+    }
+  
+  /* Style for the navbar */
+  .navbar {
+    background-color: #337ab7; /* Blue color for the navbar */
+    color: rgb(0, 0, 0);
+    padding: 0.8rem 2rem; /* Moderate padding for balance */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow for floating effect */
+  }
+  
+  /* Navbar items layout */
+  .navbar .navbar-nav {
+    display: flex;
+    justify-content: center; /* Center align items */
+    align-items: center;
+    margin: 0;
+  }
+  
+  .navbar .navbar-nav .nav-item {
+    padding: 0 2rem; /* Space out navbar items */
+  }
+  
+  .navbar .navbar-nav .nav-link {
+    color: #337ab7; /* White text for the nav links */
+    text-decoration: none; /* Remove underline from links */
+    font-size: 1.2rem; /* Larger font size for the links */
+    font-weight: 500; /* Medium weight for a balanced look */
+    transition: all 0.3s ease; /* Smooth transition for hover and active states */
+  }
+  
+  /* Active link style */
+  .navbar .navbar-nav .nav-link.active {
+    border-bottom: 2px solid #337ab7; /* White underline to show the active page */
+    font-weight: 600; /* Make active link bold */
+  }
+  
+  /* Hover effect for links */
+  .navbar .navbar-nav .nav-link:hover {
+    color: #609ed4; /* Lighter yellow color for hover effect */
+    text-decoration: underline; /* Add underline on hover */
+    transform: translateY(-2px); /* Slightly lift the link on hover */
+  }
+  
+  
+  /* Responsive Design for large screens */
+  @media (min-width: 992px) {
+    .navbar-nav {
+      justify-content: flex-start; /* Align navbar items to the left on large screens */
+    }
+    .navbar-nav .nav-item {
+      padding: 0 2rem; /* More spacing between items */
+    }
+  }
+  
+  /* Ensure content is not hidden behind the navbar */
+  router-outlet {
+    margin-top: 70px; /* Space below navbar */
+  }
+  
+  /* Custom spacing for the "home" class */
+  .home {
+    margin-top: 80px; /* Padding to avoid content being hidden behind navbar */
+  }
+  
+  /* Mobile-friendly responsiveness */
+  @media (max-width: 768px) {
+    .navbar .navbar-nav {
+      flex-direction: column; /* Stack navbar items on smaller screens */
+      align-items: center; /* Center navbar items vertically on mobile */
+    }
+    .navbar .navbar-nav .nav-item {
+      padding: 1rem 0; /* Add vertical padding for mobile */
+    }
+  }
+  

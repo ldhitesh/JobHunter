@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class ReferencesComponent {
   public references: any;
+  public filteredreferences:any=[];
   public nomatchingdata:boolean=false;
   public pageSize = 10;
   public currentPage = 1;
@@ -25,9 +26,8 @@ export class ReferencesComponent {
       next: (data) => {
         
         this.references=data;    
+        this.filteredreferences=data;
         this.totalPages=Math.ceil(this.references.length/this.pageSize);  
-        console.log(this.references);
-
       },
       error: (err) => {
         console.error('Error fetching companies:', err);
@@ -35,11 +35,21 @@ export class ReferencesComponent {
     });
   }
 
+  onSearch(searchstring: string): void {    
+    console.log(searchstring);
+    
+    this.filteredreferences = this.references.filter((item:any) =>
+      item.organization.toLowerCase().includes(searchstring.toLowerCase())
+    );
+  
+    this.nomatchingdata=this.filteredreferences.length==0?true:false;
+    this.totalPages=Math.ceil(this.filteredreferences.length/this.pageSize);  
+  }
 
   get paginatedData() {
       const startIndex = (this.currentPage-1) * this.pageSize;
       const endIndex = startIndex + this.pageSize;
-      return this.references.slice(startIndex, endIndex);
+      return this.filteredreferences.slice(startIndex, endIndex);
   }
 
   PrevClicked(){
@@ -63,5 +73,6 @@ export class ReferencesComponent {
       }
     });
   }
+
 
 }

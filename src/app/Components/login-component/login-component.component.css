@@ -1,11 +1,124 @@
-.loginform{
-    margin:10%;
-    padding: 10%;
+/* General styles for the page */
+
+
+/* Form container styling */
+.loginform {
+    width: 100%;
+    max-width: 400px;
+    margin: 100px auto; /* Center form vertically and horizontally */
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.registerlink{
+/* Title styling */
+h2 {
     text-align: center;
+    margin-bottom: 20px;
+    font-size: 30px;
+    color: #337ab7;
+}
+
+/* Input wrapper to position icon */
+.input-wrapper {
+    position: relative;
+    justify-content: space-between;
+}
+
+/* Label styling */
+label {
+    font-size: 16px;
     font-weight: 500;
-    font-size:larger;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #337ab7;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Input fields styling */
+input.form-control {
+    width: 100%;
+    padding: 20px 40px;
+    font-size: 16px;
+    color: #333;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    margin-bottom: 20px; /* Space between input fields */
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Input fields on focus */
+input.form-control:focus {
+    border-color: #007bff;
+    background-color: #fff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2); /* Light blue glow effect */
+}
+
+/* Icon styling inside input fields */
+.input-wrapper i {
+    position: absolute;
+    top: 50%;
+    left: 16px; /* Adjusted space from the left */
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #bbb;
+}
+
+/* Submit button styling */
+button.btn-primary {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    color: white;
+    background-color: #337ab7;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Hover effect for the submit button */
+button.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Register link styling */
+.registerlink {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.registerlink a {
+    font-size: 16px;
+    color: #337ab7;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+/* Hover effect for the Register link */
+.registerlink a:hover {
+    color: #0056b3;
+}
+
+/* Responsive adjustments for mobile devices */
+@media (max-width: 576px) {
+    .loginform {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    input.form-control, button.btn-primary {
+        font-size: 14px;
+        padding: 12px;
+    }
 }
