@@ -1,51 +1,55 @@
 <div class="companyform">
     <form [formGroup]="companyform" (ngSubmit)="Onsubmit()">
-        <div class="row mb-3">
-            <label for="organization" class="col-mb-3 col-form-label">Organization Name</label>
-            <br>
-            <div class="col-mb-3">
+        <h2>
+            Add Company
+        </h2>
+        <div class="">
+            <label for="organization" class="col-form-label">Organization Name</label>
+            <div class="">
             <input  type="text" 
                     class="form-control" 
                     id="organizationname"
                     formControlName="organization">
             </div>
         </div>
-        <div class="row mb-3">
-            <label for="description" class="col-mb-3 col-form-label">Description</label>
-            <br>
-            <div class="col-mb-3">
-            <input  type="text" 
+        <div class="">
+            <label for="description" class="col-form-label">Description</label>
+            <div class="">
+                <textarea 
                     class="form-control descriptionbox" 
                     id="description"
-                    formControlName="description">
+                    formControlName="description"
+                    rows="4" 
+                    placeholder="Enter your description here..."
+                ></textarea>
             </div>
         </div>
+        
 
-        <div class="row mb-3">
-            <label for="lastapplied" class="col-mb-3 col-form-label">Last Applied</label>
-            <br>
-            <div class="col-mb-3">
+        <div class="">
+            <label for="lastapplied" class="col-form-label">Last Applied</label>
+            <div class="">
             <input  type="date" 
                     class="form-control" 
                     id="lastapplied"
                     formControlName="lastapplied">
             </div>
         </div>
-        <div class="row mb-3">
-            <div class="col-mb-3">
+        <div class="">
+            <div class="radio-line">
                 <input class="statusradio" type="checkbox" 
                         id="lastapplied"
                         formControlName="status">
-                <label for="status" class="col-mb-3 col-form-label">Applied</label>                
+                <label for="status" class="col-form-label">Applied</label>                
             </div>
         </div>
 
-        <div class="row mb-3" *ngIf="!updatebtn">
-            <button type="submit" class="btn btn-primary col-mb-3 ">Add</button>
+        <div class="" *ngIf="!updatebtn">
+            <button type="submit" class="btn btn-primary">Add</button>
         </div>
-        <div class="row mb-3" *ngIf="updatebtn">
-            <button (click)="Update()" class="btn btn-primary col-mb-3 udbtn">Update</button>
-            <button (click)="Delete()" class="btn btn-danger col-mb-3 udbtn ">Delete</button>
+        <div class="" *ngIf="updatebtn">
+            <button (click)="Update()" class="btn btn-primary udbtn">Update</button>
+            <button (click)="Delete()" class="btn btn-danger udbtn ">Delete</button>
         </div>
     </form>
 </div>

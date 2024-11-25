@@ -1,18 +1,12 @@
 <div class="">
   <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" routerLink="/login">
         JobHunter
       </a>
 
       <div class="collapse navbar-collapse justify-content-evenly" id="navbarNavDropdown">
         <ul class="navbar-nav fs-2 ">
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active">News</a>
-          </li>
           <li *ngIf="!IsloggedIn" class="nav-item">
             <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
           </li>

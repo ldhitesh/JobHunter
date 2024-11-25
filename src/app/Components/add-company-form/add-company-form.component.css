@@ -1,21 +1,189 @@
-.companyform{
-    margin: 5%;
-    padding: 5%;
-    align-items: center;
-    align-items: center;
+/* General styles for the page */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc; /* Light background for the page */
     display: flex;
-    justify-content: center;  
+    justify-content: center;
+    align-items: center; /* Center form vertically and horizontally */
+    flex-direction: column;
+}
+
+/* Form container styling */
+.companyform {
+    width: 100%;
+    max-width: 500px; /* Limit the width of the form */
+    margin: 100px auto; /* Center the form vertically and horizontally */
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Soft shadow effect for depth */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center; 
+    margin-top: 8%;
+}
+
+/* Title styling (for h2) */
+h2 {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 28px;
+    color: #337ab7; /* Blue color */
+    font-weight: 600; /* Make title a bit bolder */
+}
+
+/* Label styling */
+label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #337ab7; /* Consistent color with the header */
+    display: block;
+    margin-bottom: 2px;
+    text-align: left; /* Align label text to the left */
+}
+
+/* Input fields styling */
+input.form-control {
+    font-size: 16px;
+    color: #333;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    width: 400px;
+}
+
+/* Input fields on focus */
+input.form-control:focus {
+    border-color: #007bff; /* Light blue border on focus */
+    background-color: #fff;
+    outline: none; /* Removes the default focus outline */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2); /* Light blue glow effect */
+}
+
+/* Textarea styling for description box */
+.descriptionbox {
+    height: 100px; /* Increased height for better description box */
+    overflow-y: scroll;
+    width: 100%;
+}
+
+/* Checkbox styling */
+input.statusradio {
+    margin-right: 10px; /* Space between checkbox and label */
+    transform: scale(1.2); /* Increase checkbox size */
+}
+
+.radio-line{
+    display: flex;
+    margin: 2%;
+}
+/* Submit button styling */
+button.btn-primary {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    color: white;
+    background-color: #337ab7; /* Button background color */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s ease-in-out;
+    margin-top: 10%;
+    margin-bottom: 5%;
+}
+
+/* Hover effect for the submit button */
+button.btn-primary:hover {
+    background-color: #0056b3; /* Darker blue when hovered */
+    transform: translateY(-2px); /* Slightly lift the button on hover */
+}
+
+/* Active effect for the submit button */
+button.btn-primary:active {
+    background-color: #004085; /* Even darker blue when clicked */
+    transform: translateY(0); /* Return to normal when clicked */
+}
+
+/* Delete button styling */
+button.btn-danger {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    color: white;
+    background-color: #dc3545; /* Red background color for delete */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 15%;
+
+    transition: background-color 0.3s, transform 0.3s ease-in-out;
+}
+
+/* Hover effect for the delete button */
+button.btn-danger:hover {
+    background-color: #c82333; /* Darker red when hovered */
+    transform: translateY(-2px); /* Slightly lift the button on hover */
 }
 
 .statusradio{
-    margin-right: 1%;
+    margin-top: 3.3%;
 }
 
-.descriptionbox{
-    height: 100px;
+
+/* Responsive adjustments for mobile devices */
+@media (max-width: 576px) {
+    .companyform {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 22px; /* Smaller font for the title on small screens */
+    }
+
+    input.form-control, button.btn-primary, button.btn-danger {
+        font-size: 14px;
+        padding: 12px; /* Adjust padding for smaller screens */
+    }
+
+    /* Add margin to the buttons in small screens for better spacing */
+    button {
+        margin-top: 10px;
+    }
 }
 
-.udbtn{
-    margin-bottom: 0.75%;
+/* Styling for Description Textarea */
+textarea.form-control.descriptionbox {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    color: #333;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    resize: vertical; /* Allow vertical resizing */
+    box-sizing: border-box; /* Prevent padding from affecting width */
+    overflow-y: auto; /* Enable scrolling when content overflows */
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Textarea on focus */
+textarea.form-control.descriptionbox:focus {
+    border-color: #007bff;
+    background-color: #fff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2); /* Light blue glow effect */
+}
+
+/* Optional: Adjust label styling */
+label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #337ab7; /* Color to match the theme */
+    display: block;
+    margin-bottom: 5px;
 }

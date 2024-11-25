@@ -1,8 +1,38 @@
-.addcompany{
-    background-color: #337ab7;
-    color: white;
-    padding: 0.5%;
-    opacity: 80%;
-    border-radius: 5%;
-    margin: 0.25%;
+/* Container for the button */
+div {
+    text-align: left; /* Center align the button */
+    margin-top: 10px;
+    margin-bottom: 5px; /* Space above the button */
+}
+
+/* Add Reference button styling */
+.addcompany {
+    background-color: #337ab7; /* Green background */
+    color: white; /* White text */
+    font-size: 16px; /* Font size */
+    font-weight: 600; /* Bold text */
+    padding: 12px 24px; /* Top-bottom and left-right padding */
+    border: none; /* Remove default border */
+    border-radius: 30px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions for hover effects */
+    box-sizing: border-box; /* Ensure padding doesn't affect the button width */
+}
+
+/* Hover effect for the button */
+.addcompany:hover {
+    background-color: #0f6aba; /* Darker green on hover */
+    transform: scale(1.05); /* Slight scale-up effect */
+}
+
+/* Focus effect for the button */
+.addcompany:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 10px #0f6aba; /* Green glow effect */
+}
+
+/* Active effect for the button */
+.addcompany:active {
+    background-color: #0f6aba; /* Even darker green when clicked */
+    transform: scale(1); /* Prevent scale on click */
 }

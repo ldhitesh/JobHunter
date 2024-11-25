@@ -1,10 +1,11 @@
 <div class="referencelist ">
     <search-bar (search)="onSearch($event)"></search-bar>
-    <div class="references-header-btns ">
+
+    <div class="ref-header-btns">
         <add-reference-button  routerLink="/addreferenceform" routerLinkActive="active"></add-reference-button>
-        <send-email-button routerLink="/sendreferalemail" routerLinkActive="active"></send-email-button>    
+        <send-email-button routerLink="/sendreferalemail" routerLinkActive="active"></send-email-button>        
     </div>
-    <table *ngIf="!nomatchingdata" class="table table-bordered">
+ <table *ngIf="!nomatchingdata" class="table table-bordered">
             <thead>
                 <th class="col-sm-3">Name</th>
                 <th class="col-sm-3">Organization</th>

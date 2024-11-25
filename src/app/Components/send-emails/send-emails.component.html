@@ -1,5 +1,31 @@
 <div class="container">
     <div>
+        <div class="sendmail-header">
+            <div class="radio-btns">
+                <div class="col-mb-3 radio-input">
+                    <input  class="allrecruitersradio" 
+                            type="radio" 
+                            id="allrecruiters"
+                            [(ngModel)]="mailselection"
+                            value="recruiters">
+                    <label for="status" class="col-mb-3 allrecruitersradiolabel">All Recruiters</label>                
+                </div>
+            
+                <div class="col-mb-3 radio-input">
+                    <input  class="allrecruitersradio" 
+                            type="radio" 
+                            id="allemployees"
+                            [(ngModel)]="mailselection"
+                            value="employees">
+                    <label for="status" class="col-mb-3 allrecruitersradiolabel">All Employees</label>                
+                </div>
+            </div>
+            <button class="sendemailbtn">
+                <i class="fas fa-paper-plane"></i> Send Email
+            </button>
+
+        </div>
+        
         <div >
             <input 
                 type="text" 
@@ -28,25 +54,7 @@
             </span>
           </div>
     </div>
-    <div class="radio-btns">
-        <div class="col-mb-3 radio-input">
-            <input  class="allrecruitersradio" 
-                    type="radio" 
-                    id="allrecruiters"
-                    [(ngModel)]="mailselection"
-                    value="recruiters">
-            <label for="status" class="col-mb-3 allrecruitersradiolabel">All Recruiters</label>                
-        </div>
     
-        <div class="col-mb-3 radio-input">
-            <input  class="allrecruitersradio" 
-                    type="radio" 
-                    id="allemployees"
-                    [(ngModel)]="mailselection"
-                    value="employees">
-            <label for="status" class="col-mb-3 allrecruitersradiolabel">All Employees</label>                
-        </div>
-    </div>
     
    
 </div>

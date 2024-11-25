@@ -1,4 +1,135 @@
-.registerform{
-    margin: 10%;
-    padding: 10%;
+/* General styles for the page */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc; /* Light background for the page */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center form vertically and horizontally */
+    flex-direction: column;
+}
+
+/* Form container styling */
+.registerform {
+    width: 100%;
+    max-width: 400px; /* Limit the width of the form */
+    margin: 100px auto; /* Center the form vertically and horizontally */
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Soft shadow effect for depth */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+}
+
+/* Title styling (for h2) */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 30px;
+    color: #337ab7; /* Blue color */
+}
+
+/* Input wrapper to position icon */
+.input-wrapper {
+    position: relative;
+    justify-content: space-between;
+}
+
+/* Label styling */
+label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #337ab7; /* Consistent color with the header */
+    display: block;
+    margin-bottom: 4px;
+    text-align: left; /* Align label text to the left */
+}
+
+/* Input fields styling */
+input.form-control {
+    width: 100%;
+    padding: 14px 60px; /* Adequate padding for input */
+    font-size: 16px;
+    color: #333;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    margin-bottom: 20px; /* Space between input fields */
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Input fields on focus */
+input.form-control:focus {
+    border-color: #007bff; /* Light blue border on focus */
+    background-color: #fff;
+    outline: none; /* Removes the default focus outline */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2); /* Light blue glow effect */
+}
+
+/* Icon styling inside input fields (if any) */
+.input-wrapper i {
+    position: absolute;
+    top: 50%;
+    left: 16px; /* Adjust space from the left */
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #bbb;
+}
+
+/* Submit button styling */
+button.btn-primary {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    color: white;
+    background-color: #337ab7; /* Button background color */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Hover effect for the submit button */
+button.btn-primary:hover {
+    background-color: #0056b3; /* Darker blue when hovered */
+}
+
+/* Register link styling (if any) */
+.registerlink {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.registerlink a {
+    font-size: 16px;
+    color: #337ab7; /* Blue color */
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+/* Hover effect for the Register link */
+.registerlink a:hover {
+    color: #0056b3; /* Darker blue when hovered */
+}
+
+/* Responsive adjustments for mobile devices */
+@media (max-width: 576px) {
+    .registerform {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 22px; /* Smaller font for the title on small screens */
+    }
+
+    input.form-control, button.btn-primary {
+        font-size: 14px;
+        padding: 12px; /* Adjust padding for smaller screens */
+    }
 }

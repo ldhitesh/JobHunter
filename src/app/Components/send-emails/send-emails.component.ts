@@ -62,7 +62,6 @@ export class SendEmailsComponent {
   }
 
 
-
   onKeyDown(event: KeyboardEvent) {
     
     switch (event.key) {

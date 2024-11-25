@@ -1,18 +1,71 @@
-.search{
-    padding: 0.5%;
-    background-color: rgb(243, 247, 247);
-    opacity: 50%;
-    border-radius: 5%;
-}
-
-input{
-    padding: 1%;
+/* Search container */
+.search {
     width: 100%;
-    border: none;
-    outline: none;
-    background-color: rgb(255, 255, 255);
-    text-align: center;
-    font-size: larger;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    max-width: 800px; /* Max width of the search box */
+    margin: 10px auto; /* Center horizontally and provide space around */
+    position: relative; /* For positioning icons inside input */
+    display: flex;
 }
 
+i{
+    padding-top: 20px;
+    padding-left: 10px;
+}
+/* Search input styling */
+.search input[type="search"] {
+    width: 100%; /* Full width input */
+    padding: 12px 20px; /* Space inside the input */
+    font-size: 16px; /* Clear, readable font size */
+    color: #337ab7; /* Dark text for readability */
+    border: 2px solid #ddd; /* Subtle border */
+    border-radius: 25px; /* Round edges for a modern look */
+    background-color: #f6f6f6; /* Light gray background */
+    transition: all 0.3s ease-in-out; /* Smooth transition for hover/focus effects */
+    box-sizing: border-box; /* Includes padding and borders in width calculation */
+    outline: none; /* Removes the default focus outline */
+}
+
+/* Focus effect */
+.search input[type="search"]:focus {
+    border-color: #337ab7; /* Blue border when focused */
+    background-color: #fff; /* White background on focus */
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.2); /* Light blue glow */
+}
+
+/* Placeholder styling */
+.search input[type="search"]::placeholder {
+    color: #337ab7; /* Lighter placeholder text */
+    font-style: italic; /* Slightly italicized text */
+    font-weight: 400; /* Normal weight */
+}
+
+/* Optional icon inside the search box */
+.search input[type="search"]::before {
+    content: '\f002'; /* FontAwesome search icon */
+    font-family: 'FontAwesome'; /* Make sure FontAwesome is included */
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #337ab7; /* Light gray icon color */
+    pointer-events: none; /* Prevent the icon from being interactive */
+}
+
+/* Positioning the search input icon */
+.search input[type="search"]:focus::before {
+    color: #337ab7; /* Blue color for the icon when focused */
+}
+
+/* Responsive design */
+@media (max-width: 576px) {
+    .search {
+        width: 90%; /* More space on smaller screens */
+        max-width: none; /* Remove max-width constraint */
+    }
+
+    .search input[type="search"] {
+        font-size: 14px; /* Smaller font size for small screens */
+        padding: 10px 16px; /* Adjust padding */
+    }
+}

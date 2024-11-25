@@ -11,7 +11,7 @@ export class ReferencesComponent {
   public references: any;
   public filteredreferences:any=[];
   public nomatchingdata:boolean=false;
-  public pageSize = 10;
+  public pageSize = 8;
   public currentPage = 1;
   public totalPages:any;
   constructor(private http:HttpClient,private router:Router){}
