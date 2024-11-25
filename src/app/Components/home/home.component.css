@@ -48,13 +48,13 @@ body {
   
   /* Active link style */
   .navbar .navbar-nav .nav-link.active {
+    border-bottom: 2px solid #337ab7; /* White underline to show the active page */
     font-weight: 600; /* Make active link bold */
   }
   
   /* Hover effect for links */
   .navbar .navbar-nav .nav-link:hover {
-    color: #609ed4; /* Lighter yellow color for hover effect */
-    text-decoration: underline; /* Add underline on hover */
+    color: #385167; /* Lighter yellow color for hover effect */
     transform: translateY(-2px); /* Slightly lift the link on hover */
   }
   
