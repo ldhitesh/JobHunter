@@ -20,6 +20,7 @@ import { SendEmailsComponent } from './Components/send-emails/send-emails.compon
 import { AddReferenceFormComponent } from './Components/add-reference-form/add-reference-form.component';
 import { AddReferenceButtonComponent } from './Components/add-reference-button/add-reference-button.component';
 import { SendEmailButtonComponent } from './Components/send-email-button/send-email-button.component';
+import { PopupwindowComponent } from './Components/popupwindow/popupwindow.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { SendEmailButtonComponent } from './Components/send-email-button/send-em
     SendEmailsComponent,
     AddReferenceFormComponent,
     AddReferenceButtonComponent,
-    SendEmailButtonComponent
+    SendEmailButtonComponent,
+    PopupwindowComponent
   ],
   imports: [
     BrowserModule,

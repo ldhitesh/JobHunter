@@ -31,6 +31,21 @@
     transition: background-color 0.3s;
 }
 
+/* Edit button styling inside the table */
+table.table .edit {
+    display: flex;
+    align-items: center;
+}
+
+table.table .edit .fas.fa-edit {
+    margin-right: 8px;
+    cursor: pointer;
+    color: #337ab7;
+}
+
+table.table .edit .fas.fa-edit:hover {
+    color: #0a3458;
+}
 
 /* Table styling */
 table.table {

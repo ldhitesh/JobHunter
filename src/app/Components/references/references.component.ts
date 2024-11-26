@@ -75,4 +75,17 @@ export class ReferencesComponent {
   }
 
 
+  editrefernceform(data:any){
+    this.router.navigate(['/addreferenceform'],{
+      queryParams: {
+        organization: data.organization,
+        name: data.name,
+        position: data.position,
+        email: data.email,
+        link:data.link,
+        button:"update"
+      }
+    });
+  }
+
 }

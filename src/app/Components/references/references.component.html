@@ -14,7 +14,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let c of paginatedData">
-                <td>{{c.name}}</td>
+                <td class ="edit"><span class="fas fa-edit" (click)="editrefernceform(c)"></span>{{c.name}}</td>
                 <td>{{c.organization}}</td>
                 <td>{{c.position}}</td>
                 <td (click)="SendMail(c.email)"><i class="fas fa-envelope email-td"></i> {{c.email}}</td>

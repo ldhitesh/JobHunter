@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AddCompanyFormComponent {
   public companyform:FormGroup;
   public updatebtn:boolean=false;
+  public currentorganization:string='';
   constructor(private fb:FormBuilder,private http:HttpClient,private router:Router,
               private activatedroute:ActivatedRoute)
   {
@@ -32,7 +33,7 @@ export class AddCompanyFormComponent {
       });
 
       this.updatebtn=params['button']=="update"?true:false;
-      
+      this.currentorganization=params['organization'];
     });
   }
 
@@ -57,9 +58,37 @@ export class AddCompanyFormComponent {
 
   Update(){
 
+    this.companyform.value.lastapplied=this.companyform.value.lastapplied=="Yet to Apply"
+                                      ?this.companyform.value.lastapplied
+                                      :this.companyform.value.lastapplied.toString().slice(0,10);
+    this.companyform.value.status=this.companyform.value.status==false?"Not Applied":"Applied";
+
+    
+    this.http.patch(`http://localhost:5018/api/companies/updatecompany/${this.currentorganization}`,this.companyform.value).subscribe({
+      next:(response:any) => {
+      alert('Company updated successfully!');
+      this.router.navigate(['/companieslist']); // Navigate after update
+    },
+    error:(err:any) => {
+      console.log(err);
+      
+      const errorMessage = err.error?.message || 'An unexpected error occurred.';
+      alert(errorMessage);   
+    }
+  });
   }
 
   Delete(){
-
+    this.http.delete(`http://localhost:5018/api/companies/deletecompany/${this.companyform.value.organization}`).subscribe({
+      next:(response:any) => {
+      alert('Company deleted successfully!');
+      this.router.navigate(['/companieslist']); // Navigate after update
+    },
+    error:(err:any) => {
+      const errorMessage = err.error?.message || 'An unexpected error occurred.';
+      alert(errorMessage);   
+      this.router.navigate(['/companieslist']);     
+    }
+  });
   }
 }

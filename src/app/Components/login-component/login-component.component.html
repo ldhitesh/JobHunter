@@ -1,4 +1,4 @@
-<form #loginform="ngForm" (ngSubmit)="onLogin(loginform)">
+<form #loginform="ngForm">
     <div class="loginform">
         <h2>Login</h2> 
         <div class="row mb-6">
@@ -32,7 +32,7 @@
 
         <!-- Login button -->
         <div class="">
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" (click)="onLogin(loginform)" class="btn btn-primary">Login</button>
         </div>
 
         <!-- Register link -->
@@ -41,4 +41,5 @@
         </div>
     </div>
 </form>
+
 <router-outlet></router-outlet>
