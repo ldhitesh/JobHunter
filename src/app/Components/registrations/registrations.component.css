@@ -1,0 +1,137 @@
+/* General container styling for pending approvals */
+.pendingapprovals {
+    padding: 2%;
+    border-radius: 8px;
+    margin-top: 6%;
+    width: 100%;
+}
+
+h2{
+    color: #337ab7;
+    text-align: center;
+    padding: 2%; /* Set header background to #337ab7 */
+}
+/* Styling for the table */
+table.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px; /* Optional: Add some space above the table */
+}
+
+/* Table header styling */
+table.table thead {
+    background-color: #337ab7; /* Set header background to #337ab7 */
+    color: white; /* White text for the header */
+    font-weight: bold;
+}
+
+/* Add border to header cells (th) */
+table.table th {
+    padding: 12px;
+    text-align: left;
+}
+
+/* Styling for table cells (td) */
+table.table td {
+    padding: 12px;
+    vertical-align: middle;
+    border-bottom: none;
+    
+}
+
+/* Button styling */
+button {
+    margin-right: 10px;
+}
+
+button.btn-success {
+    background-color: #337ab7; /* Use #337ab7 for the "Approve" button */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+button.btn-danger {
+    background-color: #c83b49; /* Red color for Reject button */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+/* Hover effects for buttons */
+button.btn-success:hover {
+    background-color: #0c365b; /* Darker blue for "Approve" button hover */
+}
+
+button.btn-danger:hover {
+    background-color: #88211a; /* Darker red for "Reject" button hover */
+}
+
+/* Flexbox for button container */
+.buttons {
+    display: flex;
+    justify-content: center;
+    padding: 2%;
+}
+
+/* Actions column width */
+.Actions-col {
+    width: 250px;
+    text-align: center;
+}
+
+/* No matching data message styling */
+.nomatchingdata h1 {
+    color: #f44336; /* Red color for "No Matching Data" message */
+    font-size: 34px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+/* Pagination styling */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 8px 15px;
+    margin: 0 10px;
+    background-color: #337ab7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pagination button:hover {
+    background-color: #0a3458;
+}
+
+/* Current page display */
+.pagination div {
+    font-size: 16px;
+    color: #333;
+}
+
+/* No matching data message */
+.nomatchingdata h1 {
+    color: #f44336;
+    font-size: 34px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Optional: Make table more responsive on smaller screens */
+@media (max-width: 768px) {
+    table.table th, table.table td {
+        padding: 8px;
+    }
+}
