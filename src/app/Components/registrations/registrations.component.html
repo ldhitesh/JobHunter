@@ -1,0 +1,36 @@
+<div class="pendingapprovals" >
+    <h2>Pending User Registrations</h2>
+    
+    <div >
+      <table class="table table-bordered">
+        <thead class="">
+            <th>Username</th>
+            <th>Email</th>
+            <th class="Actions-col">Actions</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of pendingapprovals">
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td class="buttons">
+              <button (click)="approveUser(user)" class="btn btn-success approve">Approve</button>
+              <button (click)="rejectUser(user)" class="btn btn-danger reject">Reject</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pagination" *ngIf="!nomatchingdata">
+        <button (click)="PrevClicked()">Prev</button>
+        <div>
+            {{currentPage}} of {{totalPages}}
+        </div>
+        <button (click)="NextClicked()">Next</button>
+    </div>
+    
+    <!-- Display message if no users -->
+    <div *ngIf="pendingapprovals.length === 0" class="nomatchingdata">
+      <h1>No Pending Approvals</h1>
+    </div>
+  </div>
+  
