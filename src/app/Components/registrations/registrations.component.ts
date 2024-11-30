@@ -33,7 +33,6 @@ export class RegistrationsComponent {
       next: (data) => {
         this.pendingapprovals=data;    
         this.totalPages=Math.ceil(this.pendingapprovals.length/this.pageSize);  
-
       },
       error: (err) => {
         console.error('Error fetching companies:', err);

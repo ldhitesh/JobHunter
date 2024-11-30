@@ -24,10 +24,13 @@ export class LoginComponentComponent {
     
       const loginData = this.loginCredential;
       this.http.post('http://localhost:5018/api/login', loginData).subscribe({
-        next: (response: any) => {
-          localStorage.setItem('jwtToken', response.token);
+        next: (response: any) => {          
+          localStorage.setItem('UserName', response.userDetails.username);
+          localStorage.setItem('Role', response.userDetails.role[0]);
+
           this.loginstatuscheckservice.login();
-          this.router.navigate(['/companiescomponent']); 
+          this.loginstatuscheckservice.RoleCheck(response.userDetails.role[0]);
+          this.router.navigate(['/home']); 
         },
         error: (err) => {
           alert('Invalid username or password!');

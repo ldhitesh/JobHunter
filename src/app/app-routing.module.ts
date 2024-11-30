@@ -8,17 +8,22 @@ import { ReferencesComponent } from './Components/references/references.componen
 import { EmailComponent } from './Components/email/email.component';
 import { AddReferenceFormComponent } from './Components/add-reference-form/add-reference-form.component';
 import { SendEmailsComponent } from './Components/send-emails/send-emails.component';
+import { HomeComponent } from './Components/home/home.component';
+import { RegistrationsComponent } from './Components/registrations/registrations.component';
+import { authGuard } from './Guards/auth.guard';
 
 const routes: Routes = [
   {path:'login',component:LoginComponentComponent},
-  {path:'companiescomponent',component:CompaniesComponentComponent},
   {path:'registerform',component:RegisterUserComponent},
-  {path:'companieslist',component:CompaniesComponentComponent},
-  {path:'addcompanyform',component:AddCompanyFormComponent},
-  {path:'references',component:ReferencesComponent},
-  {path:'sendemail',component:EmailComponent},
-  {path:'addreferenceform',component:AddReferenceFormComponent},
-  {path:'sendreferalemail',component:SendEmailsComponent},
+  {path:'companieslist',component:CompaniesComponentComponent,canActivate: [authGuard]},
+  {path:'addcompanyform',component:AddCompanyFormComponent,canActivate: [authGuard]},
+  {path:'references',component:ReferencesComponent,canActivate: [authGuard]},
+  {path:'sendemail',component:EmailComponent,canActivate: [authGuard]},
+  {path:'addreferenceform',component:AddReferenceFormComponent,canActivate: [authGuard]},
+  {path:'sendreferalemail',component:SendEmailsComponent,canActivate: [authGuard]},
+  {path:'home',component:HomeComponent},
+  {path:'registrations',component:RegistrationsComponent,canActivate: [authGuard]}
+
 
 ];
 

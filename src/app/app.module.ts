@@ -21,6 +21,7 @@ import { AddReferenceFormComponent } from './Components/add-reference-form/add-r
 import { AddReferenceButtonComponent } from './Components/add-reference-button/add-reference-button.component';
 import { SendEmailButtonComponent } from './Components/send-email-button/send-email-button.component';
 import { PopupwindowComponent } from './Components/popupwindow/popupwindow.component';
+import { RegistrationsComponent } from './Components/registrations/registrations.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { PopupwindowComponent } from './Components/popupwindow/popupwindow.compo
     AddReferenceFormComponent,
     AddReferenceButtonComponent,
     SendEmailButtonComponent,
-    PopupwindowComponent
+    PopupwindowComponent,
+    RegistrationsComponent
   ],
   imports: [
     BrowserModule,
