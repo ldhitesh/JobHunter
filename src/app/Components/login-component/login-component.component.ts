@@ -14,6 +14,7 @@ export class LoginComponentComponent {
     username:'',
     password:''
   };
+  public IsloggedIn=false;
   
 
 
@@ -23,11 +24,11 @@ export class LoginComponentComponent {
   onLogin(data:any){
     
       const loginData = this.loginCredential;
+      
       this.http.post('http://localhost:5018/api/login', loginData).subscribe({
         next: (response: any) => {          
           localStorage.setItem('UserName', response.userDetails.username);
           localStorage.setItem('Role', response.userDetails.role[0]);
-
           this.loginstatuscheckservice.login();
           this.loginstatuscheckservice.RoleCheck(response.userDetails.role[0]);
           this.router.navigate(['/home']); 

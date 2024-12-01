@@ -11,8 +11,10 @@ import { SendEmailsComponent } from './Components/send-emails/send-emails.compon
 import { HomeComponent } from './Components/home/home.component';
 import { RegistrationsComponent } from './Components/registrations/registrations.component';
 import { authGuard } from './Guards/auth.guard';
+import { PortfolioComponent } from './Components/portfolio/portfolio.component';
 
 const routes: Routes = [
+  {path:'',component:LoginComponentComponent},
   {path:'login',component:LoginComponentComponent},
   {path:'registerform',component:RegisterUserComponent},
   {path:'companieslist',component:CompaniesComponentComponent,canActivate: [authGuard]},
@@ -21,9 +23,9 @@ const routes: Routes = [
   {path:'sendemail',component:EmailComponent,canActivate: [authGuard]},
   {path:'addreferenceform',component:AddReferenceFormComponent,canActivate: [authGuard]},
   {path:'sendreferalemail',component:SendEmailsComponent,canActivate: [authGuard]},
-  {path:'home',component:HomeComponent},
-  {path:'registrations',component:RegistrationsComponent,canActivate: [authGuard]}
-
+  {path:'home',component:HomeComponent,canActivate: [authGuard]},
+  {path:'registrations',component:RegistrationsComponent,canActivate: [authGuard]},
+  {path:'app-portfolio',component:PortfolioComponent,canActivate: [authGuard]}
 
 ];
 

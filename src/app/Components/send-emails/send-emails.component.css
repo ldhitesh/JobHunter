@@ -40,12 +40,12 @@
   
   
   .tags-container{
-    height: 200px;
+    height: 100px;
     width: 850px;
     overflow-y: scroll;
     padding: 1%;
+    margin-bottom: 3%;
   }
-
 
 /* Container for radio buttons */
 .radio-btns {
@@ -174,6 +174,16 @@
 
 .sendemailbtn:hover{
     background-color: #124572; /* Green background */
+}
+
+input:disabled{
+  background-color: #d3d3d3;  /* Light gray background for disabled button */
+  color: #a9a9a9;  /* Light gray text for disabled button */
+  border: 1px solid #a9a9a9; }
+
+  .ebody{
+    height: 200px;
+    font-family: 'Roboto', sans-serif;
 }
 
 

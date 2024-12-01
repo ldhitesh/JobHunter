@@ -1,7 +1,8 @@
-<div class="">
-  <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
+<div class="container-">
     <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/login">
+      <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
+
+      <a class="navbar-brand" routerLink="/home">
         JobHunter
       </a>
 
@@ -21,7 +22,8 @@
           </li>
         </ul>
       </div>
-    </div>
   </nav>
-  <router-outlet></router-outlet>
 </div>
+</div>
+<app-portfolio *ngIf="IsHomePage"></app-portfolio>
+<router-outlet></router-outlet>

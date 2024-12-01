@@ -7,8 +7,10 @@
                             type="radio" 
                             id="allrecruiters"
                             [(ngModel)]="mailselection"
-                            value="recruiters">
-                    <label for="status" class="col-mb-3 allrecruitersradiolabel">All Recruiters</label>                
+                            value="Recruiter"
+                            name="option"
+                            (click)="allRecruiterRadioClicked()">
+                    <label (click)="allRecruiterRadioClicked()" for="status" class="col-mb-3 allrecruitersradiolabel">All Recruiters</label>                
                 </div>
             
                 <div class="col-mb-3 radio-input">
@@ -16,43 +18,70 @@
                             type="radio" 
                             id="allemployees"
                             [(ngModel)]="mailselection"
-                            value="employees">
-                    <label for="status" class="col-mb-3 allrecruitersradiolabel">All Employees</label>                
+                            value="Employees"
+                            name="option"
+                            (click)="allEmployeeRadioClicked()">
+                    <label (click)="allEmployeeRadioClicked()" for="status" class="col-mb-3 allrecruitersradiolabel">All Employees</label>                
                 </div>
             </div>
-            <button class="sendemailbtn">
+            <button class="sendemailbtn" (click)="sendEmail()">
                 <i class="fas fa-paper-plane"></i> Send Email
             </button>
-
         </div>
-        
         <div >
-            <input 
-                type="text" 
-                class="form-control multiplemailsearchbox" 
-                [(ngModel)]="inputText" 
-                (input)="filterSuggestions()" 
-                (keydown)="onKeyDown($event)" 
-                placeholder="Enter Company Name..."
-               />
-              <div *ngIf="filteredSuggestions.length > 0" class="suggestions">
+            <div >
+                <input 
+                    [disabled]="mailselection.length!=0"
+                    type="text" 
+                    class="form-control multiplemailsearchbox" 
+                    [(ngModel)]="inputText" 
+                    (input)="filterSuggestions()" 
+                    (keydown)="onKeyDown($event)" 
+                    placeholder="Enter Company Name..."/>
+                <div *ngIf="filteredSuggestions.length > 0" class="suggestions">
                     <div class="suggestions-item" 
-                    *ngFor="let suggestion of filteredSuggestions;let i=index" 
-                    (click)="selectSuggestion(suggestion)"
-                    [class.selected]="i ==selectedIndex">
-                            {{ suggestion.name}} ( {{suggestion.organization}} )
-                  </div>
+                        *ngFor="let suggestion of filteredSuggestions;let i=index" 
+                        (click)="selectSuggestion(suggestion)"
+                        [class.selected]="i ==selectedIndex">
+                                {{ suggestion.name}} ( {{suggestion.organization}} )
+                    </div>
+                </div>
+            </div>
+            <div class="tags-container">
+                <span 
+                *ngFor="let tag of tags; let i = index" 
+                class="tag">
+                {{ tag }} 
+                <i class="fas fa-times close-icon" (click)="removeTag(i)"></i>
+                </span>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="subject" class="col-sm-2 col-form-label">Subject</label>
+            <div class="col-sm-10">
+            <input  type="text" 
+                    class="form-control" 
+                    id="subject"
+                    name="subject"
+                    [(ngModel)]="emailData.subject">
+            </div>
+        </div>
 
-              </div>
-          </div>
-          <div class="tags-container">
-            <span 
-              *ngFor="let tag of tags; let i = index" 
-              class="tag">
-              {{ tag }} 
-              <i class="fas fa-times close-icon" (click)="removeTag(i)"></i>
-            </span>
-          </div>
+        <div class="row mb-3 ">
+            <label for="body" class="col-sm-2 col-form-label">Body</label>
+            <div class="col-sm-10">
+            <textarea  type="email" 
+                    class="form-control ebody" 
+                    id="body"
+                    name="body"
+                    rows="100"
+                    cols="100"
+                    [(ngModel)]="emailData.body"
+                    (keydown.enter)="onEnterKey()">
+                    </textarea>
+            </div>
+        </div>
+
     </div>
     
     

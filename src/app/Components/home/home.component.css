@@ -1,11 +1,5 @@
 /* Base body styling */
-body {
-    background-color: white; /* White background for the whole page */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  
+
   /* Navbar brand/logo */
     .navbar .navbar-brand {
         color: #337ab7;

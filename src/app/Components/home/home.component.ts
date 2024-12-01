@@ -10,11 +10,14 @@ import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-ch
 export class HomeComponent {
   IsloggedIn:boolean=false;
   UserRole:any;
+  IsHomePage: boolean = false; 
+
   constructor(private loginstatuscheckservice:LoginStatusCheckServiceService,
               private router:Router
   ){}
 
   ngOnInit(): void {
+    
     this.loginstatuscheckservice.isLoggedIn.subscribe(state => {
       this.IsloggedIn = state;
     });
@@ -26,7 +29,8 @@ export class HomeComponent {
       this.IsloggedIn=true;
       this.UserRole=localStorage.getItem('Role');
     }
-
+    this.IsHomePage = this.router.url === '/home'; // You can change '/home' if your home route is different
+    
   }
 
   Logout(){
