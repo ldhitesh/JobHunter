@@ -55,8 +55,42 @@
                     [disabled]="companyform.value.organization.trim()==0 || companyform.value.description.trim()==0">Add</button>
         </div>
         <div class="" *ngIf="updatebtn">
-            <button (click)="Update()" [disabled]="!checkForValueChange()" class="btn btn-primary udbtn">Update</button>
-            <button (click)="Delete()" class="btn btn-danger udbtn ">Delete</button>
+            <button (click)="ConfirmUpdate()" [disabled]="!checkForValueChange()" class="btn btn-primary udbtn">Update</button>
+            <button (click)="ConfirmDelete()" class="btn btn-danger udbtn ">Delete</button>
         </div>
     </form>
 </div>
+
+
+
+
+
+<!-- Confirmation Modal for Update -->
+<div class="modal" [ngClass]="{ 'is-active': isUpdateForm }">
+    <div class="modal-background" (click)="closeModal()"></div>
+    <div class="modal-content">
+      <div class="box">
+        <h3>Confirm</h3>
+        <p>Are you sure you want to update company details?</p>
+        <div class="modal-footer">
+            <button class="button is-primary" (click)="Update()">Yes</button>
+            <button class="button is-primary" (click)="closeModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+ </div>
+
+ <!-- Confirmation Modal for Update -->
+<div class="modal" [ngClass]="{ 'is-active': isDeleteForm }">
+    <div class="modal-background" (click)="closeModal()"></div>
+    <div class="modal-content">
+      <div class="box">
+        <h3>Confirm</h3>
+        <p>Are you sure you want to Delete company details?</p>
+        <div class="modal-footer">
+            <button class="button is-primary" (click)="Delete()">Yes</button>
+            <button class="button is-primary" (click)="closeModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+ </div>

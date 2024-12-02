@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-add-company-form',
@@ -13,6 +14,11 @@ export class AddCompanyFormComponent {
   public updatebtn:boolean=false;
   public currentorganization:string='';
   public currentcompanydetails:any;
+  public isUpdateForm:boolean=false;
+  public isDeleteForm:boolean=false;
+
+  @Output() onClose: EventEmitter<void> = new EventEmitter();  // Event to notify when modal is closed
+  @Output() onConfirm: EventEmitter<void> = new EventEmitter(); 
 
   constructor(private fb:FormBuilder,private http:HttpClient,private router:Router,
               private activatedroute:ActivatedRoute)
@@ -72,11 +78,10 @@ export class AddCompanyFormComponent {
     this.http.patch(`http://localhost:5018/api/companies/updatecompany/${this.currentorganization.trim()}`,this.companyform.value).subscribe({
       next:(response:any) => {
       alert('Company updated successfully!');
+      this.isUpdateForm=false;
       this.router.navigate(['/companieslist']); // Navigate after update
     },
-    error:(err:any) => {
-      console.log(err);
-      
+    error:(err:any) => {      
       const errorMessage = err.error?.message || 'An unexpected error occurred.';
       alert(errorMessage);   
     }
@@ -87,6 +92,7 @@ export class AddCompanyFormComponent {
     this.http.delete(`http://localhost:5018/api/companies/deletecompany/${this.companyform.value.organization}`).subscribe({
       next:(response:any) => {
       alert('Company deleted successfully!');
+      this.isDeleteForm=false;
       this.router.navigate(['/companieslist']); // Navigate after update
     },
     error:(err:any) => {
@@ -115,7 +121,6 @@ export class AddCompanyFormComponent {
   }
 
   checkForValueChange(){
-   
       return this.companyform.value.organization!=this.currentcompanydetails.organization ||
       this.companyform.value.description!=this.currentcompanydetails.description ||
       this.companyform.value.lastapplied!=this.currentcompanydetails.lastapplied ||
@@ -126,4 +131,19 @@ export class AddCompanyFormComponent {
     this.companyform.value.organization=this.companyform.value.organization.trim();
     this.companyform.value.description=this.companyform.value.description.trim();
   }
+
+  ConfirmUpdate(){
+    this.isUpdateForm=true;
+  }
+
+  ConfirmDelete(){
+    this.isDeleteForm=true;
+  }
+
+  closeModal(){
+    this.isUpdateForm=false;
+    this.isDeleteForm=false;
+  }
+
+
 }
