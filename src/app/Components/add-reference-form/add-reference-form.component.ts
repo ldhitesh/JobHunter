@@ -90,10 +90,13 @@ export class AddReferenceFormComponent {
   }
 
   checkForValueChange(){
-    return this.referenceform.value.email!=this.currentreferncedetails.email ||
+    return (this.referenceform.value.email!=this.currentreferncedetails.email ||
     this.referenceform.value.name!=this.currentreferncedetails.name ||
     this.referenceform.value.position!=this.currentreferncedetails.position ||
-    this.referenceform.value.organization!=this.currentreferncedetails.organization
+    this.referenceform.value.organization!=this.currentreferncedetails.organization )&& 
+    (this.referenceform.value.organization.length!=0 &&
+    this.referenceform.value.name.length!=0  && this.referenceform.value.position.length!=0 &&
+    this.referenceform.value.email.length!=0)
   }
 
   trimWhiteSpaces(){

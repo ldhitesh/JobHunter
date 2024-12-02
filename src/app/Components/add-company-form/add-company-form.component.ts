@@ -121,10 +121,12 @@ export class AddCompanyFormComponent {
   }
 
   checkForValueChange(){
-      return this.companyform.value.organization!=this.currentcompanydetails.organization ||
+      return (this.companyform.value.organization!=this.currentcompanydetails.organization ||
       this.companyform.value.description!=this.currentcompanydetails.description ||
-      this.companyform.value.lastapplied!=this.currentcompanydetails.lastapplied ||
-      this.companyform.value.status!=this.currentcompanydetails.status
+      this.checklastapplieddirty()||
+      this.companyform.value.status!=this.currentcompanydetails.status) && 
+      (this.companyform.value.organization.length!=0 &&
+      this.companyform.value.description.length!=0 )
   }
 
   trimWhiteSpaces(){

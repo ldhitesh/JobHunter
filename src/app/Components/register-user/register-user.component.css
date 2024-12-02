@@ -91,7 +91,7 @@ button.btn-primary {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-bottom: 25%;
+    margin-bottom: 10%;
 }
 
 /* Hover effect for the submit button */
@@ -122,18 +122,8 @@ button.btn-primary:hover {
     padding: 4%;
 }
 
-/* .toast-success{
-    color: #113a66; 
-    border-radius: 5px;
-    font-size: 20px;
-    text-align: center;
-    padding-bottom: 4%;
-    animation: fadeInOut 4s ease-in-out; 
-  } */
-
   .toast-success {
     color: #0e264a; 
-    padding: 5px 10px;
     border-radius: 5px;
     font-size: 18px;
     width: 100%;
@@ -142,7 +132,6 @@ button.btn-primary:hover {
     transform: translateX(-50%);
     z-index: 9999;
     animation: fadeInOut 8s ease-in-out; /* Animation for fade in and out */
-    position: fixed;
     bottom: 12%;
   }
 

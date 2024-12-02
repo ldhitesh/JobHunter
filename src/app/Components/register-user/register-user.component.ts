@@ -21,25 +21,22 @@ export class RegisterUserComponent {
     this.registerform=this.fb.group({
       username:[''],
       email:[''],
-      password:['']
+      password:[''],
+      paymentstatus:['']
     });
   }
 
   ngOnInit(): void {
-    
     this.activatedroute.paramMap.subscribe(params => {
-      this.registerResponse = params.get('status');
-      this.showNotification();
+      this.showNotification(params.get('status'));
     });
 
   }
 
 
 
-  showNotification() { 
-    setTimeout(() => {
-        this.registerResponse='';
-    }, 8000);
+  showNotification(status:any) {
+    this.registerResponse=status; 
   }
   OnRegister(){      
       this.http.post('http://localhost:5018/api/register/pendingregistrations',this.registerform.value).subscribe({

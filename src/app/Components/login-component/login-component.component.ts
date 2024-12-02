@@ -67,6 +67,6 @@ export class LoginComponentComponent {
         this.loginfailure=false;
         this.successfullogin=false;
         this.registerResponse='';
-    }, 30000);
+    }, 10000);
   }
 }
