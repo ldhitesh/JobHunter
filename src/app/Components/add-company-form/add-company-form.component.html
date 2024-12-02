@@ -9,8 +9,9 @@
             <input  type="text" 
                     class="form-control" 
                     id="organizationname"
-                    formControlName="organization">
-            </div>
+                    formControlName="organization"
+                    [ngClass]="companyform.value.organization!=currentcompanydetails.organization? 'dirty-field' : ''">
+                </div>
         </div>
         <div class="">
             <label for="description" class="col-form-label">Description</label>
@@ -21,7 +22,8 @@
                     formControlName="description"
                     rows="4" 
                     placeholder="Enter your description here..."
-                ></textarea>
+                    [ngClass]="companyform.value.description!=currentcompanydetails.description? 'dirty-field' : ''">
+                </textarea>
             </div>
         </div>
         
@@ -32,23 +34,29 @@
             <input  type="date" 
                     class="form-control" 
                     id="lastapplied"
-                    formControlName="lastapplied">
+                    (input)="lastappliedfunction()"
+                    formControlName="lastapplied"
+                    [ngClass]="companyform.value.lastapplied!=currentcompanydetails.lastapplied ? 'dirty-field' : ''">
             </div>
         </div>
-        <div class="">
-            <div class="radio-line">
+        <div >
+            <div class="radio-line" [ngClass]="companyform.value.status!=currentcompanydetails.status ? 'dirty-field' : ''">
                 <input class="statusradio" type="checkbox" 
                         id="lastapplied"
-                        formControlName="status">
-                <label for="status" class="col-form-label">Applied</label>                
+                        formControlName="status"
+                        >
+                <label  for="status" class="col-form-label">Applied</label>                
             </div>
         </div>
 
         <div class="" *ngIf="!updatebtn">
-            <button type="submit" (click)="Onsubmit()" class="btn btn-primary">Add</button>
+            <button type="submit" 
+                    (click)="Onsubmit()" 
+                    class="btn btn-primary"
+                    [disabled]="companyform.value.organization.trim()==0 || companyform.value.description.trim()==0">Add</button>
         </div>
         <div class="" *ngIf="updatebtn">
-            <button (click)="Update()" class="btn btn-primary udbtn">Update</button>
+            <button (click)="Update()" [disabled]="!companyform.dirty" class="btn btn-primary udbtn">Update</button>
             <button (click)="Delete()" class="btn btn-danger udbtn ">Delete</button>
         </div>
     </form>

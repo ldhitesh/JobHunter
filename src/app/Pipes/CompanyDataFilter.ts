@@ -12,8 +12,8 @@ export class CompanyDataFilterPipe implements PipeTransform {
       else if(identifier=='status'){
         return value === 0 ? 'Not Applied' : value;
       }
-      else if(identifier=='lastapplied'){        
-        return value===null?'Yet to Apply':value;
+      else if(identifier=='lastapplied'){     
+        return value===null||value.length==0||''?'Yet to Apply':value;
       }
     
   }

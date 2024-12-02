@@ -1,9 +1,7 @@
 
 
-  <form (submit)="sendEmail()">
-    <div>
-        <div class="SendEmail">
-            <div class="row mb-3">
+  <form class="SendEmail" (submit)="sendEmail()">
+            <div *ngIf="userRole=='Admin'" class="row mb-3">
                 <label for="to" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
                 <input  type="text" 
@@ -12,7 +10,7 @@
                         name="to"
                         [(ngModel)]="emailData.to">
                 </div>
-            </div>
+            </div>    
             <div class="row mb-3">
                 <label for="subject" class="col-sm-2 col-form-label">Subject</label>
                 <div class="col-sm-10">
@@ -42,7 +40,4 @@
             <div class="row mb-3">
                 <button type="submit" class="btn btn-primary">Send</button>
             </div>
-        </div>
-    </div>
-
 </form>

@@ -23,6 +23,7 @@ import { SendEmailButtonComponent } from './Components/send-email-button/send-em
 import { PopupwindowComponent } from './Components/popupwindow/popupwindow.component';
 import { RegistrationsComponent } from './Components/registrations/registrations.component';
 import { PortfolioComponent } from './Components/portfolio/portfolio.component';
+import { MaskEmailPipe } from './Pipes/mask-email.pipe';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { PortfolioComponent } from './Components/portfolio/portfolio.component';
     SendEmailButtonComponent,
     PopupwindowComponent,
     RegistrationsComponent,
-    PortfolioComponent
+    PortfolioComponent,
+    MaskEmailPipe
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-check-service.service';
 
 @Component({
   selector: 'app-references',
@@ -14,10 +15,20 @@ export class ReferencesComponent {
   public pageSize = 8;
   public currentPage = 1;
   public totalPages:any;
-  constructor(private http:HttpClient,private router:Router){}
+  public UserRole:any;
 
-  
+  constructor(private http:HttpClient,private router:Router,
+              private loginstatuscheckservice:LoginStatusCheckServiceService){}
+
+
+ 
   ngOnInit(): void {
+    this.loginstatuscheckservice.Role.subscribe(role => {
+      this.UserRole = role;
+    });    
+    if(localStorage.getItem('Role')){
+      this.UserRole=localStorage.getItem('Role');
+    }
     this.fetchReferences();
   }
 
@@ -36,7 +47,6 @@ export class ReferencesComponent {
   }
 
   onSearch(searchstring: string): void {    
-    console.log(searchstring);
     
     this.filteredreferences = this.references.filter((item:any) =>
       item.organization.toLowerCase().includes(searchstring.toLowerCase())

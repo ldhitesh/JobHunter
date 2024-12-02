@@ -1,9 +1,13 @@
 .SendEmail{
-    margin: 10%;
-    padding: 10%;
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 10%;
+    margin: 5%;
+    justify-content: center;  /* Center horizontally */
+    align-items: center;      /* Center vertically */
 }
 
 .ebody{
-    height: 150px;
+    height: 200px;
     font-family: 'Roboto', sans-serif;
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -12,12 +12,14 @@ export class AddCompanyFormComponent {
   public companyform:FormGroup;
   public updatebtn:boolean=false;
   public currentorganization:string='';
+  public currentcompanydetails:any;
+
   constructor(private fb:FormBuilder,private http:HttpClient,private router:Router,
               private activatedroute:ActivatedRoute)
   {
       this.companyform= this.fb.group({
-      organization:[''],
-      description:[''],
+      organization: ['', Validators.required],  // Add required validator
+      description: ['', Validators.required], 
       lastapplied:['Yet to Apply'],
       status:[false]
     })
@@ -34,7 +36,13 @@ export class AddCompanyFormComponent {
 
       this.updatebtn=params['button']=="update"?true:false;
       this.currentorganization=params['organization'];
+      this.currentcompanydetails=this.companyform.value;
     });
+  }
+
+  lastappliedfunction(){
+    if(this.companyform.value.lastapplied.length==0)
+      this.companyform.value.lastapplied='Yet to Apply';    
   }
 
   Onsubmit(){

@@ -1,7 +1,6 @@
-<div class="pendingapprovals" >
-    <h2>Pending User Registrations</h2>
-    
-    <div >
+<div class="pendingapprovals">
+    <h2 *ngIf="pendingapprovals.length>0">Pending User Registrations</h2>
+    <div *ngIf="pendingapprovals.length>0">
       <table class="table table-bordered">
         <thead class="">
             <th>Username</th>
@@ -20,16 +19,17 @@
         </tbody>
       </table>
     </div>
-    <div class="pagination" *ngIf="!nomatchingdata">
+    <div class="pagination" *ngIf="!nomatchingdata && pendingapprovals.length!=0">
         <button (click)="PrevClicked()">Prev</button>
         <div>
             {{currentPage}} of {{totalPages}}
         </div>
         <button (click)="NextClicked()">Next</button>
     </div>
-    
+
     <div *ngIf="pendingapprovals.length === 0" class="nomatchingdata">
       <h1>No Pending Approvals</h1>
     </div>
+    
   </div>
-  
+ 

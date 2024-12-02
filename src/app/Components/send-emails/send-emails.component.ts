@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component } from '@angular/core';
+import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-check-service.service';
 
 @Component({
   selector: 'app-send-emails',
@@ -9,6 +10,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 export class SendEmailsComponent {
   inputText: string = ''; 
   tags: string[] = []; 
+  prevtags: string[] = []; 
   mailselection:string='';
   filteredSuggestions:any= []; 
   suggestions:any=[];
@@ -16,11 +18,18 @@ export class SendEmailsComponent {
   selectedIndex: number = 0;  // To track the currently selected suggestion index
   private apiUrl = 'http://localhost:5018/api/email/send'; // API URL to send email
   public emailData = { to: '', subject: '', body: '' };
+  public UserRole:any;
 
-  constructor(private http:HttpClient,private cdr: ChangeDetectorRef){}
-
-  
+  constructor(private http:HttpClient,private cdr: ChangeDetectorRef,
+            private loginstatuscheckservice:LoginStatusCheckServiceService){}
+ 
   ngOnInit(): void {
+    this.loginstatuscheckservice.Role.subscribe(role => {
+      this.UserRole = role;
+    });    
+    if(localStorage.getItem('Role')){
+      this.UserRole=localStorage.getItem('Role');
+    }
     this.fetchCompanies();
   }
 
@@ -103,22 +112,30 @@ export class SendEmailsComponent {
   }
 
   allRecruiterRadioClicked(){   
-    if(this.mailselection.length==0 || this.mailselection=='Employees')
+    if(this.mailselection.length==0 || this.mailselection=='Employees'){
+      this.prevtags=this.prevtags.length==0?this.tags:this.prevtags;
+      this.tags=[];
       this.mailselection="Recruiter"; 
+    }
     else{
       this.mailselection=''; 
+      this.tags=this.prevtags;      
     }
   }
 
   allEmployeeRadioClicked(){   
-    if(this.mailselection.length==0 || this.mailselection=='Recruiter') 
+    if(this.mailselection.length==0 || this.mailselection=='Recruiter'){
+      this.prevtags=this.prevtags.length==0?this.tags:this.prevtags;
+      this.tags=[];
       this.mailselection="Employees"; 
+
+    }
     else{
       this.mailselection=''; 
+      this.tags=this.prevtags;        
     }
   }
   onEnterKey() {}
-
 
   // Send email method
   sendEmail() {
@@ -152,6 +169,13 @@ export class SendEmailsComponent {
       this.tags=[];
     }
     this.mailselection='';
+    this.prevtags=[];
+
+  }
+
+  Clear(){
+    this.tags=[];
+    this.prevtags=[];
 
   }
 

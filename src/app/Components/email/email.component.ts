@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-check-service.service';
 
 @Component({
   selector: 'email',
@@ -11,13 +12,22 @@ export class EmailComponent {
 
   private apiUrl = 'http://localhost:5018/api/email/send'; // API URL to send email
   public emailData = { to: '', subject: '', body: '' };
+  public userRole:any='';
 
-  constructor(private http: HttpClient, private activatedroute: ActivatedRoute) { }
+  constructor(private http: HttpClient, private activatedroute: ActivatedRoute,
+              private loginstatuscheckservice:LoginStatusCheckServiceService){}
+
 
   ngOnInit(): void {
     this.activatedroute.queryParams.subscribe(params => {
       this.emailData.to = params['To'];
     });
+    this.loginstatuscheckservice.Role.subscribe(role => {
+      this.userRole = role;
+    });    
+    if(localStorage.getItem('Role')){
+      this.userRole=localStorage.getItem('Role');
+    }
   }
 
   // Send email method

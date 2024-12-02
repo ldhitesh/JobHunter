@@ -6,33 +6,56 @@
         <div class="">
             <label for="name" class="col-form-label">Referral Name</label>
             <div >
-                <input type="text" class="form-control" id="referralname" formControlName="name">
+                <input  type="text" 
+                        class="form-control" 
+                        id="referralname" 
+                        formControlName="name"
+                        [ngClass]="referenceform.get('name')?.dirty ? 'dirty-field' : ''">
+
             </div>
         </div>
 
         <div class="">
             <label for="organization" class=" col-form-label">Organization</label>
             <div class="">
-                <input type="text" class="form-control descriptionbox" id="organization" formControlName="organization">
+                <input  type="text" 
+                        class="form-control descriptionbox" 
+                        id="organization" 
+                        formControlName="organization"
+                        [ngClass]="referenceform.get('organization')?.dirty ? 'dirty-field' : ''">
+
             </div>
         </div>
 
         <div class="">
             <label for="position" class="col-form-label">Position</label>
             <div class="">
-                <input type="text" class="form-control" id="position" formControlName="position">
+                <input  type="text" 
+                        class="form-control" 
+                        id="position" 
+                        formControlName="position"
+                        [ngClass]="referenceform.get('position')?.dirty ? 'dirty-field' : ''">
+
             </div>
         </div>
 
         <div class="">
             <label for="email" class="col-form-label">Email</label>
             <div class="">
-                <input type="text" class="form-control" id="email" formControlName="email">
+                <input  type="text" 
+                        class="form-control" 
+                        id="email" 
+                        formControlName="email"
+                        [ngClass]="referenceform.get('email')?.dirty ? 'dirty-field' : ''">
             </div>
         </div>
 
         <div class="" *ngIf="!updatebtn">
-            <button type="submit" (click)="Onsubmit()" class="btn btn-primary">Add Referrer</button>
+            <button type="submit" 
+                    (click)="Onsubmit()" 
+                    class="btn btn-primary"
+                    [disabled]="referenceform.value.name.trim()==0 || referenceform.value.organization.trim()==0 ||
+                                referenceform.value.position.trim()==0 || referenceform.value.email.trim()==0">Add Referrer</button>
         </div>
         
         <div class="row mb-3" *ngIf="updatebtn">

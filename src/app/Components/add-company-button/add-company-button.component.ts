@@ -18,6 +18,5 @@ export class AddCompanyButtonComponent {
     if(localStorage.getItem('Role')){
       this.UserRole=localStorage.getItem('Role');
     }
-
   }
 }

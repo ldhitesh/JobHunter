@@ -26,9 +26,7 @@ export class RegisterUserComponent {
         next:(response:any)=>{
           this.isModalVisible = true;  
         },
-        error:(err:any)=>{
-          console.log(err);
-          
+        error:(err:any)=>{          
           alert('Could not register the user!');
           this.router.navigate(['/login']); 
         }

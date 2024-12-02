@@ -108,6 +108,43 @@ button.btn-primary:active {
     transform: translateY(0); /* Return to normal when clicked */
 }
 
+button.btn-primary:disabled {
+    background-color: #657e94; /* Green background */
+
+}
+button.btn-primary:disabled:hover {
+    background-color: #657e94; /* Green background */
+
+}
+
+.dirty-field.form-control {
+    border: 2px solid #5ca0e9;  /* Dark blue border */
+    background-color: #f6f4f4;  /* Light blue background to highlight the dirty input */
+    color: #062648;  /* Dark text color for better contrast */
+    padding: 10px;  /* Add some padding inside the input for better spacing */
+    box-shadow: 0 0 30px rgba(6, 129, 252, 0.3);  /* Light shadow effect for focus */
+    transition: all 0.3s ease;  /* Smooth transition for hover and focus */
+  }
+  
+  .dirty-field.form-control.descriptionbox {
+    border: 2px solid #5ca0e9;  /* Dark blue border */
+    background-color: #f6f4f4;  /* Light blue background to highlight the dirty input */
+    color: #062648;  /* Dark text color for better contrast */
+    padding: 10px;  /* Add some padding inside the input for better spacing */
+    box-shadow: 0 0 30px rgba(6, 129, 252, 0.3);  /* Light shadow effect for focus */
+    transition: all 0.3s ease;  /* Smooth transition for hover and focus */
+  }
+  
+  .dirty-field.radio-line {
+    border: 2px solid #5ca0e9;  /* Dark blue border */
+    background-color: #f6f4f4;  /* Light blue background to highlight the dirty input */
+    color: #062648;  /* Dark text color for better contrast */
+    padding: 6px;  /* Add some padding inside the input for better spacing */
+    box-shadow: 0 0 30px rgba(6, 129, 252, 0.3);  /* Light shadow effect for focus */
+    transition: all 0.3s ease;  /* Smooth transition for hover and focus */
+  }
+
+
 /* Delete button styling */
 button.btn-danger {
     width: 100%;
@@ -187,3 +224,4 @@ label {
     display: block;
     margin-bottom: 5px;
 }
+

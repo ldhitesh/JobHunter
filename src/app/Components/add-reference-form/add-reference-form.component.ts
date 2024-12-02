@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -18,10 +18,10 @@ export class AddReferenceFormComponent {
               private activatedroute:ActivatedRoute)
   {
       this.referenceform= this.fb.group({
-      name:[''],
-      organization:[''],
-      position:[''],
-      email:[''],
+      name:['',Validators.required],
+      organization:['',Validators.required],
+      position:['',Validators.required],
+      email:['',Validators.required],
       link:['']
     })
   }

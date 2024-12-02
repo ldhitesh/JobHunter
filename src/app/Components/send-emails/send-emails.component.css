@@ -166,14 +166,22 @@
     font-weight: 600; /* Bold text */
     border: none; /* Remove default border */
     border-radius: 30px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
     transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions for hover effects */
     padding-left: 30px;
     padding-right: 30px;
+    margin: 2%;
+    width: 180px;
 }
 
 .sendemailbtn:hover{
     background-color: #124572; /* Green background */
+}
+
+.sendemailbtn:disabled{
+  background-color: #657e94; /* Green background */
+}
+.sendemailbtn:disabled:hover{
+  background-color: #657e94; /* Green background */
 }
 
 input:disabled{
@@ -187,3 +195,6 @@ input:disabled{
 }
 
 
+.btns{
+  display: flex;
+}
