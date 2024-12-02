@@ -26,13 +26,30 @@
                             id="registeremail"
                             formControlName="email">
                 </div>
+                <div class="paynow">
+                    <checkout></checkout>           
+                </div>
+           
+     
 
             <div class="col-sm-8">
-                <button type="submit" class="btn btn-primary">Register</button>
+                <button [disabled]="registerResponse!='success'" type="submit" class="btn btn-primary">Register</button>
+            </div>
+            <div *ngIf="registerResponse == 'success'" class="toast-success">
+                Now you can click on register!
+            </div>
+            <div class="empty">
             </div>
         </div>
+        
+       
     </div>
+    
 
 </form>
-<popupwindow [isVisible]="isModalVisible" (onClose)="closeModal()"></popupwindow>
+
+
+<!-- <popupwindow [isVisible]="isModalVisible" (onClose)="closeModal()"></popupwindow> -->
+
+
 <router-outlet></router-outlet>

@@ -39,6 +39,14 @@
         <div class="registerlink" routerLink="/registerform" routerLinkActive="active">
             <a>Register</a>
         </div>
+        <div *ngIf="isModalVisible">
+            <div *ngIf="isModalVisible" class="notification">
+                <h5  *ngIf="successfullogin" class="notification-title">Account Approval Pending</h5>
+                <h5 *ngIf="loginfailure" class="notification-title">User Registration Failed</h5>
+                <p *ngIf="successfullogin" class="notification-message">You will receive an email once the administrator approves your account.</p>
+                <p *ngIf="loginfailure" class="notification-message">Sorry registration failed! Please try after some time</p>
+            </div>
+        </div>
     </div>
 </form>
 

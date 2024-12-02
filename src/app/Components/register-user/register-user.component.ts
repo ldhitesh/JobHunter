@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-user',
@@ -9,39 +9,55 @@ import { Router } from '@angular/router';
   styleUrls: ['./register-user.component.css']
 })
 export class RegisterUserComponent {
+  public successfullogin: boolean = false;
+  public loginfailure: boolean = false;
+  public isModalVisible:boolean=false;
+  public registerResponse:any;
 
-  public isModalVisible: boolean = false;
   registerform!: FormGroup;
-  constructor(private fb:FormBuilder,private http:HttpClient,private router:Router){
+  constructor(private fb:FormBuilder,private http:HttpClient,private router:Router,
+              private activatedroute:ActivatedRoute
+  ){
     this.registerform=this.fb.group({
       username:[''],
       email:[''],
       password:['']
     });
   }
-  OnRegister(){
-      
-    this.openpopupwindow();
+
+  ngOnInit(): void {
+    
+    this.activatedroute.paramMap.subscribe(params => {
+      this.registerResponse = params.get('status');
+      this.showNotification();
+    });
+
+  }
+
+
+
+  showNotification() { 
+    setTimeout(() => {
+        this.registerResponse='';
+    }, 8000);
+  }
+  OnRegister(){      
       this.http.post('http://localhost:5018/api/register/pendingregistrations',this.registerform.value).subscribe({
         next:(response:any)=>{
-          this.isModalVisible = true;  
-        },
+          this.router.navigate(['/login'],{
+            queryParams: {
+              response: "Success"
+            }
+          });        },
         error:(err:any)=>{          
-          alert('Could not register the user!');
-          this.router.navigate(['/login']); 
+          this.router.navigate(['/login'],{
+            queryParams: {
+              response: "Failure"
+            }
+          });         
         }
       })
     }
-
-  openpopupwindow(){
-      this.isModalVisible = true;            
-  }
-  closeModal() {
-    this.isModalVisible = false;
-    this.router.navigate(['/login']);           
-
-  }
- 
 
 
 }

@@ -14,7 +14,9 @@ export class AddReferenceFormComponent {
   public updatebtn:boolean=false;
   public currentrefereremail:string='';
   public currentreferncedetails:any;
-
+  public isUpdateForm:boolean=false;
+  public isDeleteForm:boolean=false;
+  
   constructor(private fb:FormBuilder,private http:HttpClient,private router:Router,
               private activatedroute:ActivatedRoute)
   {
@@ -99,5 +101,19 @@ export class AddReferenceFormComponent {
     this.referenceform.value.name=this.referenceform.value.name.trim();
     this.referenceform.value.position=this.referenceform.value.position.trim();
     this.referenceform.value.email=this.referenceform.value.email.trim();    
+  }
+
+
+  ConfirmUpdate(){
+    this.isUpdateForm=true;
+  }
+
+  ConfirmDelete(){
+    this.isDeleteForm=true;
+  }
+
+  closeModal(){
+    this.isUpdateForm=false;
+    this.isDeleteForm=false;
   }
 }

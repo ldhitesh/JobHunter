@@ -1,0 +1,27 @@
+/* General styling for Pay Now button */
+.pay-now-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    color: white;
+    background-color: #52a969; /* Button background color */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 225px;
+    text-decoration: none;
+}
+
+.pay-now-btn:hover {
+  background-color: #24823d; /* Darker blue when hovered */
+  animation: hoverEffect 0.3s ease forwards;
+}
+
+/* Disabled state - grayed-out with reduced opacity */
+.pay-now-btn:disabled {
+  background-color: #b0c4de; /* Light grayish-blue background */
+  color: #a3a3a3; /* Gray text */
+  cursor: not-allowed; /* Disable pointer cursor */
+  box-shadow: none; /* Remove shadow */
+}

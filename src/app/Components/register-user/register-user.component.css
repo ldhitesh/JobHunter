@@ -91,6 +91,7 @@ button.btn-primary {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-bottom: 25%;
 }
 
 /* Hover effect for the submit button */
@@ -117,6 +118,52 @@ button.btn-primary:hover {
     color: #0056b3; /* Darker blue when hovered */
 }
 
+.paynow{
+    padding: 4%;
+}
+
+/* .toast-success{
+    color: #113a66; 
+    border-radius: 5px;
+    font-size: 20px;
+    text-align: center;
+    padding-bottom: 4%;
+    animation: fadeInOut 4s ease-in-out; 
+  } */
+
+  .toast-success {
+    color: #0e264a; 
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    width: 100%;
+    max-width:300px;
+    text-align: center;
+    transform: translateX(-50%);
+    z-index: 9999;
+    animation: fadeInOut 8s ease-in-out; /* Animation for fade in and out */
+    position: fixed;
+    bottom: 12%;
+  }
+
+  
+  @keyframes fadeInOut {
+    0% {
+        opacity: 1; /* Start fully visible */
+        transform: translateY(0); /* Stay in the original position */
+      }
+      30% {
+        opacity: 1; /* Still visible */
+      }
+      100% {
+        opacity: 0; /* End as invisible */
+        transform: translateY(0); /* Slight downward movement for the dissolve effect */
+      }
+  }
+  
+  
+  
+
 /* Responsive adjustments for mobile devices */
 @media (max-width: 576px) {
     .registerform {
@@ -133,3 +180,5 @@ button.btn-primary:hover {
         padding: 12px; /* Adjust padding for smaller screens */
     }
 }
+
+

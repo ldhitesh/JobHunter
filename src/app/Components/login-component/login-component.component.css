@@ -109,6 +109,24 @@ button.btn-primary:hover {
     color: #0056b3;
 }
 
+
+
+h5{
+    width: 400px;
+    padding-top:4%;
+    text-align: center;
+}
+
+p{
+    text-align: center;
+    font-size: 12px;
+}
+
+.notification{
+    align-items: center;
+    justify-content: center;
+}
+
 /* Responsive adjustments for mobile devices */
 @media (max-width: 576px) {
     .loginform {

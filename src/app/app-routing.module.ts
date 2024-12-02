@@ -17,6 +17,7 @@ const routes: Routes = [
   {path:'',component:LoginComponentComponent},
   {path:'login',component:LoginComponentComponent},
   {path:'registerform',component:RegisterUserComponent},
+  {path:'registerform/:status',component:RegisterUserComponent},
   {path:'companieslist',component:CompaniesComponentComponent,canActivate: [authGuard]},
   {path:'addcompanyform',component:AddCompanyFormComponent,canActivate: [authGuard]},
   {path:'references',component:ReferencesComponent,canActivate: [authGuard]},

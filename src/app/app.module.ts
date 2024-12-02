@@ -24,6 +24,7 @@ import { PopupwindowComponent } from './Components/popupwindow/popupwindow.compo
 import { RegistrationsComponent } from './Components/registrations/registrations.component';
 import { PortfolioComponent } from './Components/portfolio/portfolio.component';
 import { MaskEmailPipe } from './Pipes/mask-email.pipe';
+import { CheckoutComponent } from './Components/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { MaskEmailPipe } from './Pipes/mask-email.pipe';
     PopupwindowComponent,
     RegistrationsComponent,
     PortfolioComponent,
-    MaskEmailPipe
+    MaskEmailPipe,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
