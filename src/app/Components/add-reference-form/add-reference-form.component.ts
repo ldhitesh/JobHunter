@@ -45,8 +45,7 @@ export class AddReferenceFormComponent {
   }
 
   Onsubmit(){
-    console.log(this.referenceform.value);
-    
+    this.trimWhiteSpaces();    
     this.http.post('http://localhost:5018/api/references/addreference',this.referenceform.value).subscribe({
       next:(response:any)=>{
         this.router.navigate(['/references']); 
@@ -61,7 +60,7 @@ export class AddReferenceFormComponent {
 
  
   Update(){
- 
+    this.trimWhiteSpaces();
     this.http.patch(`http://localhost:5018/api/references/updatereference/${this.currentrefereremail}`,this.referenceform.value).subscribe({
       next:(response:any) => {
       alert('Referer updated successfully!');
@@ -93,5 +92,12 @@ export class AddReferenceFormComponent {
     this.referenceform.value.name!=this.currentreferncedetails.name ||
     this.referenceform.value.position!=this.currentreferncedetails.position ||
     this.referenceform.value.organization!=this.currentreferncedetails.organization
+  }
+
+  trimWhiteSpaces(){
+    this.referenceform.value.organization=this.referenceform.value.organization.trim();
+    this.referenceform.value.name=this.referenceform.value.name.trim();
+    this.referenceform.value.position=this.referenceform.value.position.trim();
+    this.referenceform.value.email=this.referenceform.value.email.trim();    
   }
 }

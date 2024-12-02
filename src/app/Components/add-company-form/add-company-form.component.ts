@@ -44,7 +44,7 @@ export class AddCompanyFormComponent {
 
 
   Onsubmit(){
-    
+    this.trimWhiteSpaces();
     this.companyform.value.lastapplied=this.companyform.value.lastapplied=="Yet to Apply"
                                       ?this.companyform.value.lastapplied
                                       :this.companyform.value.lastapplied.toString().slice(0,10);
@@ -63,14 +63,13 @@ export class AddCompanyFormComponent {
   }
 
   Update(){
-
+    this.trimWhiteSpaces();
     this.companyform.value.lastapplied=this.companyform.value.lastapplied=="Yet to Apply"
                                       ?this.companyform.value.lastapplied
                                       :this.companyform.value.lastapplied.toString().slice(0,10);
     this.companyform.value.status=this.companyform.value.status==false?"Not Applied":"Applied";
-
     
-    this.http.patch(`http://localhost:5018/api/companies/updatecompany/${this.currentorganization}`,this.companyform.value).subscribe({
+    this.http.patch(`http://localhost:5018/api/companies/updatecompany/${this.currentorganization.trim()}`,this.companyform.value).subscribe({
       next:(response:any) => {
       alert('Company updated successfully!');
       this.router.navigate(['/companieslist']); // Navigate after update
@@ -121,6 +120,10 @@ export class AddCompanyFormComponent {
       this.companyform.value.description!=this.currentcompanydetails.description ||
       this.companyform.value.lastapplied!=this.currentcompanydetails.lastapplied ||
       this.companyform.value.status!=this.currentcompanydetails.status
-      
+  }
+
+  trimWhiteSpaces(){
+    this.companyform.value.organization=this.companyform.value.organization.trim();
+    this.companyform.value.description=this.companyform.value.description.trim();
   }
 }
