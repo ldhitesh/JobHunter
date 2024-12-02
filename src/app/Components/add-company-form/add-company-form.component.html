@@ -34,17 +34,16 @@
             <input  type="date" 
                     class="form-control" 
                     id="lastapplied"
-                    (input)="lastappliedfunction()"
                     formControlName="lastapplied"
-                    [ngClass]="companyform.value.lastapplied!=currentcompanydetails.lastapplied ? 'dirty-field' : ''">
+                    [ngClass]="checklastapplieddirty() ? 'dirty-field' : ''">
             </div>
         </div>
         <div >
             <div class="radio-line" [ngClass]="companyform.value.status!=currentcompanydetails.status ? 'dirty-field' : ''">
-                <input class="statusradio" type="checkbox" 
+                <input class="statusradio" 
+                        type="checkbox" 
                         id="lastapplied"
-                        formControlName="status"
-                        >
+                        formControlName="status">
                 <label  for="status" class="col-form-label">Applied</label>                
             </div>
         </div>
@@ -56,7 +55,7 @@
                     [disabled]="companyform.value.organization.trim()==0 || companyform.value.description.trim()==0">Add</button>
         </div>
         <div class="" *ngIf="updatebtn">
-            <button (click)="Update()" [disabled]="!companyform.dirty" class="btn btn-primary udbtn">Update</button>
+            <button (click)="Update()" [disabled]="!checkForValueChange()" class="btn btn-primary udbtn">Update</button>
             <button (click)="Delete()" class="btn btn-danger udbtn ">Delete</button>
         </div>
     </form>

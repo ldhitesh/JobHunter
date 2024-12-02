@@ -26,6 +26,7 @@ export class AddCompanyFormComponent {
   }
 
   ngOnInit(): void {
+    
     this.activatedroute.queryParams.subscribe(params => {
       this.companyform = this.fb.group({
         organization: [params['organization'] || ''],
@@ -37,13 +38,10 @@ export class AddCompanyFormComponent {
       this.updatebtn=params['button']=="update"?true:false;
       this.currentorganization=params['organization'];
       this.currentcompanydetails=this.companyform.value;
+
     });
   }
 
-  lastappliedfunction(){
-    if(this.companyform.value.lastapplied.length==0)
-      this.companyform.value.lastapplied='Yet to Apply';    
-  }
 
   Onsubmit(){
     
@@ -98,5 +96,31 @@ export class AddCompanyFormComponent {
       this.router.navigate(['/companieslist']);     
     }
   });
+  }
+
+  checklastapplieddirty(){
+    if(this.currentcompanydetails.lastapplied!='Yet to Apply'){
+      if(this.companyform.value.lastapplied!=this.currentcompanydetails.lastapplied){
+        return true;
+      }
+    }
+    else if(this.currentcompanydetails.lastapplied=='Yet to Apply'){
+      if(this.companyform.value.lastapplied.length==0 || this.companyform.value.lastapplied=='Yet to Apply' ){
+        return false;
+      }
+      else{
+        return true;
+      }
+    }
+    return;
+  }
+
+  checkForValueChange(){
+   
+      return this.companyform.value.organization!=this.currentcompanydetails.organization ||
+      this.companyform.value.description!=this.currentcompanydetails.description ||
+      this.companyform.value.lastapplied!=this.currentcompanydetails.lastapplied ||
+      this.companyform.value.status!=this.currentcompanydetails.status
+      
   }
 }

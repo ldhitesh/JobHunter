@@ -13,6 +13,7 @@ export class AddReferenceFormComponent {
   public referenceform:FormGroup;
   public updatebtn:boolean=false;
   public currentrefereremail:string='';
+  public currentreferncedetails:any;
 
   constructor(private fb:FormBuilder,private http:HttpClient,private router:Router,
               private activatedroute:ActivatedRoute)
@@ -39,6 +40,8 @@ export class AddReferenceFormComponent {
       this.updatebtn=params['button']=="update"?true:false;
       this.currentrefereremail=params['email'];
     });
+    this.currentreferncedetails=this.referenceform.value;
+
   }
 
   Onsubmit(){
@@ -58,10 +61,7 @@ export class AddReferenceFormComponent {
 
  
   Update(){
-    console.log(this.referenceform.value);
-    console.log(this.currentrefereremail);
-    
-    
+ 
     this.http.patch(`http://localhost:5018/api/references/updatereference/${this.currentrefereremail}`,this.referenceform.value).subscribe({
       next:(response:any) => {
       alert('Referer updated successfully!');
@@ -86,5 +86,12 @@ export class AddReferenceFormComponent {
       this.router.navigate(['/references']);     
     }
   });
+  }
+
+  checkForValueChange(){
+    return this.referenceform.value.email!=this.currentreferncedetails.email ||
+    this.referenceform.value.name!=this.currentreferncedetails.name ||
+    this.referenceform.value.position!=this.currentreferncedetails.position ||
+    this.referenceform.value.organization!=this.currentreferncedetails.organization
   }
 }

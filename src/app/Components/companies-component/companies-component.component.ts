@@ -13,7 +13,7 @@ export class CompaniesComponentComponent {
   public companies: any;
   public filtercompanies:any=[];
   public nomatchingdata:boolean=false;
-  public pageSize = 10;
+  public pageSize = 8;
   public currentPage = 1;
   public totalPages:any;
   public UserRole:any;

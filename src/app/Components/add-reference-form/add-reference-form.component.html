@@ -10,8 +10,7 @@
                         class="form-control" 
                         id="referralname" 
                         formControlName="name"
-                        [ngClass]="referenceform.get('name')?.dirty ? 'dirty-field' : ''">
-
+                        [ngClass]="referenceform.value.name!=currentreferncedetails.name ? 'dirty-field' : ''">
             </div>
         </div>
 
@@ -22,8 +21,7 @@
                         class="form-control descriptionbox" 
                         id="organization" 
                         formControlName="organization"
-                        [ngClass]="referenceform.get('organization')?.dirty ? 'dirty-field' : ''">
-
+                        [ngClass]="referenceform.value.organization!=currentreferncedetails.organization ? 'dirty-field' : ''">
             </div>
         </div>
 
@@ -34,8 +32,7 @@
                         class="form-control" 
                         id="position" 
                         formControlName="position"
-                        [ngClass]="referenceform.get('position')?.dirty ? 'dirty-field' : ''">
-
+                        [ngClass]="referenceform.value.position!=currentreferncedetails.position ? 'dirty-field' : ''">
             </div>
         </div>
 
@@ -46,7 +43,7 @@
                         class="form-control" 
                         id="email" 
                         formControlName="email"
-                        [ngClass]="referenceform.get('email')?.dirty ? 'dirty-field' : ''">
+                        [ngClass]="referenceform.value.email!=currentreferncedetails.email ? 'dirty-field' : ''">
             </div>
         </div>
 
@@ -59,7 +56,7 @@
         </div>
         
         <div class="row mb-3" *ngIf="updatebtn">
-            <button (click)="Update()" class="btn btn-primary col-mb-3 udbtn">Update</button>
+            <button (click)="Update()" [disabled]="!checkForValueChange()"  class="btn btn-primary col-mb-3 udbtn">Update</button>
             <button (click)="Delete()" class="btn btn-danger col-mb-3 udbtn">Delete</button>
         </div>
     </form>
