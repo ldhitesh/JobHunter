@@ -1,4 +1,4 @@
-<form [formGroup]="registerform" (ngSubmit)="OnRegister()">
+<form [formGroup]="registerform" >
     <div>
         <div class="registerform">
             <h2>Register Form</h2> 
@@ -26,17 +26,23 @@
                             id="registeremail"
                             formControlName="email">
                 </div>
-                <div class="paynow">
-                    <checkout [registerDetails]="registerform.value" ></checkout>           
+                <div class="paynow" >
+                    <checkout [payNowButtonActive]="registerform.invalid" *ngIf="!allowToRegister" [registerDetails]="registerform.value" ></checkout>           
                 </div>
            
      
-
             <div class="col-sm-8">
-                <button [disabled]="registerResponse!='success'" type="submit" class="btn btn-primary">Register</button>
+                <button [disabled]="!allowToRegister" (click)="OnRegister()" class="btn btn-primary">Register</button>
             </div>
-            <div *ngIf="registerResponse == 'success'" class="toast-success">
-                Now you can click on register!
+            <div *ngIf="allowToRegister" class="toast-success">
+                <i class="fa fa-smile fa-2x success-smile"></i>
+                <h5>Payment Successful</h5>
+                <p>Now you can Register! <i class="fa fa-check"></i></p>            
+            </div>
+            <div *ngIf="registerResponse=='fail'" class="toast-failure">
+
+                <i class="fa fa-frown fa-2x"></i><h5>Payment Unsuccessful</h5>
+                <p>Please try after some time</p>
             </div>
             <div class="empty">
             </div>

@@ -19,7 +19,7 @@ export class LoginComponentComponent {
   public loginfailure: boolean = false;
   public isModalVisible:boolean=false;
   public registerResponse:any;
-
+  public sessionId:any;
 
 
   constructor(private http: HttpClient,
@@ -31,8 +31,8 @@ export class LoginComponentComponent {
   ngOnInit(): void {
     
     this.activatedroute.queryParams.subscribe(params => {
-        this.registerResponse=params['response'];
-        this.showNotification();
+        this.registerResponse=params['response'];   
+        this.showNotification();     
       });
   }
 

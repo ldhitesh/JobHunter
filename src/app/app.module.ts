@@ -25,6 +25,8 @@ import { RegistrationsComponent } from './Components/registrations/registrations
 import { PortfolioComponent } from './Components/portfolio/portfolio.component';
 import { MaskEmailPipe } from './Pipes/mask-email.pipe';
 import { CheckoutComponent } from './Components/checkout/checkout.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';  // <-- Import animations module
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { CheckoutComponent } from './Components/checkout/checkout.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,  // <-- Add this to enable animations
+    ToastrModule.forRoot() 
   ],
   providers: [],
   bootstrap: [AppComponent]
