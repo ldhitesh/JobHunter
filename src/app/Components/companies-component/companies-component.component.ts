@@ -55,10 +55,13 @@ export class CompaniesComponentComponent {
     );
   
     this.nomatchingdata=this.filtercompanies.length==0?true:false;
-    this.totalPages=Math.ceil(this.filtercompanies.length/this.pageSize);  
+    this.totalPages=Math.ceil(this.filtercompanies.length/this.pageSize); 
+    this.currentPage=1;
+
+    this.paginatedData(); 
   }
 
-  get paginatedData() {
+  paginatedData() {
       const startIndex = (this.currentPage-1) * this.pageSize;
       const endIndex = startIndex + this.pageSize;
       return this.filtercompanies.slice(startIndex, endIndex);
