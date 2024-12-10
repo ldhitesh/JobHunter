@@ -69,7 +69,6 @@ export class RegistrationsComponent {
       },
       error:(err:any)=>{       
         const errorMessage = err.error?.message || 'An unexpected error occurred.';
-
         alert(errorMessage);   
       }
     })
