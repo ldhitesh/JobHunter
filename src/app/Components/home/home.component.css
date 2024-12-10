@@ -74,6 +74,20 @@
     margin-top: 80px; /* Padding to avoid content being hidden behind navbar */
   }
   
+
+.notification {
+  margin-top: 7%;
+  position: fixed;           /* Fix the position relative to the viewport */
+  z-index: 899999;           /* Ensure it's on top of other elements */
+  left: 50%;                 /* Center horizontally */
+  padding: 10px;
+  color: #1b851e;            /* Text color */
+  font-size: 20px;           /* Font size */
+  text-align: center;        /* Center text */
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  transition: opacity 0.5s ease; /* Optional: smooth fade out transition */
+}
+
   /* Mobile-friendly responsiveness */
   @media (max-width: 768px) {
     .navbar .navbar-nav {
@@ -85,3 +99,82 @@
     }
   }
   
+
+/* Base Modal Styles */
+.modal {
+  display: none; /* Initially hidden */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 9999; /* Ensure modal is on top of other content */
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+}
+
+/* When modal is active, make it visible */
+.modal.is-active {
+  display: flex;
+  opacity: 1;
+}
+
+/* Modal Background (overlay) */
+.modal-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(222, 220, 220, 0.4); /* Darken the background */
+  opacity: 80%;
+}
+
+/* Modal Content Styling */
+.modal-content {
+  position: relative;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%; /* Make the modal responsive */
+}
+
+/* Box Styling Inside Modal */
+.modal-content .box {
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+}
+
+/* Title Style Inside the Modal */
+.modal-content h4 {
+  color: #248ccd;
+  margin-bottom: 15px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+/* Primary Button Style */
+.button.is-primary {
+  background-color: #337ab7;
+  color: white;
+  width: 120px;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+/* Button Hover Effect */
+.button.is-primary:hover {
+  background-color: #0056b3;
+}
+
+.success-smile{
+  padding-left: 2%;
+}

@@ -30,5 +30,16 @@
     </nav>
   </div>
 </div>
+
+<div class="modal" (click)="closeModal()" [ngClass]="{ 'is-active': notificationMessage }">
+  <div class="modal-background" ></div>
+  <div class="modal-content">
+    <div class="box">
+      <h4 *ngIf="notificationMessage=='Email sent successfully!'">{{notificationMessage}}<i class="fa fa-smile fa-1x success-smile"></i></h4>
+      <h4 *ngIf="notificationMessage=='Email Failed!'">{{notificationMessage}}<i class="fa fa-frown fa-1x success-smile"></i></h4>
+    </div>
+  </div>
+</div>
+
 <app-portfolio *ngIf="IsHomePage"></app-portfolio>
 <router-outlet></router-outlet>

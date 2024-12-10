@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-check-service.service';
+import { NotificationServiceService } from 'src/app/Services/notification-service.service';
 
 @Component({
   selector: 'app-send-emails',
@@ -19,9 +20,12 @@ export class SendEmailsComponent {
   private apiUrl = 'http://localhost:5018/api/email/send'; // API URL to send email
   public emailData = { to: '', subject: '', body: '' };
   public UserRole:any;
+  notificationMessage: string='';
+
 
   constructor(private http:HttpClient,private cdr: ChangeDetectorRef,
-            private loginstatuscheckservice:LoginStatusCheckServiceService){}
+            private loginstatuscheckservice:LoginStatusCheckServiceService,
+            private notificationService: NotificationServiceService){}
  
   ngOnInit(): void {
     this.loginstatuscheckservice.Role.subscribe(role => {
@@ -30,6 +34,7 @@ export class SendEmailsComponent {
     if(localStorage.getItem('Role')){
       this.UserRole=localStorage.getItem('Role');
     }
+    
     this.fetchCompanies();
   }
 
@@ -147,10 +152,10 @@ export class SendEmailsComponent {
       email.to=this.mailselection;
       this.http.post(this.apiUrl,email).subscribe({
         next: (response) => {
-          alert("Email Was sent successfully!")
+          this.notificationService.showNotification('Email sent successfully!');
         },
         error: (error) => {
-          alert('Error sending email: ' + error.message)
+          this.notificationService.showNotification('Email Failed!');
         }
       });
     }
@@ -159,10 +164,10 @@ export class SendEmailsComponent {
         email.to=To;      
         this.http.post(this.apiUrl,email).subscribe({
           next: (response) => {
-            alert("Email Was sent successfully!")
+            this.notificationService.showNotification('Email sent successfully!');
           },
           error: (error) => {
-            alert('Error sending email: ' + error.message)
+            this.notificationService.showNotification('Email Failed!');
           }
         });
       });
@@ -208,7 +213,7 @@ export class SendEmailsComponent {
           </style>
         </head>
         <body>
-          <div class="formatted-body">${email.body}</div>  <!-- Use div with pre-wrap styling -->
+          <div class="formatted-body">${email.body}</div>  
         </body>
       </html>
     `;

@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-check-service.service';
+import { NotificationServiceService } from 'src/app/Services/notification-service.service';
 
 @Component({
   selector: 'email',
@@ -14,8 +15,11 @@ export class EmailComponent {
   public emailData = { to: '', subject: '', body: '' };
   public userRole:any='';
 
-  constructor(private http: HttpClient, private activatedroute: ActivatedRoute,
-              private loginstatuscheckservice:LoginStatusCheckServiceService){}
+  constructor(private http: HttpClient, 
+              private router:Router,
+              private activatedroute: ActivatedRoute,
+              private loginstatuscheckservice:LoginStatusCheckServiceService,
+              private notificationService: NotificationServiceService){}
 
 
   ngOnInit(): void {
@@ -35,13 +39,14 @@ export class EmailComponent {
     let formattedEmail = {...this.emailData};
     this.emailData.body = '';
     this.emailData.subject = '';
+    this.router.navigate(['/references'])
 
     this.http.post(this.apiUrl, this.formatEmailBody(formattedEmail)).subscribe({
       next: (response) => {
-        alert('Email sent successfully!');
+          this.notificationService.showNotification('Email sent successfully!');
       },
       error: (error) => {
-        alert('Error sending email: ' + error.message)
+          this.notificationService.showNotification('Email Failed!');
       }
     });
   }

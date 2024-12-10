@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NotificationServiceService } from 'src/app/Services/notification-service.service';
 
 @Component({
   selector: 'app-registrations',
@@ -16,6 +17,7 @@ export class RegistrationsComponent {
   public nomatchingdata:boolean=false;
   public UserName:any;
   public UserRole:any
+  public notificationMessage:any;
 
   constructor(private http:HttpClient,private router:Router,
                       private activatedroute:ActivatedRoute
@@ -45,16 +47,15 @@ export class RegistrationsComponent {
     return this.pendingapprovals.slice(startIndex, endIndex);
   }
 
-  approveUser(user: any): void {    
+  approveUser(user: any): void {   
+    
     this.http.post('http://localhost:5018/api/register',user).subscribe({
       next:(response:any)=>{
-        alert(response.message);
-        this.fetchPendingApprovals();
+          this.fetchPendingApprovals();
       },
       error:(err:any)=>{       
         const errorMessage = err.error?.message || 'An unexpected error occurred.';
-
-        alert(errorMessage);   
+        this.notificationMessage=errorMessage;
       }
     })
   }
@@ -87,5 +88,9 @@ export class RegistrationsComponent {
       this.currentPage+=1;
       this.paginatedData
     }
+  }
+
+  closeModal(){
+    this.notificationMessage='';
   }
 }

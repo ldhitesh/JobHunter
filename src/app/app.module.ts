@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './Components/home/home.component';
@@ -20,13 +19,13 @@ import { SendEmailsComponent } from './Components/send-emails/send-emails.compon
 import { AddReferenceFormComponent } from './Components/add-reference-form/add-reference-form.component';
 import { AddReferenceButtonComponent } from './Components/add-reference-button/add-reference-button.component';
 import { SendEmailButtonComponent } from './Components/send-email-button/send-email-button.component';
-import { PopupwindowComponent } from './Components/popupwindow/popupwindow.component';
 import { RegistrationsComponent } from './Components/registrations/registrations.component';
 import { PortfolioComponent } from './Components/portfolio/portfolio.component';
 import { MaskEmailPipe } from './Pipes/mask-email.pipe';
 import { CheckoutComponent } from './Components/checkout/checkout.component';
 import { ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';  // <-- Import animations module
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EmailNotificationComponent } from './Components/email-notification/email-notification.component';  // <-- Import animations module
 
 @NgModule({
   declarations: [
@@ -46,11 +45,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
     AddReferenceFormComponent,
     AddReferenceButtonComponent,
     SendEmailButtonComponent,
-    PopupwindowComponent,
     RegistrationsComponent,
     PortfolioComponent,
     MaskEmailPipe,
-    CheckoutComponent
+    CheckoutComponent,
+    EmailNotificationComponent
   ],
   imports: [
     BrowserModule,

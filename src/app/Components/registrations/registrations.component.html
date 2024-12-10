@@ -30,6 +30,15 @@
     <div *ngIf="pendingapprovals.length === 0" class="nomatchingdata">
       <h1>No Pending Approvals</h1>
     </div>
+
+    <div class="modal" (click)="closeModal()" [ngClass]="{ 'is-active': notificationMessage }">
+      <div class="modal-background" ></div>
+      <div class="modal-content">
+        <div class="box">
+          <h4>{{notificationMessage}}</h4>
+        </div>
+      </div>
+    </div>
     
   </div>
  

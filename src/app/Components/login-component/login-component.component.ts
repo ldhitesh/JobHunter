@@ -20,6 +20,7 @@ export class LoginComponentComponent {
   public isModalVisible:boolean=false;
   public registerResponse:any;
   public sessionId:any;
+  public duplicateemail: any;
 
 
   constructor(private http: HttpClient,
@@ -31,7 +32,7 @@ export class LoginComponentComponent {
   ngOnInit(): void {
     
     this.activatedroute.queryParams.subscribe(params => {
-        this.registerResponse=params['response'];   
+        this.registerResponse=params['response'];  
         this.showNotification();     
       });
   }
@@ -55,13 +56,18 @@ export class LoginComponentComponent {
 
   showNotification() {
     if(this.registerResponse=="Success"){
-              this.successfullogin=true;
-              this.isModalVisible=true;
-            }
+      this.successfullogin=true;
+      this.isModalVisible=true;
+    }
     else if(this.registerResponse=="Failure"){
       this.loginfailure=true;
       this.isModalVisible=true;
-    }    
+    }  
+    else if(this.registerResponse=="Duplicate"){
+      this.duplicateemail=true;
+      this.isModalVisible=true;
+    } 
+   
     setTimeout(() => {
         this.isModalVisible = false; 
         this.loginfailure=false;
