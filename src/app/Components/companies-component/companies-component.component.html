@@ -6,7 +6,7 @@
         <thead>
             <th>ID</th>
             <th>Company</th>
-            <th>Description</th>
+            <!-- <th>Description</th> -->
             <th>Last Applied</th>
             <th>Status</th>
             <th>Link</th>
@@ -15,10 +15,10 @@
             <tr *ngFor="let c of paginatedData();let i=index" >
                 <td class="Id">{{i+1+((currentPage-1) * this.pageSize)}}</td>
                 <td class ="edit"><span *ngIf="UserRole=='Admin'" class="fas fa-edit" (click)="editcompanyform(c)"></span>{{c.organization}}</td>
-                <td class="desc">{{c.description|companyDataFilter:'description'}}</td>
+                <!-- <td class="desc">{{c.description|companyDataFilter:'description'}}</td> -->
                 <td class="lastapplied" >{{c.lastApplied|companyDataFilter:'lastapplied'}}</td>
                 <td class="status">{{c.status|companyDataFilter:'status'}}</td>
-                <td><a [href]="c.link">{{c.link}}</a></td>
+                <td><a [href]="c.link">{{c.organization}} Career Link</a></td>
             </tr>
         </tbody>
     </table>

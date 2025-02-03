@@ -65,7 +65,6 @@ export class AddReferenceFormComponent {
     this.trimWhiteSpaces();
     this.http.patch(`http://localhost:5018/api/references/updatereference/${this.currentrefereremail}`,this.referenceform.value).subscribe({
       next:(response:any) => {
-      alert('Referer updated successfully!');
       this.router.navigate(['/references']); // Navigate after update
     },
     error:(err:any) => {      
@@ -78,7 +77,6 @@ export class AddReferenceFormComponent {
   Delete(){
     this.http.delete(`http://localhost:5018/api/references/deletereference/${this.referenceform.value.email}`).subscribe({
       next:(response:any) => {
-      alert('Referer deleted successfully!');
       this.router.navigate(['/references']); // Navigate after update
     },
     error:(err:any) => {

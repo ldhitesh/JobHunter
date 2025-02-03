@@ -15,6 +15,9 @@ export class CompanyDataFilterPipe implements PipeTransform {
       else if(identifier=='lastapplied'){     
         return value===null||value.length==0||''?'Yet to Apply':value;
       }
+      else if(identifier=='link'){
+        return value.length > 80 ? value.substring(0, 80) + '...' : value;
+      }
     
   }
 
