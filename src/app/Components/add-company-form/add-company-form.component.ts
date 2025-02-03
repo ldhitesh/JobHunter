@@ -77,7 +77,6 @@ export class AddCompanyFormComponent {
     
     this.http.patch(`http://localhost:5018/api/companies/updatecompany/${this.currentorganization.trim()}`,this.companyform.value).subscribe({
       next:(response:any) => {
-      alert('Company updated successfully!');
       this.isUpdateForm=false;
       this.router.navigate(['/companieslist']); // Navigate after update
     },
@@ -91,7 +90,6 @@ export class AddCompanyFormComponent {
   Delete(){
     this.http.delete(`http://localhost:5018/api/companies/deletecompany/${this.companyform.value.organization}`).subscribe({
       next:(response:any) => {
-      alert('Company deleted successfully!');
       this.isDeleteForm=false;
       this.router.navigate(['/companieslist']); // Navigate after update
     },
