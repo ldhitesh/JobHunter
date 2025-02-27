@@ -29,8 +29,8 @@ export class EmailComponent {
     this.loginstatuscheckservice.Role.subscribe(role => {
       this.userRole = role;
     });    
-    if(localStorage.getItem('Role')){
-      this.userRole=localStorage.getItem('Role');
+    if(sessionStorage.getItem('Role')){
+      this.userRole=sessionStorage.getItem('Role');
     }
   }
 

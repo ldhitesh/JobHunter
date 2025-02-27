@@ -23,7 +23,7 @@ export class RegisterUserComponent {
   registerform!: FormGroup;
   constructor(private fb:FormBuilder,private http:HttpClient,private router:Router,
               private activatedroute:ActivatedRoute,private toastr: ToastrService,
-              private notificationService: NotificationServiceService)
+              )
   {
     this.registerform=this.fb.group({
       username:['',Validators.required],
@@ -73,6 +73,7 @@ export class RegisterUserComponent {
 
       this.http.post('http://localhost:5018/api/register/pendingregistrations',requestBody).subscribe({
         next:(response:any)=>{
+          sessionStorage.clear();
           this.router.navigate(['/login'],{
                   queryParams: {
                     response: "Success"

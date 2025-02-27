@@ -1,0 +1,26 @@
+/* email-verification-complete.component.css */
+.verification-container {
+    margin-top: 10%;
+    text-align: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .verification-container h1 {
+    color: #4caf50;
+  }
+  
+  .verification-container p {
+    font-size: 16px;
+    margin: 20px 0;
+  }
+  
+  .login-link {
+    color: #337ab7; 
+    text-decoration: none;
+  }
+  
+  .login-link:hover {
+    text-decoration: underline;
+  }
+  

@@ -10,6 +10,7 @@ import { NotificationServiceService } from 'src/app/Services/notification-servic
 })
 export class HomeComponent {
   IsloggedIn:boolean=false;
+  IsverifiedLink:boolean=false;
   UserRole:any;
   IsHomePage: boolean = false; 
   notificationMessage: string='';
@@ -20,6 +21,10 @@ export class HomeComponent {
 
   ngOnInit(): void {
     
+    // this.loginstatuscheckservice.verifiedLinkState.subscribe(state => {
+    //   this.IsverifiedLink = state;
+    // });
+
     this.loginstatuscheckservice.isLoggedIn.subscribe(state => {
       this.IsloggedIn = state;
     });
@@ -31,17 +36,17 @@ export class HomeComponent {
     this.loginstatuscheckservice.Role.subscribe(role => {
       this.UserRole = role;
     });    
-    if(localStorage.getItem('UserName')){
+    if(sessionStorage.getItem('UserName')){
       this.IsloggedIn=true;
-      this.UserRole=localStorage.getItem('Role');
+      this.UserRole=sessionStorage.getItem('Role');
     }
     this.IsHomePage = this.router.url === '/home'; // You can change '/home' if your home route is different
     
   }
 
   Logout(){
-    localStorage.removeItem('UserName');
-    localStorage.removeItem('Role');
+    sessionStorage.removeItem('UserName');
+    sessionStorage.removeItem('Role');
     this.router.navigate(['/login']);
     this.IsloggedIn=false;
     this.UserRole='';

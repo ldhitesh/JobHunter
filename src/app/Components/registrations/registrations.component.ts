@@ -27,7 +27,7 @@ export class RegistrationsComponent {
   ngOnInit(): void {
     this.fetchPendingApprovals();
     this.UserName = this.activatedroute.snapshot.paramMap.get('UserName');
-    this.UserRole=localStorage.getItem(this.UserName);  
+    this.UserRole=sessionStorage.getItem(this.UserName);  
   }
 
   fetchPendingApprovals(): void {
@@ -64,7 +64,7 @@ export class RegistrationsComponent {
     
     this.http.delete(`http://localhost:5018/api/register/rejectregistration/${user.username}`).subscribe({
       next:(response:any)=>{
-        alert(response.message);
+        //alert(response.message);
         this.fetchPendingApprovals();
       },
       error:(err:any)=>{       

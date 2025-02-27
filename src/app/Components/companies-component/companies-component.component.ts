@@ -27,8 +27,8 @@ export class CompaniesComponentComponent {
     this.loginstatuscheckservice.Role.subscribe(role => {
       this.UserRole = role;
     });    
-    if(localStorage.getItem('Role')){
-      this.UserRole=localStorage.getItem('Role');
+    if(sessionStorage.getItem('Role')){
+      this.UserRole=sessionStorage.getItem('Role');
     }
     this.fetchCompanies();
   }

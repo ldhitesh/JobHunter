@@ -12,6 +12,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { RegistrationsComponent } from './Components/registrations/registrations.component';
 import { authGuard } from './Guards/auth.guard';
 import { PortfolioComponent } from './Components/portfolio/portfolio.component';
+import { EmailVerificationCompleteComponent } from './Components/email-verification-complete/email-verification-complete.component';
 
 const routes: Routes = [
   {path:'',component:LoginComponentComponent},
@@ -27,7 +28,8 @@ const routes: Routes = [
   {path:'sendreferalemail',component:SendEmailsComponent,canActivate: [authGuard]},
   {path:'home',component:HomeComponent,canActivate: [authGuard]},
   {path:'registrations',component:RegistrationsComponent,canActivate: [authGuard]},
-  {path:'app-portfolio',component:PortfolioComponent,canActivate: [authGuard]}
+  {path:'app-portfolio',component:PortfolioComponent,canActivate: [authGuard]},
+  {path: 'email-verification-complete', component: EmailVerificationCompleteComponent }
 
 ];
 

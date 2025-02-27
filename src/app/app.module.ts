@@ -25,7 +25,8 @@ import { MaskEmailPipe } from './Pipes/mask-email.pipe';
 import { CheckoutComponent } from './Components/checkout/checkout.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EmailNotificationComponent } from './Components/email-notification/email-notification.component';  // <-- Import animations module
+import { EmailNotificationComponent } from './Components/email-notification/email-notification.component';
+import { EmailVerificationCompleteComponent } from './Components/email-verification-complete/email-verification-complete.component';  // <-- Import animations module
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { EmailNotificationComponent } from './Components/email-notification/emai
     PortfolioComponent,
     MaskEmailPipe,
     CheckoutComponent,
-    EmailNotificationComponent
+    EmailNotificationComponent,
+    EmailVerificationCompleteComponent
   ],
   imports: [
     BrowserModule,

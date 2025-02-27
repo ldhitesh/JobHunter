@@ -147,33 +147,3 @@ table.table tbody tr:hover {
     }
 }
 
-
-/* Full-screen container that takes up the entire viewport */
-.loading-container {
-    position: fixed; /* Fixed positioning to stay on top */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex; /* Enable Flexbox */
-    justify-content: center; /* Horizontally center the spinner */
-    align-items: center; /* Vertically center the spinner */
-    background-color: rgba(255, 255, 255, 0.7); /* Optional: semi-transparent background */
-    z-index: 9999; /* Ensure the spinner appears above other content */
-  }
-  
-  /* Example spinner (you can use a library like FontAwesome or a custom spinner) */
-  .spinner {
-    border: 8px solid #f3f3f3; /* Light gray border */
-    border-top: 8px solid #195176; /* Blue top border */
-    border-radius: 50%; /* Make it a circle */
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite; /* Rotate the spinner */
-  }
-  
-  /* Keyframe animation for spinning the spinner */
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
