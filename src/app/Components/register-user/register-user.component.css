@@ -49,7 +49,7 @@ label {
     text-align: left; /* Align label text to the left */
 }
 
-/* Input fields styling  */
+/* Input fields styling */
 input.form-control {
     width: 100%;
     padding: 14px 60px; /* Adequate padding for input */
