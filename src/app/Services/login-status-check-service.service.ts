@@ -19,6 +19,9 @@ export class LoginStatusCheckServiceService {
   login(): void {
     this.isLoggedInSubject.next(true); 
   }
+  logout(){
+    this.isLoggedInSubject.next(false); 
+  }
 
   verifiedlink(): void {
     this.isVerifiedLinkSubject.next(true); 

@@ -11,7 +11,7 @@ import { NotificationServiceService } from 'src/app/Services/notification-servic
 })
 export class EmailComponent {
 
-  private apiUrl = 'http://localhost:5018/api/email/send'; // API URL to send email
+  private apiUrl = 'http://api.jobhunter.life/api/email/send'; // API URL to send email
   public emailData = { to: '', subject: '', body: '' };
   public userRole:any='';
 

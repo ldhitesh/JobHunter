@@ -5,8 +5,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class PaymentService {
-  private apiUrl = 'http://localhost:5018/api/payment/create-checkout-session';
-
+  private apiUrl = 'http://api.jobhunter.life/api/payment/create-checkout-session';
+  
   constructor(private http: HttpClient) { }
 
   createCheckoutSession(registerDetails:any) {

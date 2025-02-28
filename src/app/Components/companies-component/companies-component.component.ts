@@ -35,7 +35,7 @@ export class CompaniesComponentComponent {
   
 
   fetchCompanies(): void {
-    this.http.get('http://localhost:5018/api/companies').subscribe({
+    this.http.get('http://api.jobhunter.life/api/companies').subscribe({
       next: (data) => {
         this.companies=data;    
         this.filtercompanies=data;  

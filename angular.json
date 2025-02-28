@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/job-hunter",
+            "outputPath": "dist/jobhunterfrontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -42,7 +42,7 @@
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumError": "5kb"
                 }
               ],
               "outputHashing": "all"
@@ -60,6 +60,7 @@
         },
         "serve": {
           "options": {
+            "port": 80
           },
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {

@@ -33,7 +33,7 @@ export class ReferencesComponent {
   }
 
   fetchReferences(): void {
-    this.http.get('http://localhost:5018/api/references').subscribe({
+    this.http.get('http://api.jobhunter.life/api/references').subscribe({
       next: (data) => {
         
         this.references=data;    

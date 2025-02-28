@@ -31,7 +31,7 @@ export class RegisterUserComponent {
       password:['',Validators.required],
       paymentstatus:[''],
       verificationtoken:[''],
-      accountverificationstatus:['']
+      accountverificationstatus:[''],
     });
   }
 
@@ -68,10 +68,11 @@ export class RegisterUserComponent {
       this.emailVerificationData.body=this.registerform.value.username;
       const requestBody = {
         RegisterData: this.registerform.value,
-        EmailVerificationData: this.emailVerificationData
+        EmailVerificationData: this.emailVerificationData,
+        verificationUrl:"http://api.jobhunter.life/api/email/verify-email?redirectto=http://ui.jobhunter.life/email-verification-complete"
       };
 
-      this.http.post('http://localhost:5018/api/register/pendingregistrations',requestBody).subscribe({
+      this.http.post('http://api.jobhunter.life/api/register/pendingregistrations',requestBody).subscribe({
         next:(response:any)=>{
           sessionStorage.clear();
           this.router.navigate(['/login'],{

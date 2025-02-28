@@ -49,6 +49,7 @@ export class HomeComponent {
     sessionStorage.removeItem('Role');
     this.router.navigate(['/login']);
     this.IsloggedIn=false;
+    this.loginstatuscheckservice.logout();
     this.UserRole='';
   }
 

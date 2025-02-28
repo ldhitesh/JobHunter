@@ -39,13 +39,13 @@ export class LoginComponentComponent {
 
   onLogin(data:any){
       const loginData = this.loginCredential;
-      this.http.post('http://localhost:5018/api/login', loginData).subscribe({
+      this.http.post('http://api.jobhunter.life/api/login', loginData).subscribe({
         next: (response: any) => {          
           sessionStorage.setItem('UserName', response.userDetails.username);
           sessionStorage.setItem('Role', response.userDetails.role[0]);
           this.loginstatuscheckservice.login();
           this.loginstatuscheckservice.RoleCheck(response.userDetails.role[0]);
-          this.router.navigate(['/home']); 
+          this.router.navigate(['/home']);  
         },
         error: (err) => {
           alert('Invalid username or password!');
