@@ -31,7 +31,7 @@ export class RegistrationsComponent {
   }
 
   fetchPendingApprovals(): void {
-    this.http.get('http://api.jobhunter.life/api/register/getpendingregistrations').subscribe({
+    this.http.get('http://localhost:80/api/register/getpendingregistrations').subscribe({
       next: (data) => {
         this.pendingapprovals=data;    
         this.totalPages=Math.ceil(this.pendingapprovals.length/this.pageSize);  
@@ -49,7 +49,7 @@ export class RegistrationsComponent {
 
   approveUser(user: any): void {   
     
-    this.http.post('http://api.jobhunter.life/api/register',user).subscribe({
+    this.http.post('http://localhost:80/api/register',user).subscribe({
       next:(response:any)=>{
           this.fetchPendingApprovals();
       },
@@ -62,7 +62,7 @@ export class RegistrationsComponent {
 
   rejectUser(user: any): void {
     
-    this.http.delete(`http://api.jobhunter.life/api/register/rejectregistration/${user.username}`).subscribe({
+    this.http.delete(`http://localhost:80/api/register/rejectregistration/${user.username}`).subscribe({
       next:(response:any)=>{
         this.fetchPendingApprovals();
       },

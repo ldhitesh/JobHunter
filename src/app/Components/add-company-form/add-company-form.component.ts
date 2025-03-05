@@ -56,7 +56,7 @@ export class AddCompanyFormComponent {
                                       :this.companyform.value.lastapplied.toString().slice(0,10);
     this.companyform.value.status=this.companyform.value.status==false?"Not Applied":"Applied";
 
-    this.http.post('http://api.jobhunter.life/api/companies/addcompany',this.companyform.value).subscribe({
+    this.http.post('http://localhost:80/api/companies/addcompany',this.companyform.value).subscribe({
       next:(response:any)=>{
         this.router.navigate(['/companieslist']); 
       },
@@ -75,7 +75,7 @@ export class AddCompanyFormComponent {
                                       :this.companyform.value.lastapplied.toString().slice(0,10);
     this.companyform.value.status=this.companyform.value.status==false?"Not Applied":"Applied";
     
-    this.http.patch(`http://api.jobhunter.life/api/companies/updatecompany/${this.currentorganization.trim()}`,this.companyform.value).subscribe({
+    this.http.patch(`http://localhost:80/api/companies/updatecompany/${this.currentorganization.trim()}`,this.companyform.value).subscribe({
       next:(response:any) => {
       this.isUpdateForm=false;
       this.router.navigate(['/companieslist']); // Navigate after update
@@ -88,7 +88,7 @@ export class AddCompanyFormComponent {
   }
 
   Delete(){
-    this.http.delete(`http://api.jobhunter.life/api/companies/deletecompany/${this.companyform.value.organization}`).subscribe({
+    this.http.delete(`http://localhost:80/api/companies/deletecompany/${this.companyform.value.organization}`).subscribe({
       next:(response:any) => {
       this.isDeleteForm=false;
       this.router.navigate(['/companieslist']); // Navigate after update

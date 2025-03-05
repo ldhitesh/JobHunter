@@ -232,4 +232,33 @@ button.btn-primary:hover {
     }
 }
 
+.password-requirements{
+  text-align: left;
+}
 
+
+.password-requirements p {
+  font-size: 14px;
+  color: red;
+  line-height: 25%;
+}
+
+.password-requirements p.valid {
+  color: green;
+  font-weight: bold;
+}
+
+
+.required {
+  color: red;
+}
+
+.duplicateemail{
+    white-space: normal; /* Allow the text to break into multiple lines */
+    word-wrap: break-word; /* Ensures long words break to the next line */
+    word-break: break-word; /* Breaks words if necessary */
+    padding: 10px; /* Add some padding for better visibility */
+    color: red;
+    border-radius: 5px; /* Rounded corners */
+    text-align: center; /* Center the text inside the container */
+}

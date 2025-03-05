@@ -19,16 +19,24 @@ export class RegisterUserComponent {
   public registerResponseDetails:any;
   public allowToRegister:any;
   public emailVerificationData = { to: '', subject: '', body: '' };
-
+  public registeredEmails:any=[];
+  public duplicateemailexists:boolean=false;
   registerform!: FormGroup;
   constructor(private fb:FormBuilder,private http:HttpClient,private router:Router,
               private activatedroute:ActivatedRoute,private toastr: ToastrService,
               )
   {
     this.registerform=this.fb.group({
-      username:['',Validators.required],
-      email:['',Validators.required],
-      password:['',Validators.required],
+      username: [ '', Validators.required,
+                    Validators.minLength(8),
+                    Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])[A-Za-z]{8,}$/)
+                ],
+      email:['',Validators.required,Validators.email,Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+$/)],
+      password: ['', [
+                    Validators.required,
+                    Validators.minLength(8),
+                    Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/)
+                ]],
       paymentstatus:[''],
       verificationtoken:[''],
       accountverificationstatus:[''],
@@ -46,6 +54,8 @@ export class RegisterUserComponent {
       }
     });
 
+    this.getRegisteredEmails();
+
   }
 
   showNotification(registerDetails:any,status:any) {
@@ -62,6 +72,31 @@ export class RegisterUserComponent {
     }   
   }
 
+  getRegisteredEmails(){
+  
+    // this.http.get('http://localhost:80/api/register/getregisteredemails').subscribe({
+      this.http.get('http://localhost:80/api/register/getregisteredemails').subscribe({
+
+      next:(emails:any)=>{
+        console.log(emails);
+        this.registeredEmails=emails;                  
+      },
+      error:(err:any)=>{
+        console.log(err.error.message);
+
+      }
+    }); 
+  }
+  public test:any;
+  hasemailalreadyregistered(){
+    if (this.registeredEmails.includes(this.registerform.get('email')?.value)) {
+      this.duplicateemailexists=true;
+    }
+    else{
+      this.duplicateemailexists= false;
+    }
+  }
+
   OnRegister(){    
       this.emailVerificationData.to=this.registerform.value.email;
       this.emailVerificationData.subject="Please Verify Your Email Address to Complete Registration"
@@ -69,10 +104,10 @@ export class RegisterUserComponent {
       const requestBody = {
         RegisterData: this.registerform.value,
         EmailVerificationData: this.emailVerificationData,
-        verificationUrl:"http://api.jobhunter.life/api/email/verify-email?redirectto=http://ui.jobhunter.life/email-verification-complete"
+        verificationUrl:"http://localhost:80/api/email/verify-email?redirectto=http://ui.jobhunter.life/email-verification-complete"
       };
 
-      this.http.post('http://api.jobhunter.life/api/register/pendingregistrations',requestBody).subscribe({
+      this.http.post('http://localhost:80/api/register/pendingregistrations',requestBody).subscribe({
         next:(response:any)=>{
           sessionStorage.clear();
           this.router.navigate(['/login'],{
@@ -94,6 +129,49 @@ export class RegisterUserComponent {
     
     }
 
+    hasUsernameUpperCase(): boolean {
+      return  /[A-Z]/.test(this.registerform.get('username')?.value);
+    }
+  
+    hasUsernameLowerCase(): boolean {
+      return /[a-z]/.test(this.registerform.get('username')?.value);
+    }
+  
+    hasUsernameMinLength(): boolean {
+      return this.registerform.get('username')?.value?.length >= 8;
+    }
 
+    hasPasswordUpperCase(): boolean {
+      return  /[A-Z]/.test(this.registerform.get('password')?.value);
+    }
+  
+    hasPasswordLowerCase(): boolean {
+      return  /[a-z]/.test(this.registerform.get('password')?.value);
+    }
+  
+    hasPasswordSpecialChar(): boolean {
+      return /\W/.test(this.registerform.get('password')?.value);
+    }
+  
+    hasPasswordMinLength(): boolean {
+      return  this.registerform.get('password')?.value?.length >= 8;
+    }
+
+    hasEmailvalidated():boolean{
+      return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+$/.test(this.registerform.get('email')?.value);
+    }
+
+    checkvalidations():boolean{
+    return  this.hasPasswordUpperCase() && 
+            this.hasPasswordLowerCase() && 
+            this.hasPasswordSpecialChar() && 
+            this.hasPasswordMinLength() &&
+            this.hasUsernameUpperCase() &&
+            this.hasUsernameLowerCase() &&
+            this.hasUsernameMinLength() &&
+            this.hasEmailvalidated() &&
+            !this.duplicateemailexists
+            
+    }
 }
 

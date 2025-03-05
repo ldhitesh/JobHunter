@@ -17,7 +17,7 @@ export class SendEmailsComponent {
   suggestions:any=[];
   selectedradio:string='';
   selectedIndex: number = 0;  // To track the currently selected suggestion index
-  private apiUrl = 'http://api.jobhunter.life/api/email/send'; // API URL to send email
+  private apiUrl = 'http://localhost:80/api/email/send'; // API URL to send email
   public emailData = { to: '', subject: '', body: '' };
   public UserRole:any;
   notificationMessage: string='';
@@ -39,7 +39,7 @@ export class SendEmailsComponent {
   }
 
   fetchCompanies(): void {
-    this.http.get('http://api.jobhunter.life/api/companies/getcompanyreferences').subscribe({
+    this.http.get('http://localhost:80/api/companies/getcompanyreferences').subscribe({
       next: (data) => {
         this.suggestions=data;        
       },
