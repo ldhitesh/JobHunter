@@ -1,4 +1,4 @@
-<div class="companylistcontainer table-bordered">
+<div class="companylistcontainer">
     <search-bar (search)="onSearch($event)"></search-bar>
     <add-company routerLink="/addcompanyform" routerLinkActive="active"></add-company>
 
@@ -6,19 +6,29 @@
         <thead>
             <th>ID</th>
             <th>Company</th>
-            <!-- <th>Description</th> -->
             <th>Last Applied</th>
-            <th>Status</th>
+            <th class="status-head">Status</th>
             <th>Link</th>
+            <th>Comments</th>
+
         </thead>
         <tbody>
             <tr *ngFor="let c of paginatedData();let i=index" >
                 <td class="Id">{{i+1+((currentPage-1) * this.pageSize)}}</td>
                 <td class ="edit"><span *ngIf="UserRole=='Admin'" class="fas fa-edit" (click)="editcompanyform(c)"></span>{{c.organization}}</td>
-                <!-- <td class="desc">{{c.description|companyDataFilter:'description'}}</td> -->
-                <td class="lastapplied" >{{c.lastApplied|companyDataFilter:'lastapplied'}}</td>
-                <td class="status">{{c.status|companyDataFilter:'status'}}</td>
-                <td><a [href]="c.link">{{c.organization}} Career Link</a></td>
+                <td class="lastapplied" >{{c.lastApplied|companyDataFilter:'lastapplied'| date:'MMM dd, yyyy' }}</td>
+                <td class="status">
+                    {{c.status}}
+                    <div class="toggle-switch" (click)="statuschanged(c)">
+                        <div class="switch" [class.applied]="c.status=='Applied'"></div>
+                    </div>
+                </td>
+                <td>
+                    <a *ngIf="c.link.length>0" [href]="c.link">{{c.organization}} Career Link </a>
+                    <a *ngIf="c.link.length==0"> No {{c.organization}} Career Link Added</a>
+                </td>
+                <td class="desc">{{c.description|companyDataFilter:'description'}}</td>
+
             </tr>
         </tbody>
     </table>

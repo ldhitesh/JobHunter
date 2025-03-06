@@ -94,7 +94,19 @@ export class CompaniesComponentComponent {
     });
   }
 
-
+  statuschanged(data:any){
+    data.status=data.status=="Applied"?"Not Applied":"Applied";
+    if(data.status=='Applied')
+      data.lastApplied=new Date().toString().slice(4,15);
+    this.http.patch(`http://localhost:80/api/companies/updatecompany/${data.organization.trim()}`,data).subscribe({
+      next:(response:any) => {
+    },
+    error:(err:any) => {      
+      const errorMessage = err.error?.message || 'An unexpected error occurred.';
+      alert(errorMessage);   
+    }
+  });
+  }
 
 }
 
