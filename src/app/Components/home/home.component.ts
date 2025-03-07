@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Output, Renderer2, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-check-service.service';
 import { NotificationServiceService } from 'src/app/Services/notification-service.service';
@@ -14,16 +14,11 @@ export class HomeComponent {
   UserRole:any;
   IsHomePage: boolean = false; 
   notificationMessage: string='';
-  @ViewChild('navbarCollapse', { static: false }) navbarCollapse: any;
 
   constructor(private loginstatuscheckservice:LoginStatusCheckServiceService,
-              private router:Router,private renderer: Renderer2,private notificationService: NotificationServiceService
+              private router:Router,private notificationService: NotificationServiceService
   ){}
 
-
-  onNavItemClick() {
-    this.renderer.removeClass(this.navbarCollapse.nativeElement, 'show');
-  }
   ngOnInit(): void {
     
     // this.loginstatuscheckservice.verifiedLinkState.subscribe(state => {

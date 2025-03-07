@@ -1,38 +1,33 @@
 <div class="container">
   <div class="container-fluid">
     <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
+
       <!-- JobHunter Brand with space on the right -->
       <a class="navbar-brand" routerLink="/home">
         JobHunter
       </a>
-    
-      <!-- Hamburger icon for mobile -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span> <!-- This is the hamburger icon -->
-      </button>
-    
+
       <!-- Navbar links with space between JobHunter and the links -->
-      <div class="collapse navbar-collapse" id="navbarNavDropdown" #navbarCollapse>
+      <div  class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav fs-2 ms-auto"> <!-- ms-auto added here -->
-          <li class="nav-item" *ngIf="!IsloggedIn" (click)="onNavItemClick()">
+          <li class="nav-item" *ngIf="!IsloggedIn">
             <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
           </li>
-          <li class="nav-item" *ngIf="IsloggedIn" (click)="onNavItemClick()">
+          <li class="nav-item" *ngIf="IsloggedIn">
             <a class="nav-link" routerLink="/companieslist" routerLinkActive="active">Companies</a>
           </li>
-          <li class="nav-item" *ngIf="IsloggedIn" (click)="onNavItemClick()">
+          <li class="nav-item" *ngIf="IsloggedIn">
             <a class="nav-link" routerLink="/references" routerLinkActive="active">References</a>
           </li>
-          <li *ngIf="UserRole=='Admin' && IsloggedIn" class="nav-item" (click)="onNavItemClick()">
+          <li *ngIf="UserRole=='Admin' && IsloggedIn" class="nav-item">
             <a class="nav-link" routerLink="/registrations" routerLinkActive="active">Registrations</a>
           </li>
-          <li *ngIf="IsloggedIn" (click)="onNavItemClick()" class="nav-item">
+          <li *ngIf="IsloggedIn" (click)="Logout()" class="nav-item">
             <a class="nav-link">Logout</a>
           </li>
         </ul>
       </div>
     </nav>
-    
   </div>
 </div>
 
