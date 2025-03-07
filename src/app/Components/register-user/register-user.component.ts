@@ -27,16 +27,9 @@ export class RegisterUserComponent {
               )
   {
     this.registerform=this.fb.group({
-      username: [ '', Validators.required,
-                    Validators.minLength(8),
-                    Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])[A-Za-z]{8,}$/)
-                ],
-      email:['',Validators.required,Validators.email,Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+$/)],
-      password: ['', [
-                    Validators.required,
-                    Validators.minLength(8),
-                    Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/)
-                ]],
+      username: [ '', Validators.required],
+      email:['',Validators.required ],
+      password: ['', Validators.required ],
       paymentstatus:[''],
       verificationtoken:[''],
       accountverificationstatus:[''],
@@ -72,13 +65,10 @@ export class RegisterUserComponent {
     }   
   }
 
-  getRegisteredEmails(){
-  
-    // this.http.get('http://localhost:80/api/register/getregisteredemails').subscribe({
+  getRegisteredEmails(){  
       this.http.get('http://localhost:80/api/register/getregisteredemails').subscribe({
 
-      next:(emails:any)=>{
-        console.log(emails);
+      next:(emails:any)=>{        
         this.registeredEmails=emails;                  
       },
       error:(err:any)=>{
@@ -87,7 +77,6 @@ export class RegisterUserComponent {
       }
     }); 
   }
-  public test:any;
   hasemailalreadyregistered(){
     if (this.registeredEmails.includes(this.registerform.get('email')?.value)) {
       this.duplicateemailexists=true;
