@@ -26,10 +26,6 @@ export class HomeComponent {
   }
   ngOnInit(): void {
     
-    // this.loginstatuscheckservice.verifiedLinkState.subscribe(state => {
-    //   this.IsverifiedLink = state;
-    // });
-
     this.loginstatuscheckservice.isLoggedIn.subscribe(state => {
       this.IsloggedIn = state;
     });

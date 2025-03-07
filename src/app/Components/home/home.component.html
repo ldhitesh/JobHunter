@@ -26,7 +26,7 @@
           <li *ngIf="UserRole=='Admin' && IsloggedIn" class="nav-item" (click)="onNavItemClick()">
             <a class="nav-link" routerLink="/registrations" routerLinkActive="active">Registrations</a>
           </li>
-          <li *ngIf="IsloggedIn" (click)="onNavItemClick()" class="nav-item">
+          <li *ngIf="IsloggedIn" (click)="Logout()" class="nav-item">
             <a class="nav-link">Logout</a>
           </li>
         </ul>
