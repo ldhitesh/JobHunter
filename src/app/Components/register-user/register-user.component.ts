@@ -30,6 +30,7 @@ export class RegisterUserComponent {
       username: [ '', Validators.required],
       email:['',Validators.required ],
       password: ['', Validators.required ],
+      confirmpassword: [''],
       paymentstatus:[''],
       verificationtoken:[''],
       accountverificationstatus:[''],
@@ -60,6 +61,7 @@ export class RegisterUserComponent {
         username: registerDetails.Username,
         email: registerDetails.Email,
         password: registerDetails.Password,
+        confirmpassword: registerDetails.ConfirmPassword,
         paymentstatus: "Completed(Verify-Transaction)"
       }); 
     }   
@@ -77,6 +79,14 @@ export class RegisterUserComponent {
       }
     }); 
   }
+
+
+  IsPasswordMatched(){
+    return this.registerform.get('password')?.value==this.registerform.get('confirmpassword')?.value
+          ? true :false;
+  }
+
+
   hasemailalreadyregistered(){
     if (this.registeredEmails.includes(this.registerform.get('email')?.value)) {
       this.duplicateemailexists=true;
@@ -159,7 +169,8 @@ export class RegisterUserComponent {
             this.hasUsernameLowerCase() &&
             this.hasUsernameMinLength() &&
             this.hasEmailvalidated() &&
-            !this.duplicateemailexists
+            !this.duplicateemailexists &&
+            this.IsPasswordMatched()
             
     }
 }

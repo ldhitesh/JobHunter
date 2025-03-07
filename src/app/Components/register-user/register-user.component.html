@@ -39,6 +39,21 @@
                     <p *ngIf="!hasPasswordMinLength()">Minimum 8 characters</p>
                 </div>
 
+                <label for="confirmpassword" class="col-form-label">Confirm Password
+                    <span *ngIf="registerform.get('confirmpassword')?.touched && 
+                    !registerform.get('confirmpassword')?.value" class="required">* Required</span>
+                </label>
+                <div >
+                    <input  type="password" 
+                            class="form-control" 
+                            id="registerconfirmpassword"
+                            formControlName="confirmpassword">
+                </div>
+
+                <div class="password-requirements" *ngIf="registerform.get('confirmpassword')?.touched && registerform.get('confirmpassword')?.value" >
+                    <p *ngIf="!IsPasswordMatched()"> Password did not match.</p> 
+                </div>
+
                 <label for="email" class="col-form-label">Email
                     <span *ngIf="registerform.get('email')?.touched && 
                     !registerform.get('email')?.value" class="required">* Required</span>
