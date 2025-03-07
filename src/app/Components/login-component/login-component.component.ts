@@ -39,7 +39,7 @@ export class LoginComponentComponent {
 
   onLogin(data:any){
       const loginData = this.loginCredential;
-      this.http.post('http://localhost:80/api/login', loginData).subscribe({
+      this.http.post('http://api.jobhunter.life/api/login', loginData).subscribe({
         next: (response: any) => {          
           sessionStorage.setItem('UserName', response.userDetails.username);
           sessionStorage.setItem('Role', response.userDetails.role[0]);

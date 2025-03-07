@@ -48,7 +48,7 @@ export class AddReferenceFormComponent {
 
   Onsubmit(){
     this.trimWhiteSpaces();    
-    this.http.post('http://localhost:80/api/references/addreference',this.referenceform.value).subscribe({
+    this.http.post('http://api.jobhunter.life/api/references/addreference',this.referenceform.value).subscribe({
       next:(response:any)=>{
         this.router.navigate(['/references']); 
       },
@@ -63,7 +63,7 @@ export class AddReferenceFormComponent {
  
   Update(){
     this.trimWhiteSpaces();
-    this.http.patch(`http://localhost:80/api/references/updatereference/${this.currentrefereremail}`,this.referenceform.value).subscribe({
+    this.http.patch(`http://api.jobhunter.life/api/references/updatereference/${this.currentrefereremail}`,this.referenceform.value).subscribe({
       next:(response:any) => {
       this.router.navigate(['/references']); // Navigate after update
     },
@@ -75,7 +75,7 @@ export class AddReferenceFormComponent {
   }
 
   Delete(){
-    this.http.delete(`http://localhost:80/api/references/deletereference/${this.referenceform.value.email}`).subscribe({
+    this.http.delete(`http://api.jobhunter.life/api/references/deletereference/${this.referenceform.value.email}`).subscribe({
       next:(response:any) => {
       this.router.navigate(['/references']); // Navigate after update
     },

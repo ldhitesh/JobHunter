@@ -10,7 +10,7 @@ import { PaymentService } from 'src/app/Services/payment-service.service';
 })
 export class CheckoutComponent {
   @Input() registerDetails: any ;
-  @Input() payNowButtonActive: boolean=false ;
+  @Input() payNowButtonActive: boolean=true ;
 
 
   constructor(private http:HttpClient,private paymentService: PaymentService){}

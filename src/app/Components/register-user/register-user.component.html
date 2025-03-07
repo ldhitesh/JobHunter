@@ -3,70 +3,37 @@
         <div class="registerform">
             <h2>Register Form</h2> 
 
-                <label for="username" class="col-form-label">Username
-                    <span *ngIf="registerform.get('username')?.touched && 
-                                !registerform.get('username')?.value" class="required">* Required</span>
-                </label>
-                <div>
+                <label for="username" class="col-form-label">Username</label>
+                <div >
                     <input  type="text" 
                             class="form-control" 
                             id="registerusername"
                             formControlName="username">
                 </div>
-                <div    class="password-requirements" 
-                        *ngIf="registerform.get('username')?.touched
-                        && registerform.get('username')?.value">
-                    <p *ngIf="!hasUsernameUpperCase()">At least one uppercase letter</p>
-                    <p *ngIf="!hasUsernameLowerCase()">At least one lowercase letter</p>
-                    <p *ngIf="!hasUsernameMinLength()">Minimum 8 characters</p>
-                </div>
 
-                <label for="password" class="col-form-label">Password
-                    <span *ngIf="registerform.get('password')?.touched && 
-                    !registerform.get('password')?.value" class="required">* Required</span>
-                </label>
+                <label for="password" class="col-form-label">Password</label>
                 <div >
                     <input  type="password" 
                             class="form-control" 
                             id="registerpassword"
                             formControlName="password">
                 </div>
-                     <!-- Password Requirements Messages -->
-                <div class="password-requirements" *ngIf="registerform.get('password')?.touched && registerform.get('password')?.value" >
-                    <p *ngIf="!hasPasswordUpperCase()">At least one uppercase letter</p>
-                    <p *ngIf="!hasPasswordLowerCase()">At least one lowercase letter</p>
-                    <p *ngIf="!hasPasswordSpecialChar()">At least one special character</p>
-                    <p *ngIf="!hasPasswordMinLength()">Minimum 8 characters</p>
-                </div>
 
-                <label for="email" class="col-form-label">Email
-                    <span *ngIf="registerform.get('email')?.touched && 
-                    !registerform.get('email')?.value" class="required">* Required</span>
-                </label>
+                <label for="email" class="col-form-label">Email</label>
                 <div>
                     <input  type="email" 
                             class="form-control" 
                             id="registeremail"
-                            formControlName="email"
-                            (input)="hasemailalreadyregistered()">
+                            formControlName="email">
                 </div>
-                <div class="password-requirements" *ngIf="registerform.get('email')?.touched && registerform.get('email')?.value" >
-                        <p *ngIf="!hasEmailvalidated()">Enter a valid email</p> 
-                        <p *ngIf="duplicateemailexists">Email already registered!</p> 
-                </div>
-
-                <div class="paynow" *ngIf="checkvalidations() " >
-                    <checkout *ngIf="!allowToRegister" [registerDetails]="registerform.value" >
-                    </checkout>           
+                <div class="paynow" >
+                    <checkout [payNowButtonActive]="registerform.invalid" *ngIf="!allowToRegister" [registerDetails]="registerform.value" ></checkout>           
                 </div>
            
      
             <div class="col-sm-8">
                 <button [disabled]="!allowToRegister" (click)="OnRegister()" class="btn btn-primary">Register</button>
             </div>
-
-        
-
             <div *ngIf="allowToRegister" class="toast-success">
                 <i class="fa fa-smile fa-2x success-smile"></i>
                 <h5>Payment Successful</h5>
