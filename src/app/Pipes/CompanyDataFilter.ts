@@ -13,10 +13,21 @@ export class CompanyDataFilterPipe implements PipeTransform {
         return value === 0 ? 'Not Applied' : value;
       }
       else if(identifier=='lastapplied'){     
-        return value===null||value.length==0||''?'Yet to Apply':value;
+        value===null||value.length==0||''?'Yet to Apply':value;
+        return value
       }
       else if(identifier=='link'){
         return value.length > 80 ? value.substring(0, 80) + '...' : value;
+      }
+      else if(identifier=='morethanweek'){
+
+        if(value.lastapplied=='Yet to Apply')
+          value.status='Not Applied';
+
+        console.log("count");
+        
+        return value;
+
       }
     
   }

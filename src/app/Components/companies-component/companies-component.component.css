@@ -100,14 +100,13 @@ table.table .desc {
 }
 
 .toggle-switch {
-    width: 50px;
+    width: 48px;
     height: 20px;
     background-color: #9c9fa8;
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: right;
-    padding: 2px;
     cursor: pointer;
     position: relative;
     transition: background-color 0.3s ease-in-out;
@@ -119,7 +118,7 @@ table.table .desc {
     background-color: rgb(54, 54, 55);
     border-radius: 50%;
     position: absolute;
-    left: 2px;
+    left: 1px;
     transition: all 0.3s ease-in-out;
   }
   
@@ -129,7 +128,7 @@ table.table .desc {
   }
 
   .not-applied {
-    left: 28px;
+    left: 30px;
     background-color: rgb(69, 72, 69);
   }
   .toggle-switch span {

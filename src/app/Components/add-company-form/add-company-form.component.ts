@@ -25,7 +25,7 @@ export class AddCompanyFormComponent {
   {
       this.companyform= this.fb.group({
       organization: ['', Validators.required],  // Add required validator
-      description: ['', Validators.required], 
+      description: ['No Comments', Validators.required], 
       lastapplied:['Yet to Apply'],
       status:[false]
     })
@@ -38,13 +38,15 @@ export class AddCompanyFormComponent {
         organization: [params['organization'] || ''],
         description: [params['description'] || ''],
         lastapplied: [params['lastapplied'] ||'Yet to Apply' ],
-        status: [params['status'] === 'Applied'] 
+        status: [params['status']||'Not Applied'] 
       });
 
       this.updatebtn=params['button']=="update"?true:false;
       this.currentorganization=params['organization'];
       this.currentcompanydetails=this.companyform.value;
-
+      this.companyform.patchValue({
+        lastapplied: new Date(this.companyform.value.lastapplied).toISOString().split('T')[0],
+      });
     });
   }
 
@@ -54,7 +56,7 @@ export class AddCompanyFormComponent {
     this.companyform.value.lastapplied=this.companyform.value.lastapplied=="Yet to Apply"
                                       ?this.companyform.value.lastapplied
                                       :this.companyform.value.lastapplied.toString().slice(0,10);
-    this.companyform.value.status=this.companyform.value.status==false?"Not Applied":"Applied";
+    this.companyform.value.status=this.companyform.value.lastapplied=="Yet to Apply"?"Not Applied":"Applied";
 
     this.http.post('http://localhost:80/api/companies/addcompany',this.companyform.value).subscribe({
       next:(response:any)=>{
@@ -72,9 +74,16 @@ export class AddCompanyFormComponent {
     this.trimWhiteSpaces();
     this.companyform.value.lastapplied=this.companyform.value.lastapplied=="Yet to Apply"
                                       ?this.companyform.value.lastapplied
-                                      :this.companyform.value.lastapplied.toString().slice(0,10);
+                                      :this.companyform.value.lastapplied.toString().slice(0,11);
+    this.companyform.value.lastapplied=this.companyform.value.lastapplied.length==0
+                                        ? "Yet to Apply"
+                                        :this.companyform.value.lastapplied;
+    if(this.companyform.value.lastapplied=="Yet to Apply")
+      this.companyform.value.status=false;
+
+
     this.companyform.value.status=this.companyform.value.status==false?"Not Applied":"Applied";
-    
+
     this.http.patch(`http://localhost:80/api/companies/updatecompany/${this.currentorganization.trim()}`,this.companyform.value).subscribe({
       next:(response:any) => {
       this.isUpdateForm=false;
