@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-add-company-form',
@@ -43,19 +42,20 @@ export class AddCompanyFormComponent {
 
       this.updatebtn=params['button']=="update"?true:false;
       this.currentorganization=params['organization'];
-      this.currentcompanydetails=this.companyform.value;
       this.companyform.patchValue({
-        lastapplied: new Date(this.companyform.value.lastapplied).toISOString().split('T')[0],
+        lastapplied: new Date(params['lastapplied']).toISOString().split('T')[0],
       });
+      this.currentcompanydetails=this.companyform.value;
     });
   }
 
 
   Onsubmit(){
     this.trimWhiteSpaces();
+    
     this.companyform.value.lastapplied=this.companyform.value.lastapplied=="Yet to Apply"
                                       ?this.companyform.value.lastapplied
-                                      :this.companyform.value.lastapplied.toString().slice(0,10);
+                                      :new Date(this.companyform.value.lastapplied).toString().slice(0,10);
     this.companyform.value.status=this.companyform.value.lastapplied=="Yet to Apply"?"Not Applied":"Applied";
 
     this.http.post('http://localhost:80/api/companies/addcompany',this.companyform.value).subscribe({
@@ -71,16 +71,18 @@ export class AddCompanyFormComponent {
   }
 
   Update(){
-    this.trimWhiteSpaces();
+ 
     this.companyform.value.lastapplied=this.companyform.value.lastapplied=="Yet to Apply"
                                       ?this.companyform.value.lastapplied
-                                      :this.companyform.value.lastapplied.toString().slice(0,11);
+                                      : new Date(this.companyform.value.lastapplied + 'T00:00:00').toString().slice(4,15);
+        
     this.companyform.value.lastapplied=this.companyform.value.lastapplied.length==0
                                         ? "Yet to Apply"
                                         :this.companyform.value.lastapplied;
     if(this.companyform.value.lastapplied=="Yet to Apply")
       this.companyform.value.status=false;
-
+    
+    
 
     this.companyform.value.status=this.companyform.value.status==false?"Not Applied":"Applied";
 
@@ -112,7 +114,9 @@ export class AddCompanyFormComponent {
 
   checklastapplieddirty(){
     if(this.currentcompanydetails.lastapplied!='Yet to Apply'){
-      if(this.companyform.value.lastapplied!=this.currentcompanydetails.lastapplied){
+      const date1 = new Date(this.companyform.value.lastapplied+ 'T00:00:00').toString().slice(4,15); 
+      const date2 = new Date(this.currentcompanydetails.lastapplied+ 'T00:00:00').toString().slice(4,15); 
+      if(date1!= date2){
         return true;
       }
     }

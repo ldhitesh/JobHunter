@@ -25,9 +25,11 @@
                 </td>              
                 <td class="status">
                     {{c.status}}
-                    <div class="toggle-switch" (click)="statuschanged(c)">
-                        <div class="switch" [class.applied]="c.status=='Applied'"></div>
-                    </div>
+
+                    <span class="toggle-switch"[class.toggle-Applied]="c.status=='Applied'" (click)="statuschanged(c)">
+                        <span class="switch" [class.applied]="c.status=='Applied'">
+                        </span>
+                    </span>
                 </td>
                 <td>
                     <a *ngIf="c.link.length>0" [href]="c.link">{{c.organization}} Career Link </a>

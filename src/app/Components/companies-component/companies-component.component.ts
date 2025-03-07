@@ -122,7 +122,6 @@ export class CompaniesComponentComponent {
       
     this.http.patch(`http://localhost:80/api/companies/updatecompany/${data.organization.trim()}`,data).subscribe({
       next:(response:any) => {
-        console.log(response);
     },
     error:(err:any) => {      
       const errorMessage = err.error?.message || 'An unexpected error occurred.';

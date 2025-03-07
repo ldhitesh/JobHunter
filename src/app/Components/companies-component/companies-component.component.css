@@ -24,7 +24,7 @@ table.table thead {
 }
 
 table.table th, table.table td {
-    padding: 12px;
+    padding: 8px;
     text-align: left;
 }
 
@@ -41,7 +41,6 @@ table.table td {
 
 /* Edit button styling inside the table */
 table.table .edit {
-    display: flex;
     align-items: center;
 }
 
@@ -102,7 +101,7 @@ table.table .desc {
 .toggle-switch {
     width: 48px;
     height: 20px;
-    background-color: #9c9fa8;
+    background-color: #797f7a;
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -124,24 +123,25 @@ table.table .desc {
   
   .applied {
     left: 28px;
-    background-color: #0b368d;
+    background-color: #050505;
   }
 
   .not-applied {
     left: 30px;
-    background-color: rgb(69, 72, 69);
+    background-color: #050505;
   }
   .toggle-switch span {
     font-size: 8px;
     font-weight: bold;
     position: absolute;
   }
+
+  .toggle-Applied{
+    background-color: #337ab7;    
+  }
   
- .status{
-    display: flex;
-    justify-content: space-around;
+ .status {
     width: 170px;
-    background-color: #f9f9f9;
   }
 
   .status-head{
