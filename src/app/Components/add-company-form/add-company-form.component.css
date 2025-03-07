@@ -373,19 +373,4 @@ label {
     }
 }
 
-/* Responsive Design for Small Screens */
-@media (max-width: 576px) {
-    .modal-content {
-        width: 90%; /* Take up most of the width on small screens */
-    }
-    .modal-content h3 {
-        font-size: 20px; /* Slightly smaller title on small screens */
-    }
-    .modal-content p {
-        font-size: 14px; /* Slightly smaller text */
-    }
-    .button.is-primary {
-        font-size: 14px;
-        padding: 8px 15px;
-    }
-}
+

@@ -23,7 +23,7 @@ export class AddCompanyFormComponent {
               private activatedroute:ActivatedRoute)
   {
       this.companyform= this.fb.group({
-      organization: ['', Validators.required],  // Add required validator
+      organization: ['', Validators.required], 
       description: ['No Comments', Validators.required], 
       lastapplied:['Yet to Apply'],
       status:[false]
@@ -39,15 +39,19 @@ export class AddCompanyFormComponent {
         lastapplied: [params['lastapplied'] ||'Yet to Apply' ],
         status: [params['status']||'Not Applied'] 
       });
-
+      
       this.updatebtn=params['button']=="update"?true:false;
       this.currentorganization=params['organization'];
-      this.companyform.patchValue({
-        lastapplied: new Date(params['lastapplied']).toISOString().split('T')[0],
-      });
+      if( this.companyform.value.lastapplied!='Yet to Apply'){
+        this.companyform.patchValue({
+          lastapplied: new Date(params['lastapplied']).toISOString().split('T')[0],
+        });
+      }
       this.currentcompanydetails=this.companyform.value;
+
     });
-  }
+    
+    }
 
 
   Onsubmit(){
@@ -132,6 +136,7 @@ export class AddCompanyFormComponent {
   }
 
   checkForValueChange(){
+      
       return (this.companyform.value.organization!=this.currentcompanydetails.organization ||
       this.companyform.value.description!=this.currentcompanydetails.description ||
       this.checklastapplieddirty()||
@@ -146,7 +151,9 @@ export class AddCompanyFormComponent {
   }
 
   ConfirmUpdate(){
+    
     this.isUpdateForm=true;
+
   }
 
   ConfirmDelete(){
