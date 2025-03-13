@@ -17,7 +17,7 @@ export class CompaniesComponentComponent {
   public currentPage = 1;
   public totalPages:any;
   public UserRole:any;
-
+  public isEditing:any=-1;
   constructor(private http:HttpClient,private router:Router,
               private loginstatuscheckservice:LoginStatusCheckServiceService){}
 
@@ -129,6 +129,31 @@ export class CompaniesComponentComponent {
     }
   });
   }
+
+
+  editlink(data:any) {
+    this.isEditing =data.id; 
+  }
+  
+  saveLink(data:any) {
+    console.log(data);
+    
+    this.http.patch(`http://localhost:80/api/companies/updatecompany/${data.organization.trim()}`,data).subscribe({
+      next:(response:any) => {
+        this.isEditing = false; 
+    },
+    error:(err:any) => {      
+      const errorMessage = err.error?.message || 'An unexpected error occurred.';
+      alert(errorMessage);   
+    }
+  });
+
+  }
+
+  cancellink(){
+    this.isEditing=-1;
+  }
+  
 
 }
 

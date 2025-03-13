@@ -147,3 +147,36 @@ table.table .desc {
   .status-head{
     width: 170px;
   }
+
+
+  a.disabled {
+    pointer-events: none;
+    color: gray;
+    text-decoration: none;
+    cursor: default;
+  }
+  
+
+  .edit-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adds space between input and icons */
+}
+
+.edit-container input {
+    flex: 1; /* Allows the input to take available space */
+    min-width: 150px;
+}
+
+.fas {
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.fas.fa-save {
+    color: green;
+}
+
+.fas.fa-times {
+    color: red;
+}

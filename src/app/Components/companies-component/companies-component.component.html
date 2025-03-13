@@ -31,9 +31,23 @@
                         </span>
                     </span>
                 </td>
-                <td>
-                    <a *ngIf="c.link.length>0" [href]="c.link">{{c.organization}} Career Link </a>
-                    <a *ngIf="c.link.length==0"> No {{c.organization}} Career Link Added</a>
+                <td class ="link ">
+                    <div *ngIf="isEditing==c.id" class="edit-container">
+                        <input type="text" class="form-control" [(ngModel)]="c.link" id="editlink">
+                        <span class="fas fa-save" (click)="saveLink(c)"></span>
+                        <span class="fas fa-times" (click)="cancellink()"></span>
+                    </div>
+                    <div class ="edit" *ngIf="!(isEditing==c.id)" >
+                        <span class="fas fa-edit" (click)="editlink(c)"></span>
+                        <a *ngIf="c.link?.length > 0" 
+                            [attr.href]="c.link !== 'Link Not Added' ? c.link : null"
+                            [class.disabled]="c.link === 'Link Not Added'">
+                            {{ c.organization }} Career Link
+                         </a>
+                         
+                        <a *ngIf="c.link.length==0" class="disabled"> No {{c.organization}} Career Link Added</a>
+                    </div>
+                    
                 </td>
                 <td class="desc">{{c.description|companyDataFilter:'description'}}</td>
 
