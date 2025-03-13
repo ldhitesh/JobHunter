@@ -26,7 +26,8 @@ export class AddCompanyFormComponent {
       organization: ['', Validators.required], 
       description: ['No Comments', Validators.required], 
       lastapplied:['Yet to Apply'],
-      status:[false]
+      status:[false],
+      link:[""]
     })
   }
 
@@ -37,7 +38,8 @@ export class AddCompanyFormComponent {
         organization: [params['organization'] || ''],
         description: [params['description'] || ''],
         lastapplied: [params['lastapplied'] ||'Yet to Apply' ],
-        status: [params['status']||'Not Applied'] 
+        status: [params['status']||'Not Applied'] ,
+        link:[params['link'] || 'Link Not Added']
       });
       
       this.updatebtn=params['button']=="update"?true:false;

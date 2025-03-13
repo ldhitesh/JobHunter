@@ -108,6 +108,7 @@ export class CompaniesComponentComponent {
         description: data.description,
         lastapplied: data.lastApplied,
         status: data.status,
+        link:data.link,
         button:"update"
       }
     });
