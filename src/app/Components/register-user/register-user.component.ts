@@ -103,7 +103,7 @@ export class RegisterUserComponent {
       const requestBody = {
         RegisterData: this.registerform.value,
         EmailVerificationData: this.emailVerificationData,
-        verificationUrl:"http://localhost:80/api/email/verify-email?redirectto=http://ui.jobhunter.life/email-verification-complete"
+        verificationUrl:"http://localhost:80/api/email/verify-email?redirectto=http://localhost:5000/email-verification-complete"
       };
 
       this.http.post('http://localhost:80/api/register/pendingregistrations',requestBody).subscribe({
