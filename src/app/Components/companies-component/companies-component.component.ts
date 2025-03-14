@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-check-service.service';
+import { PaginationService } from 'src/app/Services/pagination-service.service';
 
 @Component({
   selector: 'companies-component',
@@ -19,7 +20,8 @@ export class CompaniesComponentComponent {
   public UserRole:any;
   public isEditing:any=-1;
   constructor(private http:HttpClient,private router:Router,
-              private loginstatuscheckservice:LoginStatusCheckServiceService){}
+              private loginstatuscheckservice:LoginStatusCheckServiceService,
+              private paginationService: PaginationService){}
 
 
  
@@ -30,7 +32,11 @@ export class CompaniesComponentComponent {
     if(sessionStorage.getItem('Role')){
       this.UserRole=sessionStorage.getItem('Role');
     }
+    this.paginationService.currentPage$.subscribe(page => {
+      this.currentPage = page;
+    });
     this.fetchCompanies();
+
   }
   
 
@@ -46,7 +52,7 @@ export class CompaniesComponentComponent {
             const timeDiff = currentDate.getTime() - lastAppliedDate.getTime();
             const daysDiff = timeDiff / (1000 * 3600 * 24); // Convert milliseconds to days
   
-            if (daysDiff > 3 && data.status=='Applied') {
+            if (daysDiff > 15 && data.status=='Applied') {
               data.status = 'Re Apply';
             } else if(data.status=='Not Applied') {
               data.status = 'Not Applied';
@@ -78,9 +84,9 @@ export class CompaniesComponentComponent {
   }
 
   paginatedData() {
+
       const startIndex = (this.currentPage-1) * this.pageSize;
       const endIndex = startIndex + this.pageSize;
-      
       return this.filtercompanies.slice(startIndex, endIndex);
   }
 
@@ -88,14 +94,14 @@ export class CompaniesComponentComponent {
 
   PrevClicked(){
     if(this.currentPage>1 ){
-      this.currentPage-=1;
+      this.paginationService.changePage(this.currentPage-=1);
       this.paginatedData
     }
   }
 
   NextClicked(){
     if(this.currentPage<this.totalPages){
-      this.currentPage+=1;
+      this.paginationService.changePage(this.currentPage+=1);
       this.paginatedData
     }
   }
