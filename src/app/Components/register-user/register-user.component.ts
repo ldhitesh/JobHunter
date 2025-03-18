@@ -96,6 +96,8 @@ export class RegisterUserComponent {
     }
   }
 
+  
+
   OnRegister(){    
       this.emailVerificationData.to=this.registerform.value.email;
       this.emailVerificationData.subject="Please Verify Your Email Address to Complete Registration"

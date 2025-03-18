@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/Services/auth.service';
 import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-check-service.service';
 
 @Component({
@@ -8,14 +9,18 @@ import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-ch
 })
 export class AddReferenceButtonComponent {
   UserRole:any;
-  constructor(private loginstatuscheckservice:LoginStatusCheckServiceService
+  constructor(private loginstatuscheckservice:LoginStatusCheckServiceService,
+              private authService:AuthService
   ){}
 
   ngOnInit(): void {
     this.loginstatuscheckservice.Role.subscribe(role => {
       this.UserRole = role;
     });    
-    if(sessionStorage.getItem('Role')){
+    if(sessionStorage.getItem('id_token')){
+      this.UserRole=this.authService.userRole;
+    }
+    else if(sessionStorage.getItem('Role')){
       this.UserRole=sessionStorage.getItem('Role');
     }
 

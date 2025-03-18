@@ -4,7 +4,7 @@
 /* Form container styling */
 .loginform {
     width: 100%;
-    max-width: 400px;
+    max-width: 600px;
     margin: 100px auto; /* Center form vertically and horizontally */
     padding: 30px;
     background-color: #fff;
@@ -83,6 +83,7 @@ button.btn-primary {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 30%;
 }
 
 /* Hover effect for the submit button */
@@ -115,6 +116,7 @@ h5{
     width: 400px;
     padding-top:4%;
     text-align: center;
+
 }
 
 p{
@@ -123,8 +125,16 @@ p{
 }
 
 .notification{
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.singlesignonimg{
+    width: 180px;
+    height: 47px;
+    margin-top: 5%;
 }
 
 /* Responsive adjustments for mobile devices */

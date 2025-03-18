@@ -1,6 +1,11 @@
 <form #loginform="ngForm">
     <div class="loginform">
+        <div>
+            <img src="https://idoxacx.sufydely.com/JobHunterLogo.png" alt="">
+        </div>
+
         <h2>Login</h2> 
+       
         <div class="row mb-6">
             <div >
                 <div class="input-wrapper">
@@ -13,13 +18,13 @@
                             placeholder="Enter your username">
                 </div>
             </div>
-        </div>
+        </div> 
 
-        <!-- Password field with icon -->
+        <!--Password field with icon -->
         <div class="row mb-6">
             <div >
                 <div class="input-wrapper">
-                    <i class="fas fa-lock"></i> <!-- FontAwesome lock icon -->
+                    <i class="fas fa-lock"></i> 
                     <input  type="password" 
                             name="password" 
                             [(ngModel)]="loginCredential.password"
@@ -30,9 +35,12 @@
             </div>
         </div>
 
-        <!-- Login button -->
         <div class="">
-            <button type="submit" (click)="onLogin(loginform)" class="btn btn-primary">Login</button>
+            <button type="submit" (click)="onLogin()" class="btn btn-primary">Log in</button>
+        </div>
+
+        <div class="">
+           <img class="singlesignonimg" src="assets/singlesignon.png" (click)="onSingleSignOnLogin()" alt="Single Sign On" />
         </div>
 
         <!-- Register link -->
@@ -40,16 +48,16 @@
             <a>Register  
             </a>
         </div>
-        <div *ngIf="isModalVisible">
-            <div *ngIf="isModalVisible" class="notification">
-                <h5  *ngIf="successfullogin" class="notification-title">Action Required</h5>
-                <h5 *ngIf="loginfailure" class="notification-title">User Registration Failed</h5>
-                <h5 *ngIf="duplicateemail" class="notification-title">Email Already Registered</h5>
-                <p *ngIf="duplicateemail" class="notification-message">This email address is already registered. Please check your inbox for the verification email</p>
-                <p *ngIf="successfullogin" class="notification-message">A verification email has been sent. Please check your inbox to verify your email and await approval from the administrator</p>
-                <p *ngIf="loginfailure" class="notification-message">Sorry registration failed! Please try after some time</p>
-            </div>
+    <div *ngIf="isModalVisible">
+        <div *ngIf="isModalVisible" class="notification">
+            <h5  *ngIf="successfullogin" class="notification-title">Action Required</h5>
+            <h5 *ngIf="loginfailure" class="notification-title">User Registration Failed</h5>
+            <h5 *ngIf="duplicateemail" class="notification-title">Email Already Registered</h5>
+            <p *ngIf="duplicateemail" class="notification-message">This email address is already registered. Please check your inbox for the verification email</p>
+            <p *ngIf="successfullogin" class="notification-message">A verification email has been sent. Please check your inbox to verify your email and await approval from the administrator</p>
+            <p *ngIf="loginfailure" class="notification-message">Sorry registration failed! Please try after some time</p>
         </div>
+    </div> 
     </div>
 </form>
 

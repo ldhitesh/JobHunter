@@ -16,7 +16,7 @@ export class LoginStatusCheckServiceService {
   verifiedLinkState=this.isVerifiedLinkSubject.asObservable();
   Role = this.RoleSubjext.asObservable(); 
 
-  login(): void {
+  login(): void {    
     this.isLoggedInSubject.next(true); 
   }
   logout(){

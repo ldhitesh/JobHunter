@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/Services/auth.service';
 import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-check-service.service';
 import { NotificationServiceService } from 'src/app/Services/notification-service.service';
 
@@ -19,7 +20,8 @@ export class EmailComponent {
               private router:Router,
               private activatedroute: ActivatedRoute,
               private loginstatuscheckservice:LoginStatusCheckServiceService,
-              private notificationService: NotificationServiceService){}
+              private notificationService: NotificationServiceService,
+              private authService:AuthService){}
 
 
   ngOnInit(): void {
@@ -29,7 +31,10 @@ export class EmailComponent {
     this.loginstatuscheckservice.Role.subscribe(role => {
       this.userRole = role;
     });    
-    if(sessionStorage.getItem('Role')){
+    if(sessionStorage.getItem('id_token')){
+      this.userRole=this.authService.userRole;
+    }
+    else if(sessionStorage.getItem('Role')){
       this.userRole=sessionStorage.getItem('Role');
     }
   }

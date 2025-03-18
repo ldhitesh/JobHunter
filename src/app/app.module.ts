@@ -27,6 +27,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EmailNotificationComponent } from './Components/email-notification/email-notification.component';
 import { EmailVerificationCompleteComponent } from './Components/email-verification-complete/email-verification-complete.component';  // <-- Import animations module
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,9 @@ import { EmailVerificationCompleteComponent } from './Components/email-verificat
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,  // <-- Add this to enable animations
-    ToastrModule.forRoot() 
+    ToastrModule.forRoot(),
+    OAuthModule.forRoot()
+ 
   ],
   providers: [],
   bootstrap: [AppComponent]

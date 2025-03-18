@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/Services/auth.service';
 import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-check-service.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class ReferencesComponent {
   public UserRole:any;
 
   constructor(private http:HttpClient,private router:Router,
-              private loginstatuscheckservice:LoginStatusCheckServiceService){}
+              private loginstatuscheckservice:LoginStatusCheckServiceService,
+              private authService:AuthService){}
 
 
  
@@ -26,7 +28,10 @@ export class ReferencesComponent {
     this.loginstatuscheckservice.Role.subscribe(role => {
       this.UserRole = role;
     });    
-    if(sessionStorage.getItem('Role')){
+    if(sessionStorage.getItem('id_token')){
+      this.UserRole=this.authService.userRole;
+    }
+    else if(sessionStorage.getItem('Role')){
       this.UserRole=sessionStorage.getItem('Role');
     }
     this.fetchReferences();

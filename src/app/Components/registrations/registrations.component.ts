@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/Services/auth.service';
 import { NotificationServiceService } from 'src/app/Services/notification-service.service';
 
 @Component({
@@ -20,14 +21,18 @@ export class RegistrationsComponent {
   public notificationMessage:any;
 
   constructor(private http:HttpClient,private router:Router,
-                      private activatedroute:ActivatedRoute
+                      private activatedroute:ActivatedRoute,
+                      private authService:AuthService
   ){}
 
 
   ngOnInit(): void {
     this.fetchPendingApprovals();
+    console.log(this.UserRole);
+
     this.UserName = this.activatedroute.snapshot.paramMap.get('UserName');
-    this.UserRole=sessionStorage.getItem(this.UserName);  
+    this.UserRole=this.authService.userRole;
+
   }
 
   fetchPendingApprovals(): void {

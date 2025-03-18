@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component } from '@angular/core';
+import { AuthService } from 'src/app/Services/auth.service';
 import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-check-service.service';
 import { NotificationServiceService } from 'src/app/Services/notification-service.service';
 
@@ -25,13 +26,17 @@ export class SendEmailsComponent {
 
   constructor(private http:HttpClient,private cdr: ChangeDetectorRef,
             private loginstatuscheckservice:LoginStatusCheckServiceService,
-            private notificationService: NotificationServiceService){}
+            private notificationService: NotificationServiceService,
+            private authService:AuthService){}
  
   ngOnInit(): void {
     this.loginstatuscheckservice.Role.subscribe(role => {
       this.UserRole = role;
     });    
-    if(sessionStorage.getItem('Role')){
+    if(sessionStorage.getItem('id_token')){
+      this.UserRole=this.authService.userRole;
+    }
+    else if(sessionStorage.getItem('Role')){
       this.UserRole=sessionStorage.getItem('Role');
     }
     

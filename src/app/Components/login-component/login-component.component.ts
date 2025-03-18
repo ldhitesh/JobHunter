@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-check-service.service';
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
   selector: 'login-component',
@@ -26,7 +27,8 @@ export class LoginComponentComponent {
   constructor(private http: HttpClient,
               private router: Router,
               private loginstatuscheckservice:LoginStatusCheckServiceService,
-              private activatedroute: ActivatedRoute,) {}
+              private activatedroute: ActivatedRoute,
+              private authservice:AuthService) {}
 
   
   ngOnInit(): void {
@@ -37,10 +39,11 @@ export class LoginComponentComponent {
       });
   }
 
-  onLogin(data:any){
+  onLogin(){
       const loginData = this.loginCredential;
       this.http.post('http://localhost:80/api/login', loginData).subscribe({
-        next: (response: any) => {          
+        next: (response: any) => {        
+
           sessionStorage.setItem('UserName', response.userDetails.username);
           sessionStorage.setItem('Role', response.userDetails.role[0]);
           this.loginstatuscheckservice.login();
@@ -51,6 +54,9 @@ export class LoginComponentComponent {
           alert('Invalid username or password!');
         }
       });
+  }
+  onSingleSignOnLogin(){
+      this.authservice.authlogin();
   }
 
 
