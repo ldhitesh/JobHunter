@@ -4,18 +4,20 @@
 /* Form container styling */
 .loginform {
     width: 100%;
-    max-width: 600px;
-    margin: 100px auto; /* Center form vertically and horizontally */
+    max-width: 500px;
     padding: 30px;
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* This will center the form both vertically and horizontally */
     align-items: center;
-    margin-top: 10%;
 }
+
 
 /* Title styling */
 h2 {
@@ -83,7 +85,7 @@ button.btn-primary {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-top: 30%;
+    margin-top: 20%;
 }
 
 /* Hover effect for the submit button */
@@ -98,7 +100,7 @@ button.btn-primary:hover {
 }
 
 .registerlink a {
-    font-size: 16px;
+    font-size: 19px;
     color: #337ab7;
     text-decoration: none;
     font-weight: 600;
@@ -132,9 +134,14 @@ p{
 }
 
 .singlesignonimg{
-    width: 180px;
-    height: 47px;
+    width: 190px;
+    height: 45px;
     margin-top: 5%;
+}
+
+.logo{
+    width: 400px;
+    margin: 5%;
 }
 
 /* Responsive adjustments for mobile devices */

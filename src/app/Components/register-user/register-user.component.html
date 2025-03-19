@@ -70,14 +70,14 @@
                         <p *ngIf="duplicateemailexists">Email already registered!</p> 
                 </div>
 
-                <div class="paynow" *ngIf="checkvalidations() " >
+                <!-- <div class="paynow" *ngIf="checkvalidations() " >
                     <checkout *ngIf="!allowToRegister" [registerDetails]="registerform.value" >
                     </checkout>           
                 </div>
-           
+            -->
      
             <div class="col-sm-8">
-                <button [disabled]="!allowToRegister" (click)="OnRegister()" class="btn btn-primary">Register</button>
+                <button [disabled]="!checkvalidations()" (click)="OnRegister()" class="btn btn-primary">Register</button>
             </div>
 
         

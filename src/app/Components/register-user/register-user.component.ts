@@ -56,7 +56,7 @@ export class RegisterUserComponent {
     this.registerResponse=status;
 
     if(status=='Success'){
-      this.allowToRegister=true;    
+      // this.allowToRegister=true;    
       this.registerform.patchValue({
         username: registerDetails.Username,
         email: registerDetails.Email,
