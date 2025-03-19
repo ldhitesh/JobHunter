@@ -29,6 +29,9 @@
           <li *ngIf="IsloggedIn" (click)="Logout()" class="nav-item">
             <a class="nav-link">Logout</a>
           </li>
+          <li class="profilepicture" *ngIf="authService.profilepicture">
+            <img [src]="authService.profilepicture">
+          </li>
         </ul>
       </div>
     </nav>
@@ -45,6 +48,7 @@
     </div>
   </div>
 </div>
-
-<app-portfolio *ngIf="IsHomePage"></app-portfolio>
+<div *ngIf="IsHomePage">
+  <app-portfolio ></app-portfolio>
+</div>
 <router-outlet></router-outlet>

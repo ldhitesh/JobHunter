@@ -27,7 +27,7 @@ export class AuthService {
   }
 
   public userRole:any;
-  public test: any;
+  public profilepicture: any;
 
 
   private configureOAuth() {
@@ -36,7 +36,7 @@ export class AuthService {
       redirectUri: 'http://localhost:5000/login', // Callback URL after login
       clientId: '0wWmE5XJ8RNcCzPaha3XeWUBZ46WdeaD', // Your Angular app's client ID from the identity provider
       responseType: 'code', // Authorization code flow
-      scope: 'openid email',  // Include email scope here
+      scope: 'openid email profile',  // Include email scope here
       showDebugInformation: true, // Optional, for debugging
       logoutUrl: 'http://localhost:5000/login', // Logout URL
       tokenEndpoint: 'https://dev-23jl6hcwap6zsa4n.us.auth0.com/oauth/token', // Token endpoint
@@ -54,6 +54,7 @@ export class AuthService {
           }
           else{
             this.userRole=claims['jobhunter-roles'];
+            this.profilepicture=claims['picture'];
             this.loginstatuscheckservice.login();
             this.loginstatuscheckservice.RoleCheck(claims['jobhunter-roles']);
             this.router.navigate(['/home']); 
@@ -66,11 +67,6 @@ export class AuthService {
     });
   }
 
-  ngOnDestroy() {
-    if (this.test) {
-      this.test.unsubscribe();
-    }
-  }
 
   public authlogin() {
 

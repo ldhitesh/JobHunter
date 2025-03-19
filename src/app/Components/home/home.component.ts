@@ -14,14 +14,17 @@ export class HomeComponent {
   IsverifiedLink:boolean=false;
   UserRole:any;
   IsHomePage: boolean = false; 
+  profilepicture:any;
   notificationMessage: string='';
   @ViewChild('navbarCollapse', { static: false }) navbarCollapse: any;
 
   constructor(private loginstatuscheckservice:LoginStatusCheckServiceService,
               private router:Router,private renderer: Renderer2,
               private notificationService: NotificationServiceService,
-              private authService:AuthService
-  ){}
+              public authService:AuthService
+  ){
+    this.profilepicture=authService.profilepicture;
+  }
 
 
   onNavItemClick() {
@@ -53,6 +56,7 @@ export class HomeComponent {
   }
 
   Logout(){
+    this.authService.profilepicture="";
     sessionStorage.removeItem('UserName');
     sessionStorage.removeItem('Role');
     this.router.navigate(['/login']);

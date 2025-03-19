@@ -178,3 +178,8 @@
 .success-smile{
   padding-left: 2%;
 }
+
+.profilepicture img{
+  width: 60px;
+  border-radius: 50%;
+}

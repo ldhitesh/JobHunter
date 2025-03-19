@@ -3,7 +3,7 @@
         <div class="hero-content">
           <h1>Welcome to Job Hunter</h1>
           <p>Discover the best companies to work for in the U.S. and take the first step towards your dream job!</p>
-          <a routerLink="/companieslist" routerLinkActive="active" class="btn btn-primary">Explore Top Companies</a>
+          <p routerLink="/companieslist" routerLinkActive="active" class="btn btn-primary">Explore Top Companies</p>
         </div>
       </section>
     
@@ -38,12 +38,86 @@
           </div>
         </div>
       </section>
+
+
+
+      <!-- Learning Materials Section -->
+      <section class="learning-materials">
+        <div class="container">
+          <h2 class="section-title">Learning Materials</h2>
+          <p class="section-description">Explore a variety of learning resources to enhance your skills in different tech stacks.</p>
+
+          <div class="tech-cards">
+
+            <!-- Loop through the displayedTechStacks array to display cards -->
+            <div *ngFor="let stack of displayedTechStacks" class="tech-card">
+              <div class="top-tech-card-content">
+                <img [src]="stack.image" [alt]="stack.title" class="tech-image">
+                <h3 class="tech-title">{{ stack.title }}</h3>
+                <p class="tech-description">{{ stack.description }}</p>
+              </div>
+              <a [routerLink]="stack.link" class="learn-more">Learn More</a>
+            </div>
+          </div>
+
+          <!-- Show "View More" button if there are more than 4 items -->
+          <div *ngIf="techStacks.length > 4" class="view-more-container">
+            <h4 (click)="toggleView()" class="view-more-button">
+              {{ showAll ? 'View Less' : 'View More' }}
+            </h4>
+          </div>
+        </div>
+      </section>
+
+      <section class="forums-section">
+        <div class="container">
+          <h2 class="section-title">Discussion Forums</h2>
+          <p class="section-description">Join the conversation and explore topics on various technologies, programming, and more.</p>
+      
+          <div class="forum-posts">
+            <div class="forum-post" *ngFor="let post of forumPosts">
+              <div class="forum-header">
+                <h3 class="forum-title">{{ post.title }}</h3>
+                <span class="forum-author">Posted by: {{ post.author }}</span>
+              </div>
+              <p class="forum-summary">{{ post.summary }}</p>
+              <div class="forum-footer">
+                <button class="btn-reply" (click)="openPost(post.id)">Reply</button>
+                <span class="forum-date">{{ post.date | date: 'short' }}</span>
+              </div>
+            </div>
+          </div>
+      
+          <div class="create-post-container">
+            <button class="btn-create-post" (click)="createPost()">Create New Post</button>
+          </div>
+        </div>
+      </section>
+      
+
+
+      <!-- Job Board Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <!-- Support Team Section -->
+      <div class="footer-section support-team">
+        <h4>Support Team</h4>
+        <p>If you have any questions or need assistance, feel free to reach out to our support team.</p>
+        <p>Email us at: <a href="mailto:jobhuntertechteam@gmail.com">jobhuntertechteam&#64;gmail.com</a></p>
+      </div>
+    </div>
+    <div>
+      <p>&copy; 2024 Job Hunter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
     
-      <footer>
-        <p>&copy; 2024 Job Hunter. All rights reserved.</p>
-      </footer>
+      
     
     
     
 </div>
+
   
