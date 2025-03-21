@@ -36,7 +36,7 @@ const routes: Routes = [
   {path:'registrations',component:RegistrationsComponent,canActivate: [authGuard]},
   {path:'app-portfolio',component:PortfolioComponent,canActivate: [authGuard]},
   {path: 'email-verification-complete', component: EmailVerificationCompleteComponent },
-  { path: 'create-post', component: CreatepostComponent },
+  { path: 'createpost', component: CreatepostComponent },
   { path: 'post/:id', component: ReplypostComponent },
   { path: 'discussionforum', component: DiscussionForumComponent },
   { path: 'webapiconcepts', component: WebApiConceptsComponent },

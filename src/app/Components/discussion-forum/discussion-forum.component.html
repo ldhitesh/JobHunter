@@ -1,6 +1,6 @@
  <section class="forums-section">
   <div class="container">
-    <h2 class="section-title">Discussion Forums</h2>
+    <h2 class="section-title" routerLink="/discussionforum" routerLinkActive="active">Discussion Forums</h2>
     <p class="section-description">Join the conversation and explore topics on various technologies, programming, and more.</p>
 
     <div class="forum-posts">
@@ -8,8 +8,8 @@
         <div class="forum-header">
           <h3 class="forum-title">{{ post.title }}</h3>
           <span class="forum-author">Posted by: {{ post.author }}   
-            <i class="fa fa-edit" (click)="EditPost(post.post_id)"></i>       
-            <i class="fa fa-trash" (click)="deletePost(post.post_id)"></i> 
+            <i *ngIf="post.user_id==authService.email" class="fa fa-edit" (click)="EditPost(post.post_id)"></i>       
+            <i *ngIf="post.user_id==authService.email" class="fa fa-trash" (click)="deletePost(post.post_id)"></i> 
           </span>
         </div>
        
@@ -17,27 +17,20 @@
         <div class="forum-footer">
           <button class="btn-reply" (click)="openPost(post.id)">
             Reply</button>
+            
           <span class="forum-date">{{ post.date | date: 'short' }}</span>
         </div>
       </div>
     </div>
 
-    <div *ngIf="forumPosts.length > 2 && forumPosts.length!=currentdisplayedposts" class="view-more-container">
-      <h4 (click)="this.currentdisplayedposts=this.currentdisplayedposts+1" class="view-more-button">
+    <div *ngIf="forumPosts.length > 2 && forumPosts.length>currentdisplayedposts" class="view-more-container">
+      <h4 (click)="this.currentdisplayedposts=this.currentdisplayedposts+2" class="view-more-button">
         {{ showAllPosts ? 'View Less' : 'View More' }}
       </h4>
     </div>
 
     <!-- Create Post Button -->
-    <div class="btn-create-post" (click)="toggleForm()">Create New Post</div>
-
-    <!-- Create Post Form (shown/hidden based on showForm flag) -->
-    <div *ngIf="showForm" class="modal-overlay">
-      <div class="modal-content">
-        
-        <createpost></createpost> 
-
-      </div>
-    </div>
+    <div  class="btn-create-post" (click)="opencreatepostform()">Create New Post</div>
+    
   </div>
 </section>

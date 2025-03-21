@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
   selector: 'createpost',
@@ -7,35 +9,100 @@ import { Router } from '@angular/router';
   styleUrls: ['./createpost.component.css']
 })
 export class CreatepostComponent {
-  title: string = '';
-  author: string = '';
-  summary: string = '';
 
-  @Output() postCreated = new EventEmitter<any>();  // Emit new post to the parent component
+  showModal = true; 
+  @Input() postCreated = false;  // Emit new post to the parent component
 
-  constructor(private router: Router) {}
+  constructor(  
+                private router: Router,private http:HttpClient,
+                private authService:AuthService,
+                private activatedroute:ActivatedRoute
+                
+              ) {
 
+                
+              }
+    updatepostdata:any
+    crudoperation:any
+    buttonName:any="Create Post"
+    formtitle:any="Create a Post"
+    prevUrl:any;
+
+   newPost:any = {
+                  title: '',
+                  author: this.authService.username,
+                  summary: '',
+                  posted_date: new Date(),
+                  user_id:this.authService.email
+                }
+
+  ngOnInit(): void {
+
+    this.activatedroute.queryParams.subscribe(params => {
+   
+      if (params['postdata']) {
+        if (params['postdata']) {
+          this.updatepostdata = JSON.parse(params['postdata']); 
+          this.newPost.title=this.updatepostdata.title;
+          this.newPost.summary=this.updatepostdata.summary;
+          this.newPost.author=this.updatepostdata.author;
+          this.newPost.user_id=this.updatepostdata.user_id;
+          this.newPost.posted_date=new Date();
+        }
+      } 
+      if(params['operation']){
+        this.crudoperation=params['operation'];
+      }         
+      if(this.crudoperation=="Edit"){
+        this.buttonName="Update Post";
+        this.formtitle="Update a Post"
+      }
+      if(params['prevUrl']){
+        this.prevUrl=params['prevUrl']
+      }
+    });
+  }
+  
   createPost(): void {
-    if (this.title && this.author && this.summary) {
-      const newPost = {
-        id:'' ,  // Generate a unique ID based on timestamp
-        title: this.title,
-        author: this.author,
-        summary: this.summary,
-        date: new Date(),
-        replies: []  // Initially no replies
-      };
 
-      // Emit the new post to the parent component
-      this.postCreated.emit(newPost);
+    if(this.crudoperation=="Edit"){
+      this.http.patch(`http://localhost:80/api/discussion/updatepost/${this.updatepostdata.post_id}`,this.newPost).subscribe({
+        next:(response:any) => {
+        this.router.navigate([this.prevUrl]); // Navigate after update
+      },
+      error:(err:any) => {      
+        const errorMessage = err.error?.message || 'An unexpected error occurred.';
+        alert(errorMessage);   
+                this.router.navigate([this.prevUrl]); // Navigate after update
 
-      // Reset the form fields after creating the post
-      this.title = '';
-      this.author = '';
-      this.summary = '';
+      }
+    });
+    }
+    else{
+      if (this.newPost.title && this.newPost.author && this.newPost.summary) {
+        this.buttonName="Create Post"
 
-      // Navigate back to the forum posts page
-      this.router.navigate(['/home']);
+        this.http.post('http://localhost:80/api/discussion/addpost',this.newPost).subscribe({
+          next:(response:any)=>{
+            this.postCreated=false;
+            this.router.navigate([this.prevUrl]);
+            },
+          error:(err:any)=>{       
+            const errorMessage = err.error?.message || 'An unexpected error occurred.';
+            alert(errorMessage);   
+            this.router.navigate([this.prevUrl]); 
+          }
+        })
+
+    }
+    }
+  }
+
+  closeModal(event: MouseEvent): void {
+    const modalContent = document.querySelector('.modal-content');
+    if (modalContent && !modalContent.contains(event.target as Node)) {
+      this.showModal = false;
+      this.router.navigate([this.prevUrl]);
     }
   }
 }

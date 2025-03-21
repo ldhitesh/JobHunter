@@ -28,7 +28,8 @@ export class AuthService {
 
   public userRole:any;
   public profilepicture: any;
-
+  public email:any;
+  public username:any;
 
   private configureOAuth() {
     this.oauthService.configure({
@@ -53,6 +54,8 @@ export class AuthService {
             this.verifyjobhunterdatabase(claims['email']);
           }
           else{
+            this.email=claims['email'];
+            this.username=claims['name'];
             this.userRole=claims['jobhunter-roles'];
             this.profilepicture=claims['picture'];
             this.loginstatuscheckservice.login();

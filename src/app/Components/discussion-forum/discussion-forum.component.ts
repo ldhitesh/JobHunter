@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
 
 
@@ -12,19 +12,24 @@ import { AuthService } from 'src/app/Services/auth.service';
 })
 export class DiscussionForumComponent {
   forumPosts:any = [];
-  showForm: boolean = false;
   showAllPosts = false;
-  currentdisplayedposts=1;
+  currentdisplayedposts=2;
 
     constructor(private http:HttpClient,private router:Router,
-                private authService:AuthService){
-          
-                  this.fetchposts();
+                public authService:AuthService,
+                private activatedRoute:ActivatedRoute){                  
                 }
 
-  toggleForm(): void {
-    this.showForm = !this.showForm;
+    
+  ngOnInit(): void {
+    this.fetchposts();
   }
+
+  opencreatepostform(): void {
+      this.router.navigate(['/createpost'],{queryParams:{
+        prevUrl:this.router.url }
+      });
+    }
 
   fetchposts(){
     this.http.get('http://localhost:80/api/discussion/getposts').subscribe({
@@ -47,9 +52,28 @@ export class DiscussionForumComponent {
   }
    // Delete post by id
   deletePost(postId: any): void {
-    this.forumPosts = this.forumPosts.filter((post :any)=> post.post_id !== postId);
+    this.http.delete(`http://localhost:80/api/discussion/deletepost/${postId}`).subscribe({
+      next:(response:any) => {
+        this.forumPosts = this.forumPosts.filter((post :any) => post.post_id  !== postId);
+
+        this.router.navigate([this.router.url],{queryParams:{
+          prevUrl:this.router.url }
+        }); 
+    },
+    error:(err:any) => {
+      const errorMessage = err.error?.message || 'An unexpected error occurred.';
+      alert(errorMessage);   
+      this.router.navigate(['/discussionforum']);     
+    }
+  });
+  
   }
+
   EditPost(postId: any): void {
-    let post = this.forumPosts.find((post :any) => post.post_id  == postId);
+    let post =this.forumPosts.find((x:any)=>x.post_id=postId);    
+    this.router.navigate(['/createpost'],{queryParams:{
+      postdata:JSON.stringify(post),operation:"Edit",
+      prevUrl:this.router.url }})
   }
+
 }

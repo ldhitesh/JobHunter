@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Output, Renderer2, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
 import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-check-service.service';
 import { NotificationServiceService } from 'src/app/Services/notification-service.service';
@@ -21,7 +21,8 @@ export class HomeComponent {
   constructor(private loginstatuscheckservice:LoginStatusCheckServiceService,
               private router:Router,private renderer: Renderer2,
               private notificationService: NotificationServiceService,
-              public authService:AuthService
+              public authService:AuthService,
+              private activatedRoute:ActivatedRoute
   ){
     this.profilepicture=authService.profilepicture;
   }
@@ -31,6 +32,7 @@ export class HomeComponent {
     this.renderer.removeClass(this.navbarCollapse.nativeElement, 'show');
   }
   ngOnInit(): void {    
+    
     this.loginstatuscheckservice.isLoggedIn.subscribe(state => {
       this.IsloggedIn = state;
     });
@@ -69,5 +71,8 @@ export class HomeComponent {
   closeModal(){
     this.notificationMessage='';
   }
+
+
+
 
 }
