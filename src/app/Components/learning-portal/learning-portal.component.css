@@ -1,0 +1,207 @@
+
+
+/* Learning Materials Section */
+.learning-materials {
+    background-color: #ffffff;
+    padding: 100px 0;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #2c3e50;
+  }
+  
+  .section-description {
+    text-align: center;
+    font-size: 18px;
+    color: #7f8c8d;
+    margin-bottom: 40px;
+  }
+  
+  /* Tech Cards Layout */
+  .tech-cards {
+    display: flex;
+    justify-content:flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  
+  .tech-card {
+    background-color: #ecf0f1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 270px;
+    height: 300px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    text-align: center;  
+    padding: 20px;
+  }
+  
+  .top-tech-card-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: auto;  /* Pushes the button to the bottom */
+    align-self: flex-end; 
+  }
+  
+  .tech-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .tech-image {
+    width: 100px;
+    height: 90px;
+    object-fit:fill;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    top: 100;
+  }
+  
+  .tech-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 5px;
+  }
+  
+  .tech-description {
+    font-size: 14px;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+  }
+  
+  .learn-more {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+  
+  .learn-more:hover {
+    background-color: #2980b9;
+  }
+  
+  
+  
+  /* View More Button */
+  .view-more-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .view-more-button {
+    color: rgb(26, 88, 143);
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .view-more-button:hover {
+    color: #082e48;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 1024px) {
+    .tech-card {
+      width: 48%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .tech-cards {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .tech-card {
+      width: 80%;
+      margin-bottom: 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .section-title {
+      font-size: 28px;
+    }
+  
+    .tech-card {
+      width: 100%;
+    }
+  }
+  
+  
+  /* ----------------------------------Forums---------------------------------------------- */
+  
+  
+  /* Position the tooltip container above the link */
+  .help-detail {
+    position: absolute;
+    background-color: #333;
+    color: white;
+    border-radius: 5px;
+    padding-top: 13px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    bottom: 50px; /* Adjust this value to control the position */
+    left: 0;
+    width: 220px; /* Adjust the width as needed */
+    z-index: 10;
+    font-size: 14px;
+    line-height: 1.5;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+  }
+  
+  /* .help-detail::after {
+    content: '';
+    position: absolute;
+    top: 100%; 
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent; 
+  }
+  */
+  .help-detail.ng-leave {
+    opacity: 0;
+    visibility: hidden;
+  } 
+  
+  /* Styling for the Learn More link */
+  .learn-more {
+    position: relative; /* Needed for positioning the tooltip relative to this link */
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .learn-more:hover {
+    color: #0056b3; /* Change color when hovering over the link */
+  }
+  
+  
+  

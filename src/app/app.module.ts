@@ -28,6 +28,25 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EmailNotificationComponent } from './Components/email-notification/email-notification.component';
 import { EmailVerificationCompleteComponent } from './Components/email-verification-complete/email-verification-complete.component';  // <-- Import animations module
 import { OAuthModule } from 'angular-oauth2-oidc';
+import { EcsFargateComponent } from './Learning/ecs-fargate/ecs-fargate.component';
+import { WebApiConceptsComponent } from './Learning/web-api-concepts/web-api-concepts.component';
+import { SystemDesignComponent } from './Learning/system-design/system-design.component';
+import { ReactComponent } from './Learning/react/react.component';
+import { AngularComponent } from './Learning/angular/angular.component';
+import { LeetcodeComponent } from './Learning/leetcode/leetcode.component';
+import { Auth0Component } from './Learning/auth0/auth0.component';
+import { GmailApiComponent } from './Learning/gmail-api/gmail-api.component';
+import { MySqlComponent } from './Learning/my-sql/my-sql.component';
+import { DiscussionForumComponent } from './Components/discussion-forum/discussion-forum.component';
+import { LearningPortalComponent } from './Components/learning-portal/learning-portal.component';
+import { CreatepostComponent } from './Components/createpost/createpost.component';
+import { ReplypostComponent } from './Components/replypost/replypost.component';
+import { WebapidashboardComponent } from './Learning/webapidashboard/webapidashboard.component';
+import { AngulardashboardComponent } from './Learning/angulardashboard/angulardashboard.component';
+import { AwsdashboardComponent } from './Learning/awsdashboard/awsdashboard.component';
+import { MysqldashboardComponent } from './Learning/mysqldashboard/mysqldashboard.component';
+import { ReactdashboardComponent } from './Learning/reactdashboard/reactdashboard.component';
+import { NavbarComponent } from './Components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -52,8 +71,27 @@ import { OAuthModule } from 'angular-oauth2-oidc';
     MaskEmailPipe,
     CheckoutComponent,
     EmailNotificationComponent,
-    EmailVerificationCompleteComponent
-  ],
+    EmailVerificationCompleteComponent,
+    EcsFargateComponent,
+    WebApiConceptsComponent,
+    SystemDesignComponent,
+    ReactComponent,
+    AngularComponent,
+    LeetcodeComponent,
+    Auth0Component,
+    GmailApiComponent,
+    MySqlComponent,
+    DiscussionForumComponent,
+    LearningPortalComponent,
+    CreatepostComponent,
+    ReplypostComponent,
+    WebapidashboardComponent,
+    AngulardashboardComponent,
+    AwsdashboardComponent,
+    MysqldashboardComponent,
+    ReactdashboardComponent,
+    NavbarComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

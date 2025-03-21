@@ -1,0 +1,39 @@
+<section class="learning-materials">
+    <div class="container">
+      <h2 class="section-title">Learning Materials</h2>
+      <p class="section-description">Explore a variety of learning resources to enhance your skills in different tech stacks.</p>
+
+      <div class="tech-cards">
+
+        <!-- Loop through the displayedTechStacks array to display cards -->
+        <div *ngFor="let stack of displayedTechStacks;let index = index" class="tech-card">
+            <div class="top-tech-card-content">
+              <img [src]="stack.image" [alt]="stack.title" class="tech-image">
+              <h3 class="tech-title">{{ stack.title }}</h3>
+              <p class="tech-description">{{ stack.description }}</p>
+            </div>
+            <div>
+              <p  [class.disabled]="!stack.link" [routerLink]="stack.link" 
+              class="learn-more"
+              (mouseenter)="showHelp = index " 
+              (mouseleave)="showHelp = -10">
+              Learn More
+            </p>
+            </div>
+            
+        
+          <!-- Hover div -->
+          <div *ngIf="index==showHelp && !stack.link" class="help-detail">
+            <p>Sorry! No Content Yet! </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Show "View More" button if there are more than 4 items -->
+      <div *ngIf="techStacks.length > 4" class="view-more-container">
+        <h4 (click)="toggleView()" class="view-more-button">
+          {{ showAll ? 'View Less' : 'View More' }}
+        </h4>
+      </div>
+    </div>
+  </section>

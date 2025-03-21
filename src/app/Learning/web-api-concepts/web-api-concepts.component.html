@@ -1,0 +1,1540 @@
+
+
+<div class="webapi-container">
+  <section class="container card">
+    <!-- Step 1 -->
+      <h2>Step 1: Create a New Web API Project</h2>
+      <pre><code>dotnet new webApi -n &lt;NameOfApi&gt; -no-openapi -controllers</code></pre>
+  
+      <ul>
+        <li><strong>-n &lt;NameOfApi&gt;:</strong> Specifies the project name.</li>
+        <li><strong>-no-openapi:</strong> Prevents automatic Swagger/OpenAPI scaffold.</li>
+        <li><strong>-controllers:</strong> Adds a default controller.</li>
+      </ul>
+    <br>  
+    <!-- Step 2 -->
+      <h2>Step 2: Configure .csproj File</h2>
+      <p><code>&lt;Project&gt;</code> tag defines the SDK:</p>
+      <pre><code>&lt;Project Sdk="Microsoft.NET.Sdk.Web"&gt;</code></pre>
+  
+      <p>Package references:</p>
+      <pre><code>&lt;ItemGroup&gt;
+    &lt;PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.7" /&gt;
+    &lt;PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" /&gt;
+  &lt;/ItemGroup&gt;</code></pre>
+  
+      <p>Framework and build settings:</p>
+      <pre><code>&lt;PropertyGroup&gt;
+    &lt;TargetFramework&gt;net8.0&lt;/TargetFramework&gt;
+    &lt;Nullable&gt;enable&lt;/Nullable&gt;
+    &lt;ImplicitUsings&gt;enable&lt;/ImplicitUsings&gt;
+  &lt;/PropertyGroup&gt;</code></pre>
+  <br>
+    <!-- Step 3 -->
+      <h2>Step 3: LaunchSettings.json</h2>
+      <p><strong>$schema:</strong> Provides schema validation and IntelliSense support for editors.</p>
+      <pre><code>"$schema": "http://json.schemastore.org/launchsettings.json"</code></pre>
+  
+      <p>This file defines different profiles for running the application (HTTP, HTTPS, IIS Express).</p>
+  
+      <pre><code>"profiles": &#123;
+        "http": &#123;
+          "commandName": "Project",
+          "dotnetRunMessages": true,
+          "launchBrowser": true,
+          "launchUrl": "swagger",
+          "applicationUrl": "http://localhost:5144",
+          "environmentVariables": &#123;
+            "ASPNETCORE_ENVIRONMENT": "Development"
+          &#125;
+        &#125;
+      &#125;</code></pre>
+  
+      <p><strong>SSL Port Explanation:</strong></p>
+      <p>When using IIS Express, you can specify a custom <code>sslPort</code> (e.g., <code>44311</code>) to avoid conflicts and allow secure (HTTPS) connections during development.</p>
+
+      <br>
+
+    <!-- Step 4 -->
+        <h2>Step 4: Program.cs Overview</h2>
+        <p>This file defines the HTTP request pipeline and registers services (like controllers) to the dependency injection container.</p>
+    
+        <pre><code>// Program.cs
+    var builder = WebApplication.CreateBuilder(args);
+    builder.Services.AddControllers();
+    
+    var app = builder.Build();
+    app.UseHttpsRedirection();
+    app.UseAuthorization();
+    app.MapControllers();
+    app.Run();
+    </code></pre>
+    
+        <ul>
+        <li><code>builder.Services.AddControllers()</code>: Registers controllers to handle HTTP requests.</li>
+        <li><code>app.Run()</code>: Starts listening to incoming HTTP requests on the configured port(s).</li>
+        <li><code>app.UseHttpsRedirection()</code>: Automatically redirects HTTP traffic to HTTPS for secure communication.</li>
+        <li><code>app.UseAuthorization()</code>: Adds authorization middleware to protect your routes based on defined policies.</li>
+        </ul>
+    
+        <p><strong>Summary:</strong> The Program.cs file defines how your ASP.NET Core Web API is configured to handle requests and enforce security.</p>
+  
+  </section>
+
+  <br>
+
+  <section class="container">
+     
+        <div class="card">
+            <h1>Controller Basics & appsettings.json</h1>
+            <br>
+            <h3>Controller Attributes:</h3>
+            <ul>
+            <li><code>[HttpGet]</code>, <code>[HttpPost]</code>, <code>[HttpPut]</code>, <code>[HttpDelete]</code>, <code>[HttpPatch]</code>: Action-specific attributes that define the type of HTTP request the method will handle.</li>
+            <li><code>[Route("example")]</code>: Maps incoming requests to specific controller actions based on URL path.</li>
+            <li><code>[ApiController]</code> + <code>[Route("[controller]")]</code>: 
+                <ul>
+                <li>Defines the class as an API controller.</li>
+                <li><code>[Route("[controller]")]</code> automatically resolves to the controller’s name (e.g., "UserController" → /user).</li>
+                </ul>
+            </li>
+            </ul>
+        
+            <h3>appsettings.json</h3>
+            <ul>
+            <li>Defines development and production configurations.</li>
+            <li>Stores connection strings needed to connect your application to external services like SQL Server, PostgreSQL, etc.</li>
+            </ul>
+        
+            <pre><code>&#123;
+            "ConnectionStrings": &#123;
+                "DefaultConnection": "Server=localhost;Database=AppDb;Trusted_Connection=True;"
+            &#125;,
+            "Logging": &#123;
+                "LogLevel": &#123;
+                "Default": "Information",
+                "Microsoft.AspNetCore": "Warning"
+                &#125;
+            &#125;,
+            "AllowedHosts": "*"
+            &#125;</code></pre>
+            
+        </div>  
+
+  </section>
+
+  <section class="container">
+        <div class="card">
+            <h1>Creating a Service in ASP.NET Core</h1>
+            <br>
+            <ol>
+            <li>Create a <code>Service.cs</code> file for your service class.</li>
+            <li>Declare the service inside your controller:
+                <pre><code>private readonly &lt;ServiceName&gt; _service = new(_);</code></pre>
+            </li>
+            <li>Inject the service using constructor injection.</li>
+            <li>Register the service in <code>Program.cs</code>:
+                <pre><code>builder.Services.AddScoped&lt;ServiceName&gt;();</code></pre>
+                If the service implements an interface:
+                <pre><code>builder.Services.AddScoped&lt;IServiceName, ServiceName&gt;();</code></pre>
+            </li>
+            </ol>
+        
+            <h3>Service Lifetimes</h3>
+            <ul>
+            <li><strong>AddSingleton:</strong> Shared across the entire application. Best for shared or static data like config/loggers.</li>
+            <li><strong>AddScoped:</strong> One instance per HTTP request. Best for database contexts like <code>DbContext</code>.</li>
+            <li><strong>AddTransient:</strong> A new instance is created every time the service is requested. Best for lightweight services.</li>
+            </ul>
+        
+            <h3>Comparison:</h3>
+            <table>
+            <thead>
+                <tr>
+                <th>Type</th>
+                <th>Scope</th>
+                <th>Example Usage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>Singleton</td>
+                <td>App-wide</td>
+                <td>Logging, Configurations</td>
+                </tr>
+                <tr>
+                <td>Scoped</td>
+                <td>Per HTTP request</td>
+                <td>EF DbContext, Session</td>
+                </tr>
+                <tr>
+                <td>Transient</td>
+                <td>Each Injection</td>
+                <td>Stateless utilities, helpers</td>
+                </tr>
+            </tbody>
+            </table>
+        
+            <h3>Notes:</h3>
+            <ul>
+            <li>Controllers are the entry point for client-server communication.</li>
+            <li><code>[HttpGet("example")]</code> is equivalent to <code>[HttpGet] [Route("example")]</code>.</li>
+            <li><strong>Query Parameters</strong>: Passed in the URL as <code>?key=value</code>.<br>Example: <code>get/weather?max=23</code></li>
+            <li><strong>Route Parameters</strong>: Passed directly in the route:<br>e.g., <code>[Route(&#123;take&#125;/example)]</code> matches <code>get/weather/24/example?max=23</code>.</li>
+            </ul>
+        </div>
+        
+  </section>
+
+  <section class="container">
+    <!-- Step 8 -->
+<div class="card">
+    <h1>HTTP Status Codes</h1>
+    <br>
+    <p>HTTP status codes are standardized responses from a server to a client, indicating the outcome of the request. They are categorized into five groups:</p>
+  
+    <h3>1xx: Informational</h3>
+    <ul>
+      <li><strong>100 Continue:</strong> The client may continue with its request.</li>
+      <li><strong>101 Switching Protocols:</strong> The server is switching to the protocol requested.</li>
+    </ul>
+  
+    <h3>2xx: Success</h3>
+    <ul>
+      <li><strong>200 OK:</strong> The request succeeded, and the server returned the expected data.</li>
+      <li><strong>201 Created:</strong> The request succeeded, and a new resource was created (used with POST).</li>
+      <li><strong>204 No Content:</strong> The request succeeded, but there is no response body (often used with DELETE).</li>
+    </ul>
+  
+    <h3>3xx: Redirection</h3>
+    <ul>
+      <li><strong>301 Moved Permanently:</strong> The resource has been moved to a new URL permanently.</li>
+      <li><strong>302 Found:</strong> Temporary redirect to another URL.</li>
+      <li><strong>304 Not Modified:</strong> Cached resource is still valid, no need to resend data.</li>
+    </ul>
+  
+    <h3>4xx: Client Errors</h3>
+    <ul>
+      <li><strong>400 Bad Request:</strong> Client-side error (e.g., invalid syntax).</li>
+      <li><strong>401 Unauthorized:</strong> Authentication is required.</li>
+      <li><strong>403 Forbidden:</strong> The request is valid but access is denied.</li>
+      <li><strong>404 Not Found:</strong> The requested resource is missing on the server.</li>
+    </ul>
+  
+    <h3>5xx: Server Errors</h3>
+    <ul>
+      <li><strong>500 Internal Server Error:</strong> Generic server-side issue.</li>
+      <li><strong>501 Not Implemented:</strong> The requested functionality is not supported by the server.</li>
+      <li><strong>503 Service Unavailable:</strong> The server is temporarily overloaded or under maintenance.</li>
+    </ul>
+  
+    <h3>Notes:</h3>
+    <ul>
+      <li>Use <code>Response.StatusCode = 400;</code> to manually set HTTP status codes inside controllers.</li>
+      <li>Alternatively, use built-in methods like <code>Ok()</code>, <code>NotFound()</code>, <code>BadRequest()</code>, etc., which accept objects as parameters.</li>
+      <li>These methods are part of the <code>IActionResult</code> interface in ASP.NET Core.</li>
+    </ul>
+  </div>
+  
+  </section>
+
+  <section class="container">
+    <!-- Section -->
+        <div class="card">
+            <h1>Basic Exception Handling using UseExceptionHandler</h1>
+        
+            <p>This is a simple way to handle exceptions globally in ASP.NET Core.</p>
+        
+            <h3>Configure <code>UseExceptionHandler</code> in Program.cs</h3>
+            <pre><code>var builder = WebApplication.CreateBuilder(args);
+        var app = builder.Build();
+        
+        if (!app.Environment.IsDevelopment())
+        &#123;
+            app.UseExceptionHandler("/error");
+        &#125;
+        
+        app.MapGet("/", () =&gt; throw new Exception("Something went wrong!"));
+        app.MapGet("/error", () =&gt; Results.Problem("An error occurred. Please try again later."));
+        
+        app.Run();
+        </code></pre>
+        
+            <p><strong>Note:</strong> In production, this prevents stack traces from being exposed and returns a generic error message instead.</p>
+        
+            <h1>Global Error Handling Middleware</h1>
+            <p>For handling HTTP context and JSON serialization, include:</p>
+            <pre><code>using System;
+        using System.Net;
+        using System.Threading.Tasks;
+        using System.Text.Json;
+        using Microsoft.AspNetCore.Http;
+        </code></pre>
+        
+            <h3>Create a Middleware Class:</h3>
+            <pre><code>public class ErrorHandlerMiddleware
+        &#123;
+            private readonly RequestDelegate _next;
+        
+            public ErrorHandlerMiddleware(RequestDelegate next)
+            &#123;
+                _next = next;
+            &#125;
+        
+            public async Task Invoke(HttpContext context)
+            &#123;
+                try
+                &#123;
+                    await _next(context);
+                &#125;
+                catch (Exception e)
+                &#123;
+                    await Handle(context, e);
+                &#125;
+            &#125;
+        
+            public static Task Handle(HttpContext context, Exception exception)
+            &#123;
+                context.Response.ContentType = "application/json";
+                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+        
+                var response = new
+                &#123;
+                    StatusCode = context.Response.StatusCode,
+                    Message = "Hitesh throwed custom middle global error",
+                    DetailedError = exception.Message
+                &#125;;
+        
+                var jsonResponse = JsonSerializer.Serialize(response);
+                return context.Response.WriteAsync(jsonResponse);
+            &#125;
+        &#125;
+        </code></pre>
+        
+            <h3>Register Middleware in Program.cs</h3>
+            <pre><code>app.UseMiddleware&lt;ErrorHandlerMiddleware&gt;();</code></pre>
+        
+            <h3>Throw Custom Exceptions in Controllers</h3>
+            <pre><code>[HttpGet]
+        public async Task&lt;IActionResult&gt; GetCompanies()
+        &#123;
+            if (condition)
+            &#123;
+                // some task
+            &#125;
+            else
+            &#123;
+                throw new Exception("This is a test exception!");
+            &#125;
+        &#125;
+        </code></pre>
+        </div>
+  
+
+  </section>
+
+  <section>
+    <section class="container">
+        <div class="card">
+          <h1>Building Custom Exceptions in Angular</h1>
+      
+          <p>This guide demonstrates how to build and handle custom exceptions globally in an Angular application.</p>
+      
+          <div class="steps">
+            <h2>1. Create a Basic Exception Class</h2>
+            <p>Create a basic exception class that inherits from the built-in exception class.</p>
+            <pre><code>
+              public class BasicException : Exception
+              &#123;
+                  public int StatusCode &#123; get; &#125;
+      
+                  public BasicException(string message, int statusCode = 400) : base(message)
+                  &#123;
+                      StatusCode = statusCode;
+                  &#125;
+              &#125;
+            </code></pre>
+      
+            <h2>2. Create Custom Exceptions</h2>
+            <p>Next, create custom exceptions as needed by inheriting from the `BasicException` class.</p>
+            <pre><code>
+              namespace JobHunterApi.CustomExceptions
+              &#123;
+                  public class HunterNotFoundException : BasicException
+                  &#123;
+                      public HunterNotFoundException(string message) : base(message, 404) &#123; &#125;
+                  &#125;
+      
+                  public class HunterValidationException : BasicException
+                  &#123;
+                      public HunterValidationException(string message) : base(message, 400) &#125;
+                  &#125;
+      
+                  public class HunterUnauthorizedException : BasicException
+                  &#123;
+                      public HunterUnauthorizedException(string message) : base(message, 401) &#125;
+                  &#125;
+              &#125;
+            </code></pre>
+      
+            <h2>3. Create Middleware to Handle Global Errors</h2>
+            <p>Create middleware to catch exceptions globally and return a JSON response.</p>
+            <pre><code>
+              public class CustomErrorExceptionHandlerMiddleware
+              &#123;
+                  private readonly RequestDelegate _next;
+      
+                  public CustomErrorExceptionHandlerMiddleware(RequestDelegate next)
+                  &#123;
+                      _next = next;
+                  &#125;
+      
+                  public async Task Invoke(HttpContext context)
+                  &#123;
+                      try
+                      &#123;
+                          await _next(context);
+                      &#125;
+                      catch (Exception ex)
+                      &#123;
+                          await HandleExceptionAsync(context, ex);
+                      &#125;
+                  &#125;
+      
+                  private static Task HandleExceptionAsync(HttpContext context, Exception exception)
+                  &#123;
+                      context.Response.ContentType = "application/json";
+                      int statusCode = (int)HttpStatusCode.InternalServerError;
+                      string message = "Custom Exception Errors";
+      
+                      if (exception is BasicException appEx)
+                      &#123;
+                          statusCode = appEx.StatusCode;
+                          message = appEx.Message;
+                      &#125;
+      
+                      context.Response.StatusCode = statusCode;
+      
+                      var response = new
+                      &#123;
+                          StatusCode = statusCode,
+                          Message = message
+                      &#125;;
+      
+                      var jsonResponse = JsonSerializer.Serialize(response);
+                      return context.Response.WriteAsync(jsonResponse);
+                  &#125;
+              &#125;
+            </code></pre>
+      
+            <h2>4. Inject Middleware in `Program.cs`</h2>
+            <p>Before using the middleware, inject it into the `Program.cs` file.</p>
+            <pre><code>
+              app.UseMiddleware&lt;CustomErrorExceptionHandlerMiddleware&gt;;
+            </code></pre>
+      
+            <h2>5. Use Custom Exceptions in Your Controllers</h2>
+            <p>Throw the custom exceptions wherever needed in your controllers.</p>
+            <pre><code>
+              [HttpGet("getmycompanies/&#123;username&#123;")]
+              public async Task&lt;IActionResult&gt; GetMyCompanies(string username)
+              &#123;
+                  var mycompanies = await _context.UserCompaniesTracker
+                                                  .Where(data => data.Username == username)
+                                                  .ToListAsync();
+      
+                  if (mycompanies.Length == 0)
+                  &#123;
+                      throw new HunterNotFoundException("Companies not found");
+                  &#125;
+      
+                  return Ok(mycompanies);
+              &#125;
+            </code></pre>
+      
+            <h3>Note:</h3>
+            <ul>
+              <li>Don&apos;t forget to import the custom exceptions when throwing them in controllers.</li>
+              <li>Also, import them in the middleware.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      
+  </section>
+
+  <section class="container">
+    <div class="card">
+      <h1>Caching in .NET Core</h1>
+      <br>
+      <h2>Using IMemoryCache</h2>
+      <p>To use the <code>IMemoryCache</code>, follow these steps:</p>
+  
+      <h3>Step 1: Register IMemoryCache in Program.cs</h3>
+      <pre><code>
+        builder.Services.AddMemoryCache();
+      </code></pre>
+  
+      <h3>Step 2: Inject IMemoryCache into Your Controller</h3>
+      <pre><code>
+        public class CompaniesController : ControllerBase
+        &#123;
+            private readonly CompaniesDbContext _context;
+            private readonly IMemoryCache _memorycache;
+            private readonly string key = "registeredemails";
+  
+            public CompaniesController(
+              CompaniesDbContext context,
+              IMemoryCache memorycache
+            )
+            &#123;
+                _context = context;
+                _memorycache = memorycache;
+            &#125;
+        &#125;
+      </code></pre>
+  
+      <h3>Step 3: Use it in your action method to reduce the response time</h3>
+      <pre><code>
+        public async Task&lt;IActionResult&gt; GetCompanies()
+        &#123;
+            if (!_memorycache.TryGetValue(key, out List&lt;CompanyModel&gt; companieslist))
+            &#123;
+                companieslist = await _context.Companies.ToListAsync();
+  
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(10))
+                    .SetSlidingExpiration(TimeSpan.FromMinutes(5));
+  
+                _memorycache.Set(key, companieslist, cacheOptions);
+  
+                return Ok(
+                    new &#123;
+                        Source = "Database",
+                        Data = companieslist
+                        &#123;);
+            &#125;
+  
+            return Ok(new &#123; Source = "Cache", Data = companieslist &#123;);
+        &#125;
+      </code></pre>
+  
+      <h3>When to Use IMemoryCache?</h3>
+      <ul>
+        <li><strong>Good for:</strong></li>
+        <ul>
+          <li>Caching frequently used data (e.g., product lists, configuration settings).</li>
+          <li>Reducing database queries for performance improvement.</li>
+          <li>Single-server applications (not distributed).</li>
+        </ul>
+        <li><strong>Not good for:</strong></li>
+        <ul>
+          <li>Multi-server applications (use Redis or IDistributedCache instead).</li>
+          <li>Large datasets (memory-intensive).</li>
+        </ul>
+      </ul>
+  
+      <h2>Using ResponseCaching</h2>
+      <p>To use <code>ResponseCaching</code>, follow these steps:</p>
+  
+      <h3>Step 1: Add and Use ResponseCaching in Program.cs</h3>
+      <pre><code>
+        builder.Services.AddResponseCaching();
+        app.UseResponseCaching();
+      </code></pre>
+  
+      <h3>Step 2: Add ResponseCache decorator into Your Controller</h3>
+      <pre><code>
+        [HttpGet("getcompanyreferences")]
+        [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]
+        public async Task&lt;IActionResult&gt; GetCompanyReferences()
+        &#123;
+            var references = await _context.CompanyReferences
+                                    .OrderBy(c => c.Organization)
+                                    .Select(c => new &#123; c.Organization, c.Name, c.Email &#123;)
+                                    .ToListAsync();
+            return Ok(references);
+        &#125;
+      </code></pre>
+  
+      <h3>Cache Control Explanation:</h3>
+      <ul>
+        <li><strong>Duration = 60</strong> → Cache the response for 60 seconds.</li>
+        <li><strong>Location = ResponseCacheLocation.Any</strong> → Cache on client and server.</li>
+        <li><strong>NoStore = false</strong> → Allows caching (set true to disable caching).</li>
+        <li><strong>Location = ResponseCacheLocation.Client</strong> → Cache only on the client.</li>
+        <li><strong>private, max-age=60</strong> → Caches response only in the browser.</li>
+      </ul>
+  
+      <h3>Server-Side Caching (s-maxage)</h3>
+      <p><strong>s-maxage=120</strong> → Tells the server to cache the response for 120 seconds. The server will not process the request again until 120 seconds have passed.</p>
+  
+      <h3>Client-Side Caching (max-age)</h3>
+      <p><strong>max-age=60</strong> → Tells the client (browser) to cache the response for 60 seconds. The browser will return the cached response without contacting the server.</p>
+  
+      <h3>When to Use ResponseCaching?</h3>
+      <ul>
+        <li><strong>Good for:</strong></li>
+        <ul>
+          <li>Static data (e.g., product lists, configurations).</li>
+          <li>Reducing repeated database calls for identical requests.</li>
+          <li>Improving response times for public data.</li>
+        </ul>
+        <li><strong>Not good for:</strong></li>
+        <ul>
+          <li>Dynamic data (e.g., user profiles, stock prices).</li>
+          <li>Authentication-based responses.</li>
+          <li>Multi-server applications (use distributed caching instead).</li>
+        </ul>
+      </ul>
+    </div>
+  </section>
+  
+  <section class="container">
+    <div class="card">
+      <h1>Custom Validation Attributes in C#</h1>
+  
+      <p>This guide demonstrates how to create and use custom validation attributes in C#.</p>
+  
+      <h2>Step 1: Create the MinWordsAttribute Class</h2>
+      <p>Inherit from <code>ValidationAttribute</code> and override the method <code>IsValid()</code>, which is of return type <code>ValidationResult</code>.</p>
+      <pre><code>
+        public class MinWords : ValidationAttribute
+        &#123;
+            private readonly int _minWords;
+            public MinWords(int minWords)
+            &#123;
+                _minWords = minWords;
+            &#125;
+  
+            protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+            &#123;
+                if (value == null || string.IsNullOrWhiteSpace(value.ToString()))
+                &#123;
+                    return new ValidationResult("Field cannot be empty.");
+                &#125;
+  
+                var wordCount = value.ToString().Split(' ', StringSplitOptions.RemoveEmptyEntries).Length;
+                return wordCount &gt;= _minWords
+                    ? ValidationResult.Success
+                    : new ValidationResult($"The field must contain at least &#123;_minWords&#125; words.");
+            &#125;
+        &#125;
+      </code></pre>
+  
+      <h2>Step 2: Use the Attribute in a Model</h2>
+      <p>Note: It can only be applied to model objects, not to primitive variables. Here, the validation attribute <code>MinWords</code> is added to the field <code>UserName</code>.</p>
+      <pre><code>
+        public class User : IdentityUser
+        &#123;
+            [MinWords(2)] 
+            public string UserName &#123; get; set; &#125; = string.Empty;
+            public string Password &#123; get; set; &#125; = string.Empty;
+        &#125;
+      </code></pre>
+  
+      <h2>Step 3: Use it in the Controller</h2>
+      <p>Note: To use <code>ModelState.IsValid</code>, you need to import <code>Microsoft.AspNetCore.Mvc</code>.</p>
+      <pre><code>
+        [HttpPost("test")]
+        public async Task&lt;IActionResult&gt; CreateCompany([FromBody] User user)
+        &#123;
+            if (!ModelState.IsValid)
+            &#123;
+                return BadRequest(new &#123;message = user, ModelState&#125;);
+            &#125;
+            return Ok(user);
+        &#125;
+      </code></pre>
+  
+      <h2>Which One Should You Use?</h2>
+      <p><strong>Data Annotations:</strong> Simple validation like required fields, string length, etc.</p>
+      <p><strong>Custom Validation Attributes:</strong> When you need reusable validation logic (e.g., <code>MinWords</code>).</p>
+      <p><strong>FluentValidation:</strong> Complex validation logic, dependency injection, and scalability.</p>
+    </div>
+  </section>
+  
+
+  <section class="container">
+    <div class="card">
+      <h1>Logging with ILogger in .NET Core</h1>
+  
+      <h2>Step 1: Inject ILogger&lt;T&gt; in a Controller</h2>
+      <pre><code>
+        private readonly ILogger&lt;CompaniesController&gt; _logger;
+  
+        public CompaniesController(ILogger&lt;CompaniesController&gt; logger) // Constructor
+        &#123;
+            _context = context;
+            _logger = logger;
+        &#125;
+      </code></pre>
+  
+      <h2>Step 2: Use ILogger&lt;T&gt; in the Action Methods</h2>
+      <pre><code>
+        public async Task&lt;IActionResult&gt; GetCompanyReferences()
+        &#123;
+            _logger.LogTrace("Hitesh : This is a trace log.");
+            _logger.LogDebug("Hitesh : This is a debug log.");
+            _logger.LogInformation("Hitesh : This is an informational log.");
+            _logger.LogWarning("Hitesh : This is a warning log.");
+            _logger.LogError("Hitesh : This is an error log.");
+            _logger.LogCritical("Hitesh : This is a critical log.");
+  
+            return Ok(references);
+        &#125;
+      </code></pre>
+  
+      <h2>Configure Logging in <code>appsettings.json</code></h2>
+      <p>By default, logs are written to the console. You can configure logging levels in the <code>appsettings.json</code> file:</p>
+      <pre><code>
+        &#123;
+          "Logging": 
+          &#123;
+              "LogLevel": 
+              &#123;
+                  "Default": "Information",
+                  "Microsoft.AspNetCore": "Warning"
+              &#125;
+          &#125;
+        &#125;
+      </code></pre>
+  
+      <h2>Logging Levels</h2>
+      <ul>
+        <li><strong>Trace:</strong> Most detailed logs</li>
+        <li><strong>Debug:</strong> Debugging information</li>
+        <li><strong>Information:</strong> General logs</li>
+        <li><strong>Warning:</strong> Potential issues</li>
+        <li><strong>Error:</strong> Errors that need attention</li>
+        <li><strong>Critical:</strong> Serious failures</li>
+      </ul>
+  
+      <h2>Log Usage Recommendations</h2>
+      <ul>
+        <li><strong>Log inside controllers:</strong> Use <code>ILogger&lt;T&gt;</code> directly</li>
+        <li><strong>Log inside services:</strong> Inject <code>ILogger&lt;T&gt;</code> into a service</li>
+        <li><strong>Log all levels (Trace, Debug, Critical):</strong> Enable in <code>appsettings.json</code></li>
+        <li><strong>Save logs to a file:</strong> Use Serilog</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="card">
+      <h1>API Versioning in .NET Core</h1>
+  
+      <h2>Step 1: Configure API Versioning in Program.cs</h2>
+      <pre><code>
+        builder.Services.AddApiVersioning(options =&gt;
+        &#123;
+            options.ReportApiVersions = true;
+            options.AssumeDefaultVersionWhenUnspecified = true;
+            options.DefaultApiVersion = new ApiVersion(1, 0);
+            options.ApiVersionReader = new QueryStringApiVersionReader("version");
+        &#125;);
+      </code></pre>
+  
+      <h2>Step 2: Use API Versioning in Your Controller</h2>
+      <pre><code>
+        [Route("api/[controller]")]
+        [ApiController]
+        [ApiVersion("1.0")]
+        public class CompaniesController : ControllerBase
+        &#123;
+  
+        [HttpGet]
+        [Route("getcompanyreferences")]
+        public async Task&lt;IActionResult&gt; GetCompanyReferences()
+        &#123;
+            var references = await _context.CompanyReferences
+                                .OrderBy(c =&gt; c.Organization)
+                                .Select(c =&gt; new &#123; c.Organization, c.Name, c.Email &#125;)
+                                .ToListAsync();
+            return Ok(new &#123; message = "Version 2", references &#125;);
+        &#125;
+        &#125;
+      </code></pre>
+  
+      <h2>Using Query String Versioning (?version=1.0)</h2>
+      <p>This method appends the version as a query parameter.</p>
+      <ul>
+        <li><strong>Endpoint for version 1.0:</strong> <code>api/companies?version=1.0</code></li>
+        <li><strong>Bad Request:</strong> If you try <code>api/companies?version=2.0</code> it will return a bad request, as the controller is set to version 1.0 by default.</li>
+      </ul>
+  
+      <h2>Step 3: Implementing Different Versions on the Same Controller</h2>
+      <pre><code>
+        [HttpGet]
+        [Route("getcompanyreferences")]
+        [MapToApiVersion("1.0")]
+        public async Task&lt;IActionResult&gt; GetCompanyReferencesV1()
+        &#123;
+            var references = await _context.CompanyReferences
+                                .OrderBy(c =&gt; c.Organization)
+                                .Select(c =&gt; new &#123; c.Organization, c.Name, c.Email &#125;)
+                                .ToListAsync();
+            return Ok(new &#123; message = "Version 1", references &#125;);
+        &#125;
+  
+        [HttpGet]
+        [Route("getcompanyreferences")]
+        [MapToApiVersion("2.0")]
+        public async Task&lt;IActionResult&gt; GetCompanyReferencesV2()
+        &#123;
+            var references = await _context.CompanyReferences
+                                .OrderBy(c =&gt; c.Organization)
+                                .Select(c =&gt; new &#123; c.Organization, c.Name, c.Email &#125;)
+                                .ToListAsync();
+            return Ok(new &#123; message = "Version 2", references &#125;);
+        &#125;
+      </code></pre>
+  
+      <h2>Using URL Versioning (/v&#123;version&#125;)</h2>
+      <pre><code>
+        builder.Services.AddApiVersioning(options =&gt;
+        &#123;
+            options.ReportApiVersions = true;
+            options.AssumeDefaultVersionWhenUnspecified = true;
+            options.DefaultApiVersion = new ApiVersion(1, 0);
+            options.ApiVersionReader = new UrlSegmentApiVersionReader();
+        &#125;);
+  
+        [HttpGet]
+        [Route("api/v&#123;version:apiVersion&#125;")]
+        [ApiVersion("1.0")]
+        public async Task&lt;IActionResult&gt; GetCompanyReferencesV1()
+        &#123;
+            var references = await _context.CompanyReferences
+                                .OrderBy(c =&gt; c.Organization)
+                                .Select(c =&gt; new &#123; c.Organization, c.Name, c.Email &#125;)
+                                .ToListAsync();
+            return Ok(new &#123; message = "Version 1", references &#125;);
+        &#125;
+  
+        [HttpGet]
+        [Route("api/v&#123;version:apiVersion&#125;")]
+        [ApiVersion("2.0")]
+        public async Task&lt;IActionResult&gt; GetCompanyReferencesV2()
+        &#123;
+            var references = await _context.CompanyReferences
+                                .OrderBy(c =&gt; c.Organization)
+                                .Select(c =&gt; new &#123; c.Organization, c.Name, c.Email &#125;)
+                                .ToListAsync();
+            return Ok(new &#123; message = "Version 2", references &#125;);
+        &#125;
+      </code></pre>
+  
+      <h2>Using Header Versioning (Best Practice)</h2>
+      <pre><code>
+        builder.Services.AddApiVersioning(options =&gt;
+        &#123;
+            options.ReportApiVersions = true;
+            options.AssumeDefaultVersionWhenUnspecified = true;
+            options.DefaultApiVersion = new ApiVersion(1, 0);
+            options.ApiVersionReader = new HeaderApiVersionReader("api-version");
+        &#125;);
+  
+        [HttpGet]
+        [Route("api/[controller]")]
+        [ApiVersion("2.0")]
+        public async Task&lt;IActionResult&gt; GetCompanyReferencesV2()
+        &#123;
+            var references = await _context.CompanyReferences
+                                .OrderBy(c =&gt; c.Organization)
+                                .Select(c =&gt; new &#123; c.Organization, c.Name, c.Email &#125;)
+                                .ToListAsync();
+            return Ok(new &#123; message = "Version 2", references &#125;);
+        &#125;
+      </code></pre>
+  
+      <h2>Notes:</h2>
+      <ul>
+        <li>For query string versioning, use <code>api/companies?version=1.0</code>.</li>
+        <li>For URL versioning, use <code>api/v1/companies</code>.</li>
+        <li>For header versioning, pass the version number in the header like <code>api-version=1.0</code>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="card">
+      <h1>Testing an ASP.NET Core Web API using xUnit, Moq, and Swagger</h1>
+  
+      <h2>Step 1: Create an ASP.NET Core Web API Project</h2>
+      <p>Run the following command to create a new Web API project:</p>
+      <pre><code>
+        dotnet new webapi -n MyWebApi
+        cd MyWebApi
+      </code></pre>
+      <p>This creates a basic ASP.NET Core Web API project.</p>
+  
+      <h3>Install Dependencies</h3>
+      <pre><code>
+        dotnet add package Microsoft.AspNetCore.Mvc.Core
+        dotnet add package Microsoft.AspNetCore.Mvc.NewtonsoftJson
+      </code></pre>
+      <p>This ensures compatibility with JSON serialization.</p>
+  
+      <h2>Step 2: Define Models and Interfaces</h2>
+      <h3>A. Create <code>User.cs</code> Model</h3>
+      <pre><code>
+        namespace MyWebApi.Models
+        &#123;
+            public class User
+            &#123;
+                public int Id &#123; get; set; &#125;
+                public string Name &#123; get; set; &#125;
+                public string Email &#123; get; set; &#125;
+            &#125;
+        &#125;
+      </code></pre>
+  
+      <h3>B. Create <code>IUserService.cs</code> Interface</h3>
+      <pre><code>
+        using System.Collections.Generic;
+        using MyWebApi.Models;
+  
+        namespace MyWebApi.Services
+        &#123;
+            public interface IUserService
+            &#123;
+                List&lt;User&gt; GetUsers();
+                User GetUserById(int id);
+                User AddUser(User user);
+                bool DeleteUser(int id);
+            &#125;
+        &#125;
+      </code></pre>
+  
+      <h2>Step 3: Implement the Service</h2>
+      <pre><code>
+        using System.Collections.Generic;
+        using System.Linq;
+        using MyWebApi.Models;
+  
+        namespace MyWebApi.Services
+        &#123;
+            public class UserService : IUserService
+            &#123;
+                private readonly List&lt;User&gt; _users = new()
+                &#123;
+                    new User &#123; Id = 1, Name = "Alice", Email = "alice@example.com" &#125;,
+                    new User &#123; Id = 2, Name = "Bob", Email = "bob@example.com" &#125;
+                &#125; ;
+  
+                public List&lt;User&gt; GetUsers() => _users;
+  
+                public User GetUserById(int id) => _users.FirstOrDefault(u =&gt; u.Id == id);
+  
+                public User AddUser(User user)
+                &#123;
+                    user.Id = _users.Max(u =&gt; u.Id) + 1;
+                    _users.Add(user);
+                    return user;
+                &#125;
+  
+                public bool DeleteUser(int id)
+                &#123;
+                    var user = _users.FirstOrDefault(u =&gt; u.Id == id);
+                    if (user == null) return false;
+                    _users.Remove(user);
+                    return true;
+                &#125;
+            &#125;
+        &#125;
+      </code></pre>
+  
+      <h2>Step 4: Create API Controller</h2>
+      <pre><code>
+        using Microsoft.AspNetCore.Mvc;
+        using System.Collections.Generic;
+        using MyWebApi.Models;
+        using MyWebApi.Services;
+  
+        namespace MyWebApi.Controllers
+        &#123;
+            [ApiController]
+            [Route("api/users")]
+            public class UsersController : ControllerBase
+            &#123;
+                private readonly IUserService _userService;
+  
+                public UsersController(IUserService userService)
+                &#123;
+                    _userService = userService;
+                &#125;
+  
+                [HttpGet]
+                public ActionResult&lt;List&lt;User&gt;&gt; GetUsers()
+                &#123;
+                    return Ok(_userService.GetUsers());
+                &#125;
+  
+                [HttpGet("&#123;id&#125;")]
+                public ActionResult&lt;User&gt; GetUserById(int id)
+                &#123;
+                    var user = _userService.GetUserById(id);
+                    return user != null ? Ok(user) : NotFound();
+                &#125;
+  
+                [HttpPost]
+                public ActionResult&lt;User&gt; AddUser([FromBody] User user)
+                &#123;
+                    var createdUser = _userService.AddUser(user);
+                    return CreatedAtAction(nameof(GetUserById), new &#123; id = createdUser.Id &#125;, createdUser);
+                &#125;
+  
+                [HttpDelete("&#123;id&#125;")]
+                public ActionResult DeleteUser(int id)
+                &#123;
+                    return _userService.DeleteUser(id) ? NoContent() : NotFound();
+                &#125;
+            &#125;
+        &#125;
+      </code></pre>
+  
+      <h2>Step 5: Register Services in Program.cs</h2>
+      <pre><code>
+        var builder = WebApplication.CreateBuilder(args);
+  
+        builder.Services.AddControllers();
+        builder.Services.AddScoped&lt;IUserService, UserService&gt;();
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
+  
+        var app = builder.Build();
+  
+        if (app.Environment.IsDevelopment())
+        &#123;
+            app.UseSwagger();
+            app.UseSwaggerUI(options =&gt;
+            &#123;
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "User API v1");
+            &#125;);
+        &#125;
+  
+        app.UseAuthorization();
+        app.MapControllers();
+        app.Run();
+      </code></pre>
+  
+      <h2>Step 6: Test API using Postman or Swagger</h2>
+      <p>Run the API using <code>dotnet run</code>.</p>
+  
+      <h2>Step 7: Write Unit Tests</h2>
+      <h3>A. Create a New Test Project</h3>
+      <pre><code>
+        dotnet new xunit -n MyWebApi.Tests
+        cd MyWebApi.Tests
+        dotnet add reference ../MyWebApi/MyWebApi.csproj
+      </code></pre>
+  
+      <h3>B. Install Required Packages</h3>
+      <pre><code>
+        dotnet add package xunit
+        dotnet add package Moq
+      </code></pre>
+  
+      <h3>C. Create <code>UsersControllerTests.cs</code></h3>
+      <pre><code>
+        namespace MyWebApi.Tests
+        &#123;
+            public class UsersControllerTests
+            &#123;
+                private readonly Mock&lt;IUserService&gt; _mockService;
+                private readonly UsersController _controller;
+  
+                public UsersControllerTests()
+                &#123;
+                    _mockService = new Mock&lt;IUserService&gt;();
+                    _controller = new UsersController(_mockService.Object);
+                &#125;
+  
+                [Fact]
+                public void GetUsers_ReturnsOkResult_WithListOfUsers()
+                &#123;
+                    // Arrange
+                    var users = new List&lt;User&gt; &#123; new() &#123; Id = 1, Name = "Alice", Email = "alice@example.com" &#125; &#125;;
+  
+                    _mockService.Setup(service =&gt; service.GetUsers()).Returns(users);
+  
+                    // Act
+                    var result = _controller.GetUsers();
+  
+                    // Assert
+                    var okResult = Assert.IsType&lt;OkObjectResult&gt;(result.Result);
+                    var returnUsers = Assert.IsType&lt;List&lt;User&gt;&gt;(okResult.Value);
+                    Assert.Single(returnUsers);
+                &#125;
+            &#125;
+        &#125;
+      </code></pre>
+  
+      <h2>Step 8: Run Unit Tests</h2>
+      <pre><code>
+        dotnet test
+      </code></pre>
+  
+      <h2>Basic xUnit Testing Commands</h2>
+      <ul>
+        <li><strong>[Fact]</strong> → Defines a test method (no parameters).</li>
+        <li><strong>[Theory]</strong> → Defines a parameterized test.</li>
+        <li><strong>[InlineData(value)]</strong> → Provides inline test data for [Theory].</li>
+        <li><strong>Assert.Equal(expected, actual)</strong> → Checks if two values are equal.</li>
+        <li><strong>Assert.NotEqual(expected, actual)</strong> → Checks if two values are not equal.</li>
+        <li><strong>Assert.True(condition)</strong> → Asserts that a condition is true.</li>
+        <li><strong>Assert.False(condition)</strong> → Asserts that a condition is false.</li>
+      </ul>
+  
+      <h2>Alternative to xUnit: NUnit</h2>
+      <p>To use NUnit, run the following:</p>
+      <pre><code>
+        dotnet add package NUnit
+        dotnet add package Microsoft.NET.Test.Sdk
+        dotnet add package NUnit3TestAdapter
+      </code></pre>
+  
+      <h2>Testing REST APIs Using Swagger in ASP.NET Core</h2>
+      <p>Swagger provides an interactive UI to test REST APIs directly from the browser.</p>
+      <h3>Step 1: Install Swagger</h3>
+      <pre><code>
+        dotnet add package Swashbuckle.AspNetCore
+      </code></pre>
+  
+      <h3>Step 2: Configure Swagger</h3>
+      <pre><code>
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen(options =&gt;
+        &#123;
+            options.SwaggerDoc("v1", new OpenApiInfo &#123; Title = "User API", Version = "v1" &#125;);
+        &#125;);
+      </code></pre>
+  
+      <h3>Enable Swagger UI</h3>
+      <pre><code>
+        if (app.Environment.IsDevelopment())
+        &#123;
+            app.UseSwagger();
+            app.UseSwaggerUI(options =&gt;
+            &#123;
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "User API v1");
+            &#125;);
+        &#125;
+      </code></pre>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="card">
+      <h1>Routing in ASP.NET Core</h1>
+  
+      <h2>1. How Routing Works in ASP.NET Core</h2>
+      <ul>
+        <li>Incoming Request → Matches a defined route pattern.</li>
+        <li>Route Matching → Determines which controller or endpoint should handle the request.</li>
+        <li>Route Execution → Calls the corresponding controller method or middleware.</li>
+      </ul>
+      <p><strong>Routing</strong> is enabled by default in ASP.NET Core and can be configured in <code>Program.cs</code> and controllers.</p>
+  
+      <h2>2. Types of Routing in ASP.NET Core</h2>
+      <p>ASP.NET Core supports two main types of routing:</p>
+      <table>
+        <tr>
+          <th>Routing Type</th>
+          <th>Description</th>
+          <th>Example</th>
+        </tr>
+        <tr>
+          <td>Attribute Routing</td>
+          <td>Uses <code>[Route]</code> attributes in controllers</td>
+          <td><code>[Route("api/products/&#123;id&#125;")]</code></td>
+        </tr>
+        <tr>
+          <td>Convention-Based Routing</td>
+          <td>Defined in <code>Program.cs</code>, works with controllers</td>
+          <td><code>app.MapControllerRoute(...)</code></td>
+        </tr>
+      </table>
+  
+      <h2>3. Attribute Routing (Recommended for APIs)</h2>
+      <p>Attribute routing uses <code>[Route]</code>, <code>[HttpGet]</code>, <code>[HttpPost]</code>, etc., inside controllers.</p>
+  
+      <h3>Example: Basic Attribute Routing</h3>
+      <pre><code>
+        [ApiController]
+        [Route("api/products")]
+        public class ProductsController : ControllerBase
+        &#123;
+            [HttpGet("&#123;id&#125;")]
+            public IActionResult GetProduct(int id)
+            &#123;
+                return Ok($"Product ID: &#123;id&#125;");
+            &#125;
+        &#125;
+      </code></pre>
+      <p><strong>Accessing GET /api/products/5</strong> calls <code>GetProduct(5)</code>.</p>
+  
+      <h3>Example: Multiple Routes for the Same Action</h3>
+      <pre><code>
+        [HttpGet("byname/&#123;name&#125;")]
+        [HttpGet("find/&#123;name&#125;")]
+        public IActionResult GetByName(string name)
+        &#123;
+            return Ok($"Product Name: &#123;name&#125;");
+        &#125;
+      </code></pre>
+      <p><strong>Works for both GET /api/products/byname/Laptop</strong> and <strong>GET /api/products/find/Laptop</strong>.</p>
+  
+      <h2>4. Convention-Based Routing (Recommended for MVC)</h2>
+      <p>Convention-based routing is defined globally in <code>Program.cs</code> and is commonly used for MVC applications.</p>
+      <h3>Example: Configure Routing in Program.cs</h3>
+      <pre><code>
+        var builder = WebApplication.CreateBuilder(args);
+        var app = builder.Build();
+  
+        app.UseRouting();
+  
+        app.UseEndpoints(endpoints =&gt;
+        &#123;
+            endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "&#123;controller=Home&#125;/&#123;action=Index&#125;/&#123;id?&#125;");
+        &#125;);
+        app.Run();
+      </code></pre>
+      <p><strong>Requests like GET /home/index/5</strong> are mapped to:</p>
+      <pre><code>
+        public class HomeController : Controller
+        &#123;
+            public IActionResult Index(int? id)
+            &#123;
+                return Content($"Home Page. ID: &#123;id&#125;");
+            &#125;
+        &#125;
+      </code></pre>
+  
+      <h2>5. Minimal API Routing (for Lightweight APIs)</h2>
+      <p>Minimal APIs were introduced in .NET 6 and later, and they use <code>app.MapGet()</code> instead of controllers.</p>
+      <h3>Example: Minimal API Routing</h3>
+      <pre><code>
+        var app = WebApplication.CreateBuilder(args).Build();
+  
+        app.MapGet("/hello", () =&gt; "Hello, World!");
+        app.MapGet("/user/&#123;id&#125;", (int id) =&gt; $"User ID: &#123;id&#125;");
+  
+        app.Run();
+      </code></pre>
+      <p><strong>Requests like /hello</strong> and <strong>/user/10</strong> are mapped directly.</p>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="card">
+      <h1>Authentication and Authorization Using Claims in ASP.NET Core 8.0</h1>
+  
+      <p>This guide will walk you through implementing authentication (verifying users) and authorization (controlling access) using JWT tokens and claims-based authorization from scratch.</p>
+  
+      <h2>1. Install Required Packages</h2>
+      <p>First, install the necessary package for JWT authentication:</p>
+      <pre><code>
+        dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 8.0.0
+      </code></pre>
+  
+      <h2>2. Configure JWT Authentication in <code>Program.cs</code></h2>
+      <pre><code>
+        using Microsoft.AspNetCore.Authentication.JwtBearer;
+        using Microsoft.IdentityModel.Tokens;
+        using System.Security.Claims;
+        using System.Text;
+  
+        var builder = WebApplication.CreateBuilder(args);
+  
+        // JWT Configuration
+        var jwtKey = builder.Configuration["Jwt:Key"];
+        var jwtIssuer = builder.Configuration["Jwt:Issuer"];
+        var jwtAudience = builder.Configuration["Jwt:Audience"];
+  
+        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =&gt;
+            &#123;
+                options.TokenValidationParameters = new TokenValidationParameters
+                &#123;
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = jwtIssuer,
+                    ValidAudience = jwtAudience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+                &#125;;
+            &#125;);
+  
+        builder.Services.AddAuthorization(options =&gt;
+        &#123;
+            options.AddPolicy("AdminOnly", policy =&gt; policy.RequireClaim(ClaimTypes.Role, "Admin"));
+            options.AddPolicy("UserOnly", policy =&gt; policy.RequireClaim(ClaimTypes.Role, "User"));
+        &#125;);
+  
+        builder.Services.AddControllers();
+        var app = builder.Build();
+  
+        app.UseAuthentication(); // Enables authentication middleware
+        app.UseAuthorization();  // Enables authorization middleware
+  
+        app.MapControllers();
+        app.Run();
+      </code></pre>
+  
+      <h2>3. Add JWT Configuration in <code>appsettings.json</code></h2>
+      <pre><code>
+        &#123;
+          "Jwt": &#123;
+            "Issuer": "yourdomain.com",
+            "Audience": "yourdomain.com",
+            "Key": "YourSuperSecretKey123456"
+          &#125;
+        &#125;
+      </code></pre>
+      <p><strong>Ensure your JWT key is strong and securely stored (use environment variables in production).</strong></p>
+  
+      <h2>4. Create JWT Token Generation Logic</h2>
+      <p>We need an authentication controller (<code>AuthController.cs</code>) to issue JWT tokens based on claims.</p>
+      <pre><code>
+        using Microsoft.AspNetCore.Mvc;
+        using Microsoft.IdentityModel.Tokens;
+        using System.IdentityModel.Tokens.Jwt;
+        using System.Security.Claims;
+        using System.Text;
+  
+        [Route("api/auth")]
+        [ApiController]
+        public class AuthController : ControllerBase
+        &#123;
+            private readonly IConfiguration _config;
+  
+            public AuthController(IConfiguration config)
+            &#123;
+                _config = config;
+            &#125;
+  
+            [HttpPost("login")]
+            public IActionResult Login([FromBody] LoginModel model)
+            &#123;
+                if (model.Username == "admin" &amp;&amp; model.Password == "password")
+                &#123;
+                    var tokenString = GenerateJwtToken(model.Username, "Admin");
+                    return Ok(new &#123; Token = tokenString &#125;);
+                &#125;
+                else if (model.Username == "user" &amp;&amp; model.Password == "password")
+                &#123;
+                    var tokenString = GenerateJwtToken(model.Username, "User");
+                    return Ok(new &#123; Token = tokenString &#125;);
+                &#125;
+  
+                return Unauthorized(new &#123; Message = "Invalid username or password" &#125;);
+            &#125;
+  
+            private string GenerateJwtToken(string username, string role)
+            &#123;
+                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+                var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+  
+                var claims = new List&lt;Claim&gt;
+                &#123;
+                    new Claim(ClaimTypes.Name, username),
+                    new Claim(ClaimTypes.Role, role),
+                    new Claim("CustomClaim", "MyCustomValue") // Example of a custom claim
+                &#125;;
+  
+                var token = new JwtSecurityToken(
+                    issuer: _config["Jwt:Issuer"],
+                    audience: _config["Jwt:Audience"],
+                    claims: claims,
+                    expires: DateTime.UtcNow.AddHours(1),
+                    signingCredentials: credentials
+                );
+  
+                return new JwtSecurityTokenHandler().WriteToken(token);
+            &#125;
+        &#125;
+  
+        public class LoginModel
+        &#123;
+            public string Username &#123; get; set; &#125;
+            public string Password &#123; get; set; &#125;
+        &#125;
+      </code></pre>
+  
+      <h2>5. Secure API Endpoints with Claims-Based Authorization</h2>
+      <p>Now, create a controller (<code>UsersController.cs</code>) with role-based and claims-based authorization.</p>
+      <pre><code>
+        using Microsoft.AspNetCore.Authorization;
+        using Microsoft.AspNetCore.Mvc;
+        using System.Security.Claims;
+  
+        [Route("api/users")]
+        [ApiController]
+        public class UsersController : ControllerBase
+        &#123;
+            // Accessible to all authenticated users
+            [HttpGet("profile")]
+            [Authorize]
+            public IActionResult GetUserProfile()
+            &#123;
+                var username = User.Identity.Name; // Get username from JWT token
+                var role = User.Claims.FirstOrDefault(c =&gt; c.Type == ClaimTypes.Role)?.Value;
+                return Ok(new &#123; Username = username, Role = role &#125;);
+            &#125;
+  
+            // Accessible only to Admins (Claim-based authorization)
+            [HttpGet("admin")]
+            [Authorize(Policy = "AdminOnly")]
+            public IActionResult AdminAccess()
+            &#123;
+                return Ok(new &#123; Message = "Welcome, Admin! You have full access." &#125;);
+            &#125;
+  
+            // Accessible only to Users
+            [HttpGet("user")]
+            [Authorize(Policy = "UserOnly")]
+            public IActionResult UserAccess()
+            &#123;
+                return Ok(new &#123; Message = "Welcome, User! You have limited access." &#125;);
+            &#125;
+  
+            // Accessible only if user has a specific custom claim
+            [HttpGet("custom-claim")]
+            [Authorize]
+            public IActionResult CheckCustomClaim()
+            &#123;
+                var hasClaim = User.HasClaim("CustomClaim", "MyCustomValue");
+                if (!hasClaim)
+                &#123;
+                    return Forbid(); // Return 403 Forbidden if claim is missing
+                &#125;
+                return Ok(new &#123; Message = "You have the required custom claim!" &#125;);
+            &#125;
+        &#125;
+      </code></pre>
+  
+      <h2>6. Testing Authentication and Authorization</h2>
+      <h3>Step 1: Login to Get JWT Token</h3>
+      <p>Send a POST request to <code>/api/auth/login</code> with:</p>
+      <pre><code>
+        &#123; "username": "admin", "password": "password" &#125;
+      </code></pre>
+      <p>OR</p>
+      <pre><code>
+        &#123; "username": "user", "password": "password" &#125;
+      </code></pre>
+      <p>You'll receive a JWT token in response.</p>
+  
+      <h3>Step 2: Use the Token for Secured API Requests</h3>
+      <p>Copy the token and send a GET request to <code>/api/users/profile</code> with:</p>
+      <pre><code>
+        Authorization: Bearer YOUR_JWT_TOKEN
+      </code></pre>
+  
+      <h3>Step 3: Test Authorization</h3>
+      <ul>
+        <li>Admin-only endpoint: <code>GET /api/users/admin</code></li>
+        <li>User-only endpoint: <code>GET /api/users/user</code></li>
+        <li>If you try accessing <code>/api/users/admin</code> with a User token, you will get <strong>403 Forbidden</strong>.</li>
+      </ul>
+  
+      <h2>Registering a User and Implementing Claims-Based Authentication</h2>
+      <p>This guide walks you through the process of:</p>
+      <ul>
+        <li>User Registration → Store user credentials and claims.</li>
+        <li>User Authentication (Login) → Generate a JWT token with claims.</li>
+        <li>Use Claims for Authorization → Control API access.</li>
+      </ul>
+  
+      <h3>1. Create User Model (<code>UserModel.cs</code>)</h3>
+      <pre><code>
+        public class UserModel
+        &#123;
+            public string Username &#123; get; set; &#125;
+            public string Password &#123; get; set; &#125; // Store securely (hashed)
+            public string Role &#123; get; set; &#125;  // Admin, User, Editor, etc.
+            public List&lt;Claim&gt; Claims &#123; get; set; &#125; = new List&lt;Claim&gt;();
+        &#125;
+      </code></pre>
+  
+      <h3>2. Create a User Store</h3>
+      <pre><code>
+        public static class UserStore
+        &#123;
+            public static List&lt;UserModel&gt; Users = new List&lt;UserModel&gt;();
+        &#125;
+      </code></pre>
+  
+      <h3>3. Implement Registration API (<code>AuthController.cs</code>)</h3>
+      <pre><code>
+        [Route("api/auth")]
+        [ApiController]
+        public class AuthController : ControllerBase
+        &#123;
+            [HttpPost("register")]
+            public IActionResult Register([FromBody] UserModel model)
+            &#123;
+                if (UserStore.Users.Any(u =&gt; u.Username == model.Username))
+                &#123;
+                    return BadRequest(new &#123; Message = "User already exists" &#125;);
+                &#125;
+  
+                var claims = new List&lt;Claim&gt;
+                &#123;
+                    new Claim(ClaimTypes.Name, model.Username),
+                    new Claim(ClaimTypes.Role, model.Role),
+                    new Claim("RegisteredOn", DateTime.UtcNow.ToString("yyyy-MM-dd"))
+                &#125;;
+  
+                model.Claims = claims;
+  
+                UserStore.Users.Add(model);
+  
+                return Ok(new &#123; Message = "User registered successfully" &#125;);
+            &#125;
+        &#125;
+      </code></pre>
+  
+      <h3>4. Implement Login API (<code>AuthController.cs</code>)</h3>
+      <pre><code>
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] UserModel model)
+        &#123;
+            var user = UserStore.Users.FirstOrDefault(u =&gt; u.Username == model.Username &amp;&amp; u.Password == model.Password);
+            if (user == null)
+            &#123;
+                return Unauthorized(new &#123; Message = "Invalid username or password" &#125;);
+            &#125;
+  
+            var tokenString = GenerateJwtToken(user);
+  
+            return Ok(new &#123; Token = tokenString &#125;);
+        &#125;
+      </code></pre>
+  
+      <h3>5. Protect API Endpoints Using Claims-Based Authorization</h3>
+      <pre><code>
+        [Route("api/users")]
+        [ApiController]
+        public class UsersController : ControllerBase
+        &#123;
+            [HttpGet("profile")]
+            [Authorize]
+            public IActionResult GetUserProfile()
+            &#123;
+                var username = User.Identity.Name;
+                var role = User.Claims.FirstOrDefault(c =&gt; c.Type == ClaimTypes.Role)?.Value;
+                return Ok(new &#123; Username = username, Role = role &#125;);
+            &#125;
+        &#125;
+      </code></pre>
+    </div>
+  </section>
+  
+
+</div>

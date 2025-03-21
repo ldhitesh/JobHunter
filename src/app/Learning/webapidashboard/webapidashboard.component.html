@@ -1,0 +1,33 @@
+<div class="dashboard-container">
+    <h1 class="dashboard-title">Web API Dashboard</h1>
+    
+    <div class="dashboard-sections">
+      <h2>Jobhunter Materials</h2>
+      <ul>
+        <li >
+          <a routerLink="/webapiconcepts" routerLinkActive="active" >Personal Notes</a>
+        </li>
+      </ul>
+    </div>
+      
+      <!-- Interview Questions Section -->
+    <div class="dashboard-sections">
+        <h2>Interview Questions</h2>
+        <ul>
+          <li *ngFor="let question of interviewQuestions">
+            <a [href]="question.link" target="_blank">{{ question.question }}</a>
+          </li>
+        </ul>
+    </div>
+  
+      <!-- Video Links Section -->
+    <div class="dashboard-sections">
+        <h2>Video Tutorials</h2>
+        <ul>
+          <li *ngFor="let video of videoLinks">
+            <a [href]="video.url" target="_blank">{{ video.title }}</a>
+          </li>
+        </ul>
+    </div>
+  </div>
+

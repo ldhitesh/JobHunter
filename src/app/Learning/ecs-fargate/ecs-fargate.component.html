@@ -1,0 +1,315 @@
+<div class="container">
+  <section class="card">
+    <h2>Deployment to AWS ECS (Fargate) using Docker</h2>
+  
+    <p><strong>Objective:</strong> Learn how to deploy applications using Docker and AWS ECS with Fargate (serverless compute).</p>
+  
+    <h3>Tools & Services Used:</h3>
+  
+    <pre><code>
+  <span class="comment"># Required Tools & Services</span>
+  <span class="constant">- Docker Desktop</span>       <span class="comment">// GUI tool + Docker Engine to build & run containers locally</span>
+  <span class="constant">- Docker CLI</span>            <span class="comment">// Command-line utility to manage Docker images and containers</span>
+  <span class="constant">- AWS ECS (Fargate)</span>     <span class="comment">// Managed service to deploy containers without managing EC2 instances</span>
+  <span class="constant">- AWS ECR</span>               <span class="comment">// Secure, private Docker image registry on AWS cloud</span>
+  <span class="constant">- ECS Cluster</span>           <span class="comment">// Logical grouping of ECS services and tasks, similar to a Kubernetes cluster</span>
+  <span class="constant">- Task Definitions</span>      <span class="comment">// JSON blueprint defining how containers should run on ECS (e.g., ports, CPU)</span>
+  <span class="constant">- Security Group Rules</span>  <span class="comment">// AWS firewall settings defining inbound/outbound network access</span>
+    </code></pre>
+  
+    <ul>
+      <li><strong>Docker Desktop:</strong> A local Docker environment with a GUI, allowing developers to easily run containers on Windows/macOS.</li>
+      <li><strong>Docker CLI:</strong> The primary tool to execute Docker commands for building, tagging, pushing images, and managing containers.</li>
+      <li><strong>AWS ECS (Fargate):</strong> A serverless container orchestration service, removing the need to provision EC2 instances.</li>
+      <li><strong>AWS ECR:</strong> AWS-managed Docker image repository where you can securely push/pull images to/from ECS.</li>
+      <li><strong>ECS Cluster:</strong> A group of ECS resources that run your tasks and services. ECS services are deployed inside a cluster.</li>
+      <li><strong>Task Definition:</strong> A reusable ECS JSON template defining how a container should behave (e.g., environment variables, resource allocations).</li>
+      <li><strong>Security Group Rules:</strong> Define which ports (e.g., 80, 443) are open to specific IP addresses or networks for your services.</li>
+    </ul>
+  
+    <p>
+      These are the fundamental services required to set up an end-to-end container deployment pipeline in AWS using Docker and Fargate.
+    </p>
+  </section>
+  
+  <section class="card">
+    <h2>Step 1: Docker Configuration Options</h2>
+    <p>Depending on your project type, you will either create a <strong>Dockerfile</strong> (for single service apps) or a <strong>docker-compose.yml</strong> (for multi-service apps like frontend + backend).</p>
+  
+    <h3>Single Service Deployment (Dockerfile)</h3>
+    <p>A Dockerfile is used to build a single container image for applications like APIs or backend services.</p>
+  
+    <pre><code>
+  <span class="comment"># Dockerfile for .NET Web API (single service)</span>
+  <span class="keyword">FROM</span> <span class="constant">mcr.microsoft.com/dotnet/sdk:8.0</span> <span class="keyword">AS build</span>
+  <span class="keyword">WORKDIR</span> /app
+  
+  <span class="comment"># Copy project file and restore dependencies</span>
+  <span class="keyword">COPY</span> *.csproj ./
+  <span class="keyword">RUN</span> dotnet restore
+  
+  <span class="comment"># Copy source code and build app</span>
+  <span class="keyword">COPY</span> . ./
+  <span class="keyword">RUN</span> dotnet publish -c Release -o /publish
+  
+  <span class="comment"># Runtime stage</span>
+  <span class="keyword">FROM</span> <span class="constant">mcr.microsoft.com/dotnet/aspnet:8.0</span> <span class="keyword">AS runtime</span>
+  <span class="keyword">WORKDIR</span> /app
+  <span class="keyword">COPY</span> --from=build /publish .
+  
+  <span class="comment"># Open HTTP port</span>
+  <span class="keyword">EXPOSE</span> 80
+  
+  <span class="comment"># Environment variable for DB connection</span>
+  <span class="env">ENV</span> awsdbdatabase="Server=db-jobhunter...;Database=JobHunter;..."
+  
+  <span class="comment"># App startup</span>
+  <span class="keyword">ENTRYPOINT</span> ["dotnet", "JobHunterApi.dll"]
+    </code></pre>
+  
+    <p><strong>Explanation:</strong> This Dockerfile first builds your Web API project using the .NET SDK image and then runs it inside a lightweight ASP.NET Core runtime image.</p>
+  
+    <h3>Multi-Service Deployment (docker-compose.yml)</h3>
+    <p><strong>docker-compose.yml</strong> allows you to run multiple related services (e.g., API + frontend) locally in isolated containers using a single command.</p>
+  
+    <pre><code>
+  <span class="comment"># docker-compose.yml for Angular + WebAPI</span>
+  <span class="keyword">version:</span> "3.8"
+  
+  <span class="keyword">services:</span>
+    frontend:
+      build: ./angular-app
+      ports:
+        - "4200:4200"
+    backend:
+      build: ./webapi
+      ports:
+        - "5000:80"
+      environment:
+        - awsdbdatabase=Server=db-jobhunter...;Database=JobHunter;...
+    </code></pre>
+  
+    <p><strong>Explanation:</strong> This file defines two services—one for an Angular frontend and one for the .NET Web API backend—and configures ports and environment variables.</p>
+  </section>
+  
+  <section class="card">
+    <h2>Step 2: Configure AWS Services for Deployment</h2>
+  
+    <p>Once your Docker image is ready, the next step is configuring AWS services to securely deploy the container to the cloud.</p>
+  
+    <pre><code>
+  <span class="comment"># AWS Services Checklist:</span>
+  
+  <span class="keyword">1. ECR</span>              <span class="comment">// Stores Docker Images</span>
+  <span class="keyword">2. ECS (Fargate)</span>    <span class="comment">// Runs containers without managing servers</span>
+  <span class="keyword">3. IAM Roles & Policies</span> <span class="comment">// Secure service permissions</span>
+  <span class="keyword">4. Security Groups</span>   <span class="comment">// Control network access</span>
+  <span class="keyword">5. ECS Cluster</span>       <span class="comment">// Group ECS services together</span>
+  <span class="keyword">6. Task Definitions</span>  <span class="comment">// Describe runtime configuration for containers</span>
+    </code></pre>
+  
+    <h3>Detailed Overview:</h3>
+    <ul>
+      <li><strong>Amazon ECR:</strong> A fully managed container image repository integrated with IAM for access control.</li>
+      <li><strong>AWS Fargate:</strong> Abstracts away server management, letting you focus on containerized app deployment.</li>
+      <li><strong>IAM:</strong> Defines roles & policies to securely access AWS services (e.g., allowing ECS to pull from ECR).</li>
+      <li><strong>Security Groups:</strong> Virtual firewalls to open/close ports and control access by IP range.</li>
+      <li><strong>ECS Cluster:</strong> Logical container group to organize tasks & services under one umbrella.</li>
+      <li><strong>Task Definition:</strong> Blueprint defining container settings like image URI, port mapping, and resources.</li>
+    </ul>
+  </section>
+  
+  <section class="card">
+    <h2>Step 3: Push Docker Image to AWS ECR</h2>
+  
+    <p>Once your image is built, you'll push it to Amazon Elastic Container Registry (ECR) so ECS can later pull and deploy it.</p>
+  
+    <h3>Step 1: Create an Elastic Container Registry (ECR)</h3>
+    <ul>
+      <li>Log in to the AWS Console.</li>
+      <li>Go to <strong>Amazon ECR</strong>.</li>
+      <li>Click <strong>Create repository</strong> and give it a unique name (e.g., <code>jobhunterapi-repo</code>).</li>
+    </ul>
+    <p><strong>🔍 Why?</strong> ECR is a private Docker-compatible registry where you store your container images securely within AWS.</p>
+  
+    <h3>Step 2: Retrieve Push Commands</h3>
+    <p>Once created, use the "View push commands" option in the ECR console to get the AWS CLI commands for uploading your image.</p>
+  
+    <h3>Step 3: Push Image via CLI</h3>
+    <pre><code>
+  <span class="comment"># Step 1: Authenticate Docker with ECR</span>
+  <span class="command">aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin &lt;ECR_URL&gt;</span>
+  
+  <span class="comment"># Step 2: Build the Docker image locally</span>
+  <span class="command">docker build -t jobhunterapi-repo .</span>
+  
+  <span class="comment"># Step 3: Tag the image for ECR repository</span>
+  <span class="command">docker tag jobhunterapi-repo:latest &lt;ECR_URL&gt;/jobhunterapi-repo:latest</span>
+  
+  <span class="comment"># Step 4: Push the image to ECR</span>
+  <span class="command">docker push &lt;ECR_URL&gt;/jobhunterapi-repo:latest</span>
+    </code></pre>
+  
+    <p><strong>Output:</strong> When authentication is successful, you'll see:</p>
+    <pre><code><span class="success">Login Succeeded</span></code></pre>
+  
+    <p>Once pushed, ECS will be able to access this image from ECR.</p>
+  </section>
+  
+  <section class="card">
+    <h2>Step 4: Setup IAM Roles and IAM User</h2>
+  
+    <p><strong>IAM (Identity and Access Management)</strong> lets you control who has access to AWS resources. For ECS, you'll need:</p>
+    <ul>
+      <li><strong>IAM Role:</strong> Grants ECS permissions to pull images from ECR and write logs to CloudWatch.</li>
+      <li><strong>IAM User:</strong> Grants developers or your CI/CD pipelines programmatic access via CLI/API.</li>
+    </ul>
+  
+    <h3>🛡️ IAM Role (For ECS Tasks)</h3>
+    <p>This role is assumed by ECS at runtime to allow pulling Docker images and logging to CloudWatch.</p>
+    <pre><code>
+  <span class="keyword">1.</span> Go to <strong>IAM > Roles</strong> → <strong>Create Role</strong>
+  <span class="keyword">2.</span> Choose <strong>ECS Task</strong> use case
+  <span class="keyword">3.</span> Attach policy: <span class="constant">AmazonECSTaskExecutionRolePolicy</span>
+  <span class="keyword">4.</span> Name role (e.g., <code>AWSServiceRoleForECS</code>)
+    </code></pre>
+  
+    <h3>👤 IAM User (For Console/CLI Access)</h3>
+    <p>This user allows automation tools or developers to execute AWS CLI commands securely.</p>
+    <pre><code>
+  <span class="keyword">1.</span> Go to <strong>IAM > Users</strong> → <strong>Create User</strong>
+  <span class="keyword">2.</span> Enable <strong>Programmatic Access</strong>
+  <span class="keyword">3.</span> Attach policies: <code>AmazonECSFullAccess</code> & <code>AmazonEC2ContainerRegistryFullAccess</code>
+  <span class="keyword">4.</span> Save <strong>Access Key ID</strong> & <strong>Secret</strong> securely.
+    </code></pre>
+  
+    <p><strong>Tip:</strong> Use AWS Secrets Manager or a secure vault to store your IAM user's credentials.</p>
+  </section>
+  
+  <section class="card">
+    <h2>Step 5: Create ECS Cluster & Task Definition</h2>
+  
+    <h3>🏗️ Create ECS Cluster</h3>
+    <ul>
+      <li>Navigate to <strong>ECS > Clusters</strong>.</li>
+      <li>Click <strong>Create Cluster</strong> and select <strong>Networking only (AWS Fargate)</strong>.</li>
+      <li>Provide a name (e.g., <code>jobhunterapi-cluster</code>).</li>
+    </ul>
+  
+    <p><strong>What's a Cluster?</strong> It's where ECS runs your services. Think of it as a container environment manager.</p>
+  
+    <h3>Task Definition</h3>
+    <ul>
+      <li>Go to <strong>ECS > Task Definitions</strong> and click <strong>Create new Task Definition</strong>.</li>
+      <li>Choose <strong>Fargate</strong> as the launch type.</li>
+      <li>Set OS to <strong>Linux/x86_64</strong> and configure <strong>0.25 vCPU / 0.5 GB RAM</strong> (Free Tier eligible).</li>
+      <li>Assign the IAM Role you created earlier (e.g., <code>AWSServiceRoleForECS</code>).</li>
+    </ul>
+  
+    <h3>🔧 Container Definition</h3>
+    <pre><code>
+  <span class="keyword">Container Name:</span> jobhunter-api
+  <span class="keyword">Image URI:</span> &lt;ECR-URI&gt;/jobhunterapi-repo:latest
+  <span class="keyword">Port Mappings:</span> TCP : 80
+  <span class="keyword">Essential Container:</span> Yes
+    </code></pre>
+  
+    <p><strong>Note:</strong> The Task Definition acts like a Docker Compose service but inside AWS.</p>
+  </section>
+  
+  <section class="card">
+    <h2>Step 6: Run a Task inside ECS Cluster</h2>
+  
+    <p>With your cluster and task ready, it's time to deploy the app.</p>
+  
+    <h3>🚀 Launch a New Task</h3>
+    <ul>
+      <li>Go to <strong>ECS > Clusters</strong> and select your cluster (e.g., <code>jobhunterapi-cluster</code>).</li>
+      <li>Click <strong>Run New Task</strong>.</li>
+    </ul>
+  
+    <h3>🛠️ Task Parameters</h3>
+    <pre><code>
+  <span class="keyword">Launch Type:</span> FARGATE
+  <span class="keyword">Platform Version:</span> LATEST
+  <span class="keyword">Application Type:</span> Task (for microservices or background jobs)
+  <span class="keyword">Task Definition:</span> jobhunterapitasks
+  <span class="keyword">Revision:</span> Latest
+  <span class="keyword">Desired tasks:</span> 1
+    </code></pre>
+  
+    <p>Once you click <strong>Run Task</strong>, ECS Fargate will provision infrastructure behind the scenes to run your app.</p>
+  
+    <p><strong>Result:</strong> Your Dockerized application will now be running in the cloud inside AWS Fargate.</p>
+  </section>
+  
+  <section class="card">
+    <h2>Step 7: Configure Security Group Inbound Rules</h2>
+  
+    <p><strong>Security Groups</strong> act like firewalls that define which inbound/outbound traffic is allowed to your containers running on ECS.</p>
+  
+    <h3>🔐 Configure Access</h3>
+    <ul>
+      <li>Go to <strong>EC2 > Security Groups</strong>.</li>
+      <li>Find and select the security group associated with your ECS task.</li>
+      <li>Click <strong>Edit Inbound Rules</strong> to open required ports.</li>
+    </ul>
+  
+    <pre><code>
+  <span class="keyword">Type:</span> HTTP
+  <span class="keyword">Protocol:</span> TCP
+  <span class="keyword">Port Range:</span> 80
+  <span class="keyword">Source:</span> 0.0.0.0/0   <span class="comment">// Open to all IPs (use caution)</span>
+  <span class="keyword">OR</span>
+  <span class="keyword">Source:</span> &lt;Your_Public_IP&gt;/32   <span class="comment">// Only open to your IP (recommended for dev)</span>
+    </code></pre>
+  
+    <p><strong>Important:</strong> For production workloads, avoid using <code>0.0.0.0/0</code> unless behind an Application Load Balancer (ALB).</p>
+  </section>
+  
+  <section class="card">
+    <h2>⚡ Why Use AWS ECS Fargate?</h2>
+  
+    <ul>
+      <li><strong>No EC2 management:</strong> Serverless container hosting platform—AWS manages the infrastructure.</li>
+      <li><strong>Auto-scaling:</strong> Dynamically scales CPU and memory based on workload demand.</li>
+      <li><strong>Pay-as-you-go:</strong> Billed per vCPU and memory usage per second.</li>
+      <li><strong>Security:</strong> Each task runs in its own isolated compute environment.</li>
+      <li><strong>AWS Integration:</strong> Seamless integration with ALB, CloudWatch, Secrets Manager, and more.</li>
+    </ul>
+  
+    <h3>⚠️ When NOT to use Fargate?</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Scenario</th>
+          <th>Limitation</th>
+          <th>Recommended Alternative</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>24/7 High-CPU Workloads</td>
+          <td>Fargate can be expensive for long-running jobs</td>
+          <td>ECS on EC2 or EKS</td>
+        </tr>
+        <tr>
+          <td>Custom OS-level Configs</td>
+          <td>No access to the underlying OS</td>
+          <td>ECS on EC2</td>
+        </tr>
+        <tr>
+          <td>GPU-based Workloads</td>
+          <td>No GPU support</td>
+          <td>ECS on EC2 with GPU instances</td>
+        </tr>
+        <tr>
+          <td>Massive Batch Jobs</td>
+          <td>Can be less cost-effective at scale</td>
+          <td>AWS Batch + Spot Instances</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  
+</div>

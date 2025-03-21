@@ -1,43 +1,24 @@
-<div class="container">
-  <div class="container-fluid">
-    <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
-      <!-- JobHunter Brand with space on the right -->
-      <a class="navbar-brand" routerLink="/home">
-        JobHunter
-      </a>
-    
-      <!-- Hamburger icon for mobile -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span> <!-- This is the hamburger icon -->
-      </button>
-    
-      <!-- Navbar links with space between JobHunter and the links -->
-      <div class="collapse navbar-collapse" id="navbarNavDropdown" #navbarCollapse>
-        <ul class="navbar-nav fs-2 ms-auto"> <!-- ms-auto added here -->
-          <li class="nav-item" *ngIf="!IsloggedIn" (click)="onNavItemClick()">
-            <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
-          </li>
-          <li class="nav-item" *ngIf="IsloggedIn" (click)="onNavItemClick()">
-            <a class="nav-link" routerLink="/companieslist" routerLinkActive="active">Companies</a>
-          </li>
-          <li class="nav-item" *ngIf="IsloggedIn" (click)="onNavItemClick()">
-            <a class="nav-link" routerLink="/references" routerLinkActive="active">References</a>
-          </li>
-          <li *ngIf="UserRole=='Admin' && IsloggedIn" class="nav-item" (click)="onNavItemClick()">
-            <a class="nav-link" routerLink="/registrations" routerLinkActive="active">Registrations</a>
-          </li>
-          <li *ngIf="IsloggedIn" (click)="Logout()" class="nav-item">
-            <a class="nav-link">Logout</a>
-          </li>
-          <li class="profilepicture" *ngIf="authService.profilepicture">
-            <img [src]="authService.profilepicture">
-          </li>
-        </ul>
+<navbar></navbar>
+<app-portfolio></app-portfolio>
+
+
+ <!-- Job Board Footer -->
+ <footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <!-- Support Team Section -->
+      <div class="footer-section support-team">
+        <h4>Support Team</h4>
+        <p>If you have any questions or need assistance, feel free to reach out to our support team.</p>
+        <p>Email us at: <a href="mailto:jobhuntertechteam@gmail.com">jobhuntertechteam&#64;gmail.com</a></p>
       </div>
-    </nav>
-    
+    </div>
+    <div>
+      <p>&copy; 2024 Job Hunter. All rights reserved.</p>
+    </div>
   </div>
-</div>
+</footer>
+  
 
 <div class="modal" (click)="closeModal()" [ngClass]="{ 'is-active': notificationMessage }">
   <div class="modal-background" ></div>
@@ -48,7 +29,7 @@
     </div>
   </div>
 </div>
-<div *ngIf="IsHomePage">
-  <app-portfolio ></app-portfolio>
-</div>
-<router-outlet></router-outlet>
+
+
+
+

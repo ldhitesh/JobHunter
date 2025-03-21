@@ -1,0 +1,71 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'learning-portal',
+  templateUrl: './learning-portal.component.html',
+  styleUrls: ['./learning-portal.component.css']
+})
+export class LearningPortalComponent {
+
+  showAll = false;
+  showHelp:any; 
+
+  techStacks = [
+    {
+      title: 'Angular',
+      description: 'Learn the latest features in Angular, including components, services, routing, and state management.',
+      image: 'assets/angular.png',
+    },
+    {
+      title: 'Web API in .NET',
+      description: 'Explore how to build Web APIs in .NET Core, including controllers, authentication, and authorization.',
+      image: 'assets/webapi.png',
+      link: '/webapidashboard'
+    },
+    {
+      title: 'Deployment to AWS',
+      description: 'Learn how to deploy applications to AWS, including EC2, S3, Lambda, and API Gateway.',
+      image: 'assets/aws.png',
+    },
+    {
+      title: 'System Design',
+      description: 'Learn the fundamentals of system design, focusing on scalability, load balancing, and caching.',
+      image: 'assets/sys.png',
+    },
+    {
+      title: 'Leetcode',
+      description: 'Prepare for coding interviews by practicing problems on Leetcode, from easy to advanced levels.',
+      image: 'assets/leetcode.png',
+    },
+    {
+      title: 'Gmail API Integration',
+      description: 'Learn how to integrate Gmail API into your applications for sending, reading, and managing emails.',
+      image: 'assets/Gmail_api.png',
+    },
+    {
+      title: 'Auth0 Integration',
+      description: 'Discover how to implement Auth0 for secure user authentication and management in your apps.',
+      image: 'assets/auth0.png',
+    },
+    {
+      title: 'React',
+      description: 'Learn how to build dynamic and interactive user interfaces using React.js.',
+      image: 'assets/react.png',
+    },
+    {
+      title: 'MySQL',
+      description: 'Learn to create, manage, and optimize MySQL databases for efficient data storage and access.',
+      image: 'assets/mysql.png',
+    }    
+  ];
+
+
+  toggleView() {
+    this.showAll = !this.showAll;
+  }
+
+  get displayedTechStacks() {
+    return this.showAll ? this.techStacks : this.techStacks.slice(0, 4);
+  }
+
+}

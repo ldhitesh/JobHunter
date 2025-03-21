@@ -1,78 +1,4 @@
-/* Base body styling */
 
-  /* Navbar brand/logo */
-    .navbar .navbar-brand {
-        color: #337ab7;
-        font-size: 1.5rem;
-        font-weight: bold;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        display: flex;
-        align-items: center;
-        transition: color 0.3s ease;
-        justify-content: space-between;
-    }
-  
-  /* Style for the navbar */
-  .navbar {
-    background-color: #337ab7; /* Blue color for the navbar */
-    color: rgb(0, 0, 0);
-    padding: 0.8rem 2rem; /* Moderate padding for balance */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow for floating effect */
-  }
-  
-  /* Navbar items layout */
-  .navbar .navbar-nav {
-    display: flex;
-    justify-content: center; /* Center align items */
-    align-items: center;
-    margin: 0;
-  }
-  
-  .navbar .navbar-nav .nav-item {
-    padding: 0 2rem; /* Space out navbar items */
-  }
-  
-  .navbar .navbar-nav .nav-link {
-    color: #337ab7; /* White text for the nav links */
-    text-decoration: none; /* Remove underline from links */
-    font-size: 1.2rem; /* Larger font size for the links */
-    font-weight: 500; /* Medium weight for a balanced look */
-    transition: all 0.3s ease; /* Smooth transition for hover and active states */
-  }
-  
-  /* Active link style */
-  .navbar .navbar-nav .nav-link.active {
-    border-bottom: 2px solid #337ab7; /* White underline to show the active page */
-    font-weight: 600; /* Make active link bold */
-  }
-  
-  /* Hover effect for links */
-  .navbar .navbar-nav .nav-link:hover {
-    color: #385167; /* Lighter yellow color for hover effect */
-    transform: translateY(-2px); /* Slightly lift the link on hover */
-  }
-  
-  
-  /* Responsive Design for large screens */
-  @media (min-width: 992px) {
-    .navbar-nav {
-      justify-content: flex-start; /* Align navbar items to the left on large screens */
-    }
-    .navbar-nav .nav-item {
-      padding: 0 2rem; /* More spacing between items */
-    }
-  }
-  
-  /* Ensure content is not hidden behind the navbar */
-  router-outlet {
-    margin-top: 70px; /* Space below navbar */
-  }
-  
-  /* Custom spacing for the "home" class */
-  .home {
-    margin-top: 80px; /* Padding to avoid content being hidden behind navbar */
-  }
   
 
 .notification {
@@ -88,17 +14,7 @@
   transition: opacity 0.5s ease; /* Optional: smooth fade out transition */
 }
 
-  /* Mobile-friendly responsiveness */
-  @media (max-width: 768px) {
-    .navbar .navbar-nav {
-      flex-direction: column; /* Stack navbar items on smaller screens */
-      align-items: center; /* Center navbar items vertically on mobile */
-    }
-    .navbar .navbar-nav .nav-item {
-      padding: 1rem 0; /* Add vertical padding for mobile */
-    }
-  }
-  
+
 
 /* Base Modal Styles */
 .modal {
@@ -179,7 +95,105 @@
   padding-left: 2%;
 }
 
-.profilepicture img{
-  width: 60px;
-  border-radius: 50%;
+
+
+
+
+
+/* -----------------------------------------footer-------------------------------------------------- */
+
+
+/* Footer Styles */
+.footer {
+  background-color: #0c2d4b;
+  color: #fff;
+  font-family: 'Roboto', Arial, sans-serif;
+  left: 0;
+  bottom: 0; /* Fixes the footer to the bottom */
+  width: 100%; /* Ensures the footer spans the full width of the page */
+  padding: 20px 0; /* Adds padding for spacing */
+  text-align: center; /* Centers the text inside the footer */
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2); /* Adds a shadow to give depth */
 }
+
+.footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.footer-section {
+  text-align: center;
+  padding: 20px;
+}
+
+.footer-section h4 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.footer-section p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.footer-section a {
+  color: #ecf0f1;
+  text-decoration: none;
+}
+
+.footer-section a:hover {
+  text-decoration: underline;
+}
+
+/* Styling for the logo */
+.footer-logo {
+  width: 150px; /* Set the logo size */
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.footer-bottom p {
+  margin: 5px 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .footer-section {
+    margin-bottom: 20px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+

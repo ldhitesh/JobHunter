@@ -13,6 +13,12 @@ import { RegistrationsComponent } from './Components/registrations/registrations
 import { authGuard } from './Guards/auth.guard';
 import { PortfolioComponent } from './Components/portfolio/portfolio.component';
 import { EmailVerificationCompleteComponent } from './Components/email-verification-complete/email-verification-complete.component';
+import { CreatepostComponent } from './Components/createpost/createpost.component';
+import { ReplypostComponent } from './Components/replypost/replypost.component';
+import { DiscussionForumComponent } from './Components/discussion-forum/discussion-forum.component';
+import { WebApiConceptsComponent } from './Learning/web-api-concepts/web-api-concepts.component';
+import { WebapidashboardComponent } from './Learning/webapidashboard/webapidashboard.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {path:'',component:LoginComponentComponent},
@@ -29,12 +35,17 @@ const routes: Routes = [
   {path:'home',component:HomeComponent,canActivate: [authGuard]},
   {path:'registrations',component:RegistrationsComponent,canActivate: [authGuard]},
   {path:'app-portfolio',component:PortfolioComponent,canActivate: [authGuard]},
-  {path: 'email-verification-complete', component: EmailVerificationCompleteComponent }
+  {path: 'email-verification-complete', component: EmailVerificationCompleteComponent },
+  { path: 'create-post', component: CreatepostComponent },
+  { path: 'post/:id', component: ReplypostComponent },
+  { path: 'discussionforum', component: DiscussionForumComponent },
+  { path: 'webapiconcepts', component: WebApiConceptsComponent },
+  { path: 'webapidashboard', component: WebapidashboardComponent }
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
