@@ -14,6 +14,11 @@ export class DiscussionForumComponent {
   forumPosts:any = [];
   showAllPosts = false;
   currentdisplayedposts=2;
+  replyContent: string = '';
+  showreplymodal:any;
+  postindex:any;
+  updatebtn:any=false;
+  singleReplyData:any;
 
     constructor(private http:HttpClient,private router:Router,
                 public authService:AuthService,
@@ -47,10 +52,12 @@ export class DiscussionForumComponent {
     return this.showAllPosts ? this.forumPosts : this.forumPosts.slice(0, this.currentdisplayedposts);
   }
 
-  openPost(postid:any){
-
+  openReply(postindex:any){
+    this.showreplymodal=true;
+    this.postindex=postindex;
   }
-   // Delete post by id
+
+
   deletePost(postId: any): void {
     this.http.delete(`http://localhost:80/api/discussion/deletepost/${postId}`).subscribe({
       next:(response:any) => {
@@ -74,6 +81,80 @@ export class DiscussionForumComponent {
     this.router.navigate(['/createpost'],{queryParams:{
       postdata:JSON.stringify(post),operation:"Edit",
       prevUrl:this.router.url }})
+  }
+
+  submitReply(postId:any): void {
+    const replydata={
+      "post_id": postId,
+      "user_id": this.authService.email,
+      "reply_summary": this.replyContent,
+      "replied_on": new Date(),
+      "username":this.authService.username 
+    }
+    this.http.post('http://localhost:80/api/discussion/addreply',replydata).subscribe({
+      next:(response:any) => {
+        const post = this.forumPosts.find((p:any) => p.post_id === postId);
+        if (post) {
+          post.replies = post.replies
+          post.replies.push(response.reply);          
+        }
+        this.closeModal();
+        this.replyContent='';
+    },
+    error:(err:any) => {      
+      const errorMessage = err.error?.message || 'An unexpected error occurred.';
+      alert("Could save the reply!")
+    }
+  });
+  }
+
+  EditReply(replyId:any,postId:any,postindex:any){
+    this.updatebtn=true;
+    this.openReply(postindex);
+    let post=this.forumPosts.find((p:any) => p.post_id === postId);
+    this.singleReplyData=post.replies.find((r:any)=>r.reply_id==replyId);
+    this.replyContent= this.singleReplyData.reply_summary;
+    console.log(this.singleReplyData);
+    
+  }
+
+  UpdateReply(){
+
+   this.singleReplyData.reply_summary=this.replyContent;
+    
+    this.http.patch(`http://localhost:80/api/discussion/updatereply/${this.singleReplyData.reply_id}`,this.singleReplyData).subscribe({
+    next:(response:any) => {
+      let post=this.forumPosts.find((p:any) => p.post_id === this.singleReplyData.post_id);
+      let reply= post.replies.find((r:any)=>r.reply_id==this.singleReplyData.reply_id);
+      reply=this.singleReplyData;
+      this.replyContent='';
+      this.closeModal()
+    },
+    error:(err:any) => {      
+      const errorMessage = err.error?.message || 'An unexpected error occurred.';
+      alert(errorMessage);   
+    }
+    });
+  }
+
+  deleteReply(replyId:any,postId:any){
+ 
+    this.http.delete(`http://localhost:80/api/discussion/deletereply/${replyId}`).subscribe({
+      next:(response:any) => 
+        {
+        let post=this.forumPosts.find((p:any) => p.post_id === postId);
+         post.replies= post.replies.filter((r:any)=>r.reply_id!==replyId);
+        },
+        error:(err:any) => {
+          const errorMessage = err.error?.message || 'An unexpected error occurred.';
+          alert(errorMessage);   
+        }
+    });
+  }
+
+  closeModal(): void {
+      this.showreplymodal = false;
+      this.replyContent='';
   }
 
 }

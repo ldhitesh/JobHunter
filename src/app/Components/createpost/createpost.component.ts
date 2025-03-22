@@ -41,14 +41,12 @@ export class CreatepostComponent {
     this.activatedroute.queryParams.subscribe(params => {
    
       if (params['postdata']) {
-        if (params['postdata']) {
           this.updatepostdata = JSON.parse(params['postdata']); 
           this.newPost.title=this.updatepostdata.title;
           this.newPost.summary=this.updatepostdata.summary;
           this.newPost.author=this.updatepostdata.author;
           this.newPost.user_id=this.updatepostdata.user_id;
           this.newPost.posted_date=new Date();
-        }
       } 
       if(params['operation']){
         this.crudoperation=params['operation'];

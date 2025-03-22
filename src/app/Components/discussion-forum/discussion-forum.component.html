@@ -1,27 +1,56 @@
- <section class="forums-section">
+<section class="forums-section">
   <div class="container">
     <h2 class="section-title" routerLink="/discussionforum" routerLinkActive="active">Discussion Forums</h2>
     <p class="section-description">Join the conversation and explore topics on various technologies, programming, and more.</p>
 
     <div class="forum-posts">
-      <div class="forum-post" *ngFor="let post of displayedforumPosts">
+      <div class="forum-post" *ngFor="let post of displayedforumPosts;let index=index">
         <div class="forum-header">
-          <h3 class="forum-title">{{ post.title }}</h3>
+          <h3 class="forum-title">{{ post.title|titlecase}} </h3>
           <span class="forum-author">Posted by: {{ post.author }}   
             <i *ngIf="post.user_id==authService.email" class="fa fa-edit" (click)="EditPost(post.post_id)"></i>       
             <i *ngIf="post.user_id==authService.email" class="fa fa-trash" (click)="deletePost(post.post_id)"></i> 
           </span>
         </div>
-       
+
         <p class="forum-summary">{{ post.summary }}</p>
+
+        <!-- Replies section inside each post -->
+        <div class="replies" *ngIf="post.replies.length>0">
+          <h4>Replies:</h4>
+          <div *ngFor="let reply of post.replies" class="reply-item">
+            <p>{{ reply.reply_summary }} <span class="icon-actions">
+              <i *ngIf="reply.user_id==authService.email" class="fa fa-edit" (click)="EditReply(reply.reply_id,reply.post_id,index)"></i>
+              <i *ngIf="reply.user_id==authService.email" class="fa fa-trash" (click)="deleteReply(reply.reply_id,reply.post_id)"></i>
+            </span>
+          </p>
+            <small>By {{ reply.username }} on {{ reply.replied_on | date: 'short' }}</small>
+          </div>
+        </div>
+
         <div class="forum-footer">
-          <button class="btn-reply" (click)="openPost(post.id)">
+          <button class="btn-reply" 
+                  (click)="openReply(index)"
+                  *ngIf="!(showreplymodal && postindex ==index)" 
+                  >
             Reply</button>
-            
           <span class="forum-date">{{ post.date | date: 'short' }}</span>
         </div>
+
+        
+
+              <!-- INLINE Reply Form -->
+              <div *ngIf="showreplymodal && postindex ==index" class="reply-section-inline">
+                <h4>Reply to this Post</h4>
+                <textarea [(ngModel)]="replyContent" placeholder="Write your reply here..."></textarea>
+                <div class="replymodalbtns">
+                  <button *ngIf="!updatebtn" class="submit-btn" (click)="submitReply(post.post_id)">Submit Reply</button>
+                  <button *ngIf="updatebtn" class="submit-btn" (click)="UpdateReply()">Update Reply</button>
+                  <button class="cancel-btn" (click)="closeModal()">Cancel</button>
+                </div>
+              </div>
+        </div>
       </div>
-    </div>
 
     <div *ngIf="forumPosts.length > 2 && forumPosts.length>currentdisplayedposts" class="view-more-container">
       <h4 (click)="this.currentdisplayedposts=this.currentdisplayedposts+2" class="view-more-button">
@@ -30,7 +59,7 @@
     </div>
 
     <!-- Create Post Button -->
-    <div  class="btn-create-post" (click)="opencreatepostform()">Create New Post</div>
-    
+    <div class="btn-create-post" (click)="opencreatepostform()">Create New Post</div>
   </div>
 </section>
+
