@@ -33,7 +33,9 @@ export class CreatepostComponent {
                   author: this.authService.username,
                   summary: '',
                   posted_date: new Date(),
-                  user_id:this.authService.email
+                  user_id:this.authService.email,
+                  postprofilepic:this.authService.profilepicture,
+                  post_id:''
                 }
 
   ngOnInit(): void {
@@ -47,6 +49,7 @@ export class CreatepostComponent {
           this.newPost.author=this.updatepostdata.author;
           this.newPost.user_id=this.updatepostdata.user_id;
           this.newPost.posted_date=new Date();
+          this.newPost.post_id=this.updatepostdata.post_id
       } 
       if(params['operation']){
         this.crudoperation=params['operation'];
@@ -59,6 +62,9 @@ export class CreatepostComponent {
         this.prevUrl=params['prevUrl']
       }
     });
+
+    console.log(this.updatepostdata);
+    
   }
   
   createPost(): void {
@@ -67,9 +73,11 @@ export class CreatepostComponent {
       this.http.patch(`http://localhost:80/api/discussion/updatepost/${this.updatepostdata.post_id}`,this.newPost).subscribe({
         next:(response:any) => {
         this.router.navigate([this.prevUrl]); // Navigate after update
+        this.newPost='';
       },
       error:(err:any) => {      
         const errorMessage = err.error?.message || 'An unexpected error occurred.';
+        this.newPost='';
         alert(errorMessage);   
                 this.router.navigate([this.prevUrl]); // Navigate after update
 
@@ -77,22 +85,22 @@ export class CreatepostComponent {
     });
     }
     else{
-      if (this.newPost.title && this.newPost.author && this.newPost.summary) {
         this.buttonName="Create Post"
-
         this.http.post('http://localhost:80/api/discussion/addpost',this.newPost).subscribe({
           next:(response:any)=>{
             this.postCreated=false;
+            this.newPost='';
             this.router.navigate([this.prevUrl]);
             },
           error:(err:any)=>{       
             const errorMessage = err.error?.message || 'An unexpected error occurred.';
+            this.newPost='';
             alert(errorMessage);   
             this.router.navigate([this.prevUrl]); 
           }
         })
 
-    }
+    
     }
   }
 
@@ -101,6 +109,8 @@ export class CreatepostComponent {
     if (modalContent && !modalContent.contains(event.target as Node)) {
       this.showModal = false;
       this.router.navigate([this.prevUrl]);
+      this.updatepostdata=''
+      this.newPost=''
     }
   }
 }

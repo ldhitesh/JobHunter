@@ -32,7 +32,7 @@
               <a class="nav-link">Logout</a>
             </li>
             <li class="profilepicture" *ngIf="authService.profilepicture">
-              <img [src]="authService.profilepicture">
+              <img [src]="authService.profilepicture" (error)="setDefaultImage($event)">
             </li>
           </ul>
         </div>

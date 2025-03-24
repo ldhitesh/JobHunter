@@ -27,7 +27,7 @@
 
 .forum-posts{
   width: 100%;
-  padding: 3%;
+  padding: 3% 1% 3% 3%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background-color: #fff;
 
@@ -37,7 +37,7 @@
 .forum-post {
   width: 100%;
   border-radius: 8px;
-  padding: 3%;
+  padding: 1%;
   margin-bottom: 40px;
   position: relative;
 }
@@ -54,21 +54,74 @@
 }
 
 /* Header */
+
 .forum-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: flex-start; /* Align everything to the top */
+  gap: 12px;
+}
+
+.postprofilepicture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.pic-title {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* take remaining space */
+  margin-top:5px;
 }
 
 .forum-title {
   font-size: 1.25rem;
   font-weight: 500;
+  width: 750px;
+  word-wrap: break-word;
+  white-space: normal;
+  margin: 0;
 }
 
 .forum-author {
-  font-size: 0.875rem;
-  color: #666;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  /* margin-right: -2%; */
 }
+
+.menu-container {
+  position: relative;
+}
+
+.dots-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.menu-options {
+  position: absolute;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  min-width: 100px;
+  z-index: 100;
+}
+
+.menu-options div {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.menu-options div:hover {
+  background: #f1f1f1;
+}
+
 
 /* Summary */
 .forum-summary {
@@ -76,6 +129,7 @@
   margin-top: 20px;
   color: #444;
   word-wrap: break-word;
+  
 }
 
 /* Footer */
@@ -166,7 +220,6 @@
 .replies {
   margin-top: 20px;
   padding: 15px;
-  background: #f5f7fa;
   border: 1px solid #ddd;
   border-radius: 5px;
 }
@@ -174,16 +227,11 @@
 .replies h4 {
   font-size: 1rem;
   color: #0f406a;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .reply-item {
-  background: #ffffff;
-  padding: 12px;
-  border: 1px solid #e0e0e0;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  margin-bottom:2%;
 }
 
 .reply-item p {
@@ -195,10 +243,14 @@
 .reply-item small {
   color: #777;
   font-size: 0.75rem;
-  display: block;
+  display: flex;
   margin-top: 5px;
 }
 
+.reply-item small .dots-btn {
+  font-size: 16px;
+  font-weight: 800;
+}
 /* Create Post Button */
 .btn-create-post {
   background-color: #0f406a;
@@ -241,7 +293,7 @@
 /* FontAwesome Icons */
 .fa-trash,
 .fa-edit {
-  font-size: 20px;
+  font-size: 15px;
   opacity: 70%;
   cursor: pointer;
 }
@@ -295,19 +347,132 @@
   gap: 10px;
 }
 
-/* .icon-actions i {
-  font-size: 18px;
-  margin-left: 10px;
-  color: #666;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.icon-actions i:hover {
-  color: #0f6aba;
-} */
-
 .reply-item p {
   display: flex;
   justify-content: space-between;
+  margin-left: 3%;
+}
+
+.profilepicture{
+  width: 30px;
+  border-radius: 50%;
+}
+
+.postprofilepicture{
+  width: 50px;
+  border-radius: 50%;
+}
+
+
+.individual-forum-post{
+  display: flex;
+}
+
+.individual-forum-header{
+  width: 100%;
+  margin-left: 2%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.createform-create-post-form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  font-size: 1rem;
+  color: #555;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+textarea {
+  height: 200px;
+}
+
+.createform-btn {
+  background-color: #14568f;
+  color: #fff;
+  border: none;
+  padding: 12px 18px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  margin-top:3%;
+  margin-left: auto;  /* Center the button */
+  margin-right: auto; /* Center the button */
+  width: 200px; /* Optional: Set a fixed width for better alignment */
+}
+
+.createform-btn:hover {
+  background-color: #052a44;
+}
+
+
+
+.createform-modal-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.5); /* Dim the background */
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 1000;
+}
+
+.createform-modal-content {
+background-color: white;
+padding: 30px;
+border-radius: 8px;
+width: 800px;
+height: 600px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.createform-modal-content h2 {
+font-size: 1.5rem;
+margin-bottom: 20px;
 }

@@ -52,4 +52,10 @@ export class NavbarComponent {
     this.UserRole='';
     this.authService.logout();
   }
+  defaultProfilePic = 'assets/NoProfileImage.png'; // Path to your fallback image
+
+  setDefaultImage(event: Event) {
+    const target = event.target as HTMLImageElement;
+    target.src = this.defaultProfilePic;
+  }
 }
