@@ -41,13 +41,13 @@ export class AuthService {
       } 
       else if (event instanceof OAuthSuccessEvent) {  
           const claims = this.oauthService.getIdentityClaims();
-            this.email=claims['email'];
-            this.username=claims['name'];
-            this.userRole=claims['jobhunter-roles'];
-            this.profilepicture=claims['picture'];
-            this.loginstatuscheckservice.login();
-            this.loginstatuscheckservice.RoleCheck(this.userRole);
-            this.router.navigate(['/home']); 
+          this.email=claims['email'];
+          this.username=claims['name'];
+          this.userRole=claims['jobhunter-roles'];
+          this.profilepicture=claims['picture'];
+          this.loginstatuscheckservice.login();
+          this.loginstatuscheckservice.RoleCheck(this.userRole);
+          this.router.navigate(['/home']); 
       }
     });
 

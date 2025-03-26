@@ -19,9 +19,9 @@ export class LoginComponentComponent {
   public IsloggedIn:boolean=false;
   public successfullogin: boolean = false;
   public loginfailure: boolean = false;
+  public duplicateemail: boolean=false;
   public isModalVisible:boolean=false;
   public registerResponse:any;
-  public duplicateemail: any;
   public invalidCredentials=false;
 
   constructor(private http: HttpClient,
@@ -38,46 +38,47 @@ export class LoginComponentComponent {
       });
   }
 
-  onLogin(){
-      this.http.post('http://localhost:80/api/login', this.loginCredential).subscribe({
-        next: (response: any) => {        
-          sessionStorage.setItem('Token', response.token);
-          this.authservice.setUserDetails();
-          this.loginstatuscheckservice.login(); 
-          this.loginstatuscheckservice.RoleCheck(this.authservice.userRole);
-          this.router.navigate(['/home']); 
-        },
-        error: (err) => {
-          this.invalidCredentials=true;
-          setTimeout(() =>  {
-                              this.invalidCredentials = false; 
-                            }, 3000);        
-                        }
-        });
-  }
-  onSingleSignOnLogin(){
-      this.authservice.authlogin();
+onLogin(){
+  this.http.post('http://localhost:80/api/login', this.loginCredential).subscribe({
+    next: (response: any) => {        
+      sessionStorage.setItem('Token', response.token);
+      this.authservice.setUserDetails();
+
+      this.loginstatuscheckservice.login(); 
+      this.loginstatuscheckservice.RoleCheck(this.authservice.userRole);
+      
+      this.router.navigate(['/home']); 
+    },
+    error: (err) => {
+      this.invalidCredentials=true;
+      setTimeout(() =>  {
+                          this.invalidCredentials = false; 
+                        }, 3000);        
+                    }
+    });
   }
 
+onSingleSignOnLogin(){
+  this.authservice.authlogin();
+}
 
-  showNotification() {
-    if(this.registerResponse=="Success"){
-      this.successfullogin=true;
-    }
-    else if(this.registerResponse=="Failure"){
-      this.loginfailure=true;
-    }  
-    else if(this.registerResponse=="Duplicate"){
-      this.duplicateemail=true;
-    } 
-    this.isModalVisible=true;
 
-    setTimeout(() => {
-        this.isModalVisible = false; 
-        this.loginfailure=false;
-        this.successfullogin=false;
-        this.registerResponse='';
-    }, 10000);
+showNotification() {
+  const responseMap:any = {
+    "Success": () => this.successfullogin = true,
+    "Failure": () => this.loginfailure = true,
+    "Duplicate": () => this.duplicateemail = true
+  };
+
+  if (responseMap[this.registerResponse]) {
+      responseMap[this.registerResponse]();
   }
+  this.isModalVisible=true;
+
+  setTimeout(() => {
+      this.isModalVisible = false; 
+      this.registerResponse='';
+  }, 10000);
+}
 
 }
