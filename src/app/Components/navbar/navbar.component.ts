@@ -18,18 +18,10 @@ export class NavbarComponent {
     constructor(private loginstatuscheckservice:LoginStatusCheckServiceService,
                 private router:Router,private renderer: Renderer2,
                 public authService:AuthService
-    ){
-      this.profilepicture=authService.profilepicture;
-      if(sessionStorage.getItem('id_token')){
-        this.IsloggedIn=true;
-        this.UserRole=this.authService.userRole;
-        this.loginstatuscheckservice.login();
-      }
-    }
+    ){}
 
 
   ngOnInit(): void {    
-
     this.loginstatuscheckservice.isLoggedIn.subscribe(state => {
       this.IsloggedIn = state;
     });
@@ -40,23 +32,19 @@ export class NavbarComponent {
     if(sessionStorage.getItem('id_token')){
       this.IsloggedIn=true;
       this.UserRole=this.authService.userRole;
-      this.loginstatuscheckservice.login();
     }
     else if(sessionStorage.getItem('Token')){
       this.IsloggedIn=true;
-      this.authService.setUserDetails();
       this.UserRole=this.authService.getUserDetails().role;
     }    
   }
 
   Logout(){
     this.authService.profilepicture="";
-    sessionStorage.clear();
-    this.router.navigate(['/login']);
     this.IsloggedIn=false;
-    this.loginstatuscheckservice.logout();
     this.UserRole='';
     this.authService.logout();
+    this.router.navigate(['/login']);
   }
   defaultProfilePic = 'assets/NoProfileImage.png'; // Path to your fallback image
 

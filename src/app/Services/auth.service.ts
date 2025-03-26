@@ -87,7 +87,8 @@ export class AuthService {
       this.oauthService.logOut();
     }  
     sessionStorage.clear();
-  }
+    this.loginstatuscheckservice.logout();
+    }
 
   public getAccessToken() {
     return this.oauthService.getAccessToken();
