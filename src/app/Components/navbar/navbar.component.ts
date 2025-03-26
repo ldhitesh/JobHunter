@@ -20,14 +20,19 @@ export class NavbarComponent {
                 public authService:AuthService
     ){
       this.profilepicture=authService.profilepicture;
+      if(sessionStorage.getItem('id_token')){
+        this.IsloggedIn=true;
+        this.UserRole=this.authService.userRole;
+        this.loginstatuscheckservice.login();
+      }
     }
 
 
   ngOnInit(): void {    
+
     this.loginstatuscheckservice.isLoggedIn.subscribe(state => {
       this.IsloggedIn = state;
     });
-
     this.loginstatuscheckservice.Role.subscribe(role => {
       this.UserRole = role;
     });    
@@ -35,9 +40,11 @@ export class NavbarComponent {
     if(sessionStorage.getItem('id_token')){
       this.IsloggedIn=true;
       this.UserRole=this.authService.userRole;
+      this.loginstatuscheckservice.login();
     }
     else if(sessionStorage.getItem('Token')){
       this.IsloggedIn=true;
+      this.authService.setUserDetails();
       this.UserRole=this.authService.getUserDetails().role;
     }    
   }

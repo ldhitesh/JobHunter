@@ -32,6 +32,7 @@ export class HomeComponent {
     this.renderer.removeClass(this.navbarCollapse.nativeElement, 'show');
   }
   ngOnInit(): void {    
+    console.log("home"+this.IsloggedIn);
     
     this.loginstatuscheckservice.isLoggedIn.subscribe(state => {
       this.IsloggedIn = state;
@@ -48,6 +49,7 @@ export class HomeComponent {
     if(sessionStorage.getItem('id_token')){
       this.IsloggedIn=true;
       this.UserRole=this.authService.userRole;
+      this.loginstatuscheckservice.login()
     }
     else if(sessionStorage.getItem('Token')){
       this.IsloggedIn=true;
@@ -55,7 +57,7 @@ export class HomeComponent {
     }
     
     this.IsHomePage = this.router.url === '/home'; // You can change '/home' if your home route is different
-    
+
   }
 
   Logout(){

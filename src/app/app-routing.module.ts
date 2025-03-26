@@ -18,7 +18,6 @@ import { ReplypostComponent } from './Components/replypost/replypost.component';
 import { DiscussionForumComponent } from './Components/discussion-forum/discussion-forum.component';
 import { WebApiConceptsComponent } from './Learning/web-api-concepts/web-api-concepts.component';
 import { WebapidashboardComponent } from './Learning/webapidashboard/webapidashboard.component';
-import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {path:'',component:LoginComponentComponent},

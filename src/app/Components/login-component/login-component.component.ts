@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-check-service.service';
 import { AuthService } from 'src/app/Services/auth.service';
-import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'login-component',
@@ -12,18 +11,18 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class LoginComponentComponent {
 
-  loginCredential={
+  public loginCredential={
     username:'',
     password:''
   };
-  public IsloggedIn=false;
+
+  public IsloggedIn:boolean=false;
   public successfullogin: boolean = false;
   public loginfailure: boolean = false;
   public isModalVisible:boolean=false;
   public registerResponse:any;
-  public sessionId:any;
   public duplicateemail: any;
-
+  public invalidCredentials=false;
 
   constructor(private http: HttpClient,
               private router: Router,
@@ -33,7 +32,6 @@ export class LoginComponentComponent {
 
   
   ngOnInit(): void {
-    
     this.activatedroute.queryParams.subscribe(params => {
         this.registerResponse=params['response'];  
         this.showNotification();     
@@ -41,37 +39,40 @@ export class LoginComponentComponent {
   }
 
   onLogin(){
-      const loginData = this.loginCredential;
-      this.http.post('http://localhost:80/api/login', loginData).subscribe({
+      this.http.post('http://localhost:80/api/login', this.loginCredential).subscribe({
         next: (response: any) => {        
           sessionStorage.setItem('Token', response.token);
-          this.loginstatuscheckservice.login();
-          this.router.navigate(['/home']);  
+          this.authservice.setUserDetails();
+          this.loginstatuscheckservice.login(); 
+          this.loginstatuscheckservice.RoleCheck(this.authservice.userRole);
+          this.router.navigate(['/home']); 
         },
         error: (err) => {
-          alert('Invalid username or password!');
-        }
-      });
+          this.invalidCredentials=true;
+          setTimeout(() =>  {
+                              this.invalidCredentials = false; 
+                            }, 3000);        
+                        }
+        });
   }
   onSingleSignOnLogin(){
       this.authservice.authlogin();
+      this.loginstatuscheckservice.login();
   }
 
 
   showNotification() {
     if(this.registerResponse=="Success"){
       this.successfullogin=true;
-      this.isModalVisible=true;
     }
     else if(this.registerResponse=="Failure"){
       this.loginfailure=true;
-      this.isModalVisible=true;
     }  
     else if(this.registerResponse=="Duplicate"){
       this.duplicateemail=true;
-      this.isModalVisible=true;
     } 
-   
+    this.isModalVisible=true;
+
     setTimeout(() => {
         this.isModalVisible = false; 
         this.loginfailure=false;

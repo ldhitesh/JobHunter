@@ -59,7 +59,6 @@
   .radio-input {
     display: flex;
     align-items: center;
-    font-family: Arial, sans-serif;
   }
   
   /* Custom size for radio buttons */
@@ -191,7 +190,6 @@ input:disabled{
 
   .ebody{
     height: 200px;
-    font-family: 'Roboto', sans-serif;
 }
 
 

@@ -49,8 +49,13 @@ export class AuthService {
       } 
       else if (event instanceof OAuthSuccessEvent) {  
           const claims = this.oauthService.getIdentityClaims();
-          if(!claims['email_verified']){
+          if(!claims['email_verified']){            
             this.verifyjobhunterdatabase(claims['email']);
+            this.email=this.getUserDetails().email;
+            this.username=this.getUserDetails().unique_name;
+            this.userRole=this.getUserDetails().role;
+            this.loginstatuscheckservice.login();
+            this.loginstatuscheckservice.RoleCheck(this.getUserDetails().role);
           }
           else{
             this.email=claims['email'];
@@ -73,6 +78,7 @@ export class AuthService {
   public authlogin() {
 
     this.oauthService.initCodeFlow(); 
+    this.loginstatuscheckservice.login();
 
   }
 
@@ -87,6 +93,7 @@ export class AuthService {
     return this.oauthService.getAccessToken();
   }
 
+  
 
 
   verifyjobhunterdatabase(email:any){
@@ -129,13 +136,20 @@ export class AuthService {
 
 
     getUserDetails(){
-    
       const token = sessionStorage.getItem('Token');
       if (token) {
         const decoded: any = jwtDecode(token);  
         return decoded;
       } 
       return;
+    }
+
+    setUserDetails():void{
+      let userdata=this.getUserDetails();
+      this.userRole=userdata.role;
+      this.profilepicture="/assets/NoProfileImage.png"
+      this.email=userdata.email;
+      this.username=userdata.unique_name;
     }
   }
   

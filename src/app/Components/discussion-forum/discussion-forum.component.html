@@ -13,7 +13,7 @@
           <div class="individual-forum-header">
             <div class="forum-header">
               <div class="pic-title">
-                <h3 style="white-space: pre; font-family: monospace;" class="forum-title">{{ post.title | titlecase }}</h3>
+                <h3 style="white-space: pre;" class="forum-title">{{ post.title | titlecase }}</h3>
               </div>
               <div class="forum-author">
                 Posted By {{ post.author }} on {{ post.posted_date | date: 'short' }}
@@ -29,7 +29,7 @@
               </div>
             </div>
             
-            <p style="white-space: pre; font-family: monospace;  background-color: inherit; color:inherit" class="forum-summary">{{ post.summary }}</p>
+            <p style="white-space: pre; background-color: inherit; color:inherit" class="forum-summary">{{ post.summary }}</p>
     
             <!-- Replies section inside each post -->
             <div class="replies" *ngIf="post.replies.length>0">
@@ -39,13 +39,13 @@
                   <img class="profilepicture" *ngIf="reply.replyprofilepic" [src]="reply.replyprofilepic" (error)="setDefaultImage($event)">
                   <p>Replied By {{ reply.username }} on {{ reply.replied_on | date: 'short' }}</p> 
                   <small>
-                    <span class="icon-actions">
+                    <span class="icon-actions" *ngIf="reply.user_id==authService.email" >
                         <i *ngIf="reply.user_id==authService.email" class="fa fa-edit" (click)="EditReply(reply.reply_id,reply.post_id,index)"></i>
                         <i *ngIf="reply.user_id==authService.email" class="fa fa-trash" (click)="deleteReply(reply.reply_id,reply.post_id)"></i>
                     </span>
                   </small>
                 </div>
-                <div class="reply-summary" style="white-space: pre; font-family: monospace;">
+                <div class="reply-summary" style="white-space: pre;">
                   {{ reply.reply_summary }}
 
                 </div>
@@ -65,7 +65,7 @@
                 <!-- INLINE Reply Form -->
           <div *ngIf="showreplymodal && postindex ==index" class="reply-section-inline">
             <h4>Reply to this Post</h4>
-            <textarea  style="white-space: pre; font-family: monospace;" [(ngModel)]="replyContent" placeholder="Write your reply here..."></textarea>
+            <textarea  style="white-space: pre; " [(ngModel)]="replyContent" placeholder="Write your reply here..."></textarea>
             <div class="replymodalbtns">
               <button *ngIf="!updatebtn" class="submit-btn" (click)="submitReply(post.post_id)">Submit Reply</button>
               <button *ngIf="updatebtn" class="submit-btn" (click)="UpdateReply()">Update Reply</button>
@@ -103,9 +103,9 @@
       <h2>{{createformtitle}}</h2>
       <form class="createform-form">
         <label for="title">Title:</label>
-        <input style="white-space: pre; font-family: monospace;" type="text" [(ngModel)]="this.newPost.title" name="title" required>
+        <input style="white-space: pre; " type="text" [(ngModel)]="this.newPost.title" name="title" required>
         <label for="summary">Summary:</label>
-        <textarea style="white-space: pre; background-color: inherit;font-family: monospace;color:inherit"  name="summary" [(ngModel)]="this.newPost.summary" required></textarea>
+        <textarea style="white-space: pre; background-color: inherit;color:inherit"  name="summary" [(ngModel)]="this.newPost.summary" required></textarea>
         <button *ngIf="!updatecreateformbtn" class="createform-btn" (click)="createPost()"  type="submit">Create Post</button>
         <button *ngIf="updatecreateformbtn" class="createform-btn" (click)="onEditPostSubmit(newPost.post_id)" type="submit">Update Post</button>
 

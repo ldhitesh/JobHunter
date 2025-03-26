@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+/* Import the Google Font in index.html, but here we apply it globally */
+body {
+  font-family: 'Nunito', sans-serif;
+}
+  
+  /* Optional: Apply different font for headings */
+  h1, h2, h3 {
+    font-family: 'Nunito', sans-serif;
+  }
+  
+  /* Optional: Apply different font for paragraph */
+  p {
+    font-family: 'Nunito', sans-serif;
+  }
+  

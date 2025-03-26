@@ -43,6 +43,9 @@ export class DiscussionForumComponent {
     
   ngOnInit(): void {
     this.fetchposts();
+    if(sessionStorage.getItem('Token')){
+      this.authService.setUserDetails();
+    }
   }
 
   opencreatepostform(): void {
