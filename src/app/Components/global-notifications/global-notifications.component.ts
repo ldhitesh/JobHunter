@@ -7,7 +7,7 @@ import { NotificationServiceService } from 'src/app/Services/notification-servic
   styleUrls: ['./global-notifications.component.css']
 })
 export class GlobalNotificationsComponent {
-  notificationMessage:string='Email sent successfully!';
+  notificationMessage:string='';
 
   constructor(private notificationService: NotificationServiceService){}
 
