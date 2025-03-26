@@ -11,7 +11,6 @@ export class GlobalNotificationsComponent {
 
   constructor(private notificationService: NotificationServiceService){}
 
-
   ngOnInit(): void {      
     this.notificationService.notification$.subscribe(message => {
       this.notificationMessage = message;      

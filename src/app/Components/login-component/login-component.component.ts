@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-check-service.service';
 import { AuthService } from 'src/app/Services/auth.service';
+import { NotificationServiceService } from 'src/app/Services/notification-service.service';
 
 @Component({
   selector: 'login-component',
@@ -28,7 +29,9 @@ export class LoginComponentComponent {
               private router: Router,
               private loginstatuscheckservice:LoginStatusCheckServiceService,
               private activatedroute: ActivatedRoute,
-              private authservice:AuthService) {}
+              private authservice:AuthService,
+              private notificationService: NotificationServiceService,
+            ) {}
 
   
   ngOnInit(): void {
@@ -49,8 +52,13 @@ onLogin(){
       
       this.router.navigate(['/home']); 
     },
-    error: (err) => {
-      this.invalidCredentials=true;
+    error: (err) => {  
+      if(err.error.message=="waiting for approval")  {
+        this.notificationService.showNotification('Email Approval Waiting!');
+      }
+      else{
+        this.invalidCredentials=true;
+      }
       setTimeout(() =>  {
                           this.invalidCredentials = false; 
                         }, 3000);        

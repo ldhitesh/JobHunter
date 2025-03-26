@@ -13,6 +13,25 @@
         {{ notificationMessage }}
         <i class="fa fa-frown fa-2x error-smile" aria-hidden="true"></i>
       </h4>
+
+      <!-- Approval Pending Notification -->
+      <h4 *ngIf="notificationMessage === 'Email Approval Waiting!'" class="approval-waiting-message">
+         <h3> Account Approval Pending!
+          </h3>  
+          <p> Since the email address you registered is not from Gmail, your account is pending administrator approval. 
+              Thank you for your patience while the process is completed.
+          </p>
+
+          <h6>Email us at: 
+            <a href="mailto:jobhuntertechteam@gmail.com" aria-label="Email Job Hunter support team">
+                jobhuntertechteam&#64;gmail.com
+            </a>
+          </h6>
+          <h4>Thank You!          
+            <i class="fa fa-smile fa-2x success-smile" aria-hidden="true"></i>
+          </h4>
+
+      </h4>
     </div>
   </div>
 </div>
