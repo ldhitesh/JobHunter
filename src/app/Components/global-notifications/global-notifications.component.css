@@ -1,0 +1,138 @@
+/* Modal Container */
+.modal {
+  display: none; /* Initially hidden */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Dark overlay with transparency */
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+  font-family: 'Lato', sans-serif; /* Modern and sleek font */
+}
+
+/* When modal is active, make it visible */
+.modal.is-active {
+  display: flex;
+  opacity: 1;
+}
+
+/* Modal Background (Overlay) */
+.modal-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Darker background for more contrast */
+  opacity: 0.85; /* Slight transparency for a modern touch */
+  z-index: -1; /* Ensure it stays behind the modal content */
+  transition: background-color 0.3s ease;
+}
+
+/* Modal Content Box */
+.modal-content {
+  top:-25%;
+  position: relative;
+  padding: 20px;
+  background-color: #fff; /* Clean white background */
+  border-radius: 5px; /* More rounded corners for a smooth look */
+  max-width: 440px; /* Ensure the modal doesn't get too wide */
+  width: 90%; /* Make modal responsive */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25); /* Subtle shadow to create depth */
+  text-align: center;
+  transition: transform 0.3s ease-out; /* Smooth transition for scaling effect */
+  animation: fadeIn 0.3s ease-out; /* Fade-in effect for smooth appearance */
+}
+
+/* Notification Text */
+.box h4 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #333; /* Dark gray text for legibility */
+  line-height: 1.5;
+}
+
+/* Success Message Styling */
+.success-message {
+  color: #4caf50; /* Green for success */
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+/* Failure Message Styling */
+.error-message {
+  color: #f44336; /* Red for failure */
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+/* Icons (Smile / Frown) */
+.success-smile {
+  margin-left: 15px;
+  font-size: 1.8rem; /* Slightly larger icons */
+  vertical-align: middle;
+  color: #4caf50; /* Green color for success icon */
+}
+
+.error-smile {
+  margin-left: 15px;
+  font-size: 1.8rem; /* Slightly larger icons */
+  vertical-align: middle;
+  color: #f44336; /* Red color for error icon */
+}
+
+/* Modal Close Effect */
+.modal-background {
+  cursor: pointer; /* User can click anywhere to close the modal */
+}
+
+/* Hover Effect on Modal Content */
+.modal-content:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px); /* Start from slightly below */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Button Inside Modal */
+.button.is-primary {
+  background-color: #2196f3; /* Blue for the button */
+  color: white;
+  border-radius: 30px;
+  padding: 12px 25px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for button */
+}
+
+.button.is-primary:hover {
+  background-color: #1976d2; /* Darker blue on hover */
+  transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+/* Responsive Modal */
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 20px;
+    width: 90%; /* Adjust width for smaller screens */
+  }
+  .success-smile, .error-smile {
+    font-size: 1.4rem; /* Smaller icons on mobile */
+  }
+}

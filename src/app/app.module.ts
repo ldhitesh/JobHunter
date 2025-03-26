@@ -47,6 +47,7 @@ import { AwsdashboardComponent } from './Learning/awsdashboard/awsdashboard.comp
 import { MysqldashboardComponent } from './Learning/mysqldashboard/mysqldashboard.component';
 import { ReactdashboardComponent } from './Learning/reactdashboard/reactdashboard.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
+import { GlobalNotificationsComponent } from './Components/global-notifications/global-notifications.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ import { NavbarComponent } from './Components/navbar/navbar.component';
     AwsdashboardComponent,
     MysqldashboardComponent,
     ReactdashboardComponent,
-    NavbarComponent
+    NavbarComponent,
+    GlobalNotificationsComponent
     ],
   imports: [
     BrowserModule,

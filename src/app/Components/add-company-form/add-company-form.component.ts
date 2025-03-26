@@ -63,7 +63,6 @@ export class AddCompanyFormComponent {
                                       ?this.companyform.value.lastapplied
                                       :new Date(this.companyform.value.lastapplied + 'T00:00:00').toString().slice(4,15);
     this.companyform.value.status=this.companyform.value.lastapplied=="Yet to Apply"?"Not Applied":"Applied";
-    console.log(this.companyform.value);
     
     this.http.post('http://localhost:80/api/companies/addcompany',this.companyform.value).subscribe({
       next:(response:any)=>{

@@ -28,8 +28,6 @@ export class RegistrationsComponent {
 
   ngOnInit(): void {
     this.fetchPendingApprovals();
-    console.log(this.UserRole);
-
     this.UserName = this.activatedroute.snapshot.paramMap.get('UserName');
     this.UserRole=this.authService.userRole;
 

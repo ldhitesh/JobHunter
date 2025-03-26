@@ -1,0 +1,25 @@
+{
+    "companies": [
+      {
+        "name": "Apple",
+        "logo": "assets/Apple.png",
+        "description": "Apple is one of the largest technology companies, famous for its innovative products like the iPhone, iPad, and MacBooks."
+      },
+      {
+        "name": "Google",
+        "logo": "assets/Google.png",
+        "description": "Google is a multinational technology company specializing in internet-related services and products, including search engines, advertising, and cloud computing."
+      },
+      {
+        "name": "Microsoft",
+        "logo": "assets/Microsoft.png",
+        "description": "Microsoft is a global leader in software development and cloud services, with its well-known products like Windows, Office Suite, and Azure."
+      },
+      {
+        "name": "IBM",
+        "logo": "assets/IBM.png",
+        "description": "IBM, or International Business Machines Corporation, is an American multinational company that specializes in cloud computing, AI, and computer hardware."
+      }
+    ]
+  }
+  

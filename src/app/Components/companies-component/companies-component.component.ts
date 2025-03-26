@@ -148,9 +148,7 @@ export class CompaniesComponentComponent {
     this.isEditing =data.id; 
   }
   
-  saveLink(data:any) {
-    console.log(data);
-    
+  saveLink(data:any) {    
     this.http.patch(`http://localhost:80/api/companies/updatecompany/${data.organization.trim()}`,data).subscribe({
       next:(response:any) => {
         this.isEditing = false; 

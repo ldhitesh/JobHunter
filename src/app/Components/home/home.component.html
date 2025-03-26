@@ -1,10 +1,10 @@
 <navbar></navbar>
 
 <div class="companies-description">
-  <img class="bgimage" src="assets/bg1.png" alt="">
+  <img class="bgimage" src="assets/bg1.png" alt="Background Image">
 
-  <section class="hero-section">
-      <div class="hero-content">
+  <section class="home-section">
+      <div class="home-content">
         <h1>Welcome to Job Hunter</h1>
         <p>Discover the best companies to work for in the U.S. and take the first step towards your dream job!</p>
         <p routerLink="/companieslist" routerLinkActive="active" class="btn btn-primary">Explore Top Companies</p>
@@ -12,72 +12,36 @@
   </section>
   
   <section class="companies-section">
-    <div class="container">
-      <h2>Top U.S. Companies</h2>
-
-      <div class="company-cards">
-        <div class="company-card">
-          <img src="assets/Apple.png" alt="Apple Logo" />
-          <h3>Apple</h3>
-          <p>Apple is one of the largest technology companies, famous for its innovative products like the iPhone, iPad, and MacBooks.</p>
-        </div>
-
-        <div class="company-card">
-          <img src="assets/Google.png" alt="Google Logo" />
-          <h3>Google</h3>
-          <p>Google is a multinational technology company specializing in internet-related services and products, including search engines, advertising, and cloud computing.</p>
-        </div>
-
-        <div class="company-card">
-          <img src="assets/Microsoft.png" alt="Microsoft Logo" />
-          <h3>Microsoft</h3>
-          <p>Microsoft is a global leader in software development and cloud services, with its well-known products like Windows, Office Suite, and Azure.</p>
-        </div>
-
-        <div class="company-card">
-          <img src="assets/IBM.png" alt="IBM Logo" />
-          <h3>IBM</h3>
-          <p>IBM, or International Business Machines Corporation, is an American multinational company that specializes in cloud computing, AI, and computer hardware.</p>
+      <div class="container">
+        <h2>Top U.S. Companies</h2>
+        <div class="company-cards">
+          <div *ngFor="let company of companyCards" class="company-card">
+            <img [src]="company.logo" [alt]="company.name + ' Logo'" />
+            <h3>{{ company.name }}</h3>
+            <p>{{ company.description }}</p>
+          </div>
         </div>
       </div>
-    </div>
   </section>
 </div>
-
-
-
 
 <learning-portal></learning-portal>      
 <discussion-forum></discussion-forum>
 
-
-
-<footer class="footer" >
+<!-- Footer Section -->
+<footer class="footer">
   <div class="container">
     <div class="footer-content">
       <div class="footer-section support-team">
         <h4>Support Team</h4>
         <p>If you have any questions or need assistance, feel free to reach out to our support team.</p>
-        <p>Email us at: <a href="mailto:jobhuntertechteam@gmail.com">jobhuntertechteam&#64;gmail.com</a></p>
+        <p>Email us at: <a href="mailto:jobhuntertechteam@gmail.com" aria-label="Email Job Hunter support team">jobhuntertechteam&#64;gmail.com</a></p>
       </div>
     </div>
-    <div>
+    <div class="footer-section">
       <p>&copy; 2024 Job Hunter. All rights reserved.</p>
     </div>
   </div>
 </footer>
-  
-
-<div class="modal" (click)="closeModal()" [ngClass]="{ 'is-active': notificationMessage }">
-  <div class="modal-background" ></div>
-  <div class="modal-content">
-    <div class="box">
-      <h4 *ngIf="notificationMessage=='Email sent successfully!'">{{notificationMessage}}<i class="fa fa-smile fa-1x success-smile"></i></h4>
-      <h4 *ngIf="notificationMessage=='Email Failed!'">{{notificationMessage}}<i class="fa fa-frown fa-1x success-smile"></i></h4>
-    </div>
-  </div>
-</div>
-
-
 
 <router-outlet></router-outlet>

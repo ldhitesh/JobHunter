@@ -22,10 +22,7 @@ export class CompanyDataFilterPipe implements PipeTransform {
       else if(identifier=='morethanweek'){
 
         if(value.lastapplied=='Yet to Apply')
-          value.status='Not Applied';
-
-        console.log("count");
-        
+          value.status='Not Applied';        
         return value;
 
       }

@@ -2,7 +2,6 @@ import { Component, ElementRef, EventEmitter, Output, Renderer2, ViewChild } fro
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
 import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-check-service.service';
-import { NotificationServiceService } from 'src/app/Services/notification-service.service';
 
 @Component({
   selector: 'navbar',
@@ -16,7 +15,7 @@ export class NavbarComponent {
 
   
     constructor(private loginstatuscheckservice:LoginStatusCheckServiceService,
-                private router:Router,private renderer: Renderer2,
+                private router:Router,
                 public authService:AuthService
     ){}
 

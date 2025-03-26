@@ -61,10 +61,7 @@ export class CreatepostComponent {
       if(params['prevUrl']){
         this.prevUrl=params['prevUrl']
       }
-    });
-
-    console.log(this.updatepostdata);
-    
+    });    
   }
   
   createPost(): void {

@@ -1,0 +1,18 @@
+<div class="modal" (click)="closeModal()" [ngClass]="{ 'is-active': notificationMessage }" role="dialog" aria-live="assertive">
+  <div class="modal-background" role="presentation"></div>
+  <div class="modal-content">
+    <div class="box">
+      <!-- Success Notification -->
+      <h4 *ngIf="notificationMessage === 'Email sent successfully!'" class="success-message">
+        {{ notificationMessage }}
+        <i class="fa fa-smile fa-2x success-smile" aria-hidden="true"></i>
+      </h4>
+      
+      <!-- Failure Notification -->
+      <h4 *ngIf="notificationMessage === 'Email Failed!'" class="error-message">
+        {{ notificationMessage }}
+        <i class="fa fa-frown fa-2x error-smile" aria-hidden="true"></i>
+      </h4>
+    </div>
+  </div>
+</div>
