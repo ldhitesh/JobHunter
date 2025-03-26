@@ -1,4 +1,3 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { OAuthEvent, OAuthErrorEvent, OAuthSuccessEvent } from 'angular-oauth2-oidc';
@@ -6,19 +5,12 @@ import { LoginStatusCheckServiceService } from './login-status-check-service.ser
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 
-interface OAuthErrorParams {
-  error: string;
-  error_description: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
 
-
 export class AuthService {
   constructor(private oauthService: OAuthService, 
-              private http:HttpClient,
               private loginstatuscheckservice:LoginStatusCheckServiceService,
               private router:Router
             ) {
@@ -49,23 +41,13 @@ export class AuthService {
       } 
       else if (event instanceof OAuthSuccessEvent) {  
           const claims = this.oauthService.getIdentityClaims();
-          if(!claims['email_verified']){            
-            this.verifyjobhunterdatabase(claims['email']);
-            this.email=this.getUserDetails().email;
-            this.username=this.getUserDetails().unique_name;
-            this.userRole=this.getUserDetails().role;
-            this.loginstatuscheckservice.login();
-            this.loginstatuscheckservice.RoleCheck(this.getUserDetails().role);
-          }
-          else{
             this.email=claims['email'];
             this.username=claims['name'];
             this.userRole=claims['jobhunter-roles'];
             this.profilepicture=claims['picture'];
             this.loginstatuscheckservice.login();
-            this.loginstatuscheckservice.RoleCheck(claims['jobhunter-roles']);
+            this.loginstatuscheckservice.RoleCheck(this.userRole);
             this.router.navigate(['/home']); 
-          }      
       }
     });
 
@@ -74,12 +56,25 @@ export class AuthService {
     });
   }
 
+  getUserDetails(){
+    const token = sessionStorage.getItem('Token');
+    if (token) {
+      const decoded: any = jwtDecode(token);  
+      return decoded;
+    } 
+    return;
+  }
+  
+  setUserDetails():void{
+    let userdata=this.getUserDetails();
+    this.userRole=userdata.role;
+    this.profilepicture="/assets/NoProfileImage.png"
+    this.email=userdata.email;
+    this.username=userdata.unique_name;
+  }
 
   public authlogin() {
-
     this.oauthService.initCodeFlow(); 
-    this.loginstatuscheckservice.login();
-
   }
 
   public logout() {
@@ -89,70 +84,7 @@ export class AuthService {
     sessionStorage.clear();
     this.loginstatuscheckservice.logout();
     }
-
-  public getAccessToken() {
-    return this.oauthService.getAccessToken();
-  }
-
-  
-
-
-  verifyjobhunterdatabase(email:any){
-      const requestBody = {
-        emailid: email,
-        verificationtoken: '',
-        verified:"Not-Verified"
-      };
-      console.log("1  ",requestBody );
-
-      this.http.post('http://0.0.0.0:80/api/register/triggerverifyemailsinglesignon',requestBody).subscribe({
-        next:(response:any)=>{
-          
-          if(response.message="Verified"){
-            const claims = this.oauthService.getIdentityClaims();
-            this.userRole=claims['jobhunter-roles'];
-            this.loginstatuscheckservice.login();
-            this.loginstatuscheckservice.RoleCheck(claims['jobhunter-roles']);
-            this.router.navigate(['/home']); 
-          }
-          else{
-                this.logout();
-                this.router.navigate(['/login'],{
-                  queryParams: {
-                    response: "Success"
-                  }
-                });  
-          } 
-        },
-        error:(err:any)=>{
-          let resp=err.error.message=="Duplicate Email!"?"Duplicate":"Failure"
-          this.router.navigate(['/login'],{
-                  queryParams: {
-                    response: resp,
-                  }
-                }); 
-        }
-      }); 
-    }
-
-
-    getUserDetails(){
-      const token = sessionStorage.getItem('Token');
-      if (token) {
-        const decoded: any = jwtDecode(token);  
-        return decoded;
-      } 
-      return;
-    }
-
-    setUserDetails():void{
-      let userdata=this.getUserDetails();
-      this.userRole=userdata.role;
-      this.profilepicture="/assets/NoProfileImage.png"
-      this.email=userdata.email;
-      this.username=userdata.unique_name;
-    }
-  }
+}
   
 
   

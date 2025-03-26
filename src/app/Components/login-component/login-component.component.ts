@@ -57,7 +57,6 @@ export class LoginComponentComponent {
   }
   onSingleSignOnLogin(){
       this.authservice.authlogin();
-      this.loginstatuscheckservice.login();
   }
 
 
