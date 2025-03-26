@@ -2,8 +2,9 @@
 
 /* Learning Materials Section */
 .learning-materials {
-    background-color: #ffffff;
     padding: 100px 0;
+    color: #ffffff;
+
   }
   
   .container {
@@ -17,13 +18,13 @@
     font-size: 36px;
     font-weight: 600;
     margin-bottom: 20px;
-    color: #2c3e50;
+    color: #ffffff;
   }
   
   .section-description {
     text-align: center;
     font-size: 18px;
-    color: #7f8c8d;
+    color: #ffffff;
     margin-bottom: 40px;
   }
   
@@ -110,7 +111,7 @@
   }
   
   .view-more-button {
-    color: rgb(26, 88, 143);
+    color: #ffffff;
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 16px;
@@ -121,7 +122,7 @@
   }
   
   .view-more-button:hover {
-    color: #082e48;
+    color: #cac1c1;
   }
   
   /* Responsive Styles */

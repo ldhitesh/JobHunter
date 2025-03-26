@@ -1,17 +1,46 @@
+
+
 /* Section Styling */
 .forums-section {
-  padding: 40px 0;
+  padding: 100px 0;
   margin-top: 5%;
+  width: 100%;
+  position: relative; /* Required for positioning the pseudo-element */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Keeps it fixed while scrolling */
+}
+
+
+.forums-section::before {
+  content: ''; /* Necessary to create the pseudo-element */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("/assets/bg3.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  opacity: 50%; /* Adjust the opacity to your desired level */
+  z-index: -1; /* Ensures the background is behind the content */
 }
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 2%;
+  width: 100%;
+
 }
 
 /* Section Heading */
 .section-title {
+  color: #201f1f;
   font-size: 45px;
   font-weight: 600;
   margin-bottom: 10px;
@@ -19,46 +48,42 @@
 }
 
 .section-description {
-  font-size: 18px;
-  margin-bottom: 20px;
-  color: #555;
+  font-size: 20px;
+  margin-bottom: 60px;
+  color: #201f1f;
   text-align: center;
+  font-weight: 600;
 }
 
 .forum-posts{
+  color: #201f1f;
   width: 100%;
-  padding: 3% 1% 3% 3%;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-
 }
 
 /* Forum Post Container */
 .forum-post {
   width: 100%;
   border-radius: 8px;
-  padding: 1%;
-  margin-bottom: 40px;
+  padding: 20px;
+  margin-bottom: 20px;
   position: relative;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-/* Separator Line */
-.forum-post::after {
-  content: "";
-  position: absolute;
-  bottom: -20px;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(to right, #dcdcdc 0%, #eeeeee 50%, #dcdcdc 100%);
+.forum-post:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
 }
+
+
 
 /* Header */
 
 .forum-header {
   display: flex;
-  align-items: flex-start; /* Align everything to the top */
-  gap: 12px;
+  flex-direction: column;
 }
 
 .postprofilepicture {
@@ -66,6 +91,7 @@
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
+  
 }
 
 .pic-title {
@@ -76,9 +102,9 @@
 }
 
 .forum-title {
-  font-size: 1.25rem;
-  font-weight: 500;
-  width: 750px;
+  font-size: 1.15rem;
+  font-weight: 400;
+  width: 90%;
   word-wrap: break-word;
   white-space: normal;
   margin: 0;
@@ -86,21 +112,22 @@
 
 .forum-author {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  font-size: 15px;
-  /* margin-right: -2%; */
+  font-size: 11px;
 }
 
 .menu-container {
   position: relative;
+  align-items: left;
 }
 
 .dots-btn {
   background: none;
   border: none;
-  font-size: 18px;
+  font-size: 13px;
   cursor: pointer;
+  color: #201f1f;
+
 }
 
 .menu-options {
@@ -111,6 +138,7 @@
   box-shadow: 0 2px 5px rgba(0,0,0,0.15);
   min-width: 100px;
   z-index: 100;
+  color: black;
 }
 
 .menu-options div {
@@ -127,9 +155,10 @@
 .forum-summary {
   font-size: 1rem;
   margin-top: 20px;
-  color: #444;
+  color: #201f1f;
   word-wrap: break-word;
-  
+  width: 90%;
+  overflow: scroll;
 }
 
 /* Footer */
@@ -156,7 +185,7 @@
 
 .forum-date {
   font-size: 0.875rem;
-  color: #888;
+  color: #201f1f;
 }
 
 /* Inline Reply Form */
@@ -181,6 +210,12 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   resize: vertical;
+  color: inherit; /* Keeps the default color */
+  background-color: inherit; /* Inherits the background from the parent, if needed */
+  font-family: inherit; /* Inherits the font from the parent, or you can set a default font */
+  font-size: inherit; /* Inherits the font size */
+  white-space: pre; 
+  font-family: monospace;
 }
 
 .replymodalbtns {
@@ -222,29 +257,50 @@
   padding: 15px;
   border: 1px solid #ddd;
   border-radius: 5px;
+  width: 90%;
 }
 
 .replies h4 {
   font-size: 1rem;
-  color: #0f406a;
+  color: #201f1f;
   margin-bottom: 20px;
 }
 
 .reply-item {
   margin-bottom:2%;
+
 }
+
+.reply-summary {
+  font-size: 15px;
+  font-weight: 500;
+  word-wrap: break-word;
+  white-space: normal;
+  margin: 0% 3% 2% 3%;
+  font-family: 'Segoe UI', Verdana, Geneva, Tahoma, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: #f9f9f9;
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  white-space: pre;
+  font-family: monospace;
+  overflow: scroll;
+}
+
 
 .reply-item p {
   margin: 0;
-  color: #333;
+  color: #201f1f;
   font-size: 0.95rem;
+  width: 1000px;
 }
 
 .reply-item small {
-  color: #777;
+  color: #201f1f;
   font-size: 0.75rem;
   display: flex;
-  margin-top: 5px;
 }
 
 .reply-item small .dots-btn {
@@ -254,7 +310,7 @@
 /* Create Post Button */
 .btn-create-post {
   background-color: #0f406a;
-  color: #fff;
+  color: #f6f5f5;
   padding: 12px 18px;
   font-size: 1rem;
   border-radius: 5px;
@@ -273,6 +329,20 @@
 .view-more-container {
   text-align: center;
   margin-top: 20px;
+  color: black;
+  font-weight: 700;
+}
+.view-more-container h4 {
+  color: rgb(77, 77, 77);
+  font-weight: 700;
+  transition: background-color 0.3s ease;
+
+}
+
+.view-more-container h4:hover{
+  color: #b2adad;
+  transform: translateY(2px);
+
 }
 
 .view-more-button {
@@ -287,15 +357,18 @@
 }
 
 .view-more-button:hover {
-  color: #082e48;
+  color: #000000;
+  transform: translateY(2px);
 }
 
 /* FontAwesome Icons */
 .fa-trash,
 .fa-edit {
-  font-size: 15px;
+  font-size: 12px;
   opacity: 70%;
   cursor: pointer;
+  margin-left: 1%;
+  
 }
 
 .fa-trash {
@@ -350,12 +423,12 @@
 .reply-item p {
   display: flex;
   justify-content: space-between;
-  margin-left: 3%;
-}
+  }
 
 .profilepicture{
   width: 30px;
   border-radius: 50%;
+  margin-right:1%;
 }
 
 .postprofilepicture{
@@ -373,13 +446,19 @@
   margin-left: 2%;
 }
 
+.reply-header{
+  display: flex;
+  align-items: left;
+}
+
+.reply-header p {
+  font-size: 11px;
+}
 
 
-
-
-
-
-
+.icon-actions{
+  width: 50px;
+}
 
 
 
@@ -476,3 +555,4 @@ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 font-size: 1.5rem;
 margin-bottom: 20px;
 }
+

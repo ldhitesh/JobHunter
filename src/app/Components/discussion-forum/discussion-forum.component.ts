@@ -65,15 +65,14 @@ export class DiscussionForumComponent {
     return this.showAllPosts ? this.forumPosts : this.forumPosts.slice(0, this.currentdisplayedposts);
   }
 
-
+   
    
   createPost(): void {
-
     const PostData={
-    "author":this.authService.username,
+    "author":sessionStorage.getItem('Token')?this.authService.getUserDetails().unique_name: this.authService.username,
     "posted_date": new Date(),
-    "user_id":this.authService.email,
-    "postprofilepic":this.authService.profilepicture,
+    "user_id":sessionStorage.getItem('Token')?this.authService.getUserDetails().email:this.authService.email,
+    "postprofilepic":sessionStorage.getItem('Token')? "/assets/NoProfileImage.png":this.authService.profilepicture,
     "title":this.newPost.title,
     "summary":this.newPost.summary
     }

@@ -4,8 +4,7 @@ import { OAuthService } from 'angular-oauth2-oidc';
 import { OAuthEvent, OAuthErrorEvent, OAuthSuccessEvent } from 'angular-oauth2-oidc';
 import { LoginStatusCheckServiceService } from './login-status-check-service.service';
 import { Router } from '@angular/router';
-import { HomeComponent } from '../Components/home/home.component';
-import { Subscription } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
 
 interface OAuthErrorParams {
   error: string;
@@ -44,7 +43,7 @@ export class AuthService {
       revocationEndpoint: 'https://dev-23jl6hcwap6zsa4n.us.auth0.com/oauth/revoke',
     });
   
-    var subscription=this.oauthService.events.subscribe((event: OAuthEvent) => {
+    this.oauthService.events.subscribe((event: OAuthEvent) => {
       if (event instanceof OAuthErrorEvent) {
           this.router.navigate(['/login']);        
       } 
@@ -73,7 +72,7 @@ export class AuthService {
 
   public authlogin() {
 
-    this.oauthService.initCodeFlow(); // scope should be a string here
+    this.oauthService.initCodeFlow(); 
 
   }
 
@@ -81,33 +80,13 @@ export class AuthService {
     if (this.oauthService.hasValidAccessToken()) {
       this.oauthService.logOut();
     }  
+    sessionStorage.clear();
   }
 
   public getAccessToken() {
     return this.oauthService.getAccessToken();
   }
 
-  // public click(){
-  //   const tokenId = sessionStorage.getItem('id_token');
-
-  //   if (tokenId) {
-  //     const headers = new HttpHeaders({
-  //       'Authorization': `Bearer ${tokenId}`
-  //     });
-
-  //     this.http.get("http://localhost:5106/oauth/check-email", { headers })
-  //       .subscribe(
-  //         (response) => {
-  //           console.log('API Response:', response);
-  //         },
-  //         (error) => {
-  //           console.error('Error:', error);
-  //         }
-  //       );
-  //   } else {
-  //     console.error('Token not found in session storage');
-  //   }
-  // }
 
 
   verifyjobhunterdatabase(email:any){
@@ -146,9 +125,21 @@ export class AuthService {
                 }); 
         }
       }); 
+    }
+
+
+    getUserDetails(){
     
+      const token = sessionStorage.getItem('Token');
+      if (token) {
+        const decoded: any = jwtDecode(token);  
+        return decoded;
+      } 
+      return;
     }
   }
+  
+
   
 
 

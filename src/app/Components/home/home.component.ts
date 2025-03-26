@@ -49,10 +49,11 @@ export class HomeComponent {
       this.IsloggedIn=true;
       this.UserRole=this.authService.userRole;
     }
-    else if(sessionStorage.getItem('Role')){
+    else if(sessionStorage.getItem('Token')){
       this.IsloggedIn=true;
-      this.UserRole=sessionStorage.getItem('Role');
+      this.UserRole=this.authService.getUserDetails().role;
     }
+    
     this.IsHomePage = this.router.url === '/home'; // You can change '/home' if your home route is different
     
   }

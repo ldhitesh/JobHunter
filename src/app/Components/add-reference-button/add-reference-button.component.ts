@@ -20,8 +20,8 @@ export class AddReferenceButtonComponent {
     if(sessionStorage.getItem('id_token')){
       this.UserRole=this.authService.userRole;
     }
-    else if(sessionStorage.getItem('Role')){
-      this.UserRole=sessionStorage.getItem('Role');
+    else if(sessionStorage.getItem('Token')){
+      this.UserRole=this.authService.getUserDetails().role;
     }
 
   }

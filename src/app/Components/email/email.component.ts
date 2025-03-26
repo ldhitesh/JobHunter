@@ -34,8 +34,8 @@ export class EmailComponent {
     if(sessionStorage.getItem('id_token')){
       this.userRole=this.authService.userRole;
     }
-    else if(sessionStorage.getItem('Role')){
-      this.userRole=sessionStorage.getItem('Role');
+    else if(sessionStorage.getItem('Token')){
+      this.userRole=this.authService.getUserDetails().role;
     }
   }
 

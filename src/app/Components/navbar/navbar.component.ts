@@ -36,16 +36,15 @@ export class NavbarComponent {
       this.IsloggedIn=true;
       this.UserRole=this.authService.userRole;
     }
-    else if(sessionStorage.getItem('Role')){
+    else if(sessionStorage.getItem('Token')){
       this.IsloggedIn=true;
-      this.UserRole=sessionStorage.getItem('Role');
+      this.UserRole=this.authService.getUserDetails().role;
     }    
   }
 
   Logout(){
     this.authService.profilepicture="";
-    sessionStorage.removeItem('UserName');
-    sessionStorage.removeItem('Role');
+    sessionStorage.clear();
     this.router.navigate(['/login']);
     this.IsloggedIn=false;
     this.loginstatuscheckservice.logout();

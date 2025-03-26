@@ -1,3 +1,9 @@
+.bgimage{
+  width: 100%;
+  height: 100%;
+  z-index: -100;
+  position: fixed;
+}
 
 /* Hero Section */
 .hero-section {
@@ -8,9 +14,11 @@
   background-image: url('https://example.com/hero-background.jpg'); /* Replace with your own background image */
   background-size: cover;
   background-position: center;
-  color: #14558f;
+  color: #f2f2f3;
   text-align: center;
   text-shadow: #2c3e50;
+  padding-top: 18%;
+
 }
 
 .hero-content h1 {
@@ -34,34 +42,31 @@
 }
 
 .btn-primary {
-  background-color: #337ab7;
+  background-color: #0a365d;
   color: white;
   border: none;
   
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background-color: #04172b;
 }
 
 /* Companies Section */
 .companies-section {
-  background-color: #ffffff;
-  margin-top: -5%;
-  padding-bottom:5%;
+  padding-bottom:15%;
 }
 
 .container {
   width: 90%;
   max-width: 1200px;
-  margin: 0 auto;
 }
 
 h2 {
   text-align: center;
   font-size: 2.5rem;
   margin-bottom: 80px;
-  color: #2c3e50;
+  color: #f2f2f3;
 }
 
 .company-cards {

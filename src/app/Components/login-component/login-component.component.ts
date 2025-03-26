@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-check-service.service';
 import { AuthService } from 'src/app/Services/auth.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'login-component',
@@ -43,11 +44,8 @@ export class LoginComponentComponent {
       const loginData = this.loginCredential;
       this.http.post('http://localhost:80/api/login', loginData).subscribe({
         next: (response: any) => {        
-
-          sessionStorage.setItem('UserName', response.userDetails.username);
-          sessionStorage.setItem('Role', response.userDetails.role[0]);
+          sessionStorage.setItem('Token', response.token);
           this.loginstatuscheckservice.login();
-          this.loginstatuscheckservice.RoleCheck(response.userDetails.role[0]);
           this.router.navigate(['/home']);  
         },
         error: (err) => {
