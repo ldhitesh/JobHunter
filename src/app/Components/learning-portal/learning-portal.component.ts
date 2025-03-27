@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { GetDataService } from 'src/app/Services/get-data.service';
 
 @Component({
   selector: 'learning-portal',
@@ -12,12 +13,12 @@ export class LearningPortalComponent {
   showNoLinkToolTip:any; 
   techStacks:any;
 
-  constructor(private http:HttpClient){
+  constructor(private getDataService:GetDataService){
         this.getTechCards();
   }
 
   getTechCards(){
-    this.http.get("/assets/data/techCards.json").subscribe({
+    this.getDataService.getDataFromAsset("/assets/data/techCards.json").subscribe({
       next:(response:any) => {
         this.techStacks=response.techCards
       },
