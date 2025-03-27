@@ -161,12 +161,8 @@ export class DiscussionForumComponent {
       "replyprofilepic":this.authService.profilepicture 
     }
     this.http.post('http://localhost:80/api/discussion/addreply',replydata).subscribe({
-      next:(response:any) => {
-        const post = this.forumPosts.find((p:any) => p.post_id === postId);
-        if (post) {
-          post.replies = post.replies
-          post.replies.push(response.reply);          
-        }
+      next:(response:any) => {  
+        this.fetchposts();       
         this.closeModal();
         this.replyContent='';
     },
@@ -187,11 +183,10 @@ export class DiscussionForumComponent {
 
   UpdateReply(){
    this.singleReplyData.reply_summary=this.replyContent;
+   this.singleReplyData.replied_on=new Date();
     this.http.patch(`http://localhost:80/api/discussion/updatereply/${this.singleReplyData.reply_id}`,this.singleReplyData).subscribe({
     next:(response:any) => {
-      let post=this.forumPosts.find((p:any) => p.post_id === this.singleReplyData.post_id);
-      let reply= post.replies.find((r:any)=>r.reply_id==this.singleReplyData.reply_id);
-      reply=this.singleReplyData;
+      this.fetchposts();       
       this.replyContent='';
       this.singleReplyData='';
       this.updatebtn=false;
@@ -265,3 +260,4 @@ export class DiscussionForumComponent {
   }
   
 }
+

@@ -17,21 +17,20 @@
   height: 50px;
 }
 
-.forums-section::before {
-  content: ''; /* Necessary to create the pseudo-element */
+/* .forums-section::before {
+  content: ''; 
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url("/assets/bg3.jpg");
+  background-image: url("/assets/bg1.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  opacity: 50%; /* Adjust the opacity to your desired level */
-  z-index: -1; /* Ensures the background is behind the content */
-}
+  z-index: -1;
+} */
 
 .container {
   display: flex;
@@ -42,9 +41,14 @@
 
 }
 
+.black-text .section-title,
+.black-text .section-description {
+  color: #000000 !important;
+}
+
 /* Section Heading */
 .section-title {
-  color: #201f1f;
+  color: #ffffff;
   font-size: 45px;
   font-weight: 600;
   margin-bottom: 10px;
@@ -54,9 +58,8 @@
 .section-description {
   font-size: 20px;
   margin-bottom: 60px;
-  color: #201f1f;
+  color: #ffffff;
   text-align: center;
-  font-weight: 600;
 }
 
 .forum-posts{
@@ -260,7 +263,7 @@
   padding: 15px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  width: 100%;
+  width: 1100px;
 }
 
 .replies h4 {
@@ -334,10 +337,8 @@
   font-weight: 700;
 }
 .view-more-container h4 {
-  color: rgb(77, 77, 77);
-  font-weight: 700;
+  color: rgb(255, 255, 255);
   transition: background-color 0.3s ease;
-
 }
 
 .view-more-container h4:hover{
