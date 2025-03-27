@@ -53,8 +53,12 @@ onLogin(){
       this.router.navigate(['/home']); 
     },
     error: (err) => {  
-      if(err.error.message=="waiting for approval")  {
+      const err_message=err.error.message;
+      if(err_message=="Your account is waiting for approval.")  {
         this.notificationService.showNotification('Email Approval Waiting!');
+      }
+      else if(err_message=="Account verification is required."){
+        this.notificationService.showNotification('Email verification pending!');
       }
       else{
         this.invalidCredentials=true;
