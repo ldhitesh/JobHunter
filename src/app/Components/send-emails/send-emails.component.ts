@@ -18,8 +18,14 @@ export class SendEmailsComponent {
   suggestions:any=[];
   selectedradio:string='';
   selectedIndex: number = 0;  // To track the currently selected suggestion index
-  private apiUrl = 'http://localhost:80/api/email/send'; // API URL to send email
-  public emailData = { to: '', subject: '', body: '' };
+  private apiUrl = 'http://localhost:80/api/email/sendgmailapi'; // API URL to send email
+  public emailData = {
+    "SenderName":"",
+    "FromEmail":"",
+    "ToEmail":"",
+    "Subject":"",
+    "Body":""
+  };
   public UserRole:any;
   notificationMessage: string='';
 
@@ -147,16 +153,15 @@ export class SendEmailsComponent {
   }
   onEnterKey() {}
 
-  // Send email method
   sendEmail() {
-    let formattedEmail = {...this.emailData};
-    this.emailData.body = '';
-    this.emailData.subject = '';
-    var email={...this.formatEmailBody(formattedEmail)};
+    this.emailData.FromEmail=this.authService.email;
+    this.emailData.SenderName=this.authService.username;
     if(this.mailselection.length!=0){
-      email.to=this.mailselection;
-      this.http.post(this.apiUrl,email).subscribe({
+      this.emailData.ToEmail=this.mailselection;
+      this.http.post(this.apiUrl,this.emailData).subscribe({
         next: (response) => {
+          this.emailData.Body = '';
+          this.emailData.Subject = '';
           this.notificationService.showNotification('Email sent successfully!');
         },
         error: (error) => {
@@ -166,9 +171,11 @@ export class SendEmailsComponent {
     }
     else{
       this.tags.forEach(To => {
-        email.to=To;      
-        this.http.post(this.apiUrl,email).subscribe({
+        this.emailData.ToEmail=To;      
+        this.http.post(this.apiUrl,this.emailData).subscribe({
           next: (response) => {
+            this.emailData.Body = '';
+            this.emailData.Subject = '';
             this.notificationService.showNotification('Email sent successfully!');
           },
           error: (error) => {
@@ -188,42 +195,4 @@ export class SendEmailsComponent {
     this.prevtags=[];
 
   }
-
-  // This method formats the email body with custom HTML and CSS (Roboto font)
-  formatEmailBody(email:any) {  
-    email.body = `
-      <html>
-        <head>
-          <style>
-            @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-            body {
-              font-family: 'Roboto', Arial, sans-serif;
-              font-size: 16px;
-              line-height: 1.5;
-              margin: 0;
-              padding: 20px;
-            }
-            h1 {
-              color: #333;
-            }
-            p {
-              color: #666;
-            }
-            /* Use div instead of <pre> and apply pre-wrap style to preserve formatting */
-            .formatted-body {
-              font-family: 'Roboto', Arial, sans-serif; /* Ensure the font is applied */
-              white-space: pre-wrap;  /* Preserve line breaks and spaces */
-              word-wrap: break-word;  /* Allow long words to break and prevent overflow */
-            }
-          </style>
-        </head>
-        <body>
-          <div class="formatted-body">${email.body}</div>  
-        </body>
-      </html>
-    `;
-
-    return email;
-  }
-
 }

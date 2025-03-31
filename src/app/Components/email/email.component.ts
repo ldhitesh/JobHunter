@@ -12,8 +12,14 @@ import { NotificationServiceService } from 'src/app/Services/notification-servic
 })
 export class EmailComponent {
 
-  private apiUrl = 'http://localhost:80/api/email/send'; // API URL to send email
-  public emailData = { to: '', subject: '', body: '' };
+  private apiUrl = 'http://localhost:80/api/email/sendgmailapi'; 
+  public emailData = {
+    "SenderName":"",
+    "FromEmail":"",
+    "ToEmail":"",
+    "Subject":"",
+    "Body":""
+};
   public userRole:any='';
 
   constructor(private http: HttpClient, 
@@ -26,7 +32,7 @@ export class EmailComponent {
 
   ngOnInit(): void {
     this.activatedroute.queryParams.subscribe(params => {
-      this.emailData.to = params['To'];
+      this.emailData.ToEmail = params['To'];
     });
     this.loginstatuscheckservice.Role.subscribe(role => {
       this.userRole = role;
@@ -41,14 +47,15 @@ export class EmailComponent {
 
   // Send email method
   sendEmail() {
-    let formattedEmail = {...this.emailData};
-    this.emailData.body = '';
-    this.emailData.subject = '';
-    this.router.navigate(['/references'])
-
-    this.http.post(this.apiUrl, this.formatEmailBody(formattedEmail)).subscribe({
+    this.emailData.FromEmail=this.authService.email;
+    this.emailData.SenderName=this.authService.username;
+    this.http.post(this.apiUrl, this.emailData).subscribe({
       next: (response) => {
-          this.notificationService.showNotification('Email sent successfully!');
+        this.emailData.Body = '';
+        this.emailData.Subject = '';
+        this.notificationService.showNotification('Email sent successfully!');
+        this.router.navigate(['/references'])
+
       },
       error: (error) => {
           this.notificationService.showNotification('Email Failed!');

@@ -8,7 +8,7 @@
                         class="form-control" 
                         id="recipientemail"
                         name="to"
-                        [(ngModel)]="emailData.to">
+                        [(ngModel)]="emailData.ToEmail">
                 </div>
             </div>    
             <div class="row mb-3">
@@ -18,7 +18,7 @@
                         class="form-control" 
                         id="subject"
                         name="subject"
-                        [(ngModel)]="emailData.subject">
+                        [(ngModel)]="emailData.Subject">
                 </div>
             </div>
 
@@ -31,7 +31,8 @@
                         name="body"
                         rows="100"
                         cols="100"
-                        [(ngModel)]="emailData.body"
+                        style="white-space: pre;" 
+                        [(ngModel)]="emailData.Body"
                         (keydown.enter)="onEnterKey()">
                         </textarea>
                 </div>
