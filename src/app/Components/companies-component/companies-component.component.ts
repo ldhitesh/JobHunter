@@ -165,6 +165,7 @@ export class CompaniesComponentComponent {
     this.isEditing=-1;
   }
   
+  
 
 }
 

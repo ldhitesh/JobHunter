@@ -1,1 +1,56 @@
-<p>leetcode works!</p>
+<!-- https://leetcode.com/problemset/ -->
+
+<div class="leetcode-container">
+    <h2>Solved LeetCode Problems</h2>
+    
+
+    <div class="btns-group">
+        <a class="addleetcode" href="https://leetcode.com/problemset/">Solve Leetcode </a>
+        <button class="addleetcode" (click)="openModal()">+ Leetcode Solved Problem</button>
+
+    </div>
+    <div *ngFor="let problem of solvedProblems;let i=index" class="problem-card">
+      <div class="problem-header">
+        <a [href]="problem.problem_link" target="_blank"> {{i+1+'. ' }} {{ extractProblemName(problem.problem_link)|titlecase}}</a>
+        <p *ngIf="showNoteIndex!=i" (click)="setShowNotesIndex(i)">Show Note</p>
+        <p *ngIf="showNoteIndex==i" (click)="setShowNotesIndex(i)">Hide Note</p>
+
+      </div>
+      <div *ngIf="showNoteIndex==i" class="problem-notes">
+        <div class="notes-header">
+            <p (click)="setAddNoteEditable()" *ngIf="!problem.problem_notes">  + Add Note </p>
+            <i (click)="setAddNoteEditable()" *ngIf="problem.problem_notes && !isAddNoteEditable" class="fa fa-edit"></i>
+        </div>
+   
+        <p *ngIf="isAddNoteEditable && showNoteIndex==i" (click)="addNoteToProblem(problem.problem_id, problem.problem_notes)"> <i class="fas fa-save" ></i> Save</p>
+        <textarea *ngIf="isAddNoteEditable && showNoteIndex==i" class="modal-textarea" [(ngModel)]="problem.problem_notes"></textarea>
+        <div *ngIf="!isAddNoteEditable && showNoteIndex==i" class="modal-textarea-p"> 
+          <pre><code >{{ problem.problem_notes }}</code></pre>
+        </div>
+
+      </div>
+    </div>
+    
+  </div>
+  
+
+  <!-- Modal -->
+<div *ngIf="leetcodeform" class="modal-overlay">
+    <div class="modal-content">
+      <button class="close-modal-btn" (click)="closeModal()">X</button>
+  
+      <div class="add-problem-form">
+        <input
+          type="url"
+          [(ngModel)]="newProblemLink"
+          placeholder="Problem Link"
+        />
+        <textarea class="formtextarea"
+          [(ngModel)]="newProblemNotes"
+          placeholder="Problem Notes"
+          rows="3"
+        ></textarea>
+        <button class="addleetcode" (click)="addProblem()">Add Problem</button>
+      </div>
+    </div>
+  </div>

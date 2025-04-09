@@ -48,6 +48,9 @@ import { MysqldashboardComponent } from './Learning/mysqldashboard/mysqldashboar
 import { ReactdashboardComponent } from './Learning/reactdashboard/reactdashboard.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import { GlobalNotificationsComponent } from './Components/global-notifications/global-notifications.component';
+import { ResumeDataCollectionComponent } from './Components/resume-data-collection/resume-data-collection.component';
+import { DatePipe } from '@angular/common';
+import { ResumeGeneratorComponent } from './Components/resume-generator/resume-generator.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +95,9 @@ import { GlobalNotificationsComponent } from './Components/global-notifications/
     MysqldashboardComponent,
     ReactdashboardComponent,
     NavbarComponent,
-    GlobalNotificationsComponent
+    GlobalNotificationsComponent,
+    ResumeDataCollectionComponent,
+    ResumeGeneratorComponent
     ],
   imports: [
     BrowserModule,
@@ -105,7 +110,7 @@ import { GlobalNotificationsComponent } from './Components/global-notifications/
     OAuthModule.forRoot()
  
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

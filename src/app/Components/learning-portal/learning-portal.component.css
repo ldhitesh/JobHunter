@@ -84,6 +84,12 @@
   transition: background-color 0.3s ease;
 }
 
+a{
+  text-decoration: none;
+  color: #ffffff;
+
+}
+
 .learn-more:hover {
   background-color: #020c17;
 }

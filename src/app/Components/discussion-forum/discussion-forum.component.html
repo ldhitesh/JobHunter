@@ -15,7 +15,7 @@
               </div>
               <div class="forum-author">
                 Posted By {{ post.author }} on {{ post.posted_date | date: 'short' }}
-                <div class="menu-container" *ngIf="post.user_id==authService.email" >
+                <div class="menu-container" *ngIf="post.user_id==authService.email || authService.userRole=='Admin'" >
                   <button class="dots-btn" (click)="toggleMenu($event,index)">
                     <i class="fas fa-ellipsis-v"></i> 
                   </button>
@@ -37,9 +37,10 @@
                   <img class="profilepicture" *ngIf="reply.replyprofilepic" [src]="reply.replyprofilepic" (error)="setDefaultImage($event)">
                   <p>Replied By {{ reply.username }} on {{ reply.replied_on | date: 'short' }}</p> 
                   <small>
-                    <span class="icon-actions" *ngIf="reply.user_id==authService.email" >
-                        <i *ngIf="reply.user_id==authService.email" class="fa fa-edit" (click)="EditReply(reply.reply_id,reply.post_id,index)"></i>
-                        <i *ngIf="reply.user_id==authService.email" class="fa fa-trash" (click)="deleteReply(reply.reply_id,reply.post_id)"></i>
+                    
+                    <span class="icon-actions" *ngIf="reply.user_id==authService.email || authService.userRole=='Admin'" >
+                        <i  class="fa fa-edit" (click)="EditReply(reply.reply_id,reply.post_id,index)"></i>
+                        <i  class="fa fa-trash" (click)="deleteReply(reply.reply_id,reply.post_id)"></i>
                     </span>
                   </small>
                 </div>

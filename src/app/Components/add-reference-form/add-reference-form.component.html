@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <div class="">
+        <!-- <div class="">
             <label for="position" class="col-form-label">Position</label>
             <div class="">
                 <input  type="text" 
@@ -34,8 +34,32 @@
                         formControlName="position"
                         [ngClass]="referenceform.value.position!=currentreferncedetails.position ? 'dirty-field' : ''">
             </div>
-        </div>
+        </div> -->
 
+        <div class="">
+            <div class="postion-radio">
+                <div class="radio">
+                    <label for="position" class="col-form-label">Employee</label>
+                    <input  type="radio" 
+                           
+                            id="employee" 
+                            formControlName="position"
+                            value="Employees"
+                            [ngClass]="referenceform.value.position!=currentreferncedetails.position ? 'dirty-field' : ''">
+                </div>
+
+                <div class="radio">
+                    <label for="position" class="col-form-label">Recruiter</label>
+                    <input  type="radio" 
+                            id="recruiter" 
+                            formControlName="position"
+                            value="Recruiter"
+                            [ngClass]="referenceform.value.position!=currentreferncedetails.position ? 'dirty-field' : ''">
+                </div>
+               
+                
+            </div>
+        </div>
         <div class="">
             <label for="email" class="col-form-label">Email</label>
             <div class="">

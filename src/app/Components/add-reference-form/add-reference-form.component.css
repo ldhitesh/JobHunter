@@ -329,3 +329,18 @@ button.btn-danger:hover {
         padding: 8px 15px;
     }
 }
+
+
+.postion-radio{
+    display: flex;
+    justify-content: left;
+}
+
+.radio{
+    display: flex;
+    padding: 5% 15% 0% 0%;
+}
+
+.radio label{
+    margin-right: 12%;
+}

@@ -1,0 +1,12 @@
+<div class="resume-generator">
+
+        <div    class="My-own-resume" 
+                [routerLink]="['/resumebuilder']" 
+                [queryParams]="{ resumeType: 'previousResume' }" 
+                routerLinkActive="active">DownLoad Recent Resume</div>
+
+        <div    class="My-own-resume" 
+                [routerLink]="['/resumebuilder']" 
+                [queryParams]="{ resumeType: 'newResume' }" 
+                routerLinkActive="active">New Resume</div>
+</div>

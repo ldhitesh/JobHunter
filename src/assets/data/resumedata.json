@@ -1,0 +1,131 @@
+{
+    "contact": [
+        {
+        "fullname":"HITESH LAKSHMAIAH DINESH",
+        "location": "Arlington, TX -76013",
+        "phone": "469-836-9134",
+        "linkedin": "https://www.linkedin.com/in/hitesh2021/",
+        "email": "ldhitesh.02@gmail.com"
+        }
+    ],
+    "education": [
+        {
+        "major": "Master of Science in Computer Science",
+        "date": "Dec 2020",
+        "institution": "The University of Texas At Arlington",
+        "city": "Arlington",
+        "state":"Texas"
+        },
+        {
+        "major": "Bachelor in Electronics and Communications Engineering",
+        "date": "May 2017",
+        "institution": "Visvesvaraya Technological University",
+        "city": "",
+        "state":"India"
+        }
+  ],
+    "skills": [
+      {
+        "category": "Programming languages & concepts",
+        "skills": [
+          "JavaScript",
+          "TypeScript",
+          "Angular (2,7,8,10,11,14,15)",
+          "Node JS",
+          "HTML",
+          "HTML-5",
+          "CSS",
+          "C",
+          "Java",
+          "Python",
+          ".NET Core",
+          "ASP.NET Core",
+          "C#",
+          "Web API",
+          "SQL Server",
+          "MongoDB",
+          "MaterialDesign"
+        ]
+      },
+      {
+        "category": "Technical Tools",
+        "skills": [
+          "Visual Studio",
+          "IntelliJ",
+          "PyCharm",
+          "Android Studio",
+          "Oracle",
+          "Snowflake",
+          "MySQL",
+          "Informatica",
+          "Pandas",
+          "Anaconda",
+          "XCode",
+          "Qlik Sense",
+          "Qlik View Test Data Manager",
+          "Splunk",
+          "Eclipse",
+          "JUNIT",
+          "JaCoCo",
+          "Valgrind",
+          "Selenium",
+          "AWS RDS"
+        ]
+      },
+      {
+        "category": "Operating Environments",
+        "skills": [
+          "Unix",
+          "Linux",
+          "Windows",
+          "MacOS"
+        ]
+      }
+    ],
+"work_experience": [
+    {
+    "company": "Cedent Consulting Inc",
+    "role": "Software Engineer",
+    "date_range": "Jan 2024 – Current",
+    "responsibilities": [
+        "Designed and developed REST APIs in ASP.NET 8.0 applications",
+        "Implemented Angular CLI setup with components, directives, services, and pipes",
+        "Managed authentication with JWT, ECS Fargate task definitions and CI/CD"
+    ]
+    },
+    {
+    "company": "Graco",
+    "role": "Full Stack Developer",
+    "date_range": "March 2023 – Jan 2024",
+    "responsibilities": [
+        "Used Angular 15 and NgRx for state management",
+        "Built REST APIs in ASP.NET Core, integrated CRUD in Angular",
+        "Tested APIs using xUnit, reduced load times using observables"
+    ]
+    },
+    {
+    "company": "Abbvie",
+    "role": "Software Engineer",
+    "date_range": "May 2021 – Aug 2022",
+    "responsibilities": [
+        "Built reusable Angular components, form validation",
+        "Developed APIs using ASP.NET Core and SQL for data flow"
+    ]
+    },
+    {
+    "company": "Travelers",
+    "role": "Software Test Engineer in Development",
+    "date_range": "Aug 2017 – July 2018",
+    "responsibilities": [
+        "Created efficient stored procedures, indexes and optimized queries",
+        "Trained in Core Java, Selenium, SQL, Unix, and HTML at LTI"
+    ]
+    }
+],
+"certifications": [
+    "CP-SAT (Certified Professional – Selenium Automation Testing)",
+    "Angular with Node.js (Edureka)",
+    "AWS Practitioner"
+  ]
+  
+}

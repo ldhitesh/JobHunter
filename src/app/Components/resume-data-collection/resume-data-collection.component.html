@@ -1,0 +1,346 @@
+<!-- Contact Form -->
+<div *ngIf="currentStep === 1" class="contact">
+  <div class="contact-form-container">
+    <h2>Personal Details</h2>
+    <form [formGroup]="contactForm">
+      <!-- Full Name -->
+      <div class="form-group">
+        <label for="fullname">Full Name:</label>
+        <input
+          id="fullname"
+          formControlName="fullname"
+          type="text"
+          required
+          class="form-control"
+          placeholder="Enter your full name"
+        />
+      </div>
+
+      <!-- Location -->
+      <div class="form-group">
+        <label for="location">Location:</label>
+        <input
+          id="location"
+          formControlName="location"
+          type="text"
+          required
+          class="form-control"
+          placeholder="Enter your location"
+        />
+      </div>
+
+      <!-- Phone -->
+      <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input
+          id="phone"
+          formControlName="phone"
+          type="text"
+          required
+          class="form-control"
+          placeholder="Enter your phone number"
+        />
+      </div>
+
+      <!-- LinkedIn URL -->
+      <div class="form-group">
+        <label for="linkedin">LinkedIn URL:</label>
+        <input
+          id="linkedin"
+          formControlName="linkedin"
+          type="text"
+          class="form-control"
+          placeholder="Enter LinkedIn profile URL (Optional)"
+        />
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input
+          id="email"
+          formControlName="email"
+          type="email"
+          required
+          class="form-control"
+          placeholder="Enter your email"
+        />
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="edu-section" *ngIf="currentStep==2">
+  <form [formGroup]="educationForm">
+    <div class="education">
+      <h2>Education Details</h2>
+  
+      <!-- Form Array to handle dynamic education sections -->
+      <div formArrayName="educationSections">
+        <div *ngFor="let eduSection of educationSections.controls; let i = index" [formGroupName]="i" class="education-form-container">
+          <!-- Major Input -->
+          <div class="form-group">
+            <label for="major">Major:</label>
+            <input id="major" formControlName="major" type="text" class="form-control">
+          </div>
+  
+          <!-- Date of Graduation Input -->
+           <div class="form-group">
+            <label for="date">Date of Graduation:</label>
+            <input id="date" formControlName="date" type="date" class="form-control">
+          </div>
+          
+          <div class="curr-date">
+            <label for="currdate" >Current</label>
+            <input formControlName="currdate" (click)="currentDateChecked(i,eduSection)" id="currdate" type="checkbox">
+          </div>
+          
+         
+          <!-- Institution Input -->
+          <div class="form-group">
+            <label for="institution">Institution:</label>
+            <input id="institution" formControlName="institution" type="text" class="form-control">
+          </div>
+          <!-- City Input -->
+          <div class="form-group">
+            <label for="city">City:</label>
+            <input id="city" formControlName="city" type="text" class="form-control">
+          </div>
+  
+          <!-- State Input -->
+          <div class="form-group">
+            <label for="state">State:</label>
+            <input id="state" formControlName="state" type="text" class="form-control">
+          </div>
+
+          <p class="removelink" (click)="removeEducation(i)">Remove  <i  class="fa fa-trash" ></i> </p>
+
+        </div>
+      </div>
+
+      <!-- Button to add new education section -->
+      <div class="education-btn-div">
+        <p class="add-education-btn" (click)="addEducation()" type="button">+ Add Education</p>
+      </div>
+ 
+    </div>
+  </form>
+  
+</div>
+
+
+<div class="skills-sec" *ngIf="currentStep===3">
+  <div class="skills" >
+    <h2>Skills Form</h2>
+    
+    <form [formGroup]="skillsForm">
+      <div formArrayName="categories">
+        <div *ngFor="let categoryForm of categories.controls; let i = index" [formGroupName]="i" class="category-form">
+          
+          <!-- Category Input -->
+          <div class="form-group">
+            <label for="category">Category:</label>
+            <input id="category" formControlName="category" type="text" placeholder="Enter category" />
+          </div>
+  
+          <!-- Skill Input -->
+          <div class="form-group">
+            <label for="skill">Add Skill:</label>
+            <input id="skill" formControlName="skill" (keyup.enter)="addSkill(i)" type="text" placeholder="Enter skill" />
+          </div>
+  
+          <!-- Display Skills List -->
+          <div class="skills-list">
+            <ul>
+              <li *ngFor="let skill of categoryForm.get('skills')?.value; let j = index" class="skill-item">
+                {{ skill }}
+                <span class="close-icon" (click)="removeSkill(i, j)">x</span>
+              </li>
+            </ul>
+          </div>
+          <p class="removelink" (click)="removeCategory(i)">Remove  <i  class="fa fa-trash" ></i> </p>
+        </div>
+      </div>
+      
+      <!-- Add New Category Button -->
+      <p class="add-education-btn" (click)="addNewCategory()">+ Add New Category</p>
+    </form>
+  </div>
+</div>
+
+
+<div class="work-sec" *ngIf="currentStep===4">
+  <div class="experience">
+    <h2>Experience Form</h2>
+  
+    <!-- Main form for all work experience sections -->
+    <form [formGroup]="experienceForm">
+      <div formArrayName="workExperience">
+        <div *ngFor="let workSection of workExperience.controls; let i = index" [formGroupName]="i" class="experience-form-container">
+          
+          <!-- Company Input -->
+          <div class="form-group">
+            <label for="company">Company:</label>
+            <input id="company" formControlName="company" type="text" placeholder="Enter company name" />
+
+          </div>
+  
+          <!-- Role Input -->
+          <div class="form-group">
+            <label for="role">Role:</label>
+            <input id="role" formControlName="role" type="text" placeholder="Enter role" />
+
+          </div>
+  
+          <!-- Date Range Input -->
+           <div class="date-range-group">
+            <div class="form-group date_range">
+              <label for="startdate">Start Date:</label>
+              <input id="startdate"  formControlName="startdate" type="date" placeholder="Enter Start Date" />
+            </div>
+            <div class="form-group date_range">
+              <label for="enddate">End Date:</label>
+              <input id="enddate"  formControlName="enddate" (input)="assignedPreviousEndDate(i,workSection)"  type="date" placeholder="Enter End Date" />
+            </div>
+           </div>
+  
+          <!-- Responsibilities Input -->
+          <div class="form-group">
+            <label for="responsibilitiy">Add Responsibility:</label>
+            <input id="responsibilitiy" formControlName="responsibilty" (keyup.enter)="addResponsibility(i)" type="text" placeholder="Enter responsibility" />
+          </div>
+  
+          <!-- Display List of Responsibilities -->
+          <div class="responsibilities-list">
+            <ul>
+              <li *ngFor="let res of workSection.get('responsibilities')?.value; let j = index" class="responsibility-item">
+                {{ res }}
+                <span class="close-icon" (click)="removeResponsibility(i, j)">&#10006;</span>
+              </li>
+            </ul>
+          </div>
+          <div>
+          <div class="curr-date">
+            <label for="currentselection">Current</label>
+            <input formControlName="currentselection" (click)="currentWorkingDateChecked(i,$event)" id="currentselection" type="checkbox">
+          </div>
+          </div>
+          <p class="removelink" (click)="removeWorkExperience(i)">Remove  <i  class="fa fa-trash" ></i> </p>
+        </div>
+      </div>
+  
+      <!-- Add New Work Experience Button -->
+      <p class="add-education-btn" (click)="addWorkSection()">+ Add Work Experience</p>
+  
+    </form>
+  </div>
+  
+
+</div>
+
+
+<div class="certifications" *ngIf="currentStep==5">
+  <div class="certifications-form-container">
+    <h2>Certifications Form</h2>
+
+      <!-- Certification Input -->
+      <div class="form-group" *ngIf="enableAddCertificateField">
+        <label for="certificate">Certifications:</label>
+        <input id="certificate" [(ngModel)]="certificate" name="certificate" type="text">
+      </div>
+
+      <!-- Display List of Certifications -->
+      <div *ngIf="certificates.length > 0">
+        <ul>
+          <li class="individualcertificate" *ngFor="let cert of certificates;let c_index=index">{{ cert }}<i (click)="removeCertificate(c_index)" class="fa fa-trash" ></i> </li>
+        </ul>
+      </div>
+
+      <!-- Add Certification Button -->
+      <p class="add-certification-btn"  (click)="addCertification()">+ Add Certification</p>
+  </div>
+</div>
+
+
+
+  
+<div class="main" *ngIf="currentStep==6">
+  <div class="resume">
+    <!-- Contact Information Section -->
+    <div class="section">
+      <h2 class="h2">Contact Information</h2>
+      <div class="group">
+        <div class="sub-group"> <span>Full Name:</span> {{ resumeData.contact[0].fullname }}</div>
+        <div class="sub-group"><span>Location:</span> {{ resumeData.contact[0].location }}</div>
+        <div class="sub-group"><span>Phone:</span> {{ resumeData.contact[0].phone }}</div>
+        <div class="sub-group"><span>LinkedIn:</span> {{resumeData.contact[0].linkedin?resumeData.contact[0].linkedin:'N/A' }}</div>
+        <div class="sub-group"><span>Email:</span> {{ resumeData.contact[0].email }}</div>
+      </div>
+    </div>
+  
+    <!-- Education Section -->
+    <div class="section"  *ngIf="resumeData['education'].length>0">
+      <h2 class="h2">Education</h2>
+      <div *ngFor="let edu of resumeData.education">
+        <div class="edu-group">
+          <div class="edu-sub-group"><span>Major:</span> {{ edu.major }}</div>
+          <div class="edu-sub-group"><span>Date of Graduation:</span> {{ edu.date }}</div>
+          <div class="edu-sub-group"><span>Institution:</span> {{ edu.institution }}</div>
+          <div class="edu-sub-group"><span>City:</span> {{ edu.city }}</div>
+          <div class="edu-sub-group"><span>State:</span> {{ edu.state }}</div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Skills Section -->
+    <div class="section"  *ngIf="resumeData['skills'].length>0">
+      <h2 class="h2">Skills</h2>
+      <div *ngFor="let skill of resumeData.skills">
+        <div class="skills-group">
+          <div class="skills-sub-group"><span>Category:</span> {{ skill.category }}</div>
+          <div class="skills-sub-group-headerwithlist"><span>Skills:</span>
+            <div class="skills-list-group">
+              <div class="skills-list-sub-group" *ngFor="let s of skill.skills">{{ s }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Work Experience Section -->
+    <div class="section" *ngIf="resumeData['work_experience'].length>0">
+      <h2 class="h2">Work Experience</h2>
+      <div *ngFor="let work of resumeData.work_experience">
+        <div class="work-group">
+          <div class="edu-sub-group"><span>Company:</span> {{ work.company }}</div>
+          <div class="edu-sub-group"><span>Role:</span> {{ work.role }}</div>
+          <div class="edu-sub-group"><span>Date Range:</span> {{ work.date_range }}</div>
+          <div class="skills-sub-group-headerwithlist resl-list"><span>Responsibilities:</span>
+            <div>
+              <div class="work-list-sub-group" *ngFor="let res of work.responsibilities"> {{res }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Certifications Section -->
+    <div class="section" *ngIf="resumeData['certifications'].length>0">
+      <h2 class="h2">Certifications</h2>
+      <div>
+        <div class="certifications-list-sub-group" *ngFor="let cert of resumeData.certifications">{{ cert }}</div>
+      </div>
+    </div>
+  
+    <!-- Download Resume Button -->
+    <div class="main-submit">
+      <button class="btn" (click)="downloadResume()">Download Resume</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="main-submit">
+  <button class="btn" *ngIf="currentStep<7 && currentStep>1"  (click)="prevStep()">Back</button>
+  <button class="btn" *ngIf="currentStep<6" [disabled]="!isCurrentFormValid()" (click)="nextStep()">Next</button>
+</div>

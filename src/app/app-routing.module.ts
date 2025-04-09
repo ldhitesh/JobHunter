@@ -18,6 +18,9 @@ import { ReplypostComponent } from './Components/replypost/replypost.component';
 import { DiscussionForumComponent } from './Components/discussion-forum/discussion-forum.component';
 import { WebApiConceptsComponent } from './Learning/web-api-concepts/web-api-concepts.component';
 import { WebapidashboardComponent } from './Learning/webapidashboard/webapidashboard.component';
+import { ResumeBuilderComponent } from './Components/resume-builder/resume-builder.component';
+import { ResumeGeneratorComponent } from './Components/resume-generator/resume-generator.component';
+import { LeetcodeComponent } from './Learning/leetcode/leetcode.component';
 
 const routes: Routes = [
   {path:'',component:LoginComponentComponent},
@@ -39,7 +42,11 @@ const routes: Routes = [
   { path: 'post/:id', component: ReplypostComponent },
   { path: 'discussionforum', component: DiscussionForumComponent },
   { path: 'webapiconcepts', component: WebApiConceptsComponent },
-  { path: 'webapidashboard', component: WebapidashboardComponent }
+  { path: 'webapidashboard', component: WebapidashboardComponent },
+  { path: 'resumebuilder', component: ResumeBuilderComponent },
+  { path: 'resumebuilder/:resumeType', component: ResumeBuilderComponent },
+  { path: 'resumegenerator', component: ResumeGeneratorComponent },
+  { path: 'leetcode', component: LeetcodeComponent }
 
 ];
 

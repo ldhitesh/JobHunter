@@ -1,0 +1,226 @@
+pre {
+  background-color: #2e2e2e;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #f8f8f2; /* Light text on dark background */
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+code {
+  display: block;
+}
+
+
+
+/* Container for the whole section */
+.leetcode-container {
+    width: 85%;
+    margin: 10% auto;
+    padding: 30px;
+    font-family: 'Arial', sans-serif;
+    border-radius: 8px;
+  }
+  
+  /* Heading Styling */
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+  }
+  
+  .btns-group {
+    margin-right: 3%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Styling for the problem cards */
+  .problem-card {
+    background-color: white;
+    padding: 4px 15px 4px 15px;
+    margin: 5px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Styling for the problem header */
+  .problem-header {
+    display: flex;
+    justify-content: space-between;  /* Aligns children to both ends */
+    align-items: center;
+    margin: 10px;
+  }
+  
+  .problem-header a {
+    color: #0b3858;
+    font-weight: bold;
+    font-size: 18px;
+    text-decoration: none;
+  }
+  .fas.fa-save{
+    color: #0b314d;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 10px 5px 10px 10px;
+
+  }
+  
+  .problem-header a:hover {
+    text-decoration: underline;
+  }
+  
+  .problem-header p:hover {
+    text-decoration: underline;
+  }
+  /* Notes Section Styling */
+  .problem-notes {
+    margin-top: 10px;
+  }
+  
+  .modal-textarea {
+    width: 100%;
+    border-radius: 4px;
+    resize: none; /* Disable manual resizing */
+    font-size: 14px;
+    overflow-y:inherit; /* Hide vertical scrollbar */
+    line-height: 1.4;
+    word-wrap: break-word; /* Ensures long words break and wrap properly */
+    white-space: pre-wrap; /* Ensures pasted content maintains wrapping behavior */
+    overflow:inherit;
+    padding: 10px;
+    min-height: 350px;
+  }
+  
+  .modal-textarea-p {
+    width: 100%;
+    border-radius: 4px;
+    resize: none; /* Disable manual resizing */
+    font-size: 14px;
+    overflow-y:inherit; /* Hide vertical scrollbar */
+    line-height: 1.4;
+    word-wrap: break-word; /* Ensures long words break and wrap properly */
+    white-space: pre-wrap; /* Ensures pasted content maintains wrapping behavior */
+    overflow:inherit;
+    padding: 10px;
+    height: fit-content;
+  }
+
+/* Add Reference button styling */
+.addleetcode {
+    padding: 12px;
+    background-color: #0e4973;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: fit-content;
+    margin:1%;
+    text-decoration: none;
+}
+
+/* Hover effect for the button */
+.addleetcode:hover {
+    background-color: rgb(8, 53, 85);
+    transform: scale(1.05); /* Slight scale-up effect */
+}
+
+
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensures it appears above other content */
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding:3%;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    width: 80%;
+  }
+  
+  .close-modal-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .close-modal-btn:hover {
+    color: #e74c3c; /* Red color for hover */
+  }
+  
+  .add-problem-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .add-problem-form input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 97%;
+  }
+  
+  .add-problem-form .formtextarea{
+    height: 200px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 97%;
+  }
+  .add-problem-form button {
+    padding: 12px;
+    background-color: #0e4973;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: fit-content;
+    margin: 20px auto;
+  }
+  
+  .add-problem-form button:hover {
+    background-color: rgb(8, 53, 85);
+  }
+  
+  /* Modal Open Button */
+  .open-modal-btn {
+    padding: 12px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .open-modal-btn:hover {
+    background-color: #218838;
+  }
+  
+  .notes-header{
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 10px 0px 10px;
+  }

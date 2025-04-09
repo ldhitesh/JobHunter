@@ -24,6 +24,9 @@
           <li *ngIf="IsloggedIn" (click)="Logout()" class="nav-item">
             <a class="nav-link">Logout</a>
           </li>
+          <li *ngIf="IsloggedIn" class="nav-item">
+            <a class="nav-link" routerLink="/resumegenerator" routerLinkActive="active">Resume Builder</a>
+          </li>
           <li class="profilepicture" *ngIf="authService.profilepicture">
             <img [src]="authService.profilepicture" (error)="setDefaultImage($event)">
           </li>
