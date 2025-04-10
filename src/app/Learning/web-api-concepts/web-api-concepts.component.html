@@ -919,8 +919,8 @@
             &#123;
                 private readonly List&lt;User&gt; _users = new()
                 &#123;
-                    new User &#123; Id = 1, Name = "Alice", Email = "alice@example.com" &#125;,
-                    new User &#123; Id = 2, Name = "Bob", Email = "bob@example.com" &#125;
+                    new User &#123; Id = 1, Name = "Alice", Email = "alice&#64;example.com" &#125;,
+                    new User &#123; Id = 2, Name = "Bob", Email = "bob&#64;example.com" &#125;
                 &#125; ;
   
                 public List&lt;User&gt; GetUsers() => _users;
@@ -1055,7 +1055,7 @@
                 public void GetUsers_ReturnsOkResult_WithListOfUsers()
                 &#123;
                     // Arrange
-                    var users = new List&lt;User&gt; &#123; new() &#123; Id = 1, Name = "Alice", Email = "alice@example.com" &#125; &#125;;
+                    var users = new List&lt;User&gt; &#123; new() &#123; Id = 1, Name = "Alice", Email = "alice&#64;example.com" &#125; &#125;;
   
                     _mockService.Setup(service =&gt; service.GetUsers()).Returns(users);
   
