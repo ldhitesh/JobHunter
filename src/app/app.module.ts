@@ -6,7 +6,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { CompaniesComponentComponent } from './Components/companies-component/companies-component.component';
 import { LoginComponentComponent } from './Components/login-component/login-component.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { RegisterUserComponent } from './Components/register-user/register-user.component';
 import { CompanyDataFilterPipe } from './Pipes/CompanyDataFilter';
 import { SearchBarComponent } from './Components/search-bar/search-bar.component';
@@ -53,66 +53,58 @@ import { DatePipe } from '@angular/common';
 import { ResumeGeneratorComponent } from './Components/resume-generator/resume-generator.component';
 import { CommonModule } from '@angular/common';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    CompaniesComponentComponent,
-    LoginComponentComponent,
-    RegisterUserComponent,
-    CompanyDataFilterPipe,
-    SearchBarComponent,
-    AddCompanyButtonComponent,
-    AddCompanyFormComponent,
-    ResumeBuilderComponent,
-    ReferencesComponent,
-    EmailComponent,
-    SendEmailsComponent,
-    AddReferenceFormComponent,
-    AddReferenceButtonComponent,
-    SendEmailButtonComponent,
-    RegistrationsComponent,
-    PortfolioComponent,
-    MaskEmailPipe,
-    CheckoutComponent,
-    EmailNotificationComponent,
-    EmailVerificationCompleteComponent,
-    EcsFargateComponent,
-    WebApiConceptsComponent,
-    SystemDesignComponent,
-    ReactComponent,
-    AngularComponent,
-    LeetcodeComponent,
-    Auth0Component,
-    GmailApiComponent,
-    MySqlComponent,
-    DiscussionForumComponent,
-    LearningPortalComponent,
-    CreatepostComponent,
-    ReplypostComponent,
-    WebapidashboardComponent,
-    AngulardashboardComponent,
-    AwsdashboardComponent,
-    MysqldashboardComponent,
-    ReactdashboardComponent,
-    NavbarComponent,
-    GlobalNotificationsComponent,
-    ResumeDataCollectionComponent,
-    ResumeGeneratorComponent
+@NgModule({ declarations: [
+        AppComponent,
+        HomeComponent,
+        CompaniesComponentComponent,
+        LoginComponentComponent,
+        RegisterUserComponent,
+        CompanyDataFilterPipe,
+        SearchBarComponent,
+        AddCompanyButtonComponent,
+        AddCompanyFormComponent,
+        ResumeBuilderComponent,
+        ReferencesComponent,
+        EmailComponent,
+        SendEmailsComponent,
+        AddReferenceFormComponent,
+        AddReferenceButtonComponent,
+        SendEmailButtonComponent,
+        RegistrationsComponent,
+        PortfolioComponent,
+        MaskEmailPipe,
+        CheckoutComponent,
+        EmailNotificationComponent,
+        EmailVerificationCompleteComponent,
+        EcsFargateComponent,
+        WebApiConceptsComponent,
+        SystemDesignComponent,
+        ReactComponent,
+        AngularComponent,
+        LeetcodeComponent,
+        Auth0Component,
+        GmailApiComponent,
+        MySqlComponent,
+        DiscussionForumComponent,
+        LearningPortalComponent,
+        CreatepostComponent,
+        ReplypostComponent,
+        WebapidashboardComponent,
+        AngulardashboardComponent,
+        AwsdashboardComponent,
+        MysqldashboardComponent,
+        ReactdashboardComponent,
+        NavbarComponent,
+        GlobalNotificationsComponent,
+        ResumeDataCollectionComponent,
+        ResumeGeneratorComponent
     ],
-  imports: [
-    CommonModule,
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,  // <-- Add this to enable animations
-    ToastrModule.forRoot(),
-    OAuthModule.forRoot()
- 
-  ],
-  providers: [DatePipe],
-  bootstrap: [AppComponent]
-})
+    bootstrap: [AppComponent], imports: [CommonModule,
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule, // <-- Add this to enable animations
+        ToastrModule.forRoot(),
+        OAuthModule.forRoot()], providers: [DatePipe, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
