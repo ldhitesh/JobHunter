@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { NotificationServiceService } from 'src/app/Services/notification-service.service';
 
 @Component({
-  selector: 'global-notifications',
-  templateUrl: './global-notifications.component.html',
-  styleUrls: ['./global-notifications.component.css']
+    selector: 'global-notifications',
+    templateUrl: './global-notifications.component.html',
+    styleUrls: ['./global-notifications.component.css'],
+    standalone: false
 })
 export class GlobalNotificationsComponent {
   notificationMessage:string='';

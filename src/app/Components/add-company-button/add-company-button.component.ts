@@ -3,9 +3,10 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-check-service.service';
 
 @Component({
-  selector: 'add-company',
-  templateUrl: './add-company-button.component.html',
-  styleUrls: ['./add-company-button.component.css']
+    selector: 'add-company',
+    templateUrl: './add-company-button.component.html',
+    styleUrls: ['./add-company-button.component.css'],
+    standalone: false
 })
 export class AddCompanyButtonComponent {
   UserRole:any;

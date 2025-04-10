@@ -7,9 +7,10 @@ import { GetDataService } from 'src/app/Services/get-data.service';
 import { ResumebuilderService } from 'src/app/Services/resumebuilder.service';
 
 @Component({
-  selector: 'app-resume-builder',
-  templateUrl: './resume-builder.component.html',
-  styleUrls: ['./resume-builder.component.css']
+    selector: 'app-resume-builder',
+    templateUrl: './resume-builder.component.html',
+    styleUrls: ['./resume-builder.component.css'],
+    standalone: false
 })
 export class ResumeBuilderComponent {
   public doc:any=new jsPDF();

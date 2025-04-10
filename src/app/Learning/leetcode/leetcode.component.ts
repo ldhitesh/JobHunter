@@ -3,9 +3,10 @@ import { Component } from '@angular/core';
 import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
-  selector: 'app-leetcode',
-  templateUrl: './leetcode.component.html',
-  styleUrls: ['./leetcode.component.css']
+    selector: 'app-leetcode',
+    templateUrl: './leetcode.component.html',
+    styleUrls: ['./leetcode.component.css'],
+    standalone: false
 })
 export class LeetcodeComponent {
   newProblemLink: string = '';

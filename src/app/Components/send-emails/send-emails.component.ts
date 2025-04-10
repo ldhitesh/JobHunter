@@ -5,9 +5,10 @@ import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-ch
 import { NotificationServiceService } from 'src/app/Services/notification-service.service';
 
 @Component({
-  selector: 'app-send-emails',
-  templateUrl: './send-emails.component.html',
-  styleUrls: ['./send-emails.component.css']
+    selector: 'app-send-emails',
+    templateUrl: './send-emails.component.html',
+    styleUrls: ['./send-emails.component.css'],
+    standalone: false
 })
 export class SendEmailsComponent {
   inputText: string = ''; 

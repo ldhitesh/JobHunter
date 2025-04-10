@@ -7,9 +7,10 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { GetDataService } from 'src/app/Services/get-data.service';
 
 @Component({
-  selector: 'resume-data-collection',
-  templateUrl: './resume-data-collection.component.html',
-  styleUrls: ['./resume-data-collection.component.css']
+    selector: 'resume-data-collection',
+    templateUrl: './resume-data-collection.component.html',
+    styleUrls: ['./resume-data-collection.component.css'],
+    standalone: false
 })
 export class ResumeDataCollectionComponent {
   resumeData:any;

@@ -6,9 +6,10 @@ import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-ch
 import { PaginationService } from 'src/app/Services/pagination-service.service';
 
 @Component({
-  selector: 'companies-component',
-  templateUrl: './companies-component.component.html',
-  styleUrls: ['./companies-component.component.css']
+    selector: 'companies-component',
+    templateUrl: './companies-component.component.html',
+    styleUrls: ['./companies-component.component.css'],
+    standalone: false
 })
 export class CompaniesComponentComponent {
 

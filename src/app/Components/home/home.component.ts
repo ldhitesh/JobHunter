@@ -4,9 +4,10 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-check-service.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css'],
+    standalone: false
 })
 export class HomeComponent {
   IsloggedIn:boolean=false;

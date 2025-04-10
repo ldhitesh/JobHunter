@@ -6,9 +6,10 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { NotificationServiceService } from 'src/app/Services/notification-service.service';
 
 @Component({
-  selector: 'login-component',
-  templateUrl: './login-component.component.html',
-  styleUrls: ['./login-component.component.css']
+    selector: 'login-component',
+    templateUrl: './login-component.component.html',
+    styleUrls: ['./login-component.component.css'],
+    standalone: false
 })
 export class LoginComponentComponent {
 

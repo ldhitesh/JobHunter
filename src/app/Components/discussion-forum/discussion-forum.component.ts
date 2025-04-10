@@ -6,9 +6,10 @@ import { AuthService } from 'src/app/Services/auth.service';
 
 
 @Component({
-  selector: 'discussion-forum',
-  templateUrl: './discussion-forum.component.html',
-  styleUrls: ['./discussion-forum.component.css']
+    selector: 'discussion-forum',
+    templateUrl: './discussion-forum.component.html',
+    styleUrls: ['./discussion-forum.component.css'],
+    standalone: false
 })
 export class DiscussionForumComponent {
   forumPosts:any = [];

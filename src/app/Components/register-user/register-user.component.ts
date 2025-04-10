@@ -7,9 +7,10 @@ import { ToastrService } from 'ngx-toastr';
 import { NotificationServiceService } from 'src/app/Services/notification-service.service';
 
 @Component({
-  selector: 'app-register-user',
-  templateUrl: './register-user.component.html',
-  styleUrls: ['./register-user.component.css']
+    selector: 'app-register-user',
+    templateUrl: './register-user.component.html',
+    styleUrls: ['./register-user.component.css'],
+    standalone: false
 })
 export class RegisterUserComponent {
   public successfullogin: boolean = false;

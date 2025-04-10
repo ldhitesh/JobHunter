@@ -6,9 +6,10 @@ import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-ch
 import { NotificationServiceService } from 'src/app/Services/notification-service.service';
 
 @Component({
-  selector: 'email',
-  templateUrl: './email.component.html',
-  styleUrls: ['./email.component.css']
+    selector: 'email',
+    templateUrl: './email.component.html',
+    styleUrls: ['./email.component.css'],
+    standalone: false
 })
 export class EmailComponent {
 

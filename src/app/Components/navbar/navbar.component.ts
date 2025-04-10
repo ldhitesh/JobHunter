@@ -5,9 +5,10 @@ import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-ch
 import { jsPDF } from 'jspdf';
 
 @Component({
-  selector: 'navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+    selector: 'navbar',
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.css'],
+    standalone: false
 })
 export class NavbarComponent {
   IsloggedIn:boolean=false;

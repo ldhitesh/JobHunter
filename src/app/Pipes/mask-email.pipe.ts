@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'maskEmail'
+    name: 'maskEmail',
+    standalone: false
 })
 export class MaskEmailPipe implements PipeTransform {
 

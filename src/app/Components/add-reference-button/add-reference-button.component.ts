@@ -3,9 +3,10 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-check-service.service';
 
 @Component({
-  selector: 'add-reference-button',
-  templateUrl: './add-reference-button.component.html',
-  styleUrls: ['./add-reference-button.component.css']
+    selector: 'add-reference-button',
+    templateUrl: './add-reference-button.component.html',
+    styleUrls: ['./add-reference-button.component.css'],
+    standalone: false
 })
 export class AddReferenceButtonComponent {
   UserRole:any;

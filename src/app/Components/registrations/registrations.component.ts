@@ -5,9 +5,10 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { NotificationServiceService } from 'src/app/Services/notification-service.service';
 
 @Component({
-  selector: 'app-registrations',
-  templateUrl: './registrations.component.html',
-  styleUrls: ['./registrations.component.css']
+    selector: 'app-registrations',
+    templateUrl: './registrations.component.html',
+    styleUrls: ['./registrations.component.css'],
+    standalone: false
 })
 export class RegistrationsComponent {
 

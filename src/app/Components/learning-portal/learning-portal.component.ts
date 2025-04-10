@@ -3,9 +3,10 @@ import { Component } from '@angular/core';
 import { GetDataService } from 'src/app/Services/get-data.service';
 
 @Component({
-  selector: 'learning-portal',
-  templateUrl: './learning-portal.component.html',
-  styleUrls: ['./learning-portal.component.css']
+    selector: 'learning-portal',
+    templateUrl: './learning-portal.component.html',
+    styleUrls: ['./learning-portal.component.css'],
+    standalone: false
 })
 export class LearningPortalComponent {
 

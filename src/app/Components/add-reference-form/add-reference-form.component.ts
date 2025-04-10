@@ -4,9 +4,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'add-reference-form',
-  templateUrl: './add-reference-form.component.html',
-  styleUrls: ['./add-reference-form.component.css']
+    selector: 'add-reference-form',
+    templateUrl: './add-reference-form.component.html',
+    styleUrls: ['./add-reference-form.component.css'],
+    standalone: false
 })
 export class AddReferenceFormComponent {
 

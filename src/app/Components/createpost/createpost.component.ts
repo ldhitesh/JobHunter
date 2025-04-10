@@ -4,9 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
-  selector: 'createpost',
-  templateUrl: './createpost.component.html',
-  styleUrls: ['./createpost.component.css']
+    selector: 'createpost',
+    templateUrl: './createpost.component.html',
+    styleUrls: ['./createpost.component.css'],
+    standalone: false
 })
 export class CreatepostComponent {
 

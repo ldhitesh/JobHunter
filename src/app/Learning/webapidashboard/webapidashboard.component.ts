@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'webapidashboard',
-  templateUrl: './webapidashboard.component.html',
-  styleUrls: ['./webapidashboard.component.css']
+    selector: 'webapidashboard',
+    templateUrl: './webapidashboard.component.html',
+    styleUrls: ['./webapidashboard.component.css'],
+    standalone: false
 })
 export class WebapidashboardComponent {
   

@@ -4,9 +4,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-add-company-form',
-  templateUrl: './add-company-form.component.html',
-  styleUrls: ['./add-company-form.component.css']
+    selector: 'app-add-company-form',
+    templateUrl: './add-company-form.component.html',
+    styleUrls: ['./add-company-form.component.css'],
+    standalone: false
 })
 export class AddCompanyFormComponent {
   public companyform:FormGroup;

@@ -5,9 +5,10 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { LoginStatusCheckServiceService } from 'src/app/Services/login-status-check-service.service';
 
 @Component({
-  selector: 'app-references',
-  templateUrl: './references.component.html',
-  styleUrls: ['./references.component.css']
+    selector: 'app-references',
+    templateUrl: './references.component.html',
+    styleUrls: ['./references.component.css'],
+    standalone: false
 })
 export class ReferencesComponent {
   public references: any;

@@ -4,9 +4,10 @@ import { loadStripe } from '@stripe/stripe-js';
 import { PaymentService } from 'src/app/Services/payment-service.service';
 
 @Component({
-  selector: 'checkout',
-  templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.css']
+    selector: 'checkout',
+    templateUrl: './checkout.component.html',
+    styleUrls: ['./checkout.component.css'],
+    standalone: false
 })
 export class CheckoutComponent {
   @Input() registerDetails: any ;
