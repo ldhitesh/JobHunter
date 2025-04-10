@@ -147,6 +147,10 @@ table.table .desc {
     width: 170px;
   }
 
+  .applied-head{
+    width: 140px;
+  }
+
   .id-head{
     width: 70px;
   }

@@ -6,9 +6,9 @@
         <thead>
             <th class="id-head">ID</th>
             <th class="company-head">Company</th>
-            <th>Last Applied</th>
+            <th class="applied-head">Last Applied</th>
             <th class="status-head">Status</th>
-            <th>Link</th>
+            <th class="applied-head">Link</th>
             <th>Comments</th>
 
         </thead>
@@ -20,7 +20,7 @@
                     <!-- <span *ngIf="UserRole=='Admin'" class="fa fa-trash" ></span> -->
                     <span *ngIf="UserRole=='Admin'" class="fas fa-edit" (click)="editcompanyform(c)"></span>
 
-                    {{c.organization}}</td>
+                    {{c.organization|titlecase}}</td>
                 <td class="lastapplied" >
                     <ng-container *ngIf="c.lastApplied!== 'Yet to Apply'; else noDate">
                         {{ c.lastApplied | date:'MMM dd, yyyy' }}

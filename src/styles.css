@@ -1,3 +1,5 @@
+@import "~prismjs/themes/prism.css";
+
 /* Import the Google Font in index.html, but here we apply it globally */
 body {
   font-family: 'Nunito', sans-serif;
@@ -12,4 +14,4 @@ body {
   p {
     font-family: 'Nunito', sans-serif;
   }
-  
+

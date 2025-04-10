@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
   selector: 'app-leetcode',
@@ -15,13 +15,13 @@ export class LeetcodeComponent {
   showNoteIndex:any=-1;
   showtextnote:any="Show Note"
   solvedProblems:any;
-  constructor(private http:HttpClient) {}
+  constructor(private http:HttpClient, private authService:AuthService) {}
 
   ngOnInit(): void {
-    this.fetchproblems();
+    this.fetchproblems(); 
   }
 
-
+  
   fetchproblems(){
     this.http.get('http://localhost:80/api/discussion/getleetcodeproblemslist').subscribe({
       next:(response:any)=>{
@@ -47,9 +47,14 @@ export class LeetcodeComponent {
   }
 
   addProblem(): void {
+    const now=new Date();
+    let formatted = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ` +
+                `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
     const newProblem = {
       problem_link: this.newProblemLink,
       problem_notes: this.newProblemNotes,
+      user_id:this.authService.email,
+      solved_date:formatted
     };
 
     this.http.post('http://localhost:80/api/discussion/postleetcodeproblemslist',newProblem).subscribe({
@@ -102,4 +107,6 @@ export class LeetcodeComponent {
   setAddNoteEditable(){
     this.isAddNoteEditable=true;
   }
+  
+  
 }

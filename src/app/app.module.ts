@@ -51,6 +51,7 @@ import { GlobalNotificationsComponent } from './Components/global-notifications/
 import { ResumeDataCollectionComponent } from './Components/resume-data-collection/resume-data-collection.component';
 import { DatePipe } from '@angular/common';
 import { ResumeGeneratorComponent } from './Components/resume-generator/resume-generator.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { ResumeGeneratorComponent } from './Components/resume-generator/resume-g
     ResumeGeneratorComponent
     ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

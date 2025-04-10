@@ -1,6 +1,12 @@
 {
     "techCards": [
       {
+        "title": "Leetcode",
+        "description": "Prepare for coding interviews by practicing problems on Leetcode, from easy to advanced levels.",
+        "image": "assets/leetcode.png",
+        "link":"/leetcode"
+      },
+      {
         "title": "Angular",
         "description": "Learn the latest features in Angular, including components, services, routing, and state management.",
         "image": "assets/angular.png"
@@ -12,20 +18,14 @@
         "link": "/webapidashboard"
       },
       {
-        "title": "Deployment to AWS",
-        "description": "Learn how to deploy applications to AWS, including EC2, S3, Lambda, and API Gateway.",
-        "image": "assets/aws.png"
-      },
-      {
         "title": "System Design",
         "description": "Learn the fundamentals of system design, focusing on scalability, load balancing, and caching.",
         "image": "assets/sys.png"
       },
       {
-        "title": "Leetcode",
-        "description": "Prepare for coding interviews by practicing problems on Leetcode, from easy to advanced levels.",
-        "image": "assets/leetcode.png",
-        "link":"/leetcode"
+        "title": "Deployment to AWS",
+        "description": "Learn how to deploy applications to AWS, including EC2, S3, Lambda, and API Gateway.",
+        "image": "assets/aws.png"
       },
       {
         "title": "Gmail API Integration",

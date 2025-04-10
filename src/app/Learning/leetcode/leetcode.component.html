@@ -1,12 +1,20 @@
 <!-- https://leetcode.com/problemset/ -->
 
 <div class="leetcode-container">
-    <h2>Solved LeetCode Problems</h2>
+    <h2>Solved Coding Problems</h2>
     
 
     <div class="btns-group">
-        <a class="addleetcode" href="https://leetcode.com/problemset/">Solve Leetcode </a>
-        <button class="addleetcode" (click)="openModal()">+ Leetcode Solved Problem</button>
+      <div class="coding-platforms">
+        <a href="https://leetcode.com/problemset/">
+          <img src="/assets/leetcode-p.png" >
+        </a>
+        <a href="https://neetcode.io/practice">
+          <img src="/assets/neetcode-p.png">
+        </a>
+      </div>
+      
+      <h5 class="addleetcode" (click)="openModal()">+ Add Solved Problem</h5>
 
     </div>
     <div *ngFor="let problem of solvedProblems;let i=index" class="problem-card">
@@ -25,7 +33,7 @@
         <p *ngIf="isAddNoteEditable && showNoteIndex==i" (click)="addNoteToProblem(problem.problem_id, problem.problem_notes)"> <i class="fas fa-save" ></i> Save</p>
         <textarea *ngIf="isAddNoteEditable && showNoteIndex==i" class="modal-textarea" [(ngModel)]="problem.problem_notes"></textarea>
         <div *ngIf="!isAddNoteEditable && showNoteIndex==i" class="modal-textarea-p"> 
-          <pre><code >{{ problem.problem_notes }}</code></pre>
+          <pre><code>{{ problem.problem_notes }}</code></pre>
         </div>
 
       </div>
@@ -50,7 +58,7 @@
           placeholder="Problem Notes"
           rows="3"
         ></textarea>
-        <button class="addleetcode" (click)="addProblem()">Add Problem</button>
+        <button class="addleetcode" [disabled]="!newProblemLink" (click)="addProblem()">Add Problem</button>
       </div>
     </div>
   </div>

@@ -1,19 +1,14 @@
+
 pre {
-  background-color: #2e2e2e;
-  padding: 15px;
+  background-color: #f4f4f4;
+  padding: 20px;
   border-radius: 5px;
+  font-family: Consolas, "Courier New", monospace;
   font-size: 14px;
-  color: #f8f8f2; /* Light text on dark background */
-  white-space: pre-wrap;
-  word-wrap: break-word;
+  line-height: 1.2;
+  color: #333;
+  overflow: auto;
 }
-
-code {
-  display: block;
-}
-
-
-
 /* Container for the whole section */
 .leetcode-container {
     width: 85%;
@@ -21,6 +16,24 @@ code {
     padding: 30px;
     font-family: 'Arial', sans-serif;
     border-radius: 8px;
+  }
+
+  .coding-platforms{
+    display: flex;
+    justify-content: left;
+  }
+  .coding-platforms a{
+    display: flex;
+    margin: 5%;
+    
+  }
+  .coding-platforms img{
+    height: 40px;
+    width: 140px;
+    border-radius: 5%;
+    cursor: pointer;
+    margin-left: -20%;
+
   }
   
   /* Heading Styling */
@@ -31,9 +44,9 @@ code {
   }
   
   .btns-group {
-    margin-right: 3%;
     display: flex;
-    flex-direction: column;
+    justify-content:space-between;
+    padding:0% 2% 0% 2%;
   }
   
   /* Styling for the problem cards */
@@ -111,22 +124,23 @@ code {
 /* Add Reference button styling */
 .addleetcode {
     padding: 12px;
-    background-color: #0e4973;
-    color: white;
+    color: #0e4973;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     width: fit-content;
-    margin:1%;
     text-decoration: none;
+    margin-top: 1%;
+    margin-right: -2%;
 }
 
-/* Hover effect for the button */
-.addleetcode:hover {
-    background-color: rgb(8, 53, 85);
-    transform: scale(1.05); /* Slight scale-up effect */
-}
+/* Disabled state */
+.addleetcode:disabled {
+  background-color: #6c757d;
+  opacity: 0.5; 
+  pointer-events: none; 
 
+}
 
 
 /* Modal Styles */
@@ -205,22 +219,12 @@ code {
     background-color: rgb(8, 53, 85);
   }
   
-  /* Modal Open Button */
-  .open-modal-btn {
-    padding: 12px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .open-modal-btn:hover {
-    background-color: #218838;
-  }
-  
   .notes-header{
     display: flex;
     justify-content: space-between;
     margin: 0px 10px 0px 10px;
   }
+
+
+
+  
