@@ -1,8 +1,16 @@
 <!-- https://leetcode.com/problemset/ -->
 
-<div class="leetcode-container">
+<div class="leetcode-container" >
     <h2>Solved Coding Problems</h2>
-    
+    <div class="charts">
+      <div class="total">
+        <p-chart type="bar" [data]="chartData1" [options]="chartOptions1" class="total-bar"></p-chart>
+
+      </div>
+      <p-chart class="weekly-bar" type="bar" [data]="chartData" [options]="chartOptions" />
+  
+    </div>
+  
 
     <div class="btns-group">
       <div class="coding-platforms">

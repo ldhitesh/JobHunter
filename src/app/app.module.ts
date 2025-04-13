@@ -52,8 +52,10 @@ import { ResumeDataCollectionComponent } from './Components/resume-data-collecti
 import { DatePipe } from '@angular/common';
 import { ResumeGeneratorComponent } from './Components/resume-generator/resume-generator.component';
 import { CommonModule } from '@angular/common';
+import { ChartModule } from 'primeng/chart';
 
-@NgModule({ declarations: [
+@NgModule({ 
+    declarations: [
         AppComponent,
         HomeComponent,
         CompaniesComponentComponent,
@@ -99,7 +101,10 @@ import { CommonModule } from '@angular/common';
         ResumeDataCollectionComponent,
         ResumeGeneratorComponent
     ],
-    bootstrap: [AppComponent], imports: [CommonModule,
+    bootstrap: [AppComponent], 
+    imports: [
+        ChartModule,
+        CommonModule,
         BrowserModule,
         AppRoutingModule,
         FormsModule,

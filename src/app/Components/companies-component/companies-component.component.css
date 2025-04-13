@@ -8,6 +8,16 @@
     width: 100%;
 }
 
+.company-header-btns{
+  display: flex;
+  justify-content: space-between;
+}
+
+.company-header-btns img{
+  width: 200px;
+  height: 50px;
+  margin-top: 5%;
+}
 
 /* Styling for the table */
 table.table {
@@ -189,4 +199,67 @@ table.table .desc {
 
 .fas.fa-times {
     color: red;
+}
+
+
+
+
+
+
+.charts{
+  width: 100%;
+}
+
+.total{
+  width: 50%;
+  margin-bottom: 2%;
+}
+/* Custom styling for the canvas inside the p-chart component */
+::ng-deep .total-bar canvas {
+  height: 86px !important; /* Set the height of the canvas */
+  width: 100% !important;  /* Set the width of the canvas */
+}
+
+::ng-deep .weekly-bar canvas{
+  width: 80%;
+  height: 250px;
+}
+
+
+.dropdown-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.styled-select {
+  position: absolute;
+  background-color: white;
+  z-index: 1000;
+  top: 75%;
+  padding: 8px;
+  width: 180px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* Style for each dropdown option */
+.styled-select option {
+  padding: 10px 16px;
+  cursor: pointer;
+  text-align: center; /* Center the text inside the option */
+  display: flex;
+  justify-content: left; /* Ensure content is centered horizontally */
+  margin: 0px auto;
+  font-size: 14px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Highlight the option on hover */
+.styled-select option:hover {
+  background-color: #f5f5f5;
+  color: #000;
 }

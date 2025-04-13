@@ -1,7 +1,36 @@
 <div class="companylistcontainer">
+    <div class="charts">
+        <div class="company-header-btns">
+            <div class="total">
+                <p-chart type="bar" [data]="chartData1" [options]="chartOptions1" class="total-bar"></p-chart>
+              </div>
+            <!-- Wrapper for positioning -->
+            <div class="dropdown-wrapper">
+                <a>
+                    <img    id="applywithlinkdin-btn"
+                            src="/assets/applywithlinkdin.png"
+                            style="cursor:pointer;">
+                </a>
+            
+                <div *ngIf="dropdownOpen"
+                    class="styled-select">
+                    <option (click)="openLinkdIn('dotnet')" >DotNet</option>
+                    <option (click)="openLinkdIn('angular')">Angular</option>
+                    <option (click)="openLinkdIn('fullstack')">Full Stack</option>
+                    <option (click)="openLinkdIn('frontend')">Front-End</option>
+                </div>
+            </div>
+  
+        </div>
+        
+        <p-chart class="weekly-bar" type="bar" [data]="chartData" [options]="chartOptions" />
+    
+      </div>
+      
     <search-bar (search)="onSearch($event)"></search-bar>
     <add-company routerLink="/addcompanyform" routerLinkActive="active"></add-company>
-
+        
+   
     <table *ngIf="!nomatchingdata" class="table">
         <thead>
             <th class="id-head">ID</th>
@@ -49,7 +78,7 @@
                              Career Link
                          </a>
                          
-                        <a *ngIf="c.link.length==0" class="disabled"> No {{c.organization}} Career Link Added</a>
+                        <a *ngIf="c.link.length==0" class="disabled"> No Link</a>
                     </div>
                     
                 </td>

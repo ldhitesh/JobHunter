@@ -226,5 +226,21 @@ pre {
   }
 
 
+.charts{
+  width: 100%;
+}
 
-  
+.total{
+  width: 50%;
+  margin-bottom: 2%;
+}
+/* Custom styling for the canvas inside the p-chart component */
+::ng-deep .total-bar canvas {
+  height: 86px !important; /* Set the height of the canvas */
+  width: 100% !important;  /* Set the width of the canvas */
+}
+
+::ng-deep .weekly-bar canvas{
+  width: 80%;
+  height: 250px;
+}
