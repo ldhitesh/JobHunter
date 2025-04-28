@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
@@ -13,12 +13,14 @@ import { GetDataService } from 'src/app/Services/get-data.service';
     standalone: false
 })
 export class ResumeDataCollectionComponent {
-  resumeData:any;
+  resumeData:any={};
   currentStep: number = 1; // Tracks the current step/form
   dateFieldDisabled:any=false;
   previousdateSelection:any=[];
+  operation:any;
 
   @Output() dataSent: EventEmitter<string> = new EventEmitter<string>();
+  @Input() profile:any=false;
 
   contactForm: FormGroup = this.fb.group({}); 
   educationForm: FormGroup=this.fb.group({});
@@ -30,13 +32,14 @@ export class ResumeDataCollectionComponent {
 
   constructor(    private fb: FormBuilder, 
                   private datePipe: DatePipe,
-                  private getdata:GetDataService,
                   private authService:AuthService,
-                  private http:HttpClient) { 
+                  private http:HttpClient,
+                  private router:Router) { 
   }
 
   ngOnInit(): void {
-
+    if(this.authService.email==undefined)
+      this.authService.setUserDetails();
     this.getResumeData();
 
     // Define form controls and their validators
@@ -63,7 +66,6 @@ export class ResumeDataCollectionComponent {
   }
 
   getResumeData(){
-    
     const headers = new HttpHeaders({
       'Content-Type': 'application/json', // Set content type to application/json
     });
@@ -73,10 +75,10 @@ export class ResumeDataCollectionComponent {
           next:(response:any) => {    
             if (response[0] && response[0].details) {
               response[0].details = JSON.parse(response[0].details);
-            }
-            this.resumeData=response[0].details;  
-            this.setResumeValues()  
-                   
+              this.resumeData=response[0].details;  
+              this.profile=true;
+              this.setResumeValues() ; 
+            }     
           },
       error:(err:any) => {      
         console.log(err)
@@ -422,6 +424,27 @@ export class ResumeDataCollectionComponent {
   }
   downloadResume(){    
     this.dataSent.emit(this.resumeData); 
+  }
+
+  saveUserProfileInfo(){
+    let data={
+      "user_id":this.authService.email,
+      "details":JSON.stringify(this.resumeData, null, 2),
+      "resumecreated":"YES"
+    }
+    this.http.post('http://localhost:80/api/resume',data).subscribe({
+      next:(response:any)=>{
+        this.profile=false;
+        this.router.navigate(['resumegenerator']);
+
+      },
+      error:(err:any)=>{       
+        if(err.error.message=='Resume is already been added!'){
+          this.router.navigate(['resumegenerator']);
+        }
+        const errorMessage = err.error?.message || 'An unexpected error occurred.';
+      }
+    })
   }
 
 }

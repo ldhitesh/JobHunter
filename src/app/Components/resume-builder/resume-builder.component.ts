@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import jsPDF from 'jspdf';
 import { AuthService } from 'src/app/Services/auth.service';
 import { GetDataService } from 'src/app/Services/get-data.service';
+import { NotificationServiceService } from 'src/app/Services/notification-service.service';
 import { ResumebuilderService } from 'src/app/Services/resumebuilder.service';
 
 @Component({
@@ -16,20 +17,72 @@ export class ResumeBuilderComponent {
   public doc:any=new jsPDF();
   public resumeType:any;
   public resumedata:any;
+  public profilecreation:any;
+
   constructor(private _resumebuilder:ResumebuilderService,
               private activatedRoute: ActivatedRoute,
               private authService:AuthService,
-              private http:HttpClient
+              private http:HttpClient,
+              private router:Router,
+              private  notificationService: NotificationServiceService
+
   ){
   }
   ngOnInit(): void {
+    if(this.authService.email==undefined){
+      this.authService.setUserDetails();
+    }
+
     this.activatedRoute.queryParams.subscribe((params:any) => {
-      this.resumeType = params['resumeType']; // Access the query parameter
+      this.resumeType = params['resumeType']; 
+      if(params['profilecreation']){
+        this.profilecreation=params['profilecreation']
+      }
+      if(params['resumedata']){
+        this.generatePDF(JSON.parse(params['resumedata']));                  
+      }
     });    
 
+    if(this.resumeType=="previousResume"){
+      this.getLatestResumeData();
+    }
+  }
+
+  getLatestResumeData(){
+        
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json', // Set content type to application/json
+        });
+    
+        // Make the GET request with the user_id as a query parameter
+        this.http.get<any>(`http://localhost:80/api/resume/getresumedata?user_id=${this.authService.email}`, { headers }).subscribe({
+              next:(response:any) => {    
+                if (response[0] && response[0].details) {
+                  response[0].details = JSON.parse(response[0].details);
+                  if(response[0].resumecreated=="YES"){
+                    this.generatePDF(response[0].details);                  
+                  }
+                  else{
+                    this.notificationService.showNotification('No Resume Created!');
+                  }
+                }     
+                else{
+                  this.notificationService.showNotification('No Resume Data!');
+                }
+              },
+          error:(err:any) => {    
+            if(err.error="No Resume Data"){
+              this.notificationService.showNotification('No Resume Data!');
+            }
+            this.router.navigate(['resumegenerator'])
+          }
+        })
+        
+      
   }
 
   generatePDF(event:any){
+
     this._resumebuilder.setdoc(this.doc)
     this.resumedata=event;
     let currLine = 20;
@@ -101,7 +154,7 @@ export class ResumeBuilderComponent {
           data["role"],
           data["date_range"],
           currLine);
-        currLine+=1
+        currLine+=3
         
         for(let points of data["responsibilities"]){
           currLine=this._resumebuilder.addBullet(
@@ -109,6 +162,8 @@ export class ResumeBuilderComponent {
             currLine
           );
         }
+        currLine+=3
+
       }
       currLine+=this._resumebuilder.lineHeight
 
@@ -129,8 +184,10 @@ export class ResumeBuilderComponent {
     if(this.resumeType=='newResume'){
       let data={
         "user_id":this.authService.email,
-        "details":JSON.stringify(this.resumedata, null, 2)
+        "details":JSON.stringify(this.resumedata, null, 2),
+        "resumecreated":"YES"
       }
+      
       this.http.post('http://localhost:80/api/resume',data).subscribe({
         next:(response:any)=>{
         },
@@ -141,7 +198,9 @@ export class ResumeBuilderComponent {
     }
    
     this.doc.save(this.authService.username+".pdf");
+    this.notificationService.showNotification('Downloaded successfully!');
     this.doc=new jsPDF();
+    this.router.navigate(['resumegenerator']);
 
   }
 

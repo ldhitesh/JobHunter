@@ -1,16 +1,265 @@
-.resume-generator{
-    margin-top: 20%;
+
+label{
+  color: #0a2d54;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: large;
 }
 
-.My-own-resume{
-    display: block;
-    width: fit-content;
-    padding:1%;
-    background-color: #0e3d77;
-    margin: 10%;
-    color: #ffffff;
-    font-size: 16px;
+.dashboard-container {
+  padding: 2rem;
+  margin: 10% 13% 0% 13%;
+}
+
+.dashboard-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #0a2d54;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.5rem;
+}
+
+.dashboard-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e5e5;
+}
+
+.dashboard-card i {
+  font-size: 2rem;
+  color: #0a2d54;
+  margin-bottom: 0.8rem;
+}
+
+.dashboard-card p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #444;
+  margin: 0;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  background-color: #f9f9f9;
+}
+
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensures it appears above other content */
+  }
+
+  .modal-header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2%;
+  }
+
+  .icon-options{
+    display: flex;
+  }
+  .icon-options p{
+    margin-right: 30%;
+    color: #0e3d77;
+    text-decoration: underline;
+  }
+  .icon-options i{
+    margin-top: 7%;
+  }
+
+  .tech-modal-overlay{
+    padding:3%;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    width:fit-content;
+    height: 500px;
+    overflow: scroll;
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding:3%;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    width: 80%;
+    height: 550px;
+    overflow:scroll;
+  }
+  
+  .close-modal-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
     border: none;
-    border-radius: 4px;
+    font-size: 24px;
+    font-weight: bold;
     cursor: pointer;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .close-modal-btn:hover {
+    color: #e74c3c; /* Red color for hover */
+  }
+  
+  .No-expereince_Added{
+    color: #e74c3c; 
+    text-align: center;
+    margin-top:10%;
+  }
+
+  .modal-footer{
+    display: flex;
+    justify-content: center;
+    margin-top: 15%;
+  }
+  
+  .modal-footer button{
+    margin: 4%;
+    width: fit-content;
+    padding: 14px;
+    font-size: 16px;
+    color: white;
+    background-color: #337ab7; /* Button background color */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s ease-in-out;
+  }
+
+
+
+
+.selected-value {
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+
+
+.styled-select {
+  background-color: white;
+  padding: 8px;
+  width: 60px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* Style for each dropdown option */
+.styled-select option {
+  padding: 10px 16px;
+  cursor: pointer;
+  text-align: center; /* Center the text inside the option */
+  display: flex;
+  justify-content: left; /* Ensure content is centered horizontally */
+  margin: 0px auto;
+  font-size: 14px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Highlight the option on hover */
+.styled-select option:hover {
+  background-color: #f5f5f5;
+  color: #000;
+}
+.edit-resp textarea {
+  width: 100%;
+  height: 170px;
+  overflow: visible;
+}
+
+
+.radio-group {
+  padding: 2rem;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  max-width: 550px;
+  margin: auto;
+  height: 500px;
+  overflow: scroll;
+}
+
+.radio-group-title {
+  text-align: center;
+  font-size: 1.0rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.radio-group-title span{
+  font-size: medium;
+  margin-left: 3%;
+}
+
+.close-icon{
+  text-align: right;
+  display: flex;
+  justify-content: right;
+  margin-bottom: 10%;
+  margin-top: -5%;
+  margin-right: -5%;
+}
+
+.radio-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  gap: 0.8rem;
+  font-size: 1rem;
+  color: #444;
+}
+
+.radio-option:hover {
+  background-color: #f1f1f1;
+  border-color: #4a90e2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.radio-input {
+  accent-color: #4a90e2; /* Stylish blue accent color for radio buttons */
+}
+
+.radio-text {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.radio-option input[type="radio"] {
+  width: 20px;
+  height: 20px;
 }

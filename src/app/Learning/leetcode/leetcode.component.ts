@@ -24,11 +24,17 @@ export class LeetcodeComponent {
     maintainAspectRatio: false
   };
   totalSolvedProblems:any;  // This could be dynamic from your data
+  currentdisplayedproblems=10;
+  showAllProblems = false;
 
   constructor(private http:HttpClient, private authService:AuthService) {}
 
   ngOnInit(): void {
     this.fetchproblems(); 
+  }
+
+  get displayedSolvedProblems() {
+    return this.showAllProblems ? this.filterproblems : this.filterproblems.slice(0, this.currentdisplayedproblems);
   }
 
   getMonday(d: Date): Date {
@@ -102,6 +108,7 @@ export class LeetcodeComponent {
     this.http.get('http://localhost:80/api/discussion/getleetcodeproblemslist').subscribe({
       next:(response:any)=>{
         this.solvedProblems=response
+        this.filterproblems=[...this.solvedProblems]
         this.totalSolvedProblems=this.solvedProblems.length;
         this.generateBarChart();
       },
@@ -127,8 +134,10 @@ export class LeetcodeComponent {
 
   addProblem(): void {
     const now=new Date();
-    this.authService.setUserDetails();
-    let formatted = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ` 
+      if(this.authService.email==undefined){
+          this.authService.setUserDetails();
+      }
+      let formatted = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ` 
       const newProblem = {
       problem_link: this.newProblemLink,
       problem_notes: this.newProblemNotes,
@@ -141,12 +150,12 @@ export class LeetcodeComponent {
         this.solvedProblems.push(response.data);
         this.newProblemLink = '';
         this.newProblemNotes = '';
-    
         this.closeModal();
+        this.displayedSolvedProblems();
       },
       error:(err:any)=>{     
         console.log(err);
-          
+        this.closeModal();
       }
     })
   
@@ -227,6 +236,17 @@ export class LeetcodeComponent {
     };
 
 
+  filterproblems:any;
+  nomatchingdata:any;
+  onSearch(searchstring: string): void {    
+    this.currentdisplayedproblems=10;
+    this.filterproblems = this.solvedProblems.filter((problem:any) =>
+      this.extractProblemName(problem.problem_link).toLowerCase().includes(searchstring.toLowerCase())
+    );
+  
+    this.nomatchingdata=this.filterproblems.length==0?true:false;
+
+  }
 
  
   

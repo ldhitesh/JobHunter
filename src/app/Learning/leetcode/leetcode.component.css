@@ -244,3 +244,30 @@ pre {
   width: 80%;
   height: 250px;
 }
+
+
+
+.view-more-container {
+  text-align: center;
+  margin-top: 20px;
+  color: black;
+  font-weight: 700;
+}
+
+
+
+.view-more-button {
+  color: rgb(26, 88, 143);
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.view-more-button:hover {
+  color: #000000;
+  transform: translateY(2px);
+} 

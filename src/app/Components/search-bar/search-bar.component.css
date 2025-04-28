@@ -37,6 +37,7 @@ i{
     color: #337ab7; /* Lighter placeholder text */
     font-style: italic; /* Slightly italicized text */
     font-weight: 400; /* Normal weight */
+    text-align: center;
 }
 
 /* Optional icon inside the search box */

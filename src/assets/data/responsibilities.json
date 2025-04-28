@@ -1,5 +1,5 @@
 {
-    "react": [
+    "React": [
       "Developed dynamic, high-performance web applications using React.js.",
       "Created reusable React components to streamline the development process and enhance code maintainability.",
       "Implemented state management in large-scale applications using Redux and React Context API.",
@@ -50,7 +50,7 @@
       "Improved user engagement by developing interactive features like custom hooks and animations in React.",
       "Created responsive forms with form validation using React Hook Form for better user interactions."
     ],
-    "angular": [
+    "Angular": [
       "Developed rich, interactive web applications using Angular 2+ framework.",
       "Implemented state management in Angular applications using NgRx for complex state handling.",
       "Built dynamic forms with validation in Angular using Reactive Forms and Template-Driven Forms.",
@@ -96,7 +96,7 @@
       "Designed and implemented an efficient state management architecture with NgRx for data consistency.",
       "Implemented and optimized complex data handling scenarios using Angular’s Reactive Forms module."
     ],
-    ".net": [
+    ".NET": [
       "Developed and maintained scalable applications using ASP.NET Core and C#.",
       "Created RESTful web APIs using ASP.NET Core Web API for data interaction.",
       "Worked with SQL Server and Entity Framework Core for efficient database management and ORM.",
@@ -135,7 +135,7 @@
       "Improved code quality and performance using design patterns such as Repository, Singleton, and Factory.",
       "Developed secure applications by implementing encryption, OAuth, and SSL/TLS in .NET applications."
     ],
-    "java": [
+    "Java": [
       "Developed scalable Java applications using Spring Boot and Java frameworks.",
       "Built RESTful APIs and microservices using Spring MVC and Spring Web.",
       "Implemented security in Java applications using Spring Security and JWT tokens for authentication.",
@@ -173,7 +173,7 @@
       "Worked on Spring Integration for system integration and handling enterprise messaging scenarios.",
       "Applied agile methodologies such as Scrum and Kanban in Java development projects."
     ],
-    "devops": [
+    "DevOps": [
       "Automated CI/CD pipelines using Jenkins, GitLab CI, and CircleCI to streamline the development and deployment process.",
       "Managed cloud infrastructure on AWS, Azure, and Google Cloud for scalable application deployments.",
       "Implemented Docker for containerization and Kubernetes for orchestration of containerized applications.",
@@ -208,7 +208,7 @@
       "Optimized cloud network setups for performance, scalability, and security in large production environments.",
       "Implemented container security scanning and vulnerability management in DevOps processes."
     ],
-    "data_science": [
+    "DataScience": [
       "Built and deployed machine learning models using Python libraries like Scikit-learn, TensorFlow, and PyTorch.",
       "Preprocessed, cleaned, and transformed large datasets using Pandas, NumPy, and OpenCV.",
       "Developed predictive models for business forecasting and decision-making using machine learning techniques.",
@@ -243,7 +243,7 @@
       "Developed and fine-tuned models for natural language understanding and translation tasks using transformers."
     ],
     
-    "reactjava": [
+    "React-Java": [
         "Developed and maintained web applications using React.js for the frontend and Java with Spring Boot for the backend.",
         "Built RESTful APIs in Java using Spring Boot and integrated them with React frontend components.",
         "Created dynamic, responsive, and high-performance user interfaces in React, consuming RESTful web services built in Java.",
@@ -280,7 +280,7 @@
         "Deployed Java backend services and React applications using Docker containers to ensure consistency across environments.",
         "Developed custom React components for complex forms, ensuring smooth interaction with Java backend services."
     ],
-    "angularjava": [
+    "Angular-Java": [
         "Built and maintained full-stack web applications using Angular for the frontend and Java with Spring Boot for the backend.",
         "Developed REST APIs in Java using Spring Boot and integrated them with Angular frontend components.",
         "Created interactive and dynamic user interfaces using Angular and connected them to Java Spring Boot backend APIs.",
@@ -316,7 +316,7 @@
         "Deployed both Angular frontend and Java backend on cloud platforms using Docker and Kubernetes for orchestration.",
         "Worked with Angular CLI for efficient component and module management, integrated with Java backend for data handling."
     ],
-    "react.net": [
+    "React.Net": [
         "Developed modern, scalable web applications using React for frontend and .NET Core for backend services.",
         "Built and maintained REST APIs in ASP.NET Core and consumed them with React components.",
         "Integrated data from .NET Core APIs with React components to provide dynamic, data-driven user interfaces.",
@@ -347,7 +347,7 @@
         "Developed push notification systems in React, with backend support provided by .NET Core for real-time messaging.",
         "Integrated file upload and download systems in React with .NET Core backend services for file storage."
     ],
-    "angular.net": [
+    "Angular.Net": [
         "Developed enterprise-level full-stack applications using Angular for the frontend and .NET Core for backend services.",
         "Built and maintained RESTful APIs with ASP.NET Core and connected them to Angular components for dynamic user interfaces.",
         "Designed secure authentication and authorization flows in Angular, integrated with .NET Core backend using ASP.NET Core Identity.",
@@ -376,7 +376,7 @@
         "Created reusable Angular directives and .NET Core libraries to reduce duplication and improve maintainability.",
         "Developed data visualization tools in Angular, using .NET Core to process large datasets from backend systems."
     ],
-    "cloud": [
+    "Cloud": [
         "Designed, implemented, and deployed cloud-native applications on cloud platforms like AWS, Azure, and Google Cloud.",
         "Worked with cloud infrastructure services such as AWS EC2, Azure VMs, and Google Compute Engine to provision scalable compute resources.",
         "Managed cloud storage services like AWS S3, Azure Blob Storage, and Google Cloud Storage for secure and scalable data storage.",
@@ -419,7 +419,52 @@
         "Monitored cloud service usage, identifying potential bottlenecks and optimization opportunities to reduce costs and improve performance.",
         "Developed cloud-based identity management systems using services like AWS Cognito, Azure Active Directory, and Google Cloud Identity.",
         "Collaborated with security teams to implement security policies, conduct risk assessments, and protect cloud-hosted applications from cyber threats."
-    ]  
+    ],
+    
+    "ReactSkills":{
+      "frontend":"JavaScript (ES6+), TypeScript, React.js, Redux, React Router, React Hooks, Context API, HTML5, CSS3, Tailwind CSS, Material-UI, Bootstrap, Styled Components, Emotion, SCSS, SASS, Framer Motion, i18next, React i18n, Formik, Yup, React Hook Form, Axios, Fetch API, Vite, Webpack, Babel, Prettier, ESLint, React Helmet, FontAwesome, SVG Icons, Mobile-first Design, Responsive Design, Lazy Loading, Suspense, Code Splitting, Error Boundaries, React Testing Library, Jest, Vitest, Cypress, Enzyme, Storybook, Accessibility (WCAG), BEM Naming, Component Reusability, Prop Drilling, Custom Hooks, Atomic Design, UI State Management",
+      "performance":"React.js, React Hooks, Redux Toolkit, React Query, SWR, TanStack Query, Code Splitting, Lazy Loading, Suspense, Memoization, useMemo, useCallback, React Profiler, DevTools Performance Tab, Lighthouse, Web Vitals, Virtual DOM, DOM Diffing, Dynamic Imports, Tree Shaking, Webpack Optimization, Babel Minify, Terser, PurgeCSS, CSS Modules, Image Optimization, CDN Usage, HTTP Caching, Service Workers, PWA, Server-Side Rendering (SSR), Static Site Generation (SSG), Incremental Static Regeneration (ISR), useTransition, useDeferredValue, Concurrent Mode, Error Boundaries, Bundle Analyzer, Critical CSS, Inlining Assets, Responsive Images, React-Lazy, Intersection Observer, Debouncing, Throttling, Font Loading Optimization, React.memo, Lazy Hydration",
+      "fullstack":"React.js, React Router, React Hooks, Redux, Context API, Node.js, Express.js, RESTful APIs, GraphQL, Apollo Client, MongoDB, Mongoose, PostgreSQL, Sequelize, MySQL, Firebase, Supabase, Prisma, Next.js (API Routes), JWT Auth, OAuth2, Passport.js, Bcrypt, Socket.IO, WebSockets, Axios, React Query, Redux Toolkit, Zustand, Tailwind CSS, Material-UI, Styled Components, Vite, Webpack, Babel, ESLint, Prettier, Docker, NGINX, PM2, GitHub Actions, Git, GitHub, GitLab, Jest, Cypress, Postman, Swagger, CORS Handling, Role-Based Access Control (RBAC), Session Management, CSRF Protection, MVC Pattern"
+    },
+    "AngularSkills": {
+      "frontend": "TypeScript, JavaScript (ES6+), Angular (2+), Angular CLI, Angular Material, RxJS, HTML5, CSS3, SCSS, SASS, Tailwind CSS, Bootstrap, NgRx, FormsModule, ReactiveFormsModule, ngx-translate, i18n, PrimeNG, Kendo UI, FontAwesome, SVG Icons, Responsive Design, Mobile-first Design, Angular Animations, Angular Flex Layout, Component Reusability, Lazy Loading Modules, Route Guards, Pipes, Custom Directives, Angular Universal (SSR), Angular Elements, ngx-bootstrap, Storybook, ESLint, Prettier, Jasmine, Karma, Cypress, Jest, Accessibility (WCAG), BEM Naming, Service Injection, Dependency Injection, Angular Routing, Template-driven Forms, Form Validation, HttpClientModule, ViewEncapsulation, ViewChild/ContentChild",
+      "performance": "Angular (2+), OnPush Change Detection, Lazy Loading, Code Splitting, Route Preloading Strategies, Angular Universal (SSR), Service Workers, PWA, Tree Shaking, AOT Compilation, Ivy Renderer, RxJS Best Practices, Memoization, TrackBy with ngFor, Bundle Optimization, Webpack Optimization, HTTP Caching, CDN Usage, Image Optimization, Font Optimization, Lighthouse, Web Vitals, Lazy Import of Modules, Debounce & Throttle Operators, NgRx Selectors, Smart/Dumb Components, Optimized Animations, Static Asset Minification, Runtime Configuration, PreloadAllModules, HTTP Interceptors, Shared Module Usage, Environment-based Builds, Build Optimizer, Source Maps Management, DevTools Memory Profiling, AsyncPipe Usage, Event Unsubscription, Dynamic Imports, Zone.js Optimization, Defer Loading, Component Level Caching, Server Push, Compression Strategies, Inlining Critical CSS, Asset Lazy Loading, Tree-shakable Providers, Smaller Bundle Size Monitoring",
+      "fullstack": "Angular (2+), Angular CLI, Angular Router, Angular Material, RxJS, Node.js, Express.js, RESTful APIs, GraphQL, Apollo Client, NestJS, MongoDB, Mongoose, MySQL, PostgreSQL, Prisma, Firebase, Supabase, JWT Auth, OAuth2, Passport.js, Bcrypt, Socket.IO, WebSockets, Angular Universal, Tailwind CSS, Bootstrap, SCSS, ESLint, Prettier, Webpack, Docker, Git, GitHub, GitLab, GitHub Actions, PM2, NGINX, Postman, Swagger, CORS Handling, Role-Based Access Control (RBAC), Session Management, CSRF Protection, MVC Pattern, Microservices, Environment Variables, API Rate Limiting, Deployment via Vercel/Netlify/Firebase Hosting, Unit Testing with Jasmine/Karma, Integration Testing with Cypress"
+    },
+    "JavaSkills": {
+      "frontend": "HTML5, CSS3, JavaScript, JSP, JSF, Thymeleaf, Angular (2+), React.js, Bootstrap, jQuery, AJAX, JSON, Material Design, PrimeFaces, XML, D3.js, Chart.js, REST API Consumption, MVC Pattern, WebSocket, Servlets, JSTL, FreeMarker, GWT, HTML DOM Manipulation, TypeScript, Vaadin, Apache Tiles, Responsive Design, Single Page Applications, Web Components, Web Forms, Adobe Flex, Applets, JavaFX WebView, DOM Parsing, Handlebars, XML/XSLT, CSS Grid, Flexbox, Web Templates, MVC Controllers, Cross-browser Compatibility, CORS Config, JS Interop (Java-JS), UI Validation, Localization (i18n), Internationalization, Theme Customization, Form Binding, XSS Protection",
+      "performance": "JVM Optimization, JIT Compilation, GC Tuning, Multithreading, Concurrency Utilities, Stream API, Memory Management, Profiling with VisualVM/JFR, Asynchronous Programming, Thread Pools, Caching Strategies, Object Pooling, Efficient Collections (HashMap, ConcurrentHashMap), Immutable Objects, Lazy Initialization, Microservices Performance, NIO, Reactive Streams, CompletableFuture, Heap Dump Analysis, Connection Pooling, Load Testing (JMeter), Circuit Breaker (Resilience4j), Rate Limiting, Efficient DB Queries, Pagination, AOT Compilation (GraalVM), HTTP/2, Batch Processing Optimization, Transaction Management, SQL Optimization, Network Timeout Configs, Hibernate Caching, JDBC Optimization, Minimize Reflection, Avoid Synchronization Overhead, Benchmarking Tools, Auto-scaling Awareness, DTO Usage, Log Management, Health Monitoring, Latency Tracking, Profilers, REST Efficiency, Minimize Serialization, Load Balancer Configs, API Gateway Tuning",
+      "fullstack": "Java, Spring Boot, Spring MVC, Spring Security, Hibernate, JPA, RESTful APIs, GraphQL, MySQL, PostgreSQL, MongoDB, Oracle DB, Redis, Kafka, RabbitMQ, Docker, Kubernetes, Jenkins, Maven, Gradle, Git, GitHub, GitLab, OAuth2, JWT, WebSockets, Apache Tomcat, NGINX, React.js, Angular, Thymeleaf, JSP, AWS EC2/S3/RDS, Swagger, Postman, Flyway, Liquibase, JUnit, Mockito, TestNG, CI/CD, ELK Stack, OpenAPI, Prometheus, Grafana, Microservices Architecture, MVC Pattern, MVC REST, RBAC, CORS, Exception Handling, DevTools, IntelliJ IDEA, VS Code"
+    },
+    "CloudSkills": {
+      "frontend": "AWS Amplify Console, Azure Static Web Apps, Firebase Hosting, Netlify UI Config, GCP App Engine Frontends, CDN Management (CloudFront, Azure CDN), IAM UI Tools, Cloud Console Dashboards, Custom Domains Config, Load Balancer Dashboards, Monitoring UI (CloudWatch, Azure Monitor), Responsive Config Portals, Billing UIs, CLI Wrappers, S3 Static Hosting, API Gateway Management UI, Azure DevOps Boards, UX for Cloud IDEs, CodeCommit UI, Realtime Logs Viewers, Security Rule Editors, UI for Cloud Functions, Interactive Cost Estimators, Bucket Browsers, Serverless Framework UI, Managed UI SSL Config, i18n Panel Config, UI Alert Rules, CORS Editors, Cloud-Based Code Editor UI, Drag-drop Deployment UIs, Performance Insights UI, Debug Console UIs, Firebase Console Tools, DNS Record Editors, Access Logs Viewer, Instance Diagram UI, Cloud Build UI, UI Testing Tools, Secret Manager UI, UI for Hybrid Connections, Templates UI, UI Git Connectors, Static Sites Viewer, Dev Console UI, Domain Mapping UI, Frontend Dev with Cloud Hooks",
+      "performance": "Auto-scaling, Load Balancing, CDN Optimization, Caching Strategies, Global Accelerator, CloudFront Optimization, S3 Transfer Acceleration, API Gateway Throttling, Cold Start Reduction, Lambda Performance Tuning, Instance Type Optimization, Spot Instance Strategies, Reserved Instances Planning, Aurora Read Replicas, SQL Performance Insights, VPC Peering, Cloud Profiler, Budget Alerts, VM Sizing, SLO/SLA Management, IAM Role Minimization, Network Load Testing, DNS Optimization, Container Start Time Analysis, CloudWatch Dashboards, Resource Utilization Alerts, Cost Explorer, Node Affinity Rules, Cloud CDN, Pre-warmed Containers, Blue/Green Deployment, Canary Releases, EBS Performance Modes, App Insights, Log Aggregation Tools, Fault Tolerance Design, Chaos Engineering, Auto Heal Configs, Circuit Breakers, Tracing Tools (X-Ray), Prometheus, Grafana, Log Retention Optimization, Retry Policies, Resource Tagging, Cloud Health Score, High Availability Zones, Placement Groups, Dedicated Hosts, Regional Failover",
+      "fullstack": "AWS (EC2, S3, Lambda, DynamoDB, RDS, API Gateway), Azure (Functions, App Services, Cosmos DB, Blob Storage), GCP (Cloud Functions, Firestore, Cloud Run), Docker, Kubernetes, Terraform, CloudFormation, CI/CD Pipelines (GitHub Actions, CodePipeline, Azure DevOps), Serverless Framework, Firebase, IAM, Cognito, OAuth2, JWT, GitLab CI, Jenkins, Ansible, Helm, REST APIs, GraphQL APIs, NGINX, React.js, Angular, Node.js, Express.js, MongoDB, MySQL, PostgreSQL, Monitoring (CloudWatch, Stackdriver), Secrets Manager, Parameter Store, RBAC, SSO, DNS (Route53, Azure DNS), Log Management (Cloud Logging, ELK Stack), Artifact Registries, CORS, Firewall Rules, VPC, Bastion Hosts, SSH Keys, Secure Token Exchange, Custom Domain Setup, HTTPS, SSL Certs"
+    },
+    "DataScienceSkills": {
+      "frontend": "Jupyter Notebook, Google Colab, Streamlit, Dash, Plotly, Seaborn, Matplotlib, Power BI, Tableau, Qlik Sense, Bokeh, Voila, Panel, Altair, D3.js, Plotnine, Datawrapper, Streamlit Components, DataTables.js, React Charts, Vega-Lite, Chart.js, HTML Dashboards, IPython Widgets, PyWebIO, Flask Web UI, Panel.js, Visual Data Cleaning UIs, File Upload Dash UI, Pivot Tables, Data Entry UI, Datapane, ECharts, Time Series Plots, Heatmaps, Treemaps, Histogram UI Tools, Graph UI (NetworkX), Choropleths, Color Pickers, Labeling UI, ML Monitoring Dashboards, UX Feedback UI, Experiment Tracking UI, Model Comparison UI, Parameter Sliders, Interactive Widgets, User-selectable Filters, Real-time Graphing, Notebook Markdown, KPI Widgets",
+
+      "performance": "Vectorization (NumPy), Memory Optimization, Dask for Big Data, Lazy Evaluation, Efficient Pandas Usage, Multithreading (Joblib), GPU Acceleration (CUDA, CuPy), Model Compression, Quantization, Pruning, Data Caching, Batch Processing, Dataset Sharding, Spark Optimization, TensorFlow Serving, ONNX Runtime, Inference Pipelines, Async IO, FastAPI, Stream Caching, Data Pipeline Monitoring, MLflow, TensorRT, Data Lake Partitioning, Parallel Training, Cloud GPU Instances, Model Batching, Efficient DataFrames, Hyperparameter Tuning Tools (Optuna), LightGBM Performance Tuning, Precompiled Models, Preprocessed Datasets, Lambda Layer Optimization, Profiling ML Models, Model Warmup, Lazy Loading Weights, TFX Pipelines, CoreML Optimization, Reduce Data Redundancy, Columnar Storage (Parquet), S3 Select Optimization, Async Prediction Endpoints, Model Drift Detection, Quantile Sampling, Batch Normalization, Compression Libraries, LRU Caches, Notebook Memory Profilers",
+
+      "fullstack": "Python, Pandas, NumPy, Scikit-learn, TensorFlow, Keras, PyTorch, Matplotlib, Seaborn, SQL, MongoDB, Spark, Hadoop, Airflow, FastAPI, Flask, Django, Streamlit, Dash, JupyterLab, Google Colab, AWS Sagemaker, Azure ML, GCP Vertex AI, MLflow, Docker, Kubernetes, Git, GitHub, GitLab, TensorBoard, Label Studio, DVC, Great Expectations, Superset, Power BI, Snowflake, BigQuery, DataBricks, S3, PostgreSQL, Redis, Kafka, RabbitMQ, REST APIs, OAuth2, JWT, Data Versioning, Model Registry, Model Serving, CI/CD Pipelines, Pytest, Experiment Tracking, Feature Store, ETL Workflows, DataOps"
+    },
+    "PythonSkills": {
+      "frontend": "Streamlit, Dash, Flask Jinja2 Templates, Django Templates, HTML5, CSS3, Bootstrap, PyWebIO, Plotly, Bokeh, Jupyter Widgets, IPython HTML Display, Tkinter GUI, PyQt, Kivy, WxPython, DearPyGUI, Plotnine, Seaborn, Matplotlib, Panel, Altair, DataTables, Chart.js (via Flask), Flask-Admin, Django Admin UI, Voila, Streamlit Components, File Upload Forms, Graph Visualizers, HTML Forms, Email Templates, Custom Widgets, Streamlit Tabs, Bootstrap Forms, CSS in Templates, Flask Forms, HTML Reports, Export to Excel UI, Filter Widgets, Dashboards, Markdown Rendering, Terminal UIs (Textual), Panel.js Integration, Tooltip Support, Color Pickers, Interactive Sliders, Autocomplete Boxes, Date Pickers, Graph Interactions, D3.js via Python, Modal Dialogs, Form Validation",
+      "performance": "Multiprocessing, Threading, Asyncio, Numba, Cython, PyPy, Joblib, Dask, Vectorization, Caching, Memoization, Profile Optimization, Logging Management, Garbage Collection Tuning, Lazy Loading, Efficient Generators, GIL Management, Bottleneck Detection, LRU Cache, Batch Processing, Resource Pooling, FastAPI Performance, Flask Caching, NumPy Efficiency, Tensor Optimizations, ORM Optimization, SQLAlchemy Tuning, Redis Caching, Image Optimization, Memory Profilers, Pydantic Models, JSON Optimization, Event Loops, Task Queues (Celery), Gunicorn Config, Uvicorn, Model Serialization Optimization, AIOHTTP, Streaming Data, PEP8 Compliance, Module Lazy Import, Inline Functions, Shared Memory Usage, Efficient Loops, Fast Compression, Queueing Systems",
+      "fullstack": "Python, Django, Flask, FastAPI, SQLAlchemy, PostgreSQL, MySQL, MongoDB, RESTful APIs, GraphQL, Jinja2, JWT, OAuth2, Docker, Kubernetes, Redis, Celery, RabbitMQ, React.js, Vue.js, Streamlit, Pandas, Numpy, Git, GitHub, GitLab, Pytest, Postman, Swagger, Docker Compose, NGINX, Gunicorn, Uvicorn, Supervisor, CI/CD Pipelines, Jenkins, Github Actions, HTML/CSS, Bootstrap, Alembic, Pydantic, Unit Testing, Integration Testing, Cloud Deployment (Heroku, AWS, GCP), Environment Variables, Logging, Error Handling, WebSockets, MVC Pattern, Directory Structure Best Practices"
+    },
+    "DotNetSkills": {
+      "frontend": "Razor Pages, Blazor, HTML5, CSS3, Bootstrap, JavaScript, TypeScript, Angular (2+), React.js (with .NET backend), MVC Views, Telerik UI, Kendo UI, jQuery, JSON, AJAX, SignalR, ViewBag/ViewData, Layout Pages, Partial Views, Client-side Validation, Responsive Layouts, Web Forms, ASP.NET Web Pages, Knockout.js, Chart.js Integration, Modals with Bootstrap, CORS Setup, DataTables, SCSS, Theme Customization, FontAwesome, Syncfusion, Infragistics, Client Routing, Component Libraries, TagHelpers, Form Validation, Localization (resx files), BEM CSS, Web Accessibility, SPA Integration, CDN Configs, Component Caching, Web Optimization, Static Content Bundling",
+      "performance": ".NET Core Optimization, Middleware Caching, Output Caching, Async/Await, Task Parallel Library (TPL), SignalR Efficiency, DB Context Pooling, EF Core Optimization, View Compilation, Dependency Injection, Minified Static Files, CDN Usage, Gzip Compression, Lazy Loading, Thread Pool Tuning, JSON Serialization Tuning, In-memory Caching, Response Compression, Profiling (dotTrace), Performance Counters, API Rate Limiting, Efficient LINQ Queries, ViewBag Minimization, ADO.NET Optimization, Logging Levels, BenchmarkDotNet, Health Checks, Circuit Breakers, Pooling Connections, Indexing Strategy, N+1 Query Detection, Middleware Pipelines, Response Headers, Output Minification, Session Management, Server Timing, Profiling Tools, Minimize ViewState, Code Analysis, Static Code Checks, Build Optimization, Preloading Scripts, SQL Execution Plans, Caching Policies, Warm Start, Load Balancer Configs",
+      "fullstack": ".NET Core, ASP.NET Core, Web API, C#, Entity Framework Core, SQL Server, PostgreSQL, MongoDB, Dapper, Blazor, Razor Pages, Angular, React.js, SignalR, IdentityServer4, JWT, OAuth2, Docker, Kubernetes, Azure (App Services, Functions, Blob Storage), AWS (EC2, RDS, S3), Swagger, Postman, NGINX, IIS, Jenkins, GitHub Actions, Git, GitLab, CI/CD Pipelines, Redis, RabbitMQ, Serilog, AutoMapper, FluentValidation, Hangfire, CQRS, MediatR, Clean Architecture, Onion Architecture, Microservices, GRPC, REST APIs, WebSockets, Logging, API Gateway, Unit Testing (xUnit, NUnit), Integration Testing, Swagger UI, Secrets Management"
+    }
+
+
+
+
+
+
       
+
   }
   

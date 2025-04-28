@@ -1,12 +1,105 @@
-<div class="resume-generator">
 
-        <div    class="My-own-resume" 
-                [routerLink]="['/resumebuilder']" 
-                [queryParams]="{ resumeType: 'previousResume' }" 
-                routerLinkActive="active">DownLoad Recent Resume</div>
+<div class="dashboard-container">
+        <h2 class="dashboard-title">Resume Dashboard</h2>
+        <div class="card-grid">
+      
+          <div class="dashboard-card" [routerLink]="['/resumebuilder']" [queryParams]="{ resumeType: 'newResume', profilecreation: true }" routerLinkActive="active">
+            <i class="fas fa-user-edit"></i>
+            <p>{{ create_edit_profile_tag }}</p>
+          </div>
+      
+          <div class="dashboard-card" (click)="downloadPreviousResume()">
+            <i class="fas fa-download"></i>
+            <p>Download Current Profile Resume</p>
+          </div>
+      
+          <div class="dashboard-card" [routerLink]="['/resumebuilder']" [queryParams]="{ resumeType: 'newResume', profilecreation: false }" routerLinkActive="active">
+            <i class="fas fa-file-alt"></i>
+            <p>New Resume</p>
+          </div>
+      
+          <div class="dashboard-card" (click)="toggleshowmodal()">
+            <i class="fas fa-tasks"></i>
+            <p>Specific Resume</p>
+          </div>
+      
+        </div>
+      </div>
+      
 
-        <div    class="My-own-resume" 
-                [routerLink]="['/resumebuilder']" 
-                [queryParams]="{ resumeType: 'newResume' }" 
-                routerLinkActive="active">New Resume</div>
+  <!-- Modal -->
+  <div *ngIf="previewmodalwindow" class="modal-overlay">
+        <div class="modal-content">
+                <label>Number of points</label>
+                <select [disabled]="resumeData['work_experience'].length === 0" class="styled-select" (change)="loadRandomPoints()" [(ngModel)]="selectedPoints">
+                        <option *ngFor="let option of pointOptions" [value]="option">{{ option }}</option>
+                </select>
+
+                <button class="close-modal-btn" (click)="closepreviewmodal()">X</button>
+                <h5 class="No-expereince_Added" *ngIf="resumeData['work_experience'].length<=0">No Experience Added! Please update your profile.</h5>
+
+
+                <div *ngFor="let work of resumeData['work_experience'];let i=index">
+                        <div class="modal-header">
+                                <h4 class="modal-title">{{work.company}}</h4>
+                                <div class="icon-options">
+                                        <p (click)="toggleEdit(i)">
+                                                {{ selectedindex==i ? 'Save' : 'Edit' }}
+                                        </p>
+                                        <i (click)="loadIndividualRandomPoints(work)" class="fas fa-sync-alt"></i>
+                                </div>
+                        </div>
+
+                        <div *ngIf="selectedindex!=i" class="modal-body">
+                                <ul>
+                                <li *ngFor="let point of work['responsibilities']">{{ point }}</li>
+                                </ul>
+                        </div>
+                        <!-- Display as editable textarea -->
+                        <div *ngIf="selectedindex==i" class="edit-resp">
+                                <textarea
+                                [(ngModel)]="responsibilitiesText"
+                                ></textarea>
+                        </div>
+                </div>
+                       
+                      
+               
+                <div class="modal-footer">
+                        <button *ngIf="resumeData['work_experience'].length>0" (click)="Download()" >DownLoad </button>
+                        <button class="danger" (click)="closepreviewmodal()">Close</button>
+                </div>
+         
+        </div>
 </div>
+
+
+<div *ngIf="showmodal" class="modal-overlay">
+                
+                <div class="radio-group">
+                        <span (click)="closemodal()" class="fas fa-times close-icon"></span>
+                        <div class="modal-header">
+                                <h6 class="radio-group-title">Select Your Preferred Tech Stack
+                                     
+                                </h6>
+                        </div>
+                        <div class="radio-options">
+                                <label class="radio-option" *ngFor="let option of options">
+                                <input 
+                                type="radio" 
+                                name="techStack" 
+                                [value]="option" 
+                                [(ngModel)]="selectedOption" 
+                                class="radio-input" />
+                                <span class="radio-text">{{ option }}</span>
+                                </label>
+                        </div>
+                        <div class="modal-footer">
+                                <button (click)="togglepreviewmodal()">Preview </button>
+                        </div>
+                </div>                
+</div>
+
+
+
+

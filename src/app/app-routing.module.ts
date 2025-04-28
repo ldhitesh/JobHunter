@@ -46,7 +46,7 @@ const routes: Routes = [
   { path: 'resumebuilder', component: ResumeBuilderComponent },
   { path: 'resumebuilder/:resumeType', component: ResumeBuilderComponent },
   { path: 'resumegenerator', component: ResumeGeneratorComponent },
-  { path: 'leetcode', component: LeetcodeComponent }
+  { path: 'leetcode', component: LeetcodeComponent,canActivate: [authGuard]}
 
 ];
 

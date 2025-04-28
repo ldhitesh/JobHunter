@@ -1,1 +1,1 @@
-<resume-data-collection *ngIf="resumeType=='newResume'" (dataSent)="generatePDF($event)"></resume-data-collection>
+<resume-data-collection *ngIf="resumeType=='newResume'" [profile]="profilecreation"  (dataSent)="generatePDF($event)"></resume-data-collection>

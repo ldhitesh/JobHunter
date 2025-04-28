@@ -211,12 +211,13 @@ table.table .desc {
 }
 
 .total{
-  width: 50%;
+  width: 30%;
   margin-bottom: 2%;
+  display: block;
 }
 /* Custom styling for the canvas inside the p-chart component */
 ::ng-deep .total-bar canvas {
-  height: 86px !important; /* Set the height of the canvas */
+  height: 76px !important; /* Set the height of the canvas */
   width: 100% !important;  /* Set the width of the canvas */
 }
 

@@ -23,9 +23,10 @@
       </div>
       
       <h5 class="addleetcode" (click)="openModal()">+ Add Solved Problem</h5>
-
     </div>
-    <div *ngFor="let problem of solvedProblems;let i=index" class="problem-card">
+    <search-bar (search)="onSearch($event)"></search-bar>
+
+    <div *ngFor="let problem of displayedSolvedProblems;let i=index" class="problem-card">
       <div class="problem-header">
         <a [href]="problem.problem_link" target="_blank"> {{i+1+'. ' }} {{ extractProblemName(problem.problem_link)|titlecase}}</a>
         <p *ngIf="showNoteIndex!=i" (click)="setShowNotesIndex(i)">Show Note</p>
@@ -47,6 +48,12 @@
       </div>
     </div>
     
+    <div *ngIf="filterproblems.length > 10 && filterproblems.length>currentdisplayedproblems" class="view-more-container">
+      <h4 (click)="this.currentdisplayedproblems=this.currentdisplayedproblems+10" class="view-more-button">
+        {{ filterproblems.length>10 ? 'View More':'' }}
+      </h4>
+    </div>
+
   </div>
   
 

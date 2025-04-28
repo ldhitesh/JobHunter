@@ -28,6 +28,8 @@ export class CompaniesComponentComponent {
     maintainAspectRatio: false
   };
   totalCompaniesApplied:any=0;  // This could be dynamic from your data
+  linkdintotalcount:any=0;
+  linkdinData:any;
 
   constructor(private http:HttpClient,private router:Router,
               private loginstatuscheckservice:LoginStatusCheckServiceService,
@@ -93,7 +95,7 @@ openLinkdIn(option: any) {
             const timeDiff = currentDate.getTime() - lastAppliedDate.getTime();
             const daysDiff = timeDiff / (1000 * 3600 * 24); // Convert milliseconds to days
   
-            if (daysDiff > 15 && data.status=='Applied') {
+            if (daysDiff > 215 && data.status=='Applied') {
               data.status = 'Re Apply';
             } else if(data.status=='Not Applied') {
               data.status = 'Not Applied';
@@ -273,13 +275,25 @@ openLinkdIn(option: any) {
     this.companies.forEach((data:any) =>{
       if(data.lastApplied!="Yet to Apply"){
         this.totalCompaniesApplied++;
-        console.log(this.companies.organization);
-
+        if(data.source=="LinkdIn"){
+          this.linkdintotalcount++;
+        }
       }
     });
 
-    console.log(this.companies.length);
     
+    this.linkdinData = {
+      labels: ['LinkedIn'],  // Label for the bar
+      datasets: [
+        {
+          label: 'Count',
+          data: [this.linkdintotalcount],  // Total value
+          backgroundColor: '#0b314d', // Bar color
+          borderColor: '#1E88E5',
+          borderWidth: 0.2,
+        }
+      ]
+    };    
     
     this.chartData1 = {
       labels: ['Total Companies Applied'],  // Label for the bar

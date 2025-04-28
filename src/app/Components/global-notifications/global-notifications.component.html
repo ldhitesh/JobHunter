@@ -4,14 +4,14 @@
     <div class="box">
       <!-- Success Notification -->
       <h4 *ngIf="notificationMessage === 'Email sent successfully!'" class="success-message">
-        {{ notificationMessage }}
+        Email sent successfully!
         <i class="fa fa-smile fa-2x success-smile" aria-hidden="true"></i>
       </h4>
       
       <!-- Failure Notification -->
       <h4 *ngIf="notificationMessage === 'Email Failed!'" class="error-message">
-        {{ notificationMessage }}
-        <i class="fa fa-frown fa-2x error-smile" aria-hidden="true"></i>
+        Email Failed!
+      <i class="fa fa-frown fa-2x error-smile" aria-hidden="true"></i>
       </h4>
 
       <!-- Approval Pending Notification -->
@@ -50,6 +50,52 @@
            </h4>
  
        </h4>
+
+       <h4 *ngIf="notificationMessage === 'Downloaded successfully!'" class="approval-waiting-message">
+        <h3> Downloaded Successfully!</h3>  
+
+         <h6>Email us at: 
+           <a href="mailto:jobhuntertechteam@gmail.com" aria-label="Email Job Hunter support team">
+               jobhuntertechteam&#64;gmail.com
+           </a>
+         </h6>
+         <h4>Thank You!          
+           <i class="fa fa-smile fa-2x success-smile" aria-hidden="true"></i>
+         </h4>
+
+     </h4>
+
+     <h4 *ngIf="notificationMessage === 'No Resume Data!'" class="approval-waiting-message">
+
+      <h3> Your profile is incomplete.</h3> <br> 
+      <h5>Please create your profile before downloading the resume</h5>
+
+       <h6>Email us at: 
+         <a href="mailto:jobhuntertechteam@gmail.com" aria-label="Email Job Hunter support team">
+             jobhuntertechteam&#64;gmail.com
+         </a>
+       </h6>
+       <h4>Thank You!          
+         <i class="fa fa-smile fa-2x success-smile" aria-hidden="true"></i>
+       </h4>
+
+    </h4>
+
+    <h4 *ngIf="notificationMessage === 'No Resume Created!'" class="approval-waiting-message">
+
+      <h3> Please build your resume first!</h3> <br> 
+      <h6>There is no recent resume that is created under your profile</h6>
+       <h6>Email us at: 
+         <a href="mailto:jobhuntertechteam@gmail.com" aria-label="Email Job Hunter support team">
+             jobhuntertechteam&#64;gmail.com
+         </a>
+       </h6>
+       <h4>Thank You!          
+         <i class="fa fa-smile fa-2x success-smile" aria-hidden="true"></i>
+       </h4>
+
+    </h4>
+
     </div>
   </div>
 </div>
